@@ -74,7 +74,7 @@ export function PromptForm({
       ...currentMessages,
       {
         id: nanoid(),
-        display: <UserMessage>{value}</UserMessage>
+        display: <UserMessage>{text ? 'File attached' : value}</UserMessage>
       }
     ])
 

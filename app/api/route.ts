@@ -8,7 +8,9 @@ export async function POST(request: Request) {
   try {
     const json = JSON.parse(content)
     return Response.json({
-      content: json.data.map((item: any) => item.post_url).join('\n')
+      content:
+        `poster_linkedin_url: ${json.data[0].poster_linkedin_url} \n` +
+        json.data.map((item: any) => item.post_url).join('\n')
     })
   } catch (e) {
     return Response.json({ content })

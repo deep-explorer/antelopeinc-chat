@@ -10,8 +10,8 @@ import { useUIState, useAIState } from 'ai/rsc'
 import { Session } from '@/lib/types'
 import { usePathname, useRouter } from 'next/navigation'
 import { Message } from '@/lib/chat/actions'
-import { useScrollAnchor } from '@/lib/hooks/use-scroll-anchor'
 import { toast } from 'sonner'
+import { PromptForm } from './prompt-form'
 
 export interface ChatProps extends React.ComponentProps<'div'> {
   initialMessages?: Message[]
@@ -54,32 +54,30 @@ export function Chat({ id, className, session, missingKeys }: ChatProps) {
     })
   }, [missingKeys])
 
-  const { messagesRef, scrollRef, visibilityRef, isAtBottom, scrollToBottom } =
-    useScrollAnchor()
-
   return (
-    <div
-      className="group w-full overflow-auto pl-0 peer-[[data-state=open]]:lg:pl-[250px] peer-[[data-state=open]]:xl:pl-[300px]"
-      ref={scrollRef}
-    >
-      <div
-        className={cn('pb-[200px] pt-4 md:pt-10', className)}
-        ref={messagesRef}
-      >
-        {messages.length ? (
-          <ChatList messages={messages} isShared={false} session={session} />
-        ) : (
-          <EmptyScreen />
-        )}
-        <div className="h-px w-full" ref={visibilityRef} />
+    <>
+      <div className="relative flex justify-center h-[calc(100vh_-_theme(spacing.36))] overflow-hidden">
+        <div className="w-[940px] flex">
+          <div className="group w-full overflow-auto  bg-[#CDE2E7] dark:bg-[#071920] rounded-lg">
+            <div className={cn('pt-4 md:pt-10 ', className)}>
+              {messages.length ? (
+                <ChatList
+                  messages={messages}
+                  isShared={false}
+                  session={session}
+                />
+              ) : (
+                <EmptyScreen />
+              )}
+            </div>
+            <ChatPanel id={id} input={input} setInput={setInput} />
+          </div>
+        </div>
       </div>
-      <ChatPanel
-        id={id}
-        input={input}
-        setInput={setInput}
-        isAtBottom={isAtBottom}
-        scrollToBottom={scrollToBottom}
-      />
-    </div>
+
+      <div className="w-full flex justify-center space-y-4 border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
+        <PromptForm input={input} setInput={setInput} />
+      </div>
+    </>
   )
 }

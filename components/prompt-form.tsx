@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import Textarea from 'react-textarea-autosize'
-
+import { useDropzone } from 'react-dropzone'
 import { useActions, useUIState } from 'ai/rsc'
 
 import { UserMessage } from './stocks/message'
@@ -31,12 +31,52 @@ export function PromptForm({
   const { submitUserMessage } = useActions()
   const [_, setMessages] = useUIState<typeof AI>()
 
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop: acceptedFiles => {
+      const formData = new FormData()
+      formData.append('file', acceptedFiles[0])
+      fetch('http://localhost:3000/api', {
+        method: 'POST',
+        body: formData
+      }).then(res =>
+        res.json().then(data => {
+          setInput(data.content)
+          console.log(data.content)
+          processMessage(data.content)
+        })
+      )
+    },
+    multiple: false,
+    accept: {
+      'application/text': ['.txt']
+    }
+  })
+
   React.useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus()
     }
   }, [])
 
+  const processMessage = async (text?: string) => {
+    const value = text || input.trim()
+    console.log({ value })
+    setInput('')
+    if (!value) return
+
+    // Optimistically add user message UI
+    setMessages(currentMessages => [
+      ...currentMessages,
+      {
+        id: nanoid(),
+        display: <UserMessage>{value}</UserMessage>
+      }
+    ])
+
+    // Submit and get response message
+    const responseMessage = await submitUserMessage(value)
+    setMessages(currentMessages => [...currentMessages, responseMessage])
+  }
   return (
     <form
       ref={formRef}
@@ -48,26 +88,12 @@ export function PromptForm({
           e.target['message']?.blur()
         }
 
-        const value = input.trim()
-        setInput('')
-        if (!value) return
-
-        // Optimistically add user message UI
-        setMessages(currentMessages => [
-          ...currentMessages,
-          {
-            id: nanoid(),
-            display: <UserMessage>{value}</UserMessage>
-          }
-        ])
-
-        // Submit and get response message
-        const responseMessage = await submitUserMessage(value)
-        setMessages(currentMessages => [...currentMessages, responseMessage])
+        processMessage()
       }}
+      className="w-[940px] "
     >
-      <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-background px-8 sm:rounded-md sm:border sm:px-12">
-        <Tooltip>
+      <div className="relative flex max-h-60 w-full grow  overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] px-8 sm:rounded-md border-[1px] border-[#1F3C45] sm:px-12">
+        {/* <Tooltip>
           <TooltipTrigger asChild>
             <Button
               variant="outline"
@@ -82,12 +108,19 @@ export function PromptForm({
             </Button>
           </TooltipTrigger>
           <TooltipContent>New Chat</TooltipContent>
-        </Tooltip>
+        </Tooltip> */}
+        <div className="flex justify-center items-center">
+          <Button variant="default" {...getRootProps()}>
+            <input {...getInputProps()} />
+            <IconPlus />
+            File
+          </Button>
+        </div>
         <Textarea
           ref={inputRef}
           tabIndex={0}
           onKeyDown={onKeyDown}
-          placeholder="Send a message."
+          placeholder="Message Antelope"
           className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
           autoFocus
           spellCheck={false}
@@ -101,8 +134,35 @@ export function PromptForm({
         <div className="absolute right-0 top-[13px] sm:right-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button type="submit" size="icon" disabled={input === ''}>
-                <IconArrowElbow />
+              <Button
+                variant={'outline'}
+                type="submit"
+                size="icon"
+                disabled={input === ''}
+              >
+                <span>
+                  <div
+                    role="button"
+                    className="send-btn relative right-[-3px] h-[28px] w-[28px] rounded-lg rount send-btn text-base flex justify-center items-center bg-[transparent] hover:bg-darken2 cursor-pointer opacity-30 pointer-events-none"
+                  >
+                    <svg
+                      className="h-4 w-4 "
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      {' '}
+                      <path stroke="none" d="M0 0h24v24H0z" />{' '}
+                      <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" />
+                    </svg>
+                  </div>
+                </span>
+
                 <span className="sr-only">Send message</span>
               </Button>
             </TooltipTrigger>

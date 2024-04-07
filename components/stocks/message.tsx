@@ -9,17 +9,18 @@ import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import { StreamableValue } from 'ai/rsc'
 import { useStreamableText } from '@/lib/hooks/use-streamable-text'
+import Image from 'next/image'
 
 // Different types of message bubbles.
 
 export function UserMessage({ children }: { children: React.ReactNode }) {
   return (
-    <div className="group relative flex items-start md:-ml-12">
-      <div className="flex size-[25px] shrink-0 select-none items-center justify-center rounded-md border bg-background shadow-sm">
-        <IconUser />
-      </div>
-      <div className="ml-4 flex-1 space-y-2 overflow-hidden pl-2">
-        {children}
+    <div className="flex justify-end">
+      <div className="group relative flex gap-4 text-white  max-w-[768px]">
+        <div className="bg-[#18898D] p-8 rounded-lg text-sm">{children}</div>
+        <div className="flex size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
+          <IconUser width={48} height={48} />
+        </div>
       </div>
     </div>
   )
@@ -35,13 +36,13 @@ export function BotMessage({
   const text = useStreamableText(content)
 
   return (
-    <div className={cn('group relative flex items-start md:-ml-12', className)}>
-      <div className="flex size-[24px] shrink-0 select-none items-center justify-center rounded-md border bg-primary text-primary-foreground shadow-sm">
-        <IconOpenAI />
+    <div className={cn('group relative flex gap-4 max-w-[768px]', className)}>
+      <div className="flex size-[48px] shrink-0 select-none items-center justify-center rounded-md">
+        <Image src="/header-logo.png" alt="bot-logo" width={48} height={48} />
       </div>
-      <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
+      <div className=" bg-white dark:bg-[#122830]  p-8 rounded-lg">
         <MemoizedReactMarkdown
-          className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
+          className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 text-sm"
           remarkPlugins={[remarkGfm, remarkMath]}
           components={{
             p({ children }) {
@@ -122,9 +123,9 @@ export function SystemMessage({ children }: { children: React.ReactNode }) {
 
 export function SpinnerMessage() {
   return (
-    <div className="group relative flex items-start md:-ml-12">
-      <div className="flex size-[24px] shrink-0 select-none items-center justify-center rounded-md border bg-primary text-primary-foreground shadow-sm">
-        <IconOpenAI />
+    <div className="group relative flex">
+      <div className="flex size-[48px] shrink-0 select-none items-center justify-center rounded-md">
+        <Image src="/header-logo.png" alt="bot-logo" width={48} height={48} />
       </div>
       <div className="ml-4 h-[24px] flex flex-row items-center flex-1 space-y-2 overflow-hidden px-1">
         {spinner}

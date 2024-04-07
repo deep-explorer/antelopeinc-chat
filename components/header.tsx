@@ -15,9 +15,12 @@ import { SidebarMobile } from './sidebar-mobile'
 import { SidebarToggle } from './sidebar-toggle'
 import { ChatHistory } from './chat-history'
 import { Session } from '@/lib/types'
+import { ThemeToggle } from './theme-toggle'
+import Image from 'next/image'
 
 async function UserOrLogin() {
   const session = (await auth()) as Session
+
   return (
     <>
       {session?.user ? (
@@ -28,12 +31,12 @@ async function UserOrLogin() {
           <SidebarToggle />
         </>
       ) : (
-        <Link href="/new" rel="nofollow">
-          <IconNextChat className="size-6 mr-2 dark:hidden" inverted />
-          <IconNextChat className="hidden size-6 mr-2 dark:block" />
+        <Link href="/" rel="nofollow" className="flex gap-2">
+          <Image src={`/header-logo.png`} alt="logo" width={32} height={32} />
+          <h2 className="text-xl">Antelope</h2>
         </Link>
       )}
-      <div className="flex items-center">
+      {/* <div className="flex items-center">
         <IconSeparator className="size-6 text-muted-foreground/50" />
         {session?.user ? (
           <UserMenu user={session.user} />
@@ -42,38 +45,30 @@ async function UserOrLogin() {
             <Link href="/login">Login</Link>
           </Button>
         )}
-      </div>
+      </div> */}
     </>
   )
 }
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl">
+    <header className="flex items-center justify-between w-full h-[153px] px-12 py-20">
       <div className="flex items-center">
         <React.Suspense fallback={<div className="flex-1 overflow-auto" />}>
           <UserOrLogin />
         </React.Suspense>
       </div>
-      <div className="flex items-center justify-end space-x-2">
-        <a
-          target="_blank"
-          href="https://github.com/vercel/nextjs-ai-chatbot/"
-          rel="noopener noreferrer"
-          className={cn(buttonVariants({ variant: 'outline' }))}
-        >
-          <IconGitHub />
-          <span className="hidden ml-2 md:flex">GitHub</span>
-        </a>
-        <a
-          href="https://vercel.com/templates/Next.js/nextjs-ai-chatbot"
-          target="_blank"
-          className={cn(buttonVariants())}
-        >
-          <IconVercel className="mr-2" />
-          <span className="hidden sm:block">Deploy to Vercel</span>
-          <span className="sm:hidden">Deploy</span>
-        </a>
+      <div className="flex items-center justify-end space-x-2 gap-4">
+        <Link href={'/'}>Home</Link>
+        <Link href={'/'}>Benefits</Link>
+        <Link href={'/'}>Process</Link>
+        <Link href={'/'}>About Us</Link>
+        <Link href={'/'}>Pricing</Link>
+        <Link href={'/'}>FAG</Link>
+      </div>
+      <div>
+        <ThemeToggle />
+        <Button variant="default">Get in touch</Button>
       </div>
     </header>
   )

@@ -35,7 +35,7 @@ export function PromptForm({
     onDrop: acceptedFiles => {
       const formData = new FormData()
       formData.append('file', acceptedFiles[0])
-      fetch('http://localhost:3000/api', {
+      fetch('/api', {
         method: 'POST',
         body: formData
       }).then(res =>
@@ -52,11 +52,11 @@ export function PromptForm({
     }
   })
 
-  React.useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus()
-    }
-  }, [])
+  // React.useEffect(() => {
+  //   if (inputRef.current) {
+  //     inputRef.current.focus()
+  //   }
+  // }, [])
 
   const processMessage = async (text?: string) => {
     const value = text || input.trim()
@@ -122,7 +122,7 @@ export function PromptForm({
           onKeyDown={onKeyDown}
           placeholder="Message Antelope"
           className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
-          autoFocus
+          // autoFocus
           spellCheck={false}
           autoComplete="off"
           autoCorrect="off"

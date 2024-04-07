@@ -5,8 +5,15 @@ export async function POST(request: Request) {
   const file = form.get('file') as File
 
   const content = await file.text()
+  try {
+    const json = JSON.parse(content)
+    return Response.json({
+      content: json.data.map((item: any) => item.post_url).join('\n')
+    })
+  } catch (e) {
+    return Response.json({ content })
+  }
   // const content = (await file.text()).replace(/[\r\n]/g, ' ')
-  return Response.json({ content })
 }
 
 export async function GET(request: Request) {

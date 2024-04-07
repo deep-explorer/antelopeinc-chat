@@ -38,13 +38,18 @@ export function PromptForm({
       fetch('/api', {
         method: 'POST',
         body: formData
-      }).then(res =>
-        res.json().then(data => {
-          setInput(data.content)
-          console.log(data.content)
-          processMessage(data.content)
-        })
-      )
+      })
+        .then(res =>
+          res
+            .json()
+            .then(data => {
+              setInput(data.content)
+              console.log(data.content)
+              processMessage(data.content)
+            })
+            .catch(e => console.log(e))
+        )
+        .catch(e => console.log(e))
     },
     multiple: false,
     accept: {

@@ -36,6 +36,8 @@ import { SpinnerMessage, UserMessage } from '@/components/stocks/message'
 import { Chat } from '@/lib/types'
 import { auth } from '@/auth'
 
+export const maxDuration = 300
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || ''
 })

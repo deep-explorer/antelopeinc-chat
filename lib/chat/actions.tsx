@@ -36,8 +36,6 @@ import { SpinnerMessage, UserMessage } from '@/components/stocks/message'
 import { Chat } from '@/lib/types'
 import { auth } from '@/auth'
 
-export const maxDuration = 300
-
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || ''
 })
@@ -122,6 +120,8 @@ async function confirmPurchase(symbol: string, price: number, amount: number) {
     }
   }
 }
+
+export const maxDuration = 300
 
 async function submitUserMessage(content: string) {
   'use server'

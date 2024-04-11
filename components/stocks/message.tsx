@@ -2,7 +2,7 @@
 
 import { IconOpenAI, IconUser } from '@/components/ui/icons'
 import { cn } from '@/lib/utils'
-import { SvgSpinnersTadpole } from './spinner'
+import { ChatSpinner } from './ChatSpinner'
 import { CodeBlock } from '../ui/codeblock'
 import { MemoizedReactMarkdown } from '../markdown'
 import remarkGfm from 'remark-gfm'
@@ -130,7 +130,7 @@ export function SpinnerMessage() {
         <Image src="/header-logo.png" alt="bot-logo" width={48} height={48} />
       </div>
       <div className="ml-4 h-[32px] flex flex-row items-center flex-1 space-y-2 overflow-hidden px-1">
-        <SvgSpinnersTadpole />
+        <ChatSpinner />
       </div>
     </div>
   )

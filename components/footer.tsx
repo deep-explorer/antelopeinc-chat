@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 export function Footer({ className, ...props }: React.ComponentProps<'p'>) {
   return (
-    <p
+    <div
       className="py-16 px-20 bg-[#122830] text-white"
       // className={cn(
       //   'px-2 text-center text-xs leading-normal text-muted-foreground',
@@ -53,6 +53,6 @@ export function Footer({ className, ...props }: React.ComponentProps<'p'>) {
           <Link href={'/'}>Cookie Policy</Link>
         </div>
       </div>
-    </p>
+    </div>
   )
 }

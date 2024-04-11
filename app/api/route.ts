@@ -1,5 +1,7 @@
 // export const dynamic = 'force-dynamic' // defaults to auto
 
+import { fetcher } from '@/lib/utils'
+
 export async function POST(request: Request) {
   const form = await request.formData()
   const file = form.get('file') as File
@@ -18,16 +20,23 @@ export async function POST(request: Request) {
   // const content = (await file.text()).replace(/[\r\n]/g, ' ')
 }
 
+//  GET Linkedin Profile Posts using RapidAPI
 export async function GET(request: Request) {
-  return Response.json({ data: 'OK' })
-  // const { searchParams } = new URL(request.url)
-  // const id = searchParams.get('id')
-  // const res = await fetch(`https://data.mongodb-api.com/product/${id}`, {
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'API-Key': process.env.DATA_API_KEY!
-  //   }
-  // })
-  // const product = await res.json()
-  // return Response.json({ product })
+  const { searchParams } = new URL(request.url)
+  const profileUrl = searchParams.get('profileUrl')
+
+  try {
+    const response = await fetcher(
+      `https://fresh-linkedin-profile-data.p.rapidapi.com/get-profile-posts?linkedin_url=${profileUrl}&type=posts`,
+      {
+        headers: {
+          'X-RapidAPI-Key': process.env.RAPID_API_KEY!
+        }
+      }
+    )
+    return Response.json({ data: response.data })
+  } catch (error) {
+    console.error(error)
+    return new Response('An error occurred', { status: 500 })
+  }
 }

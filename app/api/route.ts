@@ -1,6 +1,7 @@
 // export const dynamic = 'force-dynamic' // defaults to auto
 
 import { fetcher } from '@/lib/utils'
+import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
   const form = await request.formData()
@@ -34,9 +35,15 @@ export async function GET(request: Request) {
         }
       }
     )
-    return Response.json({ data: response.data })
+    if (response.data.length > 0) {
+      return Response.json({ data: response.data })
+    } else {
+      return NextResponse.json(
+        { error: 'The user has posted nothing' },
+        { status: 404 }
+      )
+    }
   } catch (error) {
-    console.error(error)
-    return new Response('An error occurred', { status: 500 })
+    return NextResponse.json({ error: 'User not found' }, { status: 400 })
   }
 }

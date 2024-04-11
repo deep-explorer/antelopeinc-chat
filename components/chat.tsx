@@ -76,7 +76,9 @@ export function Chat({ id, className, session, missingKeys }: ChatProps) {
       </div>
 
       <div className="w-full flex justify-center space-y-4 border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
-        <PromptForm input={input} setInput={setInput} />
+        <div>
+          <PromptForm input={input} setInput={setInput} />
+        </div>
       </div>
     </>
   )

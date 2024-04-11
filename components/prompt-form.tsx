@@ -57,11 +57,11 @@ export function PromptForm({
     }
   })
 
-  React.useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus()
-    }
-  }, [])
+  // React.useEffect(() => {
+  //   if (inputRef.current) {
+  //     inputRef.current.focus()
+  //   }
+  // }, [])
 
   const processMessage = async (
     type: 'normal' | 'file' | 'profileLink',

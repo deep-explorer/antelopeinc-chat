@@ -144,7 +144,7 @@ async function submitUserMessage(content: string) {
   let textNode: undefined | React.ReactNode
 
   const ui = render({
-    model: 'gpt-4-0125-preview',
+    model: 'gpt-4-turbo-2024-04-09',
     provider: openai,
     initial: <SpinnerMessage />,
     messages: [

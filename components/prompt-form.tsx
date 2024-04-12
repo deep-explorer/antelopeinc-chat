@@ -152,8 +152,8 @@ export function PromptForm({
   }
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} className="w-[940px] ">
-      <div className="relative flex max-h-60 w-full grow  overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] px-8 sm:rounded-md border-[1px] border-[#1F3C45] sm:px-12">
+    <form ref={formRef} onSubmit={onSubmit} className="max-w-[940px] ">
+      <div className="relative flex max-h-60 w-full grow  overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] p-1 md:px-8 sm:rounded-md border-[1px] border-[#1F3C45] sm:px-12">
         {/* <Tooltip>
           <TooltipTrigger asChild>
             <Button
@@ -174,7 +174,7 @@ export function PromptForm({
           <Button variant="default" {...getRootProps()} type="button">
             <input {...getInputProps()} />
             <IconPlus />
-            File
+            <p className="hidden md:block">File</p>
           </Button>
         </div>
         <Textarea
@@ -182,7 +182,7 @@ export function PromptForm({
           tabIndex={0}
           onKeyDown={onKeyDown}
           placeholder="Message Antelope"
-          className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
+          className="min-h-[60px] w-full resize-none bg-transparent p-1 md:px-4 md:py-[1.3rem] focus-within:outline-none sm:text-sm"
           // autoFocus
           spellCheck={false}
           autoComplete="off"

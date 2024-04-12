@@ -52,13 +52,13 @@ async function UserOrLogin() {
 
 export function Header() {
   return (
-    <header className="flex items-center justify-between w-full h-[153px] px-12 py-20">
+    <header className="flex items-center justify-between w-full md:h-[57px]">
       <div className="flex items-center">
         <React.Suspense fallback={<div className="flex-1 overflow-auto" />}>
           <UserOrLogin />
         </React.Suspense>
       </div>
-      <div className="flex items-center justify-end space-x-2 gap-4">
+      <div className="hidden lg:flex items-center justify-end space-x-2 gap-4">
         <Link href={'/'}>Home</Link>
         <Link href={'/'}>Benefits</Link>
         <Link href={'/'}>Process</Link>

@@ -6,7 +6,7 @@ interface ChatLayoutProps {
 
 export default async function ChatLayout({ children }: ChatLayoutProps) {
   return (
-    <div className="py-[100px]">
+    <div className="py-14 md:py-[100px]">
       <div className="text-center mb-8">
         <h1 className="text-primary">RESULT</h1>
         <h2 className="text-3xl my-4">Nike competitor report</h2>

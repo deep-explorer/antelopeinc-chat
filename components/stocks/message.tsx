@@ -20,7 +20,7 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
         <div className="bg-[#18898D] px-6 py-4 rounded-lg text-sm">
           {children}
         </div>
-        <div className="flex size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
+        <div className="flex size-[32px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
           <IconUser width={48} height={48} />
         </div>
       </div>
@@ -39,12 +39,12 @@ export function BotMessage({
 
   return (
     <div className={cn('group relative flex gap-4 max-w-[768px]', className)}>
-      <div className="flex size-[48px] shrink-0 select-none items-center justify-center rounded-md">
+      <div className="flex size-[32px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-md">
         <Image src="/header-logo.png" alt="bot-logo" width={48} height={48} />
       </div>
       <div className=" bg-white dark:bg-[#122830]  px-6 py-4 rounded-lg">
         <MemoizedReactMarkdown
-          className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 text-sm"
+          className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 text-xs md:text-sm"
           remarkPlugins={[remarkGfm, remarkMath]}
           components={{
             p({ children }) {

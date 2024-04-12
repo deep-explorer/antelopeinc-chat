@@ -9,7 +9,7 @@ import Link from 'next/link'
 export function Footer({ className, ...props }: React.ComponentProps<'p'>) {
   return (
     <div
-      className="py-16 px-20 bg-[#122830] text-white"
+      className="bg-[#122830] text-white flex flex-col gap-8 text-sm md:text-base m-[-24px] md:mx-[-48px] md:my-[-80px] p-6 md:px-12 md:py-20"
       // className={cn(
       //   'px-2 text-center text-xs leading-normal text-muted-foreground',
       //   className
@@ -29,8 +29,8 @@ export function Footer({ className, ...props }: React.ComponentProps<'p'>) {
           className="items-center"
         >
           <svg
-            width="26"
-            height="26"
+            width="32"
+            height="32"
             viewBox="0 0 15 15"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -44,15 +44,22 @@ export function Footer({ className, ...props }: React.ComponentProps<'p'>) {
           </svg>
         </a>
       </div>
-      <hr className="my-8" />
+      <hr className="hidden md:block border-t-2 border-[#3D565F]" />
       <div className="flex justify-between">
-        <p>Copyright © 2023 Antelope Inc. All Rights Reserved</p>
-        <div className="flex gap-4">
+        <p className="hidden md:block">
+          Copyright © 2023 Antelope Inc. All Rights Reserved
+        </p>
+        <div className="flex justify-between min-w-full md:justify-normal md:min-w-0 md:gap-4">
           <Link href={'/'}>Terms of Service</Link>
           <Link href={'/'}>Privacy</Link>
           <Link href={'/'}>Cookie Policy</Link>
         </div>
       </div>
+      <hr className="block md:hidden border-t-2 border-[#3D565F]" />
+      <p className="block md:hidden text-center">
+        Copyright © 2023 Antelope Inc.
+        <br /> All Rights Reserved
+      </p>
     </div>
   )
 }

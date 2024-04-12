@@ -44,14 +44,14 @@ export function PromptUsageWidget({}: PromptUsageWidgetProps) {
 
   return (
     <div className="relative mx-auto px-4">
-      <div className="group relative mb-4 flex items-start md:-ml-12">
+      <div className="group relative flex items-start md:-ml-12">
         <div className="bg-background flex size-[25px] shrink-0 select-none items-center justify-center rounded-md border shadow-sm">
           <ExclamationTriangleIcon />
         </div>
         <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
           <p className="text-muted-foreground leading-normal">
-            Last prompt cost = <i>{lastPromptCost.toFixed(2)} USD</i>. Total
-            cost = <i>{totalCost.toFixed(2)} USD</i>.
+            Last prompt cost = <i>{lastPromptCost.toFixed(2)} USD</i>.<br />
+            Total cost = <i>{totalCost.toFixed(2)} USD</i>.
           </p>
         </div>
       </div>

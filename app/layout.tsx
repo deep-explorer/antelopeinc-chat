@@ -53,7 +53,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <div>
+          <div className=" p-6 md:px-12 md:py-20 ">
             <Header />
             <main>{children}</main>
             <Footer className="py-8" />

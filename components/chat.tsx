@@ -57,9 +57,9 @@ export function Chat({ id, className, session, missingKeys }: ChatProps) {
 
   return (
     <>
-      <div className="relative flex justify-center h-[calc(100vh_-_theme(spacing.36))] overflow-hidden">
-        <div className="w-[940px] flex">
-          <div className="group w-full overflow-auto  bg-[#CDE2E7] dark:bg-[#071920] rounded-lg">
+      <div className="relative flex justify-center h-[calc(100vh_-_theme(spacing.36))] ">
+        <div className="max-w-[940px] min-w-[350px] w-full flex">
+          <div className="group w-full overflow-auto  bg-[#CDE2E7] dark:bg-[#071920] rounded-lg border-black dark:border-white border-2">
             <div className={cn('pt-4 md:pt-10 ', className)}>
               {messages.length ? (
                 <ChatList
@@ -76,8 +76,8 @@ export function Chat({ id, className, session, missingKeys }: ChatProps) {
         </div>
       </div>
 
-      <div className="w-full flex justify-center space-y-4 border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
-        <div>
+      <div className="w-full flex justify-center space-y-4 border-t bg-background p-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
+        <div className="max-w-[940px] w-full flex flex-col gap-2">
           <PromptForm input={input} setInput={setInput} />
           <PromptUsageWidget />
         </div>

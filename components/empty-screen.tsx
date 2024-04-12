@@ -67,7 +67,7 @@ export function EmptyScreen() {
           <h1 className="text-lg font-semibold">
             Welcome to Antelope LinkedIn profile analyzer.
           </h1>
-          <p>To begin, insert a LinkedIn profile link the box below:</p>
+          <p>To begin, insert a LinkedIn profile link in the box below</p>
           <div>
             <Input
               placeholder="https://www.linkedin.com/in/danielryanrobinson/"

@@ -50,8 +50,8 @@ export function PromptUsageWidget({}: PromptUsageWidgetProps) {
         </div>
         <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
           <p className="text-muted-foreground leading-normal">
-            For the last prompt, cost is <i>{lastPromptCost.toFixed(2)} USD</i>.
-            In total, cost is <i>{totalCost.toFixed(2)} USD</i>.
+            Last prompt cost = <i>{lastPromptCost.toFixed(2)} USD</i>. Total
+            cost = <i>{totalCost.toFixed(2)} USD</i>.
           </p>
         </div>
       </div>

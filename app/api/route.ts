@@ -8,6 +8,8 @@ export async function POST(request: Request) {
   const file = form.get('file') as File
 
   const content = await file.text()
+  return Response.json({ content })
+
   try {
     const json = JSON.parse(content)
     return Response.json({

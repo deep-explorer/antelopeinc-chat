@@ -12,6 +12,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { Message } from '@/lib/chat/actions'
 import { toast } from 'sonner'
 import { PromptForm } from './prompt-form'
+import { PromptUsageWidget } from './prompt-usage-widget'
 
 export interface ChatProps extends React.ComponentProps<'div'> {
   initialMessages?: Message[]
@@ -78,6 +79,7 @@ export function Chat({ id, className, session, missingKeys }: ChatProps) {
       <div className="w-full flex justify-center space-y-4 border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
         <div>
           <PromptForm input={input} setInput={setInput} />
+          <PromptUsageWidget />
         </div>
       </div>
     </>

@@ -70,7 +70,7 @@ export function EmptyScreen() {
           <p>To begin, insert a LinkedIn profile link the box below:</p>
           <div>
             <Input
-              placeholder="https://www.linkin.com/in/danielrobinson/"
+              placeholder="https://www.linkedin.com/in/danielryanrobinson/"
               className="w-full overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] sm:rounded-md border-[1px] border-[#1F3C45]"
               autoFocus
               value={link}

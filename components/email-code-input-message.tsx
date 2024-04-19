@@ -44,7 +44,7 @@ export function EmailCodeInputMessage() {
         <p>Check your email for a confirmation code to continue the chat.</p>
         <div>
           <Input
-            placeholder="secret code"
+            placeholder="123456"
             className="w-full overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] sm:rounded-md border-[1px] border-[#1F3C45]"
             autoFocus
             value={code}

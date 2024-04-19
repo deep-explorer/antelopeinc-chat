@@ -59,39 +59,36 @@ export function BotMessage({
         .split(/\n(?=##\s)/)
         .map(section => section.trim())
         .map((section, index) => {
+          //  TODO: refactoring
           let chart = <> </>
           if (section.includes('Writing Style')) {
             const writingStyles = [
-              'Professional',
-              'Semi-Formal',
-              'Neutral',
+              'Informal',
               'Casually-Formal',
-              'Informal'
+              'Neutral',
+              'Semi-Formal',
+              'Professional'
             ]
             const words = section.split(' ')
             words.some(word => {
-              return writingStyles.some((style, index) => {
-                if (word.includes(style)) {
+              return writingStyles.some((writingStyle, index) => {
+                if (word.includes(writingStyle)) {
                   chart = (
                     <ReactSpeedometer
                       value={(1000 * (index + 0.5)) / writingStyles.length}
-                      currentValueText={style}
+                      currentValueText={writingStyle}
                       textColor="white"
                       width={400}
+                      segmentColors={[
+                        '#FF784D',
+                        '#F49650',
+                        '#B6DBD9',
+                        '#18898D',
+                        '#2F616A'
+                      ]}
                       customSegmentLabels={[
                         {
-                          text: 'Professional',
-                          position: CustomSegmentLabelPosition.Outside,
-                          color: 'white',
-                          fontSize: '12px'
-                        },
-                        {
-                          text: 'Semi-Formal',
-                          position: CustomSegmentLabelPosition.Outside,
-                          color: 'white'
-                        },
-                        {
-                          text: 'Neutral',
+                          text: 'Informal',
                           position: CustomSegmentLabelPosition.Outside,
                           color: 'white'
                         },
@@ -101,9 +98,20 @@ export function BotMessage({
                           color: 'white'
                         },
                         {
-                          text: 'Informal',
+                          text: 'Neutral',
                           position: CustomSegmentLabelPosition.Outside,
                           color: 'white'
+                        },
+                        {
+                          text: 'Semi-Formal',
+                          position: CustomSegmentLabelPosition.Outside,
+                          color: 'white'
+                        },
+                        {
+                          text: 'Professional',
+                          position: CustomSegmentLabelPosition.Outside,
+                          color: 'white',
+                          fontSize: '12px'
                         }
                       ]}
                     />

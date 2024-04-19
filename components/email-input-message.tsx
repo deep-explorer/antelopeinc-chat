@@ -84,7 +84,7 @@ export function EmailInputMessage() {
             )}
           </div>
         </div>
-        <Button type="submit">Semd Full Report</Button>
+        <Button type="submit">Send Full Report</Button>
       </form>
     </BotCard>
   )

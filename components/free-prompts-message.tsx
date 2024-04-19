@@ -3,8 +3,9 @@ import { sleep } from '@/lib/utils'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
-import { BotCard, SpinnerMessage, UserMessage } from './stocks/message'
+import { BotCard, UserMessage } from './stocks/message'
 import { ChatSpinner } from './stocks/ChatSpinner'
+import { ScheduleMessage } from './schedule-message'
 
 export function FreePromptsMessage() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -32,25 +33,7 @@ export function FreePromptsMessage() {
       ...currentMessages.slice(0, -1),
       {
         id: nanoid(),
-        display: (
-          <BotCard>
-            <p className="mb-4 text-sm">
-              To continue, you will need to schedule a demo to meet with Antelop
-              team, click the link below and a team member will get back to you
-              soon
-            </p>
-            <div className="p-2 w-[50%]">
-              <Button
-                className="w-full bg-yellow-600"
-                onClick={() =>
-                  window.open('https://go.oncehub.com/DanielRobinson', '_blank')
-                }
-              >
-                Schedule appointment
-              </Button>
-            </div>
-          </BotCard>
-        )
+        display: <ScheduleMessage />
       }
     ])
   }
@@ -62,10 +45,7 @@ export function FreePromptsMessage() {
       <div className="flex flex-wrap">
         {freePromptMessages.map((message, index) => (
           <div className="p-2 w-[50%]" key={index}>
-            <Button
-              onClick={() => onClick(message)}
-              className="w-full bg-yellow-600"
-            >
+            <Button onClick={() => onClick(message)} className="w-full">
               {message}
             </Button>
           </div>

@@ -35,6 +35,7 @@ import { saveChat } from '@/app/actions'
 import { SpinnerMessage, UserMessage } from '@/components/stocks/message'
 import { Chat } from '@/lib/types'
 import { auth } from '@/auth'
+import { FreePromptsMessage } from '@/components/stocks/index'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || ''
@@ -154,20 +155,20 @@ async function submitUserMessage(content: string) {
 
 I have included data containing LinkedIn post data from an influencer. You will analyze the influencer's content tactics and their success based on the engagement data (comments, likes and reposts). Break down each tactic one by one into the following sections:
 
-Section A: Overall Summary
--Provide an intro to the influencer and an overall summary of the influencer's LinkedIn strategy. Do this in 2-3 sentences focusing on what they post about and how they leverage the platform.
+Section A: 📔 Overview of Influencer(use name of influencer)
+-Provide an intro to the influencer and an overview of the influencer's LinkedIn strategy. Do this in 2-3 sentences focusing on what they post about and how they leverage the platform. Start from influencer's name like this "John Doe is a ..."
 
-Section B: What's Working
--Provide two bullet point lists. The first including what has worked for them. The second what has been less effective. Use the engagement data (e.g.: likes, comments) in the dataset to determine this. For all examples, provide a short description of the tactic and then a hyperlinked example to a specific LinkedIn post that illustrates what has worked and what has note. Give put this in brackets with a short description, and link to the post. Ensure you give at least 1 and no more than 5 examples for each list. Avoid generic takeaways focusing on specific examples that apply to this influencer's niche.
+Section B: 🔍 Strengths & Weaknesses
+-Provide two bullet point lists. The first subsection includes what has worked for them and name is "What's Working". The second subsection is what has been less effective and name is "Less Effective". Use the engagement data (e.g.: likes, comments) in the dataset to determine this. For all examples, provide a short description of the tactic and then a hyperlinked example to a specific LinkedIn post that illustrates what has worked and what has note. Give put this in brackets with a short description, and link to the post. Ensure you give at least 1 and no more than 5 examples for each list. Avoid generic takeaways focusing on specific examples that apply to this influencer's niche.
 
-Section C: Writing Style
+Section C: ✏️ Writing Style
 
--Give a quick two sentence overview of his writing style, citing some examples on how they use key LinkedIn tactics (e.g.: introductory hooks, writing length, style. Avoid generic takeaways here focusing on specific things you can learn from this influencer.
+-Give a quick two sentence overview of his writing style, citing some examples on how they use key LinkedIn tactics (e.g.: introductory hooks, writing length, style. Avoid generic takeaways here focusing on specific things you can learn from this influencer. Begin by selecting a descriptor from the following options for the influencer's style: Professional, Semi-Formal, Neutral, Casually-Formal, Informal. Choose only one.
 
-Section D: Posting Frequency
+Section D: 🕒 Posting Frequency
 -A quick sentence noting how often he posts. Use the date detail to determine this (e.g.: 3x weekly, 1x monthly etc)
 
-Section E: Tactic Overview
+Section E: 📌 Tactic Overview
 
 -Create a table with the following columns. Sorting the tactics with the ones that have the higheset engagement first
 1. Content Tactic: Identify the main types of content the influencer posts.
@@ -177,14 +178,18 @@ Section E: Tactic Overview
 5. Example Posts: For each content tactic, provide 3 example post URLs and a brief summary of the post in no more than 8 words. Separate these by a numbered list but keep within the same cell. Avoid HTML formatting here (e.g. <br>).
 
 More instructions:
--Please bolden all headers
+-Bolden all headers and utilize # for heading formatting.
+-Use ## for main sections and ### for subsections.
+-Use emojis provided at each sections to make the sections more engaging and it's important!
 -Bolden all links so its obvious they are hyperlinked.
 -List each tactic one by one
--There is no reason to write the word section (e.g.: "Section A: Overall Summary") in your headlines, you can just use the title (e.g.: Overall Summary)
+-There is no reason to write the word section (e.g.: "Section A: Overview of Influencer") in your headlines, you can just use the title (e.g.: Overview of John Doe)
 -Use succinct language, ensuring all salient poitns are made but focusing on the most important ideas
 -In the "Example Posts" section, include the post URL and a brief summary of the post. You can hyperlink the summary to the URL. There is no need to list the URL as well.
 -Ensure you review all posts included, and do not ignore any
--No yapping! Take a deep breath and ensure you do this to the best of your ability, it is very important! You will get a tip if you get it right.`
+-No yapping! Take a deep breath and ensure you do this to the best of your ability, it is very important! You will get a tip if you get it right.
+-Clarify which section is the main one and which is the subsection visually. Use different font sizes or boldening to make this clear.
+-Use exact name of the influencer on LinkedIn.`
       },
       ...aiState.get().messages.map((message: any) => ({
         role: message.role,
@@ -199,6 +204,15 @@ More instructions:
       }
 
       if (done) {
+        //  if this is the first time
+        textNode = (
+          <>
+            {textNode}
+            {/* <BotMessage content={textStream.value} /> */}
+            <FreePromptsMessage />
+          </>
+        )
+
         textStream.done()
         aiState.done({
           ...aiState.get(),

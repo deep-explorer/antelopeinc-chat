@@ -64,7 +64,7 @@ export function Header() {
         <Link href={'/'}>Process</Link>
         <Link href={'/'}>About Us</Link>
         <Link href={'/'}>Pricing</Link>
-        <Link href={'/'}>FAG</Link>
+        <Link href={'/'}>FAQ</Link>
       </div>
       <div>
         <ThemeToggle />

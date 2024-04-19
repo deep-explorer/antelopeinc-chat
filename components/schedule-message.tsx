@@ -50,15 +50,12 @@ function MyDialog({
     </div>
   )
 }
-export function ScheduleMessage() {
+export function ScheduleMessage({ response }: { response: string }) {
   const [open, setOpen] = useState(false)
 
   return (
     <BotCard>
-      <p className="mb-4 text-sm">
-        To continue, you will need to schedule a demo to meet with Antelop team,
-        click the link below and a team member will get back to you soon
-      </p>
+      <p className="mb-4 text-sm">{response}</p>
       <Button className="w-full" onClick={() => setOpen(true)}>
         Schedule appointment
       </Button>

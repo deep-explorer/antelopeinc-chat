@@ -10,7 +10,7 @@ import { ScheduleMessage } from './schedule-message'
 export function FreePromptsMessage() {
   const [_, setMessages] = useUIState<typeof AI>()
 
-  const onClick = async (prompt: string) => {
+  const onClick = async (prompt: string, response: string) => {
     setMessages(currentMessages => [
       ...currentMessages,
       {
@@ -33,7 +33,7 @@ export function FreePromptsMessage() {
       ...currentMessages.slice(0, -1),
       {
         id: nanoid(),
-        display: <ScheduleMessage />
+        display: <ScheduleMessage response={response} />
       }
     ])
   }
@@ -45,8 +45,11 @@ export function FreePromptsMessage() {
       <div className="flex flex-wrap">
         {freePromptMessages.map((message, index) => (
           <div className="p-2 w-[50%]" key={index}>
-            <Button onClick={() => onClick(message)} className="w-full">
-              {message}
+            <Button
+              onClick={() => onClick(message.prompt, message.response)}
+              className="w-full"
+            >
+              {message.prompt}
             </Button>
           </div>
         ))}
@@ -56,8 +59,24 @@ export function FreePromptsMessage() {
 }
 
 const freePromptMessages = [
-  'Run another analysis',
-  "Tell me the user's top posts",
-  'Write a post in the users style',
-  'Suggest another user to review'
+  {
+    prompt: 'Run another analysis',
+    response:
+      "To dive deeper with another analysis, we'll need to arrange a session with the Antelope team. Click below to book a time, and we'll be in touch with the next steps."
+  },
+  {
+    prompt: "Tell me the user's top posts",
+    response:
+      "To reveal the user's top posts, we will need to book a session with the Antelope team . Schedule your session below,  and we'll be in touch with the next steps."
+  },
+  {
+    prompt: "Write a post in the user's style",
+    response:
+      "To craft a post reflecting the user's unique voice, we will need to book a session with the Antelope team . Schedule your session below,  and we'll be in touch with the next steps."
+  },
+  {
+    prompt: 'Suggest another user to review',
+    response:
+      "Discover the potential in reviewing another user by booking a demo. Schedule your session below,  and we'll be in touch with the next steps."
+  }
 ]

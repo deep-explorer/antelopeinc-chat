@@ -41,6 +41,7 @@
     "next-themes": "^0.2.1",
     "openai": "^4.24.7",
     "react": "^18.2.0",
+    "react-d3-speedometer": "^2.2.1",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-intersection-observer": "^9.5.3",

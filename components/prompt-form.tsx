@@ -131,7 +131,6 @@ export function PromptForm({
 
   const onSubmit = async (e: any) => {
     e.preventDefault()
-    console.log('here')
     // Blur focus on mobile
     if (window.innerWidth < 600) {
       e.target['message']?.blur()
@@ -152,8 +151,8 @@ export function PromptForm({
   }
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} className="max-w-[940px] ">
-      <div className="relative flex max-h-60 w-full grow  overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] p-1 md:px-8 sm:rounded-md border-[1px] border-[#1F3C45] sm:px-12">
+    <form ref={formRef} onSubmit={onSubmit} className="max-w-[940px]">
+      <div className="relative flex max-h-60 w-full grow  overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] p-1 md:px-8 sm:rounded-md border-[1px] border-[#1F3C45] sm:px-12  cursor-not-allowed">
         {/* <Tooltip>
           <TooltipTrigger asChild>
             <Button
@@ -171,8 +170,13 @@ export function PromptForm({
           <TooltipContent>New Chat</TooltipContent>
         </Tooltip> */}
         <div className="flex justify-center items-center">
-          <Button variant="default" {...getRootProps()} type="button">
-            <input {...getInputProps()} />
+          <Button
+            variant="default"
+            {...getRootProps()}
+            type="button"
+            disabled={true}
+          >
+            <input disabled={true} {...getInputProps()} />
             <IconPlus />
             <p className="hidden md:block">File</p>
           </Button>
@@ -182,7 +186,8 @@ export function PromptForm({
           tabIndex={0}
           onKeyDown={onKeyDown}
           placeholder="Message Antelope"
-          className="min-h-[60px] w-full resize-none bg-transparent p-1 md:px-4 md:py-[1.3rem] focus-within:outline-none sm:text-sm"
+          className="min-h-[60px] w-full resize-none bg-transparent p-1 md:px-4 md:py-[1.3rem] focus-within:outline-none sm:text-sm cursor-not-allowed"
+          disabled={true}
           // autoFocus
           spellCheck={false}
           autoComplete="off"

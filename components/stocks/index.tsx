@@ -33,4 +33,13 @@ const Events = dynamic(() => import('./events').then(mod => mod.Events), {
   loading: () => <EventsSkeleton />
 })
 
-export { Stock, Purchase, Stocks, Events }
+//  NOTE: for now
+const FreePromptsMessage = dynamic(
+  () => import('../free-prompts-message').then(mod => mod.FreePromptsMessage),
+  {
+    ssr: false,
+    loading: () => <StockSkeleton />
+  }
+)
+
+export { Stock, Purchase, Stocks, Events, FreePromptsMessage }

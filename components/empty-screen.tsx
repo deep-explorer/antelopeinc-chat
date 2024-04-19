@@ -3,11 +3,13 @@ import React, { useState } from 'react'
 import { Input } from './ui/input'
 import { spinner } from './stocks'
 import { fetcher } from '@/lib/utils'
-import { useActions, useUIState } from 'ai/rsc'
+import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
 import { UserMessage } from './stocks/message'
 import { LinkedInLogoIcon } from '@radix-ui/react-icons'
+import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
+import { EmailInputMessage } from './email-input-message'
 
 export function EmptyScreen() {
   const [link, setLink] = useState('')
@@ -15,7 +17,7 @@ export function EmptyScreen() {
   const [isLoading, setLoading] = useState(false)
 
   const [_, setMessages] = useUIState<typeof AI>()
-  const { submitUserMessage } = useActions()
+  const { setLinkedinPosts } = useFreeChatContext()
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -29,6 +31,7 @@ export function EmptyScreen() {
         const response = await fetcher(`/api?profileUrl=${link}`)
         setLoading(false)
 
+        setLinkedinPosts(JSON.stringify(response))
         setMessages(currentMessages => [
           ...currentMessages,
           {
@@ -41,14 +44,12 @@ export function EmptyScreen() {
                 </div>
               </UserMessage>
             )
+          },
+          {
+            id: nanoid(),
+            display: <EmailInputMessage />
           }
         ])
-
-        // Submit and get response message
-        const responseMessage = await submitUserMessage(
-          JSON.stringify(response)
-        )
-        setMessages(currentMessages => [...currentMessages, responseMessage])
       } catch (e: any) {
         setLoading(false)
         setError(
@@ -64,10 +65,13 @@ export function EmptyScreen() {
     <div className="mx-auto max-w-2xl px-4">
       <div className="flex flex-col gap-2 rounded-lg border bg-background p-8">
         <form onSubmit={onSubmit} className="flex flex-col gap-4">
-          <h1 className="text-lg font-semibold">
+          <h1 className="text-xl font-semibold">
             Welcome to Antelope LinkedIn profile analyzer.
           </h1>
-          <p>To begin, insert a LinkedIn profile link in the box below</p>
+          <p>
+            To begin your analysis, please insert a LinkedIn profile in the link
+            and format below
+          </p>
           <div>
             <Input
               placeholder="https://www.linkedin.com/in/danielryanrobinson/"
@@ -78,7 +82,7 @@ export function EmptyScreen() {
                 setLink(e.target.value)
               }}
             />
-            <div className="flex gap-2 h-4">
+            <div className="flex gap-2 h-6 p-1">
               {isLoading ? (
                 <>
                   {spinner}

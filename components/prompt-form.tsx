@@ -151,90 +151,75 @@ export function PromptForm({
   }
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} className="max-w-[940px]">
-      <div className="relative flex max-h-60 w-full grow  overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] p-1 md:px-8 sm:rounded-md border-[1px] border-[#1F3C45] sm:px-12  cursor-not-allowed">
-        {/* <Tooltip>
+    <form
+      ref={formRef}
+      onSubmit={onSubmit}
+      className="max-w-[940px] min-w-[350px] w-full flex bg-[#CDE2E7] dark:bg-[#071920] rounded-md md:rounded-lg border-black dark:border-white border-2 relative max-h-20 overflow-auto  p-1 md:pl-8 pr-0 cursor-not-allowed"
+    >
+      <div className="flex justify-center items-center">
+        <Button
+          variant="default"
+          {...getRootProps()}
+          type="button"
+          disabled={true}
+        >
+          <input disabled={true} {...getInputProps()} />
+          <IconPlus />
+          <p className="hidden md:block">File</p>
+        </Button>
+      </div>
+      <Textarea
+        ref={inputRef}
+        tabIndex={0}
+        onKeyDown={onKeyDown}
+        placeholder="Message Antelope"
+        className="min-h-[60px] max-h-16 w-full resize-none bg-transparent p-1 md:pl-4 md:pr-14 py-[1.3rem] focus-within:outline-none sm:text-sm cursor-not-allowed"
+        disabled={true}
+        // autoFocus
+        spellCheck={false}
+        autoComplete="off"
+        autoCorrect="off"
+        name="message"
+        rows={1}
+        value={input}
+        onChange={e => setInput(e.target.value)}
+      />
+      <div className="absolute right-2 top-[13px] sm:right-4">
+        <Tooltip>
           <TooltipTrigger asChild>
             <Button
-              variant="outline"
+              variant={'outline'}
+              type="submit"
               size="icon"
-              className="absolute left-0 top-[14px] size-8 rounded-full bg-background p-0 sm:left-4"
-              onClick={() => {
-                router.push('/new')
-              }}
+              disabled={input === ''}
             >
-              <IconPlus />
-              <span className="sr-only">New Chat</span>
+              <span>
+                <div
+                  role="button"
+                  className="send-btn relative right-[-3px] h-[28px] w-[28px] rounded-lg rount send-btn text-base flex justify-center items-center bg-[transparent] hover:bg-darken2 cursor-pointer opacity-30 pointer-events-none"
+                >
+                  <svg
+                    className="h-4 w-4 "
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" />
+                  </svg>
+                </div>
+              </span>
+
+              <span className="sr-only">Send message</span>
             </Button>
           </TooltipTrigger>
-          <TooltipContent>New Chat</TooltipContent>
-        </Tooltip> */}
-        <div className="flex justify-center items-center">
-          <Button
-            variant="default"
-            {...getRootProps()}
-            type="button"
-            disabled={true}
-          >
-            <input disabled={true} {...getInputProps()} />
-            <IconPlus />
-            <p className="hidden md:block">File</p>
-          </Button>
-        </div>
-        <Textarea
-          ref={inputRef}
-          tabIndex={0}
-          onKeyDown={onKeyDown}
-          placeholder="Message Antelope"
-          className="min-h-[60px] w-full resize-none bg-transparent p-1 md:px-4 md:py-[1.3rem] focus-within:outline-none sm:text-sm cursor-not-allowed"
-          disabled={true}
-          // autoFocus
-          spellCheck={false}
-          autoComplete="off"
-          autoCorrect="off"
-          name="message"
-          rows={1}
-          value={input}
-          onChange={e => setInput(e.target.value)}
-        />
-        <div className="absolute right-0 top-[13px] sm:right-4">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant={'outline'}
-                type="submit"
-                size="icon"
-                disabled={input === ''}
-              >
-                <span>
-                  <div
-                    role="button"
-                    className="send-btn relative right-[-3px] h-[28px] w-[28px] rounded-lg rount send-btn text-base flex justify-center items-center bg-[transparent] hover:bg-darken2 cursor-pointer opacity-30 pointer-events-none"
-                  >
-                    <svg
-                      className="h-4 w-4 "
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      {' '}
-                      <path stroke="none" d="M0 0h24v24H0z" />{' '}
-                      <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" />
-                    </svg>
-                  </div>
-                </span>
-
-                <span className="sr-only">Send message</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Send message</TooltipContent>
-          </Tooltip>
-        </div>
+          <TooltipContent>Send message</TooltipContent>
+        </Tooltip>
       </div>
     </form>
   )

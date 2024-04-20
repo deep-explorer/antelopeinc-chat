@@ -7,7 +7,7 @@ import { useActions, useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { BotCard } from './stocks/message'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
-import { antelopeEndpoint } from '@/lib/constants/config'
+import { antelopeEndpoint, mode } from '@/lib/constants/config'
 
 export function EmailCodeInputMessage() {
   const [code, setCode] = useState('')
@@ -29,7 +29,9 @@ export function EmailCodeInputMessage() {
         `${antelopeEndpoint}/chatbot/validate?email=${userEmail}&code=${code}`
       )
       setValidatingEmail(false)
-      if (!response.success) {
+
+      //  NOTE: in development, we don't care the response
+      if (mode === 'production' && !response.success) {
         setError(response.msg || 'This email is not allowed.')
         return
       }

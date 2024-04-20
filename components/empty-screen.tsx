@@ -39,7 +39,9 @@ export function EmptyScreen() {
             display: (
               <UserMessage>
                 <div className="flex gap-2">
-                  <LinkedInLogoIcon />
+                  <div className="flex items-center">
+                    <LinkedInLogoIcon />
+                  </div>
                   {link}
                 </div>
               </UserMessage>
@@ -65,10 +67,10 @@ export function EmptyScreen() {
     <div className="mx-auto max-w-2xl px-4">
       <div className="flex flex-col gap-2 rounded-lg border bg-background p-8">
         <form onSubmit={onSubmit} className="flex flex-col gap-4">
-          <h1 className="text-xl font-semibold">
+          <h1 className="text-lg md:text-xl font-semibold">
             Welcome to Antelope LinkedIn profile analyzer.
           </h1>
-          <p>
+          <p className="text-sm md:text-base">
             To begin your analysis, please insert a LinkedIn profile in the link
             and format below
           </p>

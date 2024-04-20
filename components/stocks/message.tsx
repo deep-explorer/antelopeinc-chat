@@ -13,18 +13,24 @@ import Image from 'next/image'
 import ReactSpeedometer, {
   CustomSegmentLabelPosition
 } from 'react-d3-speedometer'
+import { useWindowSize } from 'usehooks-ts'
+import { useTheme } from 'next-themes'
 
 // Different types of message bubbles.
 
 export function UserMessage({ children }: { children: React.ReactNode }) {
+  const { width: windowWidth } = useWindowSize()
   return (
-    <div className="flex justify-end">
-      <div className="group relative flex gap-4 text-white  max-w-[768px]">
-        <div className="bg-[#18898D] px-6 py-4 rounded-lg text-sm">
+    <div className="grid place-items-end">
+      <div className="group relative flex gap-2 md:gap-4 text-white max-w-[300px] sm:max-w-[600px] lg:max-w-[768px]">
+        <div className="bg-[#18898D] px-3 md:px-6 py-2 md:py-4 rounded-sm md:rounded-lg overflow-x-auto text-sm">
           {children}
         </div>
-        <div className="flex size-[32px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
-          <IconUser width={48} height={48} />
+        <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
+          <IconUser
+            width={windowWidth >= 768 ? 48 : 24}
+            height={windowWidth >= 768 ? 48 : 24}
+          />
         </div>
       </div>
     </div>
@@ -32,12 +38,19 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
 }
 
 export function BotCard({ children }: { children: React.ReactNode }) {
+  const { width: windowWidth } = useWindowSize()
+
   return (
-    <div className="group relative flex gap-4 max-w-[768px] my-4">
-      <div className="flex size-[32px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-md">
-        <Image src="/header-logo.png" alt="bot-logo" width={48} height={48} />
+    <div className="group relative flex gap-2 md:gap-4  max-w-[768px] my-4">
+      <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-md">
+        <Image
+          src="/header-logo.png"
+          alt="bot-logo"
+          width={windowWidth >= 768 ? 48 : 24}
+          height={windowWidth >= 768 ? 48 : 24}
+        />
       </div>
-      <div className=" bg-white dark:bg-[#122830]  px-6 py-4 rounded-lg">
+      <div className=" bg-white dark:bg-[#122830] px-3 md:px-6 py-2 md:py-4 rounded-sm md:rounded-lg overflow-x-auto">
         {children}
       </div>
     </div>
@@ -52,6 +65,8 @@ export function BotMessage({
   className?: string
 }) {
   const text = useStreamableText(content)
+  const { width: windowWidth } = useWindowSize()
+  const { theme } = useTheme()
 
   return (
     <>
@@ -77,8 +92,9 @@ export function BotMessage({
                     <ReactSpeedometer
                       value={(1000 * (index + 0.5)) / writingStyles.length}
                       currentValueText={writingStyle}
-                      textColor="white"
-                      width={400}
+                      textColor={theme === 'dark' ? 'white' : 'black'}
+                      width={windowWidth > 768 ? 400 : 250}
+                      height={windowWidth > 768 ? 250 : 150}
                       segmentColors={[
                         '#FF784D',
                         '#F49650',
@@ -90,28 +106,32 @@ export function BotMessage({
                         {
                           text: 'Informal',
                           position: CustomSegmentLabelPosition.Outside,
-                          color: 'white'
+                          fontSize: windowWidth > 768 ? '12px' : '10px',
+                          color: theme === 'dark' ? 'white' : 'black'
                         },
                         {
                           text: 'Casually-Formal',
                           position: CustomSegmentLabelPosition.Outside,
-                          color: 'white'
+                          fontSize: windowWidth > 768 ? '12px' : '10px',
+                          color: theme === 'dark' ? 'white' : 'black'
                         },
                         {
                           text: 'Neutral',
                           position: CustomSegmentLabelPosition.Outside,
-                          color: 'white'
+                          fontSize: windowWidth > 768 ? '12px' : '10px',
+                          color: theme === 'dark' ? 'white' : 'black'
                         },
                         {
                           text: 'Semi-Formal',
                           position: CustomSegmentLabelPosition.Outside,
-                          color: 'white'
+                          fontSize: windowWidth > 768 ? '12px' : '10px',
+                          color: theme === 'dark' ? 'white' : 'black'
                         },
                         {
                           text: 'Professional',
                           position: CustomSegmentLabelPosition.Outside,
-                          color: 'white',
-                          fontSize: '12px'
+                          fontSize: windowWidth > 768 ? '12px' : '10px',
+                          color: theme === 'dark' ? 'white' : 'black'
                         }
                       ]}
                     />
@@ -126,20 +146,20 @@ export function BotMessage({
           return (
             <div
               className={cn(
-                'group relative flex gap-4 max-w-[768px] my-4',
+                'group relative flex gap-2 md:gap-4 max-w-[768px] my-4',
                 className
               )}
               key={index}
             >
-              <div className="flex size-[32px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-md">
+              <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-md">
                 <Image
                   src="/header-logo.png"
                   alt="bot-logo"
-                  width={48}
-                  height={48}
+                  width={windowWidth >= 768 ? 48 : 24}
+                  height={windowWidth >= 768 ? 48 : 24}
                 />
               </div>
-              <div className=" bg-white dark:bg-[#122830]  px-6 py-4 rounded-lg">
+              <div className=" bg-white dark:bg-[#122830] px-3 md:px-6 py-2 md:py-4 rounded-sm md:rounded-lg overflow-x-auto">
                 <MemoizedReactMarkdown
                   className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 text-xs md:text-sm"
                   remarkPlugins={[remarkGfm, remarkMath]}
@@ -186,7 +206,7 @@ export function BotMessage({
                 >
                   {section}
                 </MemoizedReactMarkdown>
-                {chart}
+                <div className="py-2 md:py-4">{chart}</div>
               </div>
             </div>
           )
@@ -208,10 +228,17 @@ export function SystemMessage({ children }: { children: React.ReactNode }) {
 }
 
 export function SpinnerMessage() {
+  const { width: windowWidth } = useWindowSize()
+
   return (
     <div className="group relative flex">
-      <div className="flex size-[48px] shrink-0 select-none items-center justify-center rounded-md">
-        <Image src="/header-logo.png" alt="bot-logo" width={48} height={48} />
+      <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-md">
+        <Image
+          src="/header-logo.png"
+          alt="bot-logo"
+          width={windowWidth >= 768 ? 48 : 24}
+          height={windowWidth >= 768 ? 48 : 24}
+        />
       </div>
       <div className="ml-4 h-[32px] flex flex-row items-center flex-1 space-y-2 overflow-hidden px-1">
         <ChatSpinner />

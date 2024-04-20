@@ -70,7 +70,7 @@ export function Chat({ id, className, session, missingKeys }: ChatProps) {
             className="group w-full overflow-auto  bg-[#CDE2E7] dark:bg-[#071920] rounded-lg border-black dark:border-white border-2"
             ref={chatContainerRef}
           >
-            <div className={cn('pt-4 md:pt-10 ', className)}>
+            <div className={cn('pt-4 md:pt-10 px-3 md:px-6', className)}>
               {messages.length ? (
                 <ChatList
                   messages={messages}
@@ -86,11 +86,9 @@ export function Chat({ id, className, session, missingKeys }: ChatProps) {
         </div>
       </div>
 
-      <div className="w-full flex justify-center space-y-4 border-t bg-background p-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
-        <div className="max-w-[940px] w-full flex flex-col gap-2">
-          <PromptForm input={input} setInput={setInput} />
-          {/* <PromptUsageWidget /> */}
-        </div>
+      <div className="w-full flex justify-center py-2 md:py-4">
+        <PromptForm input={input} setInput={setInput} />
+        {/* <PromptUsageWidget /> */}
       </div>
     </>
   )

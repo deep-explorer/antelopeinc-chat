@@ -183,7 +183,7 @@ More instructions:
 -Use emojis provided at each sections to make the sections more engaging and it's important!
 -Bolden all links so its obvious they are hyperlinked.
 -List each tactic one by one and don't use newline characters or <br> tag in the table.
--There is no reason to write the word section (e.g.: "Section A: Overview of Influencer") in your headlines, you can just use the title (e.g.: Overview of John Doe)
+-There is no reason to write the word section (e.g.: "Section A: Overview of Influencer") in your headlines, you can just use the title (e.g.: 📔 Overview of John Doe)
 -Use succinct language, ensuring all salient poitns are made but focusing on the most important ideas
 -In the "Example Posts" section, include the post URL and a brief summary of the post. You can hyperlink the summary to the URL. There is no need to list the URL as well.
 -Ensure you review all posts included, and do not ignore any

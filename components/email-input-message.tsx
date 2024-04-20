@@ -10,6 +10,7 @@ import { BotCard } from './stocks/message'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { diposableEmailBlocklist } from '@/lib/constants/diposable-email-blocklist'
 import { EmailCodeInputMessage } from './email-code-input-message'
+import { antelopeEndpoint } from '@/lib/constants/config'
 
 export function EmailInputMessage() {
   const [email, setEmail] = useState('')
@@ -22,6 +23,7 @@ export function EmailInputMessage() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
+    console.log({ antelopeEndpoint })
 
     //  validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -30,9 +32,14 @@ export function EmailInputMessage() {
         //  validating email in server for uniqueness
         setValidatingEmail(true)
         try {
-          //  TODO: real api call
-          // const response = await fetcher(`/api?email=${email}`)
+          const response = await fetcher(
+            `${antelopeEndpoint}/chatbot/validate?email=${email}`
+          )
           setValidatingEmail(false)
+          if (!response.success) {
+            setError(response.msg || 'This email is not allowed.')
+            return
+          }
 
           setUserEmail(email)
           setMessages(currentMessages => [

@@ -7,6 +7,7 @@ import { useActions, useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { BotCard } from './stocks/message'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
+import { antelopeEndpoint } from '@/lib/constants/config'
 
 export function EmailCodeInputMessage() {
   const [code, setCode] = useState('')
@@ -24,10 +25,16 @@ export function EmailCodeInputMessage() {
     //  validation
     setValidatingEmail(true)
     try {
-      //  TODO: real api call
-      // const response = await fetcher(`/api?email=${userEmail}&code=${code}`)
+      const response = await fetcher(
+        `${antelopeEndpoint}/chatbot/validate?email=${userEmail}&code=${code}`
+      )
       setValidatingEmail(false)
+      if (!response.success) {
+        setError(response.msg || 'This email is not allowed.')
+        return
+      }
 
+      //  TODO: verify signature using public key
       // Submit and get response message
       const responseMessage = await submitUserMessage(linkedinPosts)
       setMessages(currentMessages => [...currentMessages, responseMessage])
@@ -44,7 +51,7 @@ export function EmailCodeInputMessage() {
         <p>Check your email for a confirmation code to continue the chat.</p>
         <div>
           <Input
-            placeholder="123456"
+            placeholder="ABCDEF"
             className="w-full overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] sm:rounded-md border-[1px] border-[#1F3C45]"
             autoFocus
             value={code}

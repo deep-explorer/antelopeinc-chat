@@ -44,7 +44,7 @@ export function FreePromptsMessage() {
       </p>
       <div className="flex flex-wrap">
         {freePromptMessages.map((message, index) => (
-          <div className="p-2 w-[50%]" key={index}>
+          <div className="p-2 w-full md:w-[50%]" key={index}>
             <Button
               onClick={() => onClick(message.prompt, message.response)}
               className="w-full"

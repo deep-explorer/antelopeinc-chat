@@ -31,7 +31,7 @@ export function EmptyScreen() {
         const response = await fetcher(`/api?profileUrl=${link}`)
         setLoading(false)
 
-        setLinkedinPosts(JSON.stringify(response))
+        setLinkedinPosts(response.data)
         setMessages(currentMessages => [
           ...currentMessages,
           {

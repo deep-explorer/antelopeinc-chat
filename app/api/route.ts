@@ -38,7 +38,7 @@ export async function GET(request: Request) {
       }
     )
     if (response.data.length > 0) {
-      return Response.json({ data: response.data })
+      return Response.json({ data: parseResponseToString(response.data) })
     } else {
       return NextResponse.json(
         { error: 'The user has posted nothing' },
@@ -48,4 +48,19 @@ export async function GET(request: Request) {
   } catch (error) {
     return NextResponse.json({ error: 'User not found' }, { status: 400 })
   }
+}
+
+const parseResponseToString = (posts: any[]) => {
+  let tableString = `LinkedIn poster url: ${posts[0].poster_linkedin_url}\n\n`
+  tableString += `| Post Number | Text | URL | Appreciations | Comments | Empathy | Interests | Likes | Praises | Reposts | Posted Date | Reshared |\n`
+  tableString += `|-------------|------|-----|---------------|----------|---------|-----------|-------|---------|---------|-------------|----------|\n`
+
+  // Iterate over each post and add a row to the table string
+  posts.forEach((post, index) => {
+    const resharedText = post.reshared ? 'Yes' : 'No'
+    const textSnippet = post.text.replace(/\n|\|/g, ' ') // Replace newlines with spaces
+    tableString += `| ${index + 1} | ${textSnippet} | ${post.post_url} | ${post.num_appreciations} | ${post.num_comments} | ${post.num_empathy} | ${post.num_interests} | ${post.num_likes} | ${post.num_praises} | ${post.num_reposts} | ${post.posted} | ${resharedText} |\n`
+  })
+
+  return tableString
 }

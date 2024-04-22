@@ -65,7 +65,7 @@ export function Chat({ id, className, session, missingKeys }: ChatProps) {
   return (
     <>
       <div className="relative flex justify-center h-[calc(100vh_-_theme(spacing.28))] ">
-        <div className="max-w-[940px] min-w-[350px] w-full flex">
+        <div className="max-w-[940px] min-w-[370px] w-full flex">
           <div
             className="group w-full overflow-auto  bg-[#CDE2E7] dark:bg-[#071920] rounded-lg border-black dark:border-white border-2"
             ref={chatContainerRef}

@@ -213,7 +213,7 @@ export function BotMessage({
                 >
                   {section}
                 </MemoizedReactMarkdown>
-                <div className="py-2 md:py-4">{chart}</div>
+                <div className="py-2 md:py-4 flex justify-center">{chart}</div>
               </div>
             </div>
           )

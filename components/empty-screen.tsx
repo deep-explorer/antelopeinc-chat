@@ -63,7 +63,7 @@ export function EmptyScreen() {
       <div className="flex flex-col gap-2 rounded-lg border bg-background p-8">
         <form onSubmit={onSubmit} className="flex flex-col gap-4">
           <h1 className="text-lg md:text-xl font-semibold">
-            Welcome to Antelope's LinkedIn profile analyzer.
+            Welcome to Antelope&apos;s LinkedIn profile analyzer.
           </h1>
           <p className="text-sm md:text-base">
             To begin your analysis, please insert a LinkedIn profile in the link

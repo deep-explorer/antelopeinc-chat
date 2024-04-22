@@ -35,7 +35,7 @@ function MyDialog({
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            className="h-6 w-6 text-gray-600"
+            className="size-6 text-gray-600"
           >
             <path
               strokeLinecap="round"

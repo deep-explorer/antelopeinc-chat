@@ -75,7 +75,7 @@ export function EmailInputMessage() {
         <p>Thank you for providing your profile details.</p>
         <p>
           To receive the analysis, which includes a detailed breakdown of the
-          selected profile's strengths, weaknesses, key tactics, and best
+          selected profile&apos;s strengths, weaknesses, key tactics, and best
           practices, please enter your email below.
         </p>
         <div>

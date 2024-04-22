@@ -196,10 +196,10 @@ export function PromptForm({
               <span>
                 <div
                   role="button"
-                  className="send-btn relative right-[-3px] h-[28px] w-[28px] rounded-lg rount send-btn text-base flex justify-center items-center bg-[transparent] hover:bg-darken2 cursor-pointer opacity-30 pointer-events-none"
+                  className="send-btn relative right-[-3px] size-[28px] rounded-lg rount send-btn text-base flex justify-center items-center bg-[transparent] hover:bg-darken2 cursor-pointer opacity-30 pointer-events-none"
                 >
                   <svg
-                    className="h-4 w-4 "
+                    className="size-4"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"

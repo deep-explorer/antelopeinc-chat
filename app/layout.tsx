@@ -14,10 +14,10 @@ export const metadata = {
     ? new URL(`https://${process.env.VERCEL_URL}`)
     : undefined,
   title: {
-    default: 'Next.js AI Chatbot',
+    default: 'Antelope Chatbot: LinkedIn Profile Analyzer',
     template: `%s - Next.js AI Chatbot`
   },
-  description: 'An AI-powered chatbot template built with Next.js and Vercel.',
+  description: 'Antelope Chatbot: LinkedIn Profile Analyzer',
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon-16x16.png',

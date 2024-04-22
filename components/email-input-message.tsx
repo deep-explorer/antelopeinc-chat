@@ -39,7 +39,12 @@ export function EmailInputMessage() {
 
           //  NOTE: in development, we don't care the response
           if (mode === 'production' && !response.success) {
-            setError(response.msg || 'This email is not allowed.')
+            //  TODO: backend should return a better message
+            setError(
+              response.msg === 'Email already exists' || !response.msg
+                ? "We're sorry, but only one email address per chatbot is allowed at this time."
+                : response.msg
+            )
             return
           }
 
@@ -67,14 +72,15 @@ export function EmailInputMessage() {
     <BotCard>
       <form onSubmit={onSubmit} className="flex flex-col gap-4 text-sm">
         <h1 className="text-xl font-semibold">Report Ready</h1>
-        <p>Thank you for entering profile details.</p>
+        <p>Thank you for providing your profile details.</p>
         <p>
-          Enter your email below to receive a full analysis of his successful
-          tactics and strengths.
+          To receive the analysis, which includes a detailed breakdown of the
+          selected profile's strengths, weaknesses, key tactics, and best
+          practices, please enter your email below.
         </p>
         <div>
           <Input
-            placeholder="daniel@antelopeinc.com"
+            placeholder="yourname@email.com"
             className="w-full overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] sm:rounded-md border-[1px] border-[#1F3C45]"
             autoFocus
             value={email}

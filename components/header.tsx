@@ -17,6 +17,7 @@ import { ChatHistory } from './chat-history'
 import { Session } from '@/lib/types'
 import { ThemeToggle } from './theme-toggle'
 import Image from 'next/image'
+import { companyUrl } from '@/lib/constants/config'
 
 async function UserOrLogin() {
   const session = (await auth()) as Session
@@ -31,7 +32,7 @@ async function UserOrLogin() {
           <SidebarToggle />
         </>
       ) : (
-        <Link href="/" rel="nofollow" className="flex gap-2">
+        <Link href={companyUrl} rel="nofollow" className="flex gap-2">
           <Image src={`/header-logo.png`} alt="logo" width={32} height={32} />
           <h2 className="text-xl">Antelope</h2>
         </Link>
@@ -59,12 +60,12 @@ export function Header() {
         </React.Suspense>
       </div>
       <div className="hidden lg:flex items-center justify-end space-x-2 gap-4">
-        <Link href={'/'}>Home</Link>
-        <Link href={'/'}>Benefits</Link>
-        <Link href={'/'}>Process</Link>
-        <Link href={'/'}>About Us</Link>
-        <Link href={'/'}>Pricing</Link>
-        <Link href={'/'}>FAQ</Link>
+        <Link href={`${companyUrl}/#banner`}>Home</Link>
+        <Link href={`${companyUrl}/#benefits`}>What We Do</Link>
+        <Link href={`${companyUrl}/case-study`}>Our Reports</Link>
+        <Link href={`${companyUrl}/#process`}>Process</Link>
+
+        <Link href={`${companyUrl}/blog/`}>Blog</Link>
       </div>
       <div>
         <ThemeToggle />

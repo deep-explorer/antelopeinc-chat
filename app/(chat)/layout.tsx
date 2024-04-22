@@ -10,7 +10,10 @@ export default async function ChatLayout({ children }: ChatLayoutProps) {
       <div className="text-center mb-8">
         <h1 className="text-primary">ANTELOPE CHATBOT</h1>
         <h2 className="text-3xl my-4">LinkedIn Profile Analyzer</h2>
-        <p>Enter any LinkedIn URL to reverse engineer their content strategy</p>
+        <p>
+          Reverse engineer the strengths and weaknesses of anyone's LinkedIn
+          content strategy
+        </p>
       </div>
       {children}
     </div>

@@ -32,7 +32,12 @@ export function EmailCodeInputMessage() {
 
       //  NOTE: in development, we don't care the response
       if (mode === 'production' && !response.success) {
-        setError(response.msg || 'This email is not allowed.')
+        //  TODO: backend should return a better message
+        setError(
+          response.msg === 'failure' || !response.msg
+            ? 'Please retry. The code you entered does not match.'
+            : response.msg
+        )
         return
       }
 

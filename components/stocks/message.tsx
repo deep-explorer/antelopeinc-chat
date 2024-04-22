@@ -201,6 +201,13 @@ export function BotMessage({
                           {...props}
                         />
                       )
+                    },
+                    a({ children, ...props }) {
+                      return (
+                        <a className="underline" target="_blank" {...props}>
+                          {children}
+                        </a>
+                      )
                     }
                   }}
                 >

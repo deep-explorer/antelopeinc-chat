@@ -22,44 +22,39 @@ export function EmptyScreen() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    //  validation
-    const regex = /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[\w-]+\/?$/
-    if (regex.test(link)) {
-      //  process linkedin profile link
-      setLoading(true)
-      try {
-        const response = await fetcher(`/api?profileUrl=${link}`)
-        setLoading(false)
+    // const regex = /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[\w-]+\/?$/
+    //  process linkedin profile link
+    setLoading(true)
+    try {
+      const response = await fetcher(
+        `/api?profileUrl=https://www.linkedin.com/in/${link}`
+      )
+      setLoading(false)
 
-        setLinkedinPosts(response.data)
-        setMessages(currentMessages => [
-          ...currentMessages,
-          {
-            id: nanoid(),
-            display: (
-              <UserMessage>
-                <div className="flex gap-2">
-                  <div className="flex items-center">
-                    <LinkedInLogoIcon />
-                  </div>
-                  {link}
+      setLinkedinPosts(response.data)
+      setMessages(currentMessages => [
+        ...currentMessages,
+        {
+          id: nanoid(),
+          display: (
+            <UserMessage>
+              <div className="flex gap-2">
+                <div className="flex items-center">
+                  <LinkedInLogoIcon />
                 </div>
-              </UserMessage>
-            )
-          },
-          {
-            id: nanoid(),
-            display: <EmailInputMessage />
-          }
-        ])
-      } catch (e: any) {
-        setLoading(false)
-        setError(
-          e.message || 'An error occurred while fetching the user profile'
-        )
-      }
-    } else {
-      setError('Please enter a valid LinkedIn profile link')
+                {link}
+              </div>
+            </UserMessage>
+          )
+        },
+        {
+          id: nanoid(),
+          display: <EmailInputMessage />
+        }
+      ])
+    } catch (e: any) {
+      setLoading(false)
+      setError(e.message || 'Please enter vaild LinkedIn profile name')
     }
   }
 
@@ -68,7 +63,7 @@ export function EmptyScreen() {
       <div className="flex flex-col gap-2 rounded-lg border bg-background p-8">
         <form onSubmit={onSubmit} className="flex flex-col gap-4">
           <h1 className="text-lg md:text-xl font-semibold">
-            Welcome to Antelope LinkedIn profile analyzer.
+            Welcome to Antelope's LinkedIn profile analyzer.
           </h1>
           <p className="text-sm md:text-base">
             To begin your analysis, please insert a LinkedIn profile in the link
@@ -76,7 +71,7 @@ export function EmptyScreen() {
           </p>
           <div>
             <Input
-              placeholder="https://www.linkedin.com/in/danielryanrobinson/"
+              placeholder="danielryanrobinson"
               className="w-full overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] sm:rounded-md border-[1px] border-[#1F3C45]"
               autoFocus
               value={link}

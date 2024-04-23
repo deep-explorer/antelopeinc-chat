@@ -15,7 +15,7 @@ export const metadata = {
     : undefined,
   title: {
     default: 'Antelope Chatbot: LinkedIn Profile Analyzer',
-    template: `%s - Next.js AI Chatbot`
+    template: `Antelope Chatbot: LinkedIn Profile Analyzer`
   },
   description: 'Antelope Chatbot: LinkedIn Profile Analyzer',
   icons: {

@@ -9,5 +9,13 @@ module.exports = {
         pathname: '**'
       }
     ]
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/linkedinanalyzer',
+        destination: '/'
+      }
+    ]
   }
 }

@@ -9,14 +9,5 @@ module.exports = {
         pathname: '**'
       }
     ]
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/linkedinanalyzer',
-        destination: 'https://vercel-ai-chatbot-five.vercel.app/',
-        permanent: true
-      }
-    ]
   }
 }

@@ -3658,5 +3658,7 @@ export const diposableEmailBlocklist = [
   'zymuying.com',
   'zzi.us',
   'zzrgg.com',
-  'zzz.com'
+  'zzz.com',
+
+  'cazlq.com'
 ]

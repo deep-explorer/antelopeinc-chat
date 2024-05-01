@@ -64,8 +64,14 @@ export function Header() {
         <Link href={`${companyUrl}/#benefits`}>What We Do</Link>
         <Link href={`${companyUrl}/case-study`}>Our Reports</Link>
         <Link href={`${companyUrl}/#process`}>Process</Link>
-
         <Link href={`${companyUrl}/blog/`}>Blog</Link>
+
+        <Link href="/linkedin-analyzer" className="text-green-500">
+          --- LinkedIn ---
+        </Link>
+        <Link href="/vitamin-analyzer" className="text-green-500">
+          --- Vitamin ---
+        </Link>
       </div>
       <div>
         <ThemeToggle />

@@ -13,20 +13,27 @@ import { Message } from '@/lib/chat/actions'
 import { toast } from 'sonner'
 import { PromptForm } from './prompt-form'
 import { PromptUsageWidget } from './prompt-usage-widget'
+import type { AI } from '@/lib/chat/actions'
 
 export interface ChatProps extends React.ComponentProps<'div'> {
-  initialMessages?: Message[]
+  initialScreen?: React.ReactNode
   id?: string
   session?: Session
   missingKeys: string[]
 }
 
-export function Chat({ id, className, session, missingKeys }: ChatProps) {
+export function Chat({
+  initialScreen,
+  id,
+  className,
+  session,
+  missingKeys
+}: ChatProps) {
   const router = useRouter()
   const path = usePathname()
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const [input, setInput] = useState('')
-  const [messages] = useUIState()
+  const [messages, setMessages] = useUIState<typeof AI>()
   const [aiState] = useAIState()
 
   const [_, setNewChatId] = useLocalStorage('newChatId', id)
@@ -38,6 +45,10 @@ export function Chat({ id, className, session, missingKeys }: ChatProps) {
       }
     }
   }, [id, path, session?.user, messages])
+
+  useEffect(() => {
+    setMessages([])
+  }, [path])
 
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -71,7 +82,8 @@ export function Chat({ id, className, session, missingKeys }: ChatProps) {
             ref={chatContainerRef}
           >
             <div className={cn('pt-4 md:pt-10 px-3 md:px-6', className)}>
-              {messages.length ? (
+              {initialScreen}
+              {initialScreen || messages.length ? (
                 <ChatList
                   messages={messages}
                   isShared={false}

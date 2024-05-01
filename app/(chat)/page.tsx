@@ -6,7 +6,7 @@ import { Session } from '@/lib/types'
 import { getMissingKeys } from '../actions'
 
 export const metadata = {
-  title: 'Antelope Chatbot: LinkedIn Profile Analyzer'
+  title: 'Antelope Chatbot'
 }
 
 export default async function IndexPage() {
@@ -14,9 +14,5 @@ export default async function IndexPage() {
   const session = (await auth()) as Session
   const missingKeys = await getMissingKeys()
 
-  return (
-    <AI initialAIState={{ chatId: id, messages: [] }}>
-      <Chat id={id} session={session} missingKeys={missingKeys} />
-    </AI>
-  )
+  return <p>Select an analyzer</p>
 }

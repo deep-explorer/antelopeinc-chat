@@ -14,10 +14,9 @@ export const metadata = {
     ? new URL(`https://${process.env.VERCEL_URL}`)
     : undefined,
   title: {
-    default: 'Antelope Chatbot: LinkedIn Profile Analyzer',
-    template: `Antelope Chatbot: LinkedIn Profile Analyzer`
+    default: 'Antelope Chatbot'
   },
-  description: 'Antelope Chatbot: LinkedIn Profile Analyzer',
+  description: 'Antelope Chatbot',
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',

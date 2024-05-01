@@ -19,9 +19,7 @@ export function InitialMessage() {
             className="rounded-full"
             alt="renzo-logo"
           />
-          <div className="rounded-full bg-black size-8 p-1 bg-[#2F616A]">
-            vs
-          </div>
+          <div className="rounded-full size-8 p-1 bg-[#2F616A]">vs</div>
           <Image
             src="/vitamin/logos/flintstonesvitamins.png"
             height={104}

@@ -7,6 +7,7 @@ import { SendUsMessage } from '../send-us-message'
 import { Loading } from './loading'
 import { DataOverview } from './data-overview'
 import { Comparison } from './comparison'
+import { FeedbackAnalysis } from './feedback-analysis'
 
 export function InitialMessage() {
   return (
@@ -79,6 +80,9 @@ export function InitialMessage() {
       </BotCard>
       <BotCard>
         <Comparison />
+      </BotCard>
+      <BotCard>
+        <FeedbackAnalysis />
       </BotCard>
       {/* <BotCard>
         <SendUsMessage />

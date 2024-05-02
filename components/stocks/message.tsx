@@ -15,11 +15,14 @@ import ReactSpeedometer, {
 } from 'react-d3-speedometer'
 import { useWindowSize } from 'usehooks-ts'
 import { useTheme } from 'next-themes'
+import { usePathname } from 'next/navigation'
 
 // Different types of message bubbles.
 
 export function UserMessage({ children }: { children: React.ReactNode }) {
   const { width: windowWidth } = useWindowSize()
+  const pathname = usePathname()
+
   return (
     <div className="grid place-items-end">
       <div className="group relative flex gap-2 md:gap-4 text-white max-w-[300px] sm:max-w-[600px] lg:max-w-[768px]">
@@ -27,10 +30,19 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
           {children}
         </div>
         <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
-          <IconUser
-            width={windowWidth >= 768 ? 48 : 24}
-            height={windowWidth >= 768 ? 48 : 24}
-          />
+          {pathname === '/vitamin-analyzer' ? (
+            <Image
+              src={'/icon-images/renzon.png'}
+              width={windowWidth >= 768 ? 48 : 24}
+              height={windowWidth >= 768 ? 48 : 24}
+              alt="user-logo"
+            />
+          ) : (
+            <IconUser
+              width={windowWidth >= 768 ? 48 : 24}
+              height={windowWidth >= 768 ? 48 : 24}
+            />
+          )}
         </div>
       </div>
     </div>

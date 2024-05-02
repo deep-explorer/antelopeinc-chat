@@ -65,14 +65,14 @@ const freePromptMessages = [
       "To dive deeper with another analysis, we'll need to arrange a session with the Antelope team. Click below to book a time, and we'll be in touch with the next steps."
   },
   {
-    prompt: "Tell me the user's top posts",
+    prompt: 'Tell me the user&apos;s top posts',
     response:
-      "To reveal the user's top posts, we will need to book a session with the Antelope team. Schedule your session below, and we'll be in touch with the next steps."
+      "To reveal the user&apos;s top posts, we will need to book a session with the Antelope team. Schedule your session below, and we'll be in touch with the next steps."
   },
   {
-    prompt: "Write a post in the user's style",
+    prompt: 'Write a post in the user&apos;s style',
     response:
-      "To craft a post reflecting the user's unique voice, we will need to book a session with the Antelope team. Schedule your session below, and we'll be in touch with the next steps."
+      "To craft a post reflecting the user&apos;s unique voice, we will need to book a session with the Antelope team. Schedule your session below, and we'll be in touch with the next steps."
   },
   {
     prompt: 'Suggest another user to review',

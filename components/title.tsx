@@ -29,20 +29,20 @@ const titles = [
     pathname: '/linkedin-analyzer',
     title: 'LinkedIn Profile Analyzer',
     description:
-      "Reverse engineer the strengths and weaknesses of anyone's LinkedIn content strategy"
+      'Reverse engineer the strengths and weaknesses of anyone&apos;s LinkedIn content strategy'
   },
   {
     pathname: '/vitamin-analyzer',
-    title: "Children's Vitamins Analysis",
+    title: 'Children&apos;s Vitamins Analysis',
     description:
-      "Analysis of children's vitamins in the market to assess their benefits and shortcomings."
+      'Analysis of children&apos;s vitamins in the market to assess their benefits and shortcomings.'
   }
 ]
 
 export function Title() {
   const pathname = usePathname()
-  console.log({ pathname })
   const title = titles.find(t => t.pathname === pathname)
+
   return (
     <div className="text-center mb-8">
       <h1 className="text-primary">ANTELOPE CHATBOT</h1>

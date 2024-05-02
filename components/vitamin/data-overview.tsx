@@ -8,10 +8,10 @@ export function DataOverview() {
     <div className="flex flex-col gap-4">
       <h1 className="text-lg md:text-3xl font-semibold">Data Overview</h1>
       <p>
-        We've ingested over 3 million data points for you and your closest
-        competitors in the children&apos;s vitamin industry. Next, we'll compare
-        these data points to your industry benchmarks to identify your strengths
-        and weaknesses.
+        We&apos;ve ingested over 3 million data points for you and your closest
+        competitors in the children&apos;s vitamin industry. Next, we&apos;ll
+        compare these data points to your industry benchmarks to identify your
+        strengths and weaknesses.
       </p>
       <div className="flex flex-wrap">
         {overviewSpecs.map((overviewSpec, index) => (

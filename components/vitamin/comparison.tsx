@@ -36,25 +36,25 @@ export function Comparison() {
           description="Renzo's strengths lie in their sentiment, media, and organic reach, demonstrating a robust market presence and customer loyalty across multiple platforms:"
           scores={[
             {
-              key: 'Influencer Activity',
+              title: 'Influencer Activity',
               value: 90,
               tooltipDescription:
                 'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
             },
             {
-              key: 'Ratings',
+              title: 'Ratings',
               value: 80,
               tooltipDescription:
                 'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
             },
             {
-              key: 'Testimonials',
+              title: 'Testimonials',
               value: 75,
               tooltipDescription:
                 'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
             },
             {
-              key: 'Earn Media',
+              title: 'Earn Media',
               value: 60,
               tooltipDescription:
                 'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
@@ -67,25 +67,25 @@ export function Comparison() {
           description="Renzo's weaknesses are limited product variety and higher pricing compared to competitors, which may hinder market expansion and customer acquisition:"
           scores={[
             {
-              key: 'Influencer Activity',
+              title: 'Influencer Activity',
               value: 30,
               tooltipDescription:
                 'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
             },
             {
-              key: 'Ratings',
+              title: 'Ratings',
               value: 25,
               tooltipDescription:
                 'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
             },
             {
-              key: 'Testimonials',
+              title: 'Testimonials',
               value: 20,
               tooltipDescription:
                 'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
             },
             {
-              key: 'Earn Media',
+              title: 'Earn Media',
               value: 10,
               tooltipDescription:
                 'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'

@@ -22,13 +22,13 @@ export function Loading() {
           Starting Your Analysis
         </h1>
         <p>
-          To begin, we'll gather data on Renzo&apos;s and its key competitors,
-          such as Flintstones and SmartyPants, focusing on customer feedback and
-          social content to gather deep competitive intelligence. Please give me
-          a moment.
+          To begin, we&apos;ll gather data on Renzo&apos;s and its key
+          competitors, such as Flintstones and SmartyPants, focusing on customer
+          feedback and social content to gather deep competitive intelligence.
+          Please give me a moment.
         </p>
       </div>
-      <RoundSpinner className="absolute top-0 left-0 fill-[#E76F51] w-[100px] h-[100px]" />
+      <RoundSpinner className="absolute top-0 left-0 fill-[#E76F51] size-[100px]" />
     </div>
   )
 }

@@ -37,7 +37,7 @@ const renderCustomShape = (props: {
   cy: number
   payload: any
 }): JSX.Element => {
-  const { width: windowWidth } = useWindowSize()
+  // const { width: windowWidth } = useWindowSize()
 
   const { cx, cy } = props
   let icon = 'renzo'
@@ -60,8 +60,9 @@ const renderCustomShape = (props: {
       href={`/vitamin/logos/${icon}.png`}
       x={cx - 24}
       y={cy - 24}
-      width={windowWidth > 768 ? 48 : 24}
-      height={windowWidth > 768 ? 48 : 24}
+      // width={windowWidth > 768 ? 48 : 24}
+      // height={windowWidth > 768 ? 48 : 24}
+      className="md:w-12 md:h-12 w-6 h-6"
     />
   )
 }

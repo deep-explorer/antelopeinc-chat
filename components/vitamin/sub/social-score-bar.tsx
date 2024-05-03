@@ -20,7 +20,7 @@ export function SocialScoreBar({ flag, title, value }: SocialScoreBar) {
     <div>
       <h3 className="mb-2">{title}</h3>
       <Progress.Root
-        className="relative bg-blackA6 rounded-full min-w-[200px] md:min-w-[300px] h-4 shadow-md bg-[#32474F] self-center"
+        className="relative bg-blackA6 rounded-full min-w-[200px] md:min-w-[280px] h-4 shadow-md bg-[#32474F] self-center"
         style={{
           transform: 'translateZ(0)'
         }}

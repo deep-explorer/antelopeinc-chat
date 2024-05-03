@@ -8,6 +8,9 @@ import { Loading } from './loading'
 import { DataOverview } from './data-overview'
 import { Comparison } from './comparison'
 import { FeedbackAnalysis } from './feedback-analysis'
+import { ContentPerformance } from './content-performance'
+import { ResearchRecommendations } from './research-recommendations'
+import { ThankYou } from './sub/thank-you'
 
 export function InitialMessage() {
   return (
@@ -84,9 +87,18 @@ export function InitialMessage() {
       <BotCard>
         <FeedbackAnalysis />
       </BotCard>
+      <BotCard>
+        <ContentPerformance />
+      </BotCard>
+      <BotCard>
+        <ResearchRecommendations />
+      </BotCard>
       {/* <BotCard>
         <SendUsMessage />
       </BotCard> */}
+      <BotCard>
+        <ThankYou />
+      </BotCard>
     </>
   )
 }

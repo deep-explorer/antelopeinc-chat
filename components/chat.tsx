@@ -78,7 +78,7 @@ export function Chat({
       <div className="relative flex justify-center h-[calc(100vh_-_theme(spacing.28))] ">
         <div className="max-w-[940px] min-w-[370px] w-full flex">
           <div
-            className="group w-full overflow-auto  bg-[#CDE2E7] dark:bg-[#071920] rounded-lg border-black dark:border-white border-2"
+            className="group w-full overflow-auto  bg-[#CDE2E7] dark:bg-[#071920] rounded-lg border-[#35474F] border-2"
             ref={chatContainerRef}
           >
             <div className={cn('pt-4 md:pt-10 px-3 md:px-6', className)}>

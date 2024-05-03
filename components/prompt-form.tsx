@@ -154,7 +154,7 @@ export function PromptForm({
     <form
       ref={formRef}
       onSubmit={onSubmit}
-      className="max-w-[940px] min-w-[370px] w-full flex bg-[#CDE2E7] dark:bg-[#071920] rounded-md md:rounded-lg border-black dark:border-white border-2 relative max-h-20 overflow-auto  p-1 md:pl-8 pr-0 cursor-not-allowed"
+      className="max-w-[940px] min-w-[370px] w-full flex bg-[#CDE2E7] dark:bg-[#071920] rounded-md md:rounded-lg border-[#35474F] border-2 relative max-h-20 overflow-auto  p-1 md:pl-8 pr-0 cursor-not-allowed"
     >
       <div className="flex justify-center items-center">
         <Button

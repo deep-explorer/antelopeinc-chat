@@ -23,7 +23,7 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
   const { width: windowWidth } = useWindowSize()
   const pathname = usePathname()
 
-  return (
+  return windowWidth >= 768 ? (
     <div className="grid place-items-end">
       <div className="group relative flex gap-2 md:gap-4 text-white max-w-[300px] sm:max-w-[600px] lg:max-w-[768px]">
         <div className="bg-[#18898D] px-3 md:px-6 py-2 md:py-4 rounded-sm md:rounded-lg overflow-x-auto text-sm">
@@ -32,7 +32,7 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
         <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
           {pathname === '/vitamin-analyzer' ? (
             <Image
-              src={'/icon-images/renzon.png'}
+              src={'/vitamin/logos/renzo.png'}
               width={windowWidth >= 768 ? 48 : 24}
               height={windowWidth >= 768 ? 48 : 24}
               alt="user-logo"
@@ -44,6 +44,27 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
             />
           )}
         </div>
+      </div>
+    </div>
+  ) : (
+    <div className="group relative flex gap-2 md:gap-4 text-white max-w-[300px] sm:max-w-[600px] lg:max-w-[768px]">
+      <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
+        {pathname === '/vitamin-analyzer' ? (
+          <Image
+            src={'/vitamin/logos/renzo.png'}
+            width={windowWidth >= 768 ? 48 : 24}
+            height={windowWidth >= 768 ? 48 : 24}
+            alt="user-logo"
+          />
+        ) : (
+          <IconUser
+            width={windowWidth >= 768 ? 48 : 24}
+            height={windowWidth >= 768 ? 48 : 24}
+          />
+        )}
+      </div>
+      <div className="bg-[#18898D] px-3 md:px-6 py-2 md:py-4 rounded-sm md:rounded-lg overflow-x-auto text-sm">
+        {children}
       </div>
     </div>
   )

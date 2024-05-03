@@ -10,6 +10,7 @@ import {
   Label
 } from 'recharts'
 import { ScatterCustomizedShape } from 'recharts/types/cartesian/Scatter'
+import { useWindowSize } from 'usehooks-ts'
 
 const data = [
   { name: 'Other1', x: 10, y: 60 },
@@ -36,6 +37,8 @@ const renderCustomShape = (props: {
   cy: number
   payload: any
 }): JSX.Element => {
+  const { width: windowWidth } = useWindowSize()
+
   const { cx, cy } = props
   let icon = 'renzo'
   switch (props.payload.name) {
@@ -57,8 +60,8 @@ const renderCustomShape = (props: {
       href={`/vitamin/logos/${icon}.png`}
       x={cx - 24}
       y={cy - 24}
-      width={48}
-      height={48}
+      width={windowWidth > 768 ? 48 : 24}
+      height={windowWidth > 768 ? 48 : 24}
     />
   )
 }
@@ -76,8 +79,10 @@ const CustomTooltip: React.FC<any> = ({ active, payload }) => {
 }
 
 export function ChannelGraphCard() {
+  const { width: windowWidth } = useWindowSize()
+
   return (
-    <div className="min-w-[605px] rounded-md bg-[#1E333B] flex flex-col gap-6 p-8">
+    <div className="min-w-[280px] md:min-w-[605px] rounded-md bg-[#1E333B] flex flex-col gap-3 md:gap-6 p-4 md:p-8">
       <div className="flex gap-2">
         <Image
           src={'/image-icons/instagram.png'}
@@ -92,13 +97,13 @@ export function ChannelGraphCard() {
         community, with users resonating strongly with visually-driven
         storytelling and behind-the-scenes content.
       </p>
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer width="100%" height={windowWidth > 768 ? 400 : 200}>
         <ScatterChart
           margin={{
-            top: 20,
-            right: 20,
-            bottom: 20,
-            left: 20
+            top: windowWidth > 768 ? 20 : 2,
+            right: windowWidth > 768 ? 20 : 2,
+            bottom: windowWidth > 768 ? 20 : 2,
+            left: windowWidth > 768 ? 20 : 2
           }}
         >
           <CartesianGrid strokeOpacity={0.1} />
@@ -106,7 +111,10 @@ export function ChannelGraphCard() {
             type="number"
             dataKey="x"
             domain={[0, 100]}
-            padding={{ left: 30, right: 30 }}
+            padding={{
+              left: windowWidth > 768 ? 20 : 8,
+              right: windowWidth > 768 ? 20 : 8
+            }}
             tickFormatter={(value, index) => {
               if (value === 0) return 'Few'
               if (value === 100) return 'Many'
@@ -119,7 +127,10 @@ export function ChannelGraphCard() {
             type="number"
             dataKey="y"
             domain={[0, 100]}
-            padding={{ top: 30, bottom: 30 }}
+            padding={{
+              top: windowWidth > 768 ? 20 : 8,
+              bottom: windowWidth > 768 ? 20 : 8
+            }}
             tickFormatter={(value, index) => {
               if (value === 0) return 'Low'
               if (value === 100) return 'High'

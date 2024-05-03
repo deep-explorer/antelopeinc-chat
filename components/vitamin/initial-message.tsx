@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@radix-ui/themes'
-import { BotCard } from '../stocks/message'
+import { BotCard, UserMessage } from '../stocks/message'
 import Image from 'next/image'
 import { SendUsMessage } from '../send-us-message'
 import { Loading } from './loading'
@@ -11,8 +11,54 @@ import { FeedbackAnalysis } from './feedback-analysis'
 import { ContentPerformance } from './content-performance'
 import { ResearchRecommendations } from './research-recommendations'
 import { ThankYou } from './sub/thank-you'
+import { useUIState } from 'ai/rsc'
+import { AI } from '@/lib/chat/actions'
+import { nanoid } from 'nanoid'
+import { companyUrl } from '@/lib/constants/config'
+import { sleep } from '@/lib/utils'
+import { useWindowSize } from 'usehooks-ts'
 
 export function InitialMessage() {
+  const { width: windowWidth } = useWindowSize()
+  const [_, setMessages] = useUIState<typeof AI>()
+
+  const onClick = async (index: number) => {
+    if (index === 0) {
+      setMessages([
+        {
+          id: nanoid(),
+          display: <UserMessage>Start the Analysis</UserMessage>
+        },
+        {
+          id: nanoid(),
+
+          display: (
+            <BotCard>
+              <Loading />
+            </BotCard>
+          )
+        }
+      ])
+      await sleep(3000)
+      setMessages([
+        {
+          id: nanoid(),
+          display: <UserMessage>Start the Analysis</UserMessage>
+        },
+        {
+          id: nanoid(),
+          display: (
+            <BotCard>
+              <DataOverview />
+            </BotCard>
+          )
+        }
+      ])
+    } else {
+      window.open(companyUrl, '_blank')
+    }
+  }
+
   return (
     <>
       <BotCard>
@@ -20,33 +66,40 @@ export function InitialMessage() {
           <h1 className="text-lg md:text-3xl font-semibold">
             Children&apos;s Vitamins Analysis
           </h1>
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-4 items-center w-full overflow-auto pb-2">
             <Image
               src="/vitamin/logos/renzo.png"
-              height={104}
-              width={104}
+              height={windowWidth > 768 ? 104 : 48}
+              width={windowWidth > 768 ? 104 : 48}
               className="rounded-full"
               alt="renzo-logo"
             />
             <div className="rounded-full size-8 p-1 bg-[#2F616A]">vs</div>
             <Image
               src="/vitamin/logos/flintstonesvitamins.png"
-              height={104}
-              width={104}
+              height={windowWidth > 768 ? 104 : 48}
+              width={windowWidth > 768 ? 104 : 48}
               className="rounded-full"
               alt="flintstones-logo"
             />
             <Image
               src="/vitamin/logos/maryruthorganics.png"
-              height={104}
-              width={104}
+              height={windowWidth > 768 ? 104 : 48}
+              width={windowWidth > 768 ? 104 : 48}
               className="rounded-full"
               alt="flintstones-logo"
             />
             <Image
               src="/vitamin/logos/smartypantsvitamins.png"
-              height={104}
-              width={104}
+              height={windowWidth > 768 ? 104 : 48}
+              width={windowWidth > 768 ? 104 : 48}
+              className="rounded-full"
+              alt="flintstones-logo"
+            />
+            <Image
+              src="/vitamin/logos/naturesway.png"
+              height={windowWidth > 768 ? 104 : 48}
+              width={windowWidth > 768 ? 104 : 48}
               className="rounded-full"
               alt="flintstones-logo"
             />
@@ -63,8 +116,9 @@ export function InitialMessage() {
           </p>
           <div className="flex flex-wrap">
             {availableButtons.map((availableButton, index) => (
-              <div className="p-2 w-full md:w-[50%]" key={index}>
+              <div className="p-1 md:p-2 w-full md:w-[50%]" key={index}>
                 <Button
+                  onClick={() => onClick(index)}
                   style={{
                     width: '100%'
                   }}
@@ -76,7 +130,7 @@ export function InitialMessage() {
           </div>
         </div>
       </BotCard>
-      <BotCard>
+      {/* <BotCard>
         <Loading />
       </BotCard>
       <BotCard>
@@ -99,7 +153,7 @@ export function InitialMessage() {
       </BotCard>
       <BotCard>
         <ThankYou />
-      </BotCard>
+      </BotCard> */}
     </>
   )
 }

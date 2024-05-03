@@ -1,13 +1,41 @@
 import { Button } from '@radix-ui/themes'
 import { ChannelGraphCard } from './sub/channel-graph-card'
 import { SpeedometerCard } from './sub/speedometer-card'
+import { useUIState } from 'ai/rsc'
+import { AI } from '@/lib/chat/actions'
+import { nanoid } from 'nanoid'
+import { BotCard, UserMessage } from '../stocks/message'
+import { ResearchRecommendations } from './research-recommendations'
+import { companyUrl } from '@/lib/constants/config'
 
 export function ContentPerformance() {
+  const [_, setMessages] = useUIState<typeof AI>()
+
+  const onClick = async (index: number) => {
+    if (index === 0) {
+      setMessages(currentMessages => [
+        ...currentMessages,
+        {
+          id: nanoid(),
+          display: <UserMessage>Suggest Research</UserMessage>
+        },
+        {
+          id: nanoid(),
+          display: (
+            <BotCard>
+              <ResearchRecommendations />
+            </BotCard>
+          )
+        }
+      ])
+    } else {
+      window.open(companyUrl, '_blank')
+    }
+  }
+
   return (
-    <div className="flex flex-col gap-6">
-      <h1 className="text-lg md:text-3xl font-semibold mb-4">
-        Content Performance
-      </h1>
+    <div className="flex flex-col gap-3 md:gap-6">
+      <h1 className="text-lg md:text-3xl font-semibold">Content Performance</h1>
       <p>
         Content analytics feedback suggests high engagement with informative
         articles, but concerns over content relevance and depth could be
@@ -34,7 +62,7 @@ export function ContentPerformance() {
         />
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2 md:gap-4">
         <h2 className="text-base md:text-xl font-semibold">
           Content by Channel
         </h2>
@@ -58,8 +86,9 @@ export function ContentPerformance() {
 
       <div className="flex flex-wrap">
         {availableButtons.map((availableButton, index) => (
-          <div className="p-2 w-full md:w-[50%]" key={index}>
+          <div className="p-1 md:p-2 w-full md:w-[50%]" key={index}>
             <Button
+              onClick={() => onClick(index)}
               style={{
                 width: '100%'
               }}

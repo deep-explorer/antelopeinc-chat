@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
+import { useWindowSize } from 'usehooks-ts'
 
 interface OverviewSpecCardProps {
   icon: string
@@ -15,18 +16,20 @@ export function OverviewSpecCard({
   title,
   tooltipDescription
 }: OverviewSpecCardProps) {
+  const { width: windowWidth } = useWindowSize()
+
   return (
-    <div className="p-5 flex justify-between bg-[#1E333B] rounded">
+    <div className="p-2 md:p-5 flex justify-between bg-[#1E333B] rounded">
       <div className="flex gap-4">
         <Image
           src={`/image-icons/${icon}.png`}
-          height={80}
-          width={80}
+          height={windowWidth > 768 ? 80 : 40}
+          width={windowWidth > 768 ? 80 : 40}
           alt={title}
         />
         <div>
-          <h2 className="text-[40px] font-bold">{score}</h2>
-          <p className="text-[#788589]">{title}</p>
+          <h2 className="text-[20px] md:text-[40px] font-bold">{score}</h2>
+          <p className="text-xs md:text-base text-[#788589]">{title}</p>
         </div>
       </div>
       <Tooltip.Provider>

@@ -3,11 +3,41 @@
 import { Button } from '@radix-ui/themes'
 import { SocialRatingCard } from './sub/social-rating-card'
 import { SpeedometerCard } from './sub/speedometer-card'
+import { useUIState } from 'ai/rsc'
+import { AI } from '@/lib/chat/actions'
+import { nanoid } from 'nanoid'
+import { companyUrl } from '@/lib/constants/config'
+import { ContentPerformance } from './content-performance'
+import { BotCard, UserMessage } from '../stocks/message'
 
 export function FeedbackAnalysis() {
+  const [_, setMessages] = useUIState<typeof AI>()
+
+  const onClick = async (index: number) => {
+    if (index === 0) {
+      setMessages(currentMessages => [
+        ...currentMessages,
+        {
+          id: nanoid(),
+          display: <UserMessage>Content Analysis</UserMessage>
+        },
+        {
+          id: nanoid(),
+          display: (
+            <BotCard>
+              <ContentPerformance />
+            </BotCard>
+          )
+        }
+      ])
+    } else {
+      window.open(companyUrl, '_blank')
+    }
+  }
+
   return (
-    <div className="flex flex-col gap-6">
-      <h1 className="text-lg md:text-3xl font-semibold mb-4">
+    <div className="flex flex-col gap-3 md:gap-6">
+      <h1 className="text-lg md:text-3xl font-semibold">
         Feedback Performance
       </h1>
       <p>
@@ -65,8 +95,9 @@ export function FeedbackAnalysis() {
       </p>
       <div className="flex flex-wrap">
         {availableButtons.map((availableButton, index) => (
-          <div className="p-2 w-full md:w-[50%]" key={index}>
+          <div className="p-1 md:p-2 w-full md:w-[50%]" key={index}>
             <Button
+              onClick={() => onClick(index)}
               style={{
                 width: '100%'
               }}

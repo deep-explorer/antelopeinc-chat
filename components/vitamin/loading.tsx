@@ -1,17 +1,20 @@
 import Image from 'next/image'
 import { RoundSpinner } from '../stocks/ChatSpinner'
+import { useWindowSize } from 'usehooks-ts'
 
 export function Loading() {
+  const { width: windowWidth } = useWindowSize()
+
   return (
-    <div className="flex gap-4 relative">
+    <div className="flex flex-col md:flex-row gap-2 md:gap-4 relative">
       <Image
         src="/vitamin/logos/renzo.png"
-        height={100}
-        width={100}
+        height={windowWidth > 768 ? 100 : 64}
+        width={windowWidth > 768 ? 100 : 64}
         alt="renzo-loading"
         style={{
-          height: 92,
-          width: 92,
+          height: windowWidth > 768 ? 92 : 56,
+          width: windowWidth > 768 ? 92 : 56,
           marginTop: 4,
           marginLeft: 4,
           zIndex: 10
@@ -28,7 +31,13 @@ export function Loading() {
           Please give me a moment.
         </p>
       </div>
-      <RoundSpinner className="absolute top-0 left-0 fill-[#E76F51] size-[100px]" />
+      <RoundSpinner
+        className={`absolute top-0 left-0 fill-[#E76F51] `}
+        style={{
+          width: windowWidth > 768 ? 100 : 64,
+          height: windowWidth > 768 ? 100 : 64
+        }}
+      />
     </div>
   )
 }

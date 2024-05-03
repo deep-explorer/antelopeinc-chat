@@ -9,8 +9,13 @@ import {
 } from '@radix-ui/react-icons'
 import * as Form from '@radix-ui/react-form'
 import { TextArea, TextField, Button } from '@radix-ui/themes'
+import { nanoid } from 'nanoid'
+import { BotCard } from './stocks'
+import { ThankYou } from './vitamin/sub/thank-you'
+import { useWindowSize } from 'usehooks-ts'
 
 export function SendUsMessage() {
+  const { width: windowWidth } = useWindowSize()
   const [_, setMessages] = useUIState<typeof AI>()
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -18,6 +23,19 @@ export function SendUsMessage() {
 
     const data = Object.fromEntries(new FormData(e.target as HTMLFormElement))
     console.log(data)
+    //  TODO: Send data to the server
+
+    setMessages(currentMessages => [
+      ...currentMessages,
+      {
+        id: nanoid(),
+        display: (
+          <BotCard>
+            <ThankYou />
+          </BotCard>
+        )
+      }
+    ])
   }
 
   return (
@@ -28,10 +46,10 @@ export function SendUsMessage() {
         will be in touch soon.
       </p>
       <Form.Root onSubmit={onSubmit} className="flex flex-wrap">
-        <Form.Field className="p-3 w-full md:w-[50%]" name="name">
+        <Form.Field className="p-1 md:p-3 w-full md:w-[50%]" name="name">
           <Form.Control asChild>
             <TextField.Root
-              size="3"
+              size={windowWidth > 768 ? '3' : '2'}
               radius="large"
               placeholder="Your name"
               required
@@ -42,17 +60,17 @@ export function SendUsMessage() {
             </TextField.Root>
           </Form.Control>
           <Form.Message
-            className="opacity-[0.8] text-red-500"
+            className="opacity-[0.8] text-red-500 text-xs md:text-sm"
             match="valueMissing"
           >
             Please enter your name
           </Form.Message>
         </Form.Field>
 
-        <Form.Field className="p-3 w-full md:w-[50%]" name="email">
+        <Form.Field className="p-1 md:p-3 w-full md:w-[50%]" name="email">
           <Form.Control asChild>
             <TextField.Root
-              size="3"
+              size={windowWidth > 768 ? '3' : '2'}
               radius="large"
               placeholder="Company Email"
               type="email"
@@ -64,23 +82,23 @@ export function SendUsMessage() {
             </TextField.Root>
           </Form.Control>
           <Form.Message
-            className="opacity-[0.8] text-red-500"
+            className="opacity-[0.8] text-red-500 text-xs md:text-sm"
             match="valueMissing"
           >
             Please enter your email
           </Form.Message>
           <Form.Message
-            className="opacity-[0.8] text-red-500"
+            className="opacity-[0.8] text-red-500 text-xs md:text-sm"
             match="typeMismatch"
           >
             Please provide a valid email
           </Form.Message>
         </Form.Field>
 
-        <Form.Field className="p-3 w-full md:w-[50%]" name="phone">
+        <Form.Field className="p-1 md:p-3 w-full md:w-[50%]" name="phone">
           <Form.Control asChild>
             <TextField.Root
-              size="3"
+              size={windowWidth > 768 ? '3' : '2'}
               radius="large"
               placeholder="Phone"
               type="tel"
@@ -92,22 +110,22 @@ export function SendUsMessage() {
             </TextField.Root>
           </Form.Control>
           <Form.Message
-            className="opacity-[0.8] text-red-500"
+            className="opacity-[0.8] text-red-500 text-xs md:text-sm"
             match="valueMissing"
           >
             Please enter your phone number
           </Form.Message>
           <Form.Message
-            className="opacity-[0.8] text-red-500"
+            className="opacity-[0.8] text-red-500 text-xs md:text-sm"
             match="typeMismatch"
           >
             Please enter a valid phone number
           </Form.Message>
         </Form.Field>
-        <Form.Field className="p-3 w-full md:w-[50%]" name="company">
+        <Form.Field className="p-1 md:p-3 w-full md:w-[50%]" name="company">
           <Form.Control asChild>
             <TextField.Root
-              size="3"
+              size={windowWidth > 768 ? '3' : '2'}
               radius="large"
               placeholder="Company"
               required
@@ -118,34 +136,34 @@ export function SendUsMessage() {
             </TextField.Root>
           </Form.Control>
           <Form.Message
-            className="opacity-[0.8] text-red-500"
+            className="opacity-[0.8] text-red-500 text-xs md:text-sm"
             match="valueMissing"
           >
             Please enter your company name
           </Form.Message>
         </Form.Field>
-        <Form.Field className="p-3 w-full" name="subject">
+        <Form.Field className="p-1 md:p-3 w-full" name="subject">
           <Form.Control asChild>
             <TextField.Root
-              size="3"
+              size={windowWidth > 768 ? '3' : '2'}
               radius="large"
               placeholder="Subject"
               required
             />
           </Form.Control>
           <Form.Message
-            className="opacity-[0.8] text-red-500"
+            className="opacity-[0.8] text-red-500 text-xs md:text-sm"
             match="valueMissing"
           >
             Please enter a subject
           </Form.Message>
         </Form.Field>
 
-        <Form.Field className="p-3 w-full" name="description">
+        <Form.Field className="p-1 md:p-3 w-full" name="description">
           <Form.Control asChild>
             <TextArea
               radius="large"
-              size={'3'}
+              size={windowWidth > 768 ? '3' : '2'}
               className="h-[180px]"
               resize="vertical"
               placeholder="Tell us about your project"
@@ -153,15 +171,18 @@ export function SendUsMessage() {
             />
           </Form.Control>
           <Form.Message
-            className="opacity-[0.8] text-red-500"
+            className="opacity-[0.8] text-red-500 text-xs md:text-sm"
             match="valueMissing"
           >
             Please tell about your project
           </Form.Message>
         </Form.Field>
         <Form.Submit asChild>
-          <div className="p-3 w-full flex">
-            <Button style={{ width: '100%' }} size={'3'}>
+          <div className="p-1 md:p-3 w-full flex">
+            <Button
+              style={{ width: '100%' }}
+              size={windowWidth > 768 ? '3' : '2'}
+            >
               Start Analysis
             </Button>
           </div>

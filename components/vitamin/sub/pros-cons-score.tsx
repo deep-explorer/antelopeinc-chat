@@ -3,6 +3,7 @@ import { InfoCircledIcon } from '@radix-ui/react-icons'
 import * as Progress from '@radix-ui/react-progress'
 import React from 'react'
 import Image from 'next/image'
+import { useWindowSize } from 'usehooks-ts'
 
 export interface Score {
   title: string
@@ -20,6 +21,7 @@ export function ProsConsScore({
   value,
   tooltipDescription
 }: ProsConsScoreProps) {
+  const { width: windowWidth } = useWindowSize()
   const [progress, setProgress] = React.useState(0)
 
   React.useEffect(() => {
@@ -56,20 +58,20 @@ export function ProsConsScore({
       </div>
 
       <div>
-        <div className="flex gap-2 w-[420px]">
+        <div className="flex gap-1 md:gap-2 w-[420px]">
           <Image
             src="/vitamin/logos/maryruthorganics.png"
-            height={48}
-            width={48}
+            height={windowWidth > 768 ? 48 : 24}
+            width={windowWidth > 768 ? 48 : 24}
             alt="renzo-trails"
             className="rounded-full w-[48px] h-[48px] border-2 border-red-500"
             style={{
-              height: 48,
-              width: 48
+              height: windowWidth > 768 ? 48 : 24,
+              width: windowWidth > 768 ? 48 : 24
             }}
           />
           <Progress.Root
-            className="relative bg-blackA6 rounded-full min-w-[200px] md:min-w-[300px] h-4 shadow-md bg-[#32474F] self-center"
+            className="relative bg-blackA6 rounded-full min-w-[180px] md:min-w-[300px] h-[10px] md:h-4 shadow-md bg-[#32474F] self-center"
             style={{
               // Fix overflow clipping in Safari
               // https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0
@@ -86,14 +88,14 @@ export function ProsConsScore({
             >
               <Image
                 src="/vitamin/logos/renzo.png"
-                height={36}
-                width={36}
+                height={windowWidth > 768 ? 36 : 18}
+                width={windowWidth > 768 ? 36 : 18}
                 alt="renzo-indicator"
                 className="absolute top-0 right-0 rounded-full w-[25px] h-[25px] border-2 transition-all duration-500 ease-in-out"
                 style={{
-                  height: 36,
-                  width: 36,
-                  transform: 'translate(18px, -8px)',
+                  height: windowWidth > 768 ? 36 : 18,
+                  width: windowWidth > 768 ? 36 : 18,
+                  transform: 'translate(9px, -4px)',
                   borderColor: flag === 'pros' ? '#2E7D32' : '#C62828'
                 }}
               />
@@ -102,13 +104,13 @@ export function ProsConsScore({
 
           <Image
             src="/vitamin/logos/naturesway.png"
-            height={48}
-            width={48}
+            height={windowWidth > 768 ? 48 : 24}
+            width={windowWidth > 768 ? 48 : 24}
             alt="renzo-leads"
             className="rounded-full w-[48px] h-[48px] border-2 border-green-500"
             style={{
-              height: 48,
-              width: 48
+              height: windowWidth > 768 ? 48 : 24,
+              width: windowWidth > 768 ? 48 : 24
             }}
           />
         </div>

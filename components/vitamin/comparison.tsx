@@ -3,11 +3,42 @@
 import Image from 'next/image'
 import { ProsCons } from './sub/pros-cons'
 import { Button } from '@radix-ui/themes'
+import { useUIState } from 'ai/rsc'
+import { AI } from '@/lib/chat/actions'
+import { nanoid } from 'nanoid'
+import { FeedbackAnalysis } from './feedback-analysis'
+import { companyUrl } from '@/lib/constants/config'
+import { BotCard } from '../stocks'
+import { UserMessage } from '../stocks/message'
 
 export function Comparison() {
+  const [_, setMessages] = useUIState<typeof AI>()
+
+  const onClick = async (index: number) => {
+    if (index === 0) {
+      setMessages(currentMessages => [
+        ...currentMessages,
+        {
+          id: nanoid(),
+          display: <UserMessage>Feedback Analysis</UserMessage>
+        },
+        {
+          id: nanoid(),
+          display: (
+            <BotCard>
+              <FeedbackAnalysis />
+            </BotCard>
+          )
+        }
+      ])
+    } else {
+      window.open(companyUrl, '_blank')
+    }
+  }
+
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <Image
           src="/vitamin/logos/renzo.png"
           height={80}
@@ -101,8 +132,9 @@ export function Comparison() {
       </p>
       <div className="flex flex-wrap">
         {availableButtons.map((availableButton, index) => (
-          <div className="p-2 w-full md:w-[50%]" key={index}>
+          <div className="p-1 md:p-2 w-full md:w-[50%]" key={index}>
             <Button
+              onClick={() => onClick(index)}
               style={{
                 width: '100%'
               }}

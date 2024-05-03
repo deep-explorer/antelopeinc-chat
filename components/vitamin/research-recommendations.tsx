@@ -1,10 +1,40 @@
+import { useUIState } from 'ai/rsc'
 import { RecommendationCard } from './sub/recommendation-card'
 import { Button } from '@radix-ui/themes'
+import { AI } from '@/lib/chat/actions'
+import { nanoid } from 'nanoid'
+import { BotCard, UserMessage } from '../stocks/message'
+import { SendUsMessage } from '../send-us-message'
+import { companyUrl } from '@/lib/constants/config'
 
 export function ResearchRecommendations() {
+  const [_, setMessages] = useUIState<typeof AI>()
+
+  const onClick = async (index: number) => {
+    if (index === 1) {
+      setMessages(currentMessages => [
+        ...currentMessages,
+        {
+          id: nanoid(),
+          display: <UserMessage>Send Us a Message</UserMessage>
+        },
+        {
+          id: nanoid(),
+          display: (
+            <BotCard>
+              <SendUsMessage />
+            </BotCard>
+          )
+        }
+      ])
+    } else {
+      window.open(companyUrl, '_blank')
+    }
+  }
+
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3 md:gap-6">
+      <div className="flex flex-col gap-2 md:gap-4">
         <h1 className="text-lg md:text-3xl font-semibold">
           Research Recommendations
         </h1>
@@ -71,6 +101,7 @@ export function ResearchRecommendations() {
         {availableButtons.map((availableButton, index) => (
           <div className="p-2 w-full md:w-[50%]" key={index}>
             <Button
+              onClick={() => onClick(index)}
               style={{
                 width: '100%'
               }}

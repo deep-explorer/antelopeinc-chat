@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@radix-ui/themes'
 import { OverviewSpecCard } from './sub/overview-spec-card'
 
 export function DataOverview() {
@@ -24,8 +24,9 @@ export function DataOverview() {
         {availableButtons.map((availableButton, index) => (
           <div className="p-2 w-full md:w-[50%]" key={index}>
             <Button
-              // onClick={() => onClick(message.prompt, message.response)}
-              className="w-full"
+              style={{
+                width: '100%'
+              }}
             >
               {availableButton.caption}
             </Button>

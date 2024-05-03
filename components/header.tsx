@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
 import { auth } from '@/auth'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { Button } from '@radix-ui/themes'
 import {
   IconGitHub,
   IconNextChat,
@@ -75,7 +75,7 @@ export function Header() {
       </div>
       <div>
         <ThemeToggle />
-        <Button variant="default">Get in touch</Button>
+        <Button>Get in touch</Button>
       </div>
     </header>
   )

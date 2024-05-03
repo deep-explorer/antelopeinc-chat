@@ -1,4 +1,4 @@
-import { Button } from '../ui/button'
+import { Button } from '@radix-ui/themes'
 import { ChannelGraphCard } from './sub/channel-graph-card'
 import { SpeedometerCard } from './sub/speedometer-card'
 
@@ -60,8 +60,9 @@ export function ContentPerformance() {
         {availableButtons.map((availableButton, index) => (
           <div className="p-2 w-full md:w-[50%]" key={index}>
             <Button
-              // onClick={() => onClick(message.prompt, message.response)}
-              className="w-full"
+              style={{
+                width: '100%'
+              }}
             >
               {availableButton.caption}
             </Button>

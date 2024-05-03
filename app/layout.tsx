@@ -2,6 +2,8 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 
 import '@/app/globals.css'
+import '@radix-ui/themes/styles.css'
+
 import { cn } from '@/lib/utils'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
@@ -52,7 +54,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className=" p-6 md:px-12 md:py-20 ">
+          <div className=" p-6 md:px-12 md:py-20 bg-[#ebf5f8] dark:bg-[#122830]">
             <Header />
             <main>{children}</main>
             <Footer className="py-8" />

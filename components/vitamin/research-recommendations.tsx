@@ -1,7 +1,5 @@
-import { Button } from '../ui/button'
-import { ChannelGraphCard } from './sub/channel-graph-card'
 import { RecommendationCard } from './sub/recommendation-card'
-import { SpeedometerCard } from './sub/speedometer-card'
+import { Button } from '@radix-ui/themes'
 
 export function ResearchRecommendations() {
   return (
@@ -73,8 +71,9 @@ export function ResearchRecommendations() {
         {availableButtons.map((availableButton, index) => (
           <div className="p-2 w-full md:w-[50%]" key={index}>
             <Button
-              // onClick={() => onClick(message.prompt, message.response)}
-              className="w-full"
+              style={{
+                width: '100%'
+              }}
             >
               {availableButton.caption}
             </Button>

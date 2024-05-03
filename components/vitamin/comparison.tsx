@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { ProsCons } from './sub/pros-cons'
-import { Button } from '@/components/ui/button'
+import { Button } from '@radix-ui/themes'
 
 export function Comparison() {
   return (
@@ -103,8 +103,9 @@ export function Comparison() {
         {availableButtons.map((availableButton, index) => (
           <div className="p-2 w-full md:w-[50%]" key={index}>
             <Button
-              // onClick={() => onClick(message.prompt, message.response)}
-              className="w-full"
+              style={{
+                width: '100%'
+              }}
             >
               {availableButton.caption}
             </Button>

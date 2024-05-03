@@ -124,3 +124,12 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #b2b2ba;
 }
+
+/* .dark.radix-themes {
+  --color-background: #122830;
+  --color-background: #ebf5f8;
+}
+
+.radix-themes [data-theme='dark'] {
+  --color-background: #122830;
+} */

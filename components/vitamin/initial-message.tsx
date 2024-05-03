@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@radix-ui/themes'
 import { BotCard } from '../stocks/message'
 import Image from 'next/image'
 import { SendUsMessage } from '../send-us-message'
@@ -65,8 +65,9 @@ export function InitialMessage() {
             {availableButtons.map((availableButton, index) => (
               <div className="p-2 w-full md:w-[50%]" key={index}>
                 <Button
-                  // onClick={() => onClick(message.prompt, message.response)}
-                  className="w-full"
+                  style={{
+                    width: '100%'
+                  }}
                 >
                   {availableButton.caption}
                 </Button>
@@ -93,9 +94,9 @@ export function InitialMessage() {
       <BotCard>
         <ResearchRecommendations />
       </BotCard>
-      {/* <BotCard>
+      <BotCard>
         <SendUsMessage />
-      </BotCard> */}
+      </BotCard>
       <BotCard>
         <ThankYou />
       </BotCard>

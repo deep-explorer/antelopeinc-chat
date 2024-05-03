@@ -184,9 +184,6 @@ devDependencies:
   prettier:
     specifier: ^3.2.4
     version: 3.2.4
-  radix-ui-themes-with-tailwind:
-    specifier: ^1.2.6
-    version: 1.2.6
   tailwind-merge:
     specifier: ^2.2.0
     version: 2.2.0
@@ -5108,10 +5105,6 @@ packages:
 
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
-    dev: true
-
-  /radix-ui-themes-with-tailwind@1.2.6:
-    resolution: {integrity: sha512-eIK4WnMckwrBvXBxldYrQNFSkXwgNDVCMWXJDJsgXZgjaCHoHTylOLYoKduEi9as005IoLr8GftyEV8WwdTdYQ==}
     dev: true
 
   /react-d3-speedometer@2.2.1(react-dom@18.2.0)(react@18.2.0):

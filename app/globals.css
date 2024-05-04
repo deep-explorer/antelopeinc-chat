@@ -133,3 +133,7 @@
 .radix-themes [data-theme='dark'] {
   --color-background: #122830;
 } */
+
+.radix-themes {
+  --default-font-family: Satoshi-Medium !important;
+}

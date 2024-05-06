@@ -62,8 +62,8 @@ export function EmailInputMessage() {
       </h1>
 
       <p className="text-lg">
-        Please enter your email below, and we'll send you a validation code to
-        continue your analysis.
+        Please enter your email below, and we&apos;ll send you a validation code
+        to continue your analysis.
       </p>
       <div>
         <TextField.Root

@@ -50,7 +50,7 @@ export function EmailCodeInputMessage() {
       <h1 className="text-[28px] font-semibold">Enter Code</h1>
       <p className="text-lg">
         Please check your email for a confirmation code to receive your full
-        analysis. If you don't see it, please check your spam folder.
+        analysis. If you don&apos;t see it, please check your spam folder.
       </p>
       <div>
         <TextField.Root

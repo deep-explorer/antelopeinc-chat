@@ -44,10 +44,12 @@ export function Title() {
   const title = titles.find(t => t.pathname === pathname)
 
   return (
-    <div className="text-center mb-8">
-      <h1 className="text-primary">ANTELOPE CHATBOT</h1>
-      <h2 className="text-4xl my-4 font-semibold">{title?.title}</h2>
-      <p>{title?.description}</p>
+    <div className="text-center mb-12 flex flex-col gap-6">
+      <h1 className="text-primary font-bold" style={{ letterSpacing: 2 }}>
+        ANTELOPE CHATBOT
+      </h1>
+      <h2 className="text-5xl font-bold">{title?.title}</h2>
+      <p className="text-[#B9CAD0] text-lg">{title?.description}</p>
     </div>
   )
 }

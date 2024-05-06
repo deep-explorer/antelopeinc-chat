@@ -20,7 +20,7 @@ export function RecommendationCard({
 }: RecommendationCardProps) {
   return (
     <div
-      className="p-3 md:p-5 flex flex-col justify-between bg-[#1E333B] rounded min-w-[250px] md:min-w-[300px] h-[300px] md:h-[400px] border-2"
+      className="p-3 md:p-5 flex flex-col justify-between bg-[#1E333B] rounded min-w-[250px] md:min-w-[314px] h-[300px] md:h-[400px] border-2"
       style={{
         borderColor:
           flag === 'critical'
@@ -30,8 +30,8 @@ export function RecommendationCard({
               : '#2E7D32'
       }}
     >
-      <div className="flex flex-col gap-2 md:gap-6">
-        <div className="flex justify-between">
+      <div className="flex flex-col gap-2 md:gap-3">
+        <div className="flex justify-between mb-3">
           <Image
             src={`/image-icons/${icon}.png`}
             height={72}
@@ -47,11 +47,15 @@ export function RecommendationCard({
             />
           </div>
         </div>
-        <h3>{title}</h3>
-        <p className="text-xs">{description}</p>
+        <h3 className="text-2xl font-semibold">{title}</h3>
+        <p className="text-[15px] text-[#999EA3]">{description}</p>
       </div>
 
-      <Button variant={'outline'} onClick={() => window.open(companyUrl)}>
+      <Button
+        variant={'ghost'}
+        className="border-white border-solid border-[1px] border-opacity-20 h-[46px]"
+        onClick={() => window.open(companyUrl)}
+      >
         <div className="mr-1">Learn More</div>
         <ArrowTopRightIcon />
       </Button>

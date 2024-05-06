@@ -8,9 +8,11 @@ import { nanoid } from 'nanoid'
 import { Comparison } from './comparison'
 import { companyUrl } from '@/lib/constants/config'
 import { BotCard, UserMessage } from '../stocks/message'
+import { useWindowSize } from 'usehooks-ts'
 
 export function DataOverview() {
   const [_, setMessages] = useUIState<typeof AI>()
+  const { width: windowWidth } = useWindowSize()
 
   const onClick = async (index: number) => {
     if (index === 0) {
@@ -36,7 +38,7 @@ export function DataOverview() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-lg md:text-3xl font-semibold">Data Overview</h1>
+      <h1 className="text-lg md:text-3xl font-bold">Data Overview</h1>
       <p>
         We&apos;ve ingested over 3 million data points for you and your closest
         competitors in the children&apos;s vitamin industry. Next, we&apos;ll
@@ -52,9 +54,10 @@ export function DataOverview() {
       </div>
       <div className="flex flex-wrap">
         {availableButtons.map((availableButton, index) => (
-          <div className="p-1 md:p-2 w-full md:w-[50%]" key={index}>
+          <div className="p-1 w-full md:w-[50%]" key={index}>
             <Button
               onClick={() => onClick(index)}
+              size={windowWidth > 768 ? '3' : '1'}
               style={{
                 width: '100%'
               }}
@@ -81,7 +84,7 @@ const overviewSpecs = [
     score: '2.3M',
     title: 'Earn Media',
     tooltipDescription:
-      'Tracks the volume of mentions and engagement generated without direct payment, such as through media coverage or unpaid endorsements.'
+      'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
   },
   {
     icon: 'paid-ads',

@@ -4,6 +4,9 @@ import ReactSpeedometer, {
 } from 'react-d3-speedometer'
 import { useWindowSize } from 'usehooks-ts'
 import { useTheme } from 'next-themes'
+import { InfoCircledIcon } from '@radix-ui/react-icons'
+import React from 'react'
+import { PrimaryTooltip } from '@/components/ui/tooltip'
 
 interface SpeedometerCardProps {
   icon: string
@@ -22,15 +25,23 @@ export function SpeedometerCard({
   const { theme } = useTheme()
 
   return (
-    <div className="p-3 md:p-5 flex flex-col gap-3 md:gap-6 bg-[#1E333B] rounded w-[314px]">
-      <div className="flex gap-3">
-        <Image
-          src={`/image-icons/${icon}.png`}
-          height={48}
-          width={48}
-          alt={icon}
+    <div className="p-3 md:p-5 flex flex-col gap-3 md:gap-6 bg-[#1E333B] rounded min-w-[314px]">
+      <div className="flex justify-between">
+        <div className="flex gap-3">
+          <Image
+            src={`/image-icons/${icon}.png`}
+            height={48}
+            width={48}
+            alt={icon}
+          />
+          <h2 className="text-2xl font-bold self-center">{title}</h2>
+        </div>
+        <PrimaryTooltip
+          trigger={
+            <InfoCircledIcon className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
+          }
+          description="Influencer activity looks at the relative share of sponsored mentions and engagement among competitors"
         />
-        <h2 className="text-xl self-center">{title}</h2>
       </div>
       <ReactSpeedometer
         value={value}
@@ -46,7 +57,7 @@ export function SpeedometerCard({
           color: theme === 'dark' ? 'white' : 'black'
         }))}
       />
-      <p>{description}</p>
+      <p className="text-[14px]">{description}</p>
     </div>
   )
 }

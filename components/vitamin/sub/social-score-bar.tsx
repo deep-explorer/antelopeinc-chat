@@ -5,10 +5,16 @@ import Image from 'next/image'
 interface SocialScoreBar {
   title: string
   value: number //  0 - 100
+  average: number //  0 - 100
   flag: 'pros' | 'cons'
 }
 
-export function SocialScoreBar({ flag, title, value }: SocialScoreBar) {
+export function SocialScoreBar({
+  flag,
+  title,
+  value,
+  average
+}: SocialScoreBar) {
   const [progress, setProgress] = React.useState(0)
 
   React.useEffect(() => {
@@ -18,9 +24,9 @@ export function SocialScoreBar({ flag, title, value }: SocialScoreBar) {
 
   return (
     <div>
-      <h3 className="mb-2">{title}</h3>
+      <h3 className="mb-2 text-2xl">{title}</h3>
       <Progress.Root
-        className="relative bg-blackA6 rounded-full min-w-[200px] md:min-w-[280px] h-4 shadow-md bg-[#32474F] self-center"
+        className="relative bg-blackA6 rounded-full min-w-[200px] md:min-w-[280px] h-8 shadow-md bg-[#32474F] self-center"
         style={{
           transform: 'translateZ(0)'
         }}
@@ -30,20 +36,33 @@ export function SocialScoreBar({ flag, title, value }: SocialScoreBar) {
           className="relative h-full transition-all duration-500 ease-in-out rounded-full"
           style={{
             width: `${progress}%`,
-            backgroundColor: flag === 'pros' ? '#2E7D32' : '#C62828'
+            backgroundColor: flag === 'pros' ? '#18898D' : '#E76F51'
           }}
         >
+          <div className="absolute top-1 left-4 text-white text-[14px]">
+            {progress}%
+          </div>
+          <Image
+            src="/image-icons/progress-bar-indicator.png"
+            height={32}
+            width={2}
+            alt="progress-bar-indicator"
+            className="relative transition-all duration-500 ease-in-out"
+            style={{
+              left: `${(average / progress) * 100}%`
+            }}
+          />
           <Image
             src="/vitamin/logos/renzo.png"
-            height={36}
-            width={36}
+            height={60}
+            width={60}
             alt="renzo-indicator"
-            className="absolute top-0 right-0 rounded-full w-[25px] h-[25px] border-2 transition-all duration-500 ease-in-out"
+            className="absolute top-0 right-0 rounded-full w-[25px] h-[25px] border-[6px] transition-all duration-500 ease-in-out"
             style={{
-              height: 36,
-              width: 36,
-              transform: 'translate(18px, -8px)',
-              borderColor: flag === 'pros' ? '#2E7D32' : '#C62828'
+              height: 60,
+              width: 60,
+              transform: 'translate(18px, -12px)',
+              borderColor: flag === 'pros' ? '#18898D' : '#E76F51'
             }}
           />
         </Progress.Indicator>

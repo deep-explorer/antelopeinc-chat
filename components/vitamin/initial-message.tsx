@@ -63,9 +63,9 @@ export function InitialMessage() {
     <>
       <BotCard>
         <div className="flex flex-col gap-6 text-center">
-          <h1 className="text-lg md:text-3xl font-semibold">
+          <h2 className="text-lg md:text-[40px] font-bold mt-2">
             Children&apos;s Vitamins Analysis
-          </h1>
+          </h2>
           <div className="flex gap-4 items-center w-full overflow-auto pb-2">
             <Image
               src="/vitamin/logos/renzo.png"
@@ -74,7 +74,9 @@ export function InitialMessage() {
               className="rounded-full"
               alt="renzo-logo"
             />
-            <div className="rounded-full size-8 p-1 bg-[#2F616A]">vs</div>
+            <div className="rounded-full size-8 p-2 bg-[#2F616A]">
+              <p className="text-xs">vs</p>
+            </div>
             <Image
               src="/vitamin/logos/flintstonesvitamins.png"
               height={windowWidth > 768 ? 104 : 48}
@@ -104,7 +106,7 @@ export function InitialMessage() {
               alt="flintstones-logo"
             />
           </div>
-          <p className="text-sm md:text-base px-2">
+          <p className="text-sm md:text-lg px-2">
             This analysis reviews Renzo&apos;s and nine of the largest vitamin
             brands, including Flintstones, MaryRuth&apos;s, and SmartyPants. It
             reveals Renzo&apos;s strengths and weaknesses against these
@@ -116,9 +118,10 @@ export function InitialMessage() {
           </p>
           <div className="flex flex-wrap">
             {availableButtons.map((availableButton, index) => (
-              <div className="p-1 md:p-2 w-full md:w-[50%]" key={index}>
+              <div className="p-1 w-full md:w-[50%]" key={index}>
                 <Button
                   onClick={() => onClick(index)}
+                  size={windowWidth > 768 ? '3' : '1'}
                   style={{
                     width: '100%'
                   }}
@@ -130,7 +133,8 @@ export function InitialMessage() {
           </div>
         </div>
       </BotCard>
-      {/* <BotCard>
+      {/* 
+      <BotCard>
         <Loading />
       </BotCard>
       <BotCard>

@@ -26,7 +26,7 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
   return windowWidth >= 768 ? (
     <div className="grid place-items-end">
       <div className="group relative flex gap-2 md:gap-4 text-white max-w-[300px] sm:max-w-[600px] lg:max-w-[768px]">
-        <div className="bg-[#18898D] px-3 md:px-6 py-2 md:py-4 rounded-sm md:rounded-lg overflow-x-auto text-sm">
+        <div className="bg-[#18898D] px-3 md:px-6 py-2 md:py-4 rounded-tr-none md:rounded-tr-none rounded-sm md:rounded-lg overflow-x-auto text-sm">
           {children}
         </div>
         <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
@@ -63,7 +63,7 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
           />
         )}
       </div>
-      <div className="bg-[#18898D] px-3 md:px-6 py-2 md:py-4 rounded-sm md:rounded-lg overflow-x-auto text-sm">
+      <div className="bg-[#18898D] px-3 md:px-6 py-2 md:py-4 rounded-tl-none md:rounded-tl-none rounded-sm md:rounded-lg overflow-x-auto text-sm">
         {children}
       </div>
     </div>
@@ -75,7 +75,7 @@ export function BotCard({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="group relative flex gap-2 md:gap-4  max-w-[768px] my-4">
-      <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-md">
+      <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-md ">
         <Image
           src="/header-logo.png"
           alt="bot-logo"
@@ -83,7 +83,7 @@ export function BotCard({ children }: { children: React.ReactNode }) {
           height={windowWidth >= 768 ? 48 : 24}
         />
       </div>
-      <div className=" bg-white dark:bg-[#122830] px-3 md:px-6 py-2 md:py-4 rounded-sm md:rounded-lg overflow-x-auto">
+      <div className=" bg-white dark:bg-[#122830] px-3 md:px-6 py-2 md:py-4 rounded-tl-none md:rounded-tl-none rounded-sm md:rounded-lg overflow-x-auto">
         {children}
       </div>
     </div>
@@ -192,7 +192,7 @@ export function BotMessage({
                   height={windowWidth >= 768 ? 48 : 24}
                 />
               </div>
-              <div className=" bg-white dark:bg-[#122830] px-3 md:px-6 py-2 md:py-4 rounded-sm md:rounded-lg overflow-x-auto">
+              <div className=" bg-white dark:bg-[#122830] px-3 md:px-6 py-2 md:py-4 rounded-tl-none md:rounded-tl-none rounded-sm md:rounded-lg overflow-x-auto">
                 <MemoizedReactMarkdown
                   className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 text-xs md:text-sm"
                   remarkPlugins={[remarkGfm, remarkMath]}

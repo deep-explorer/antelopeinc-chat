@@ -1,3 +1,5 @@
+import { PrimaryTooltip } from '@/components/ui/tooltip'
+import { InfoCircledIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
 import {
   ScatterChart,
@@ -84,14 +86,22 @@ export function ChannelGraphCard() {
 
   return (
     <div className="min-w-[280px] md:min-w-[605px] rounded-md bg-[#1E333B] flex flex-col gap-3 md:gap-6 p-4 md:p-8">
-      <div className="flex gap-2">
-        <Image
-          src={'/image-icons/instagram.png'}
-          width={48}
-          height={48}
-          alt="instagram-logo"
+      <div className="flex justify-between">
+        <div className="flex gap-2">
+          <Image
+            src={'/image-icons/instagram.png'}
+            width={48}
+            height={48}
+            alt="instagram-logo"
+          />
+          <h2 className="text-2xl font-bold self-center">Instagram</h2>
+        </div>
+        <PrimaryTooltip
+          trigger={
+            <InfoCircledIcon className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
+          }
+          description="Influencer activity looks at the relative share of sponsored mentions and engagement among competitors"
         />
-        <h2 className="text-xl self-center">Instagram</h2>
       </div>
       <p>
         Instagram engagement metrics suggest a highly active and loyal
@@ -99,22 +109,17 @@ export function ChannelGraphCard() {
         storytelling and behind-the-scenes content.
       </p>
       <ResponsiveContainer width="100%" height={windowWidth > 768 ? 400 : 200}>
-        <ScatterChart
-          margin={{
-            top: windowWidth > 768 ? 20 : 2,
-            right: windowWidth > 768 ? 20 : 2,
-            bottom: windowWidth > 768 ? 20 : 2,
-            left: windowWidth > 768 ? 20 : 2
-          }}
-        >
-          <CartesianGrid strokeOpacity={0.1} />
+        <ScatterChart>
+          <CartesianGrid
+            strokeOpacity={0.1}
+            enableBackground={'/image-icons/invalid.png'}
+          />
           <XAxis
             type="number"
             dataKey="x"
             domain={[0, 100]}
             padding={{
-              left: windowWidth > 768 ? 20 : 8,
-              right: windowWidth > 768 ? 20 : 8
+              left: windowWidth > 768 ? 20 : 8
             }}
             tickFormatter={(value, index) => {
               if (value === 0) return 'Few'
@@ -122,14 +127,22 @@ export function ChannelGraphCard() {
               return ''
             }}
           >
-            <Label value="Engagement" offset={0} position="insideBottom" />
+            <Label
+              value="Engagement"
+              offset={10}
+              position="insideBottom"
+              className="fill-white"
+              style={{
+                textAnchor: 'middle',
+                letterSpacing: '1px'
+              }}
+            />
           </XAxis>
           <YAxis
             type="number"
             dataKey="y"
             domain={[0, 100]}
             padding={{
-              top: windowWidth > 768 ? 20 : 8,
               bottom: windowWidth > 768 ? 20 : 8
             }}
             tickFormatter={(value, index) => {
@@ -138,7 +151,17 @@ export function ChannelGraphCard() {
               return ''
             }}
           >
-            <Label value="Content" angle={-90} position="insideLeft" />
+            <Label
+              value="Content"
+              offset={40}
+              angle={-90}
+              position="insideLeft"
+              className="fill-white"
+              style={{
+                textAnchor: 'middle',
+                letterSpacing: '1px'
+              }}
+            />
           </YAxis>
           <Tooltip
             cursor={{ strokeDasharray: '3 3' }}

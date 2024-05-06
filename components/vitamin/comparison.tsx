@@ -10,9 +10,11 @@ import { FeedbackAnalysis } from './feedback-analysis'
 import { companyUrl } from '@/lib/constants/config'
 import { BotCard } from '../stocks'
 import { UserMessage } from '../stocks/message'
+import { useWindowSize } from 'usehooks-ts'
 
 export function Comparison() {
   const [_, setMessages] = useUIState<typeof AI>()
+  const { width: windowWidth } = useWindowSize()
 
   const onClick = async (index: number) => {
     if (index === 0) {
@@ -50,7 +52,7 @@ export function Comparison() {
           }}
         />
         <div>
-          <h1 className="text-lg md:text-3xl font-semibold mb-4">
+          <h1 className="text-lg md:text-3xl font-bold mb-4">
             Renzo&apos;s, Your Report is Ready.
           </h1>
           <p>
@@ -132,9 +134,10 @@ export function Comparison() {
       </p>
       <div className="flex flex-wrap">
         {availableButtons.map((availableButton, index) => (
-          <div className="p-1 md:p-2 w-full md:w-[50%]" key={index}>
+          <div className="p-1 w-full md:w-[50%]" key={index}>
             <Button
               onClick={() => onClick(index)}
+              size={windowWidth > 768 ? '3' : '1'}
               style={{
                 width: '100%'
               }}

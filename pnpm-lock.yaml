@@ -95,6 +95,9 @@ dependencies:
   openai:
     specifier: ^4.24.7
     version: 4.24.7
+  phone:
+    specifier: ^3.1.42
+    version: 3.1.42
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -4938,6 +4941,11 @@ packages:
       '@types/estree': 1.0.5
       estree-walker: 3.0.3
       is-reference: 3.0.2
+    dev: false
+
+  /phone@3.1.42:
+    resolution: {integrity: sha512-J+cbZtGcN/ph10TRxwCLYZx9/k4WOU1wImMiUiUjr/2sWnY7bR7CadehbsM8E9UyG+/shgmH++eKbhD0kR4EZA==}
+    engines: {node: '>=12'}
     dev: false
 
   /picocolors@1.0.0:

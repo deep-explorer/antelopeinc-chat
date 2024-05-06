@@ -106,23 +106,25 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
   height: 4px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+  /* background: rgba(255, 255, 255, 0.1); */
+  border-radius: 4px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #b2b2ba;
+  background: #18898d;
+  border-radius: 4px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b2b2ba;
+  background: #18a98d;
 }
 
 /* .dark.radix-themes {
@@ -135,5 +137,6 @@
 } */
 
 .radix-themes {
-  --default-font-family: Satoshi-Medium !important;
+  --default-font-family: Satoshi-Variable !important;
+  font-weight: 400 !important;
 }

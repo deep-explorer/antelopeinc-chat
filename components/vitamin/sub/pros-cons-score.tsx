@@ -4,6 +4,7 @@ import * as Progress from '@radix-ui/react-progress'
 import React from 'react'
 import Image from 'next/image'
 import { useWindowSize } from 'usehooks-ts'
+import { PrimaryTooltip } from '@/components/ui/tooltip'
 
 export interface Score {
   title: string
@@ -33,32 +34,16 @@ export function ProsConsScore({
     <div className="flex flex-wrap">
       <div className="flex w-[170px] justify-between items-center mr-5">
         <p>{title}</p>
-        <Tooltip.Provider>
-          <Tooltip.Root delayDuration={200}>
-            <Tooltip.Trigger asChild>
-              <InfoCircledIcon className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
-            </Tooltip.Trigger>
-            <Tooltip.Portal>
-              <Tooltip.Content
-                side="bottom"
-                align="end"
-                className="max-w-[160px] data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade text-violet11 select-none rounded-[4px] bg-primary px-[15px] py-[10px] leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity] text-xs font-extralight"
-                sideOffset={4}
-                style={{ transform: 'translateX(8px)' }}
-              >
-                {tooltipDescription}
-                <Tooltip.Arrow
-                  className="fill-primary"
-                  style={{ transform: 'translateX(8px)' }}
-                />
-              </Tooltip.Content>
-            </Tooltip.Portal>
-          </Tooltip.Root>
-        </Tooltip.Provider>
+        <PrimaryTooltip
+          trigger={
+            <InfoCircledIcon className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
+          }
+          description={tooltipDescription || 'No description'}
+        />
       </div>
 
       <div>
-        <div className="flex gap-1 md:gap-2 w-[420px]">
+        <div className="flex gap-1 md:gap-3 w-[420px]">
           <Image
             src="/vitamin/logos/maryruthorganics.png"
             height={windowWidth > 768 ? 48 : 24}
@@ -83,7 +68,7 @@ export function ProsConsScore({
               className="relative h-full transition-all duration-500 ease-in-out rounded-full"
               style={{
                 width: `${progress}%`,
-                backgroundColor: flag === 'pros' ? '#2E7D32' : '#C62828'
+                backgroundColor: flag === 'pros' ? '#24AE8D' : '#C62828'
               }}
             >
               <Image
@@ -94,8 +79,8 @@ export function ProsConsScore({
                 className="absolute top-0 right-0 rounded-full w-[25px] h-[25px] border-2 transition-all duration-500 ease-in-out"
                 style={{
                   height: windowWidth > 768 ? 36 : 18,
-                  width: windowWidth > 768 ? 36 : 18,
-                  transform: 'translate(9px, -4px)',
+                  minWidth: windowWidth > 768 ? 36 : 18,
+                  transform: 'translate(9px, -8px)',
                   borderColor: flag === 'pros' ? '#2E7D32' : '#C62828'
                 }}
               />
@@ -107,7 +92,7 @@ export function ProsConsScore({
             height={windowWidth > 768 ? 48 : 24}
             width={windowWidth > 768 ? 48 : 24}
             alt="renzo-leads"
-            className="rounded-full w-[48px] h-[48px] border-2 border-green-500"
+            className="rounded-full w-[48px] h-[48px] border-2 border-[#24AE8D]"
             style={{
               height: windowWidth > 768 ? 48 : 24,
               width: windowWidth > 768 ? 48 : 24

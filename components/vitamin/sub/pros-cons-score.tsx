@@ -32,7 +32,7 @@ export function ProsConsScore({
 
   return (
     <div className="flex flex-wrap">
-      <div className="flex w-[170px] justify-between items-center mr-5">
+      <div className="flex w-full md:w-[170px] justify-between items-center mb-2 md:mr-5">
         <p className="text-xs md:text-base">{title}</p>
         <PrimaryTooltip
           trigger={

@@ -25,16 +25,18 @@ export function SpeedometerCard({
   const { theme } = useTheme()
 
   return (
-    <div className="p-3 md:p-5 flex flex-col gap-3 md:gap-6 bg-[#1E333B] rounded min-w-[314px]">
+    <div className="p-3 md:p-5 flex flex-col gap-3 md:gap-6 bg-[#1E333B] rounded min-w-[180px] md:min-w-[314px]">
       <div className="flex justify-between">
         <div className="flex gap-3">
           <Image
             src={`/image-icons/${icon}.png`}
-            height={48}
-            width={48}
+            height={windowWidth > 768 ? 48 : 30}
+            width={windowWidth > 768 ? 48 : 30}
             alt={icon}
           />
-          <h2 className="text-2xl font-bold self-center">{title}</h2>
+          <h2 className="text-[14px] md:text-2xl font-bold self-center">
+            {title}
+          </h2>
         </div>
         <PrimaryTooltip
           trigger={
@@ -47,8 +49,8 @@ export function SpeedometerCard({
         value={value}
         currentValueText={levels[Math.ceil((value / 1000) * 5) - 1]}
         textColor={theme === 'dark' ? 'white' : 'black'}
-        width={250}
-        height={150}
+        width={windowWidth > 768 ? 250 : 150}
+        height={windowWidth > 768 ? 150 : 100}
         segmentColors={['#EA3F3F', '#EA9A40', '#EABA3F', '#90B564', '#24AE8D']}
         customSegmentLabels={levels.map(level => ({
           text: level,
@@ -57,7 +59,7 @@ export function SpeedometerCard({
           color: theme === 'dark' ? 'white' : 'black'
         }))}
       />
-      <p className="text-[14px]">{description}</p>
+      <p className="text-[10px] md:text-sm">{description}</p>
     </div>
   )
 }

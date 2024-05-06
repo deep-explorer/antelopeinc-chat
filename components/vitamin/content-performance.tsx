@@ -40,7 +40,7 @@ export function ContentPerformance() {
       <h1 className="text-lg md:text-[32px] font-semibold">
         Content Performance
       </h1>
-      <p>
+      <p className="text-[10px] md:text-sm">
         Content analytics feedback suggests high engagement with informative
         articles, but concerns over content relevance and depth could be
         impacting user retention and loyalty.
@@ -70,7 +70,7 @@ export function ContentPerformance() {
         <h2 className="text-base md:text-2xl font-semibold">
           Content by Channel
         </h2>
-        <p>
+        <p className="text-[10px] md:text-sm">
           Sentiment varies across different channels, with social media showing
           the most positivity, while online retail feedback indicates areas for
           improvement.
@@ -82,7 +82,7 @@ export function ContentPerformance() {
         </div>
       </div>
 
-      <p>
+      <p className="text-[10px] md:text-sm">
         As a next step, we recommend exploring some of the solutions the
         Antelope team provide for research to build upon on your strengths and
         weaknesses

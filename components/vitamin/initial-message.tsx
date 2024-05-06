@@ -63,7 +63,7 @@ export function InitialMessage() {
     <>
       <BotCard>
         <div className="flex flex-col gap-6 text-center">
-          <h2 className="text-lg md:text-[40px] font-bold mt-2">
+          <h2 className="text-2xl md:text-[40px] font-bold mt-2">
             Children&apos;s Vitamins Analysis
           </h2>
           <div className="flex gap-4 items-center w-full overflow-auto pb-2">

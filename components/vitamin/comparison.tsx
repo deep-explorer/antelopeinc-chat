@@ -39,23 +39,23 @@ export function Comparison() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-col md:flex-row gap-4">
+    <div className="flex flex-col gap-4 md:gap-6">
+      <div className="flex flex-col md:flex-row gap-2 md:gap-4">
         <Image
           src="/vitamin/logos/renzo.png"
           height={80}
           width={80}
           alt="renzo-loading"
           style={{
-            height: 80,
-            width: 80
+            height: windowWidth > 768 ? 80 : 64,
+            width: windowWidth > 768 ? 80 : 64
           }}
         />
         <div>
           <h1 className="text-lg md:text-3xl font-bold mb-4">
             Renzo&apos;s, Your Report is Ready.
           </h1>
-          <p>
+          <p className="text-[10px] md:text-sm">
             Antelope&apos;s platform has evaluated over 2.3 million data points
             accross ten channels and 12 of your closest competitors in the
             children&apos;s vitamin space. Below is a summary of findings:
@@ -126,7 +126,7 @@ export function Comparison() {
           ]}
         />
       </div>
-      <p>
+      <p className="text-[10px] md:text-sm">
         Renzo&apos;s strengths and weaknesses highlight strong reviews yet
         comparatively poor content performance, with brands like Flintstones and
         MaryRuth&apos;s leading. Would you like to drill further into the

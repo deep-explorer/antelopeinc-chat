@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 import { ProsConsScore, Score } from './pros-cons-score'
 
 interface ProsConsProps {
@@ -12,8 +11,8 @@ interface ProsConsProps {
 export function ProsCons({ flag, title, description, scores }: ProsConsProps) {
   return (
     <div className="flex flex-col gap-2 md:gap-4">
-      <h2 className="text-lg md:text-2xl font-bold">{title}</h2>
-      <p>{description}</p>
+      <h2 className="text-[14px] md:text-2xl font-bold">{title}</h2>
+      <p className="text-[10px] md:text-[14px]">{description}</p>
       <div className="flex flex-col gap-3 w-full">
         {scores.map((score, index) => (
           <ProsConsScore flag={flag} {...score} key={index} />
@@ -21,13 +20,7 @@ export function ProsCons({ flag, title, description, scores }: ProsConsProps) {
       </div>
       <div className="flex flex-wrap">
         <div className="w-[190px] hidden md:block" />
-
-        <Image
-          src="/image-icons/ruler.png"
-          height={36}
-          width={420}
-          alt="ruler"
-        />
+        <img src="/image-icons/ruler.png" height={36} width={420} alt="ruler" />
       </div>
     </div>
   )

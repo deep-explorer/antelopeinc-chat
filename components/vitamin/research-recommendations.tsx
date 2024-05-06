@@ -40,19 +40,21 @@ export function ResearchRecommendations() {
         <h1 className="text-lg md:text-[32px] font-semibold">
           Research Recommendations
         </h1>
-        <p>
+        <p className="text-[10px] md:text-sm">
           Antelope&apos;s platform leverages artificial intelligence to analyze
           this data, providing actionable insights to help Renzo&apos;s build
           upon its strengths and address its closest weaknesses.
         </p>
-        <p>Below are some of the key reports we recommend:</p>
+        <p className="text-[10px] md:text-sm">
+          Below are some of the key reports we recommend:
+        </p>
       </div>
 
       <div className="flex flex-col gap-2">
         <h2 className="text-base md:text-xl font-semibold text-red-500">
           Critical
         </h2>
-        <p>
+        <p className="text-[10px] md:text-sm">
           Antalope&apos;s platform leverages artificial intelligence to analyze
           this data, providing actionable insights to help Renzo&apos;s build
           upon ite strengths and address its closest weaknesses:
@@ -67,7 +69,7 @@ export function ResearchRecommendations() {
         <h2 className="text-base md:text-xl font-semibold text-yellow-500">
           Suggested
         </h2>
-        <p>
+        <p className="text-[10px] md:text-sm">
           Antalope&apos;s platform leverages artificial intelligence to analyze
           this data, providing actionable insights to help Renzo&apos;s build
           upon ite strengths and address its closest weaknesses:
@@ -82,7 +84,7 @@ export function ResearchRecommendations() {
         <h2 className="text-base md:text-xl font-semibold text-green-500">
           Consider
         </h2>
-        <p>
+        <p className="text-[10px] md:text-sm">
           Antalope&apos;s platform leverages artificial intelligence to analyze
           this data, providing actionable insights to help Renzo&apos;s build
           upon ite strengths and address its closest weaknesses:
@@ -93,7 +95,7 @@ export function ResearchRecommendations() {
           ))}
         </div>
       </div>
-      <p>
+      <p className="text-[10px] md:text-sm">
         As a next step, we recommend exploring some of the solutions the
         Antelope team provide for research to build upon on your strengths and
         weaknesses

@@ -40,7 +40,7 @@ export function FeedbackAnalysis() {
   return (
     <div className="flex flex-col gap-3 md:gap-6">
       <h1 className="text-lg md:text-[32px] font-bold">Feedback Performance</h1>
-      <p>
+      <p className="text-[10px] md:text-sm">
         Renzo&apos;s feedback suggests high customer appreciation for natural
         ingredients, but concerns over taste and texture could be impacting
         repeat purchases.
@@ -94,7 +94,7 @@ export function FeedbackAnalysis() {
           industryAverageScore={68}
         />
       </div>
-      <p>
+      <p className="text-[10px] md:text-sm">
         Deeper drilldown into feedback suggests that overall sentiment is
         overwhelmingly positive, with reviewers consistently praising innovative
         products and exceptional customer experiences

@@ -4,6 +4,7 @@ import { SocialScoreBar } from './social-score-bar'
 import { Button } from '@/components/ui/button'
 import { ArrowTopRightIcon } from '@radix-ui/react-icons'
 import { companyUrl } from '@/lib/constants/config'
+import { useWindowSize } from 'usehooks-ts'
 
 interface RecommendationCardProps {
   flag: 'critical' | 'suggested' | 'consider'
@@ -18,9 +19,11 @@ export function RecommendationCard({
   title,
   description
 }: RecommendationCardProps) {
+  const { width: windowWidth } = useWindowSize()
+
   return (
     <div
-      className="p-3 md:p-5 flex flex-col justify-between bg-[#1E333B] rounded min-w-[250px] md:min-w-[314px] h-[300px] md:h-[400px] border-2"
+      className="p-3 md:p-5 flex flex-col justify-between bg-[#1E333B] rounded min-w-[250px] md:min-w-[314px] h-[270px] md:h-[400px] border-2"
       style={{
         borderColor:
           flag === 'critical'
@@ -34,8 +37,8 @@ export function RecommendationCard({
         <div className="flex justify-between mb-3">
           <Image
             src={`/image-icons/${icon}.png`}
-            height={72}
-            width={72}
+            height={windowWidth > 768 ? 44 : 72}
+            width={windowWidth > 768 ? 44 : 72}
             alt={icon}
           />
           <div>
@@ -47,13 +50,15 @@ export function RecommendationCard({
             />
           </div>
         </div>
-        <h3 className="text-2xl font-semibold">{title}</h3>
-        <p className="text-[15px] text-[#999EA3]">{description}</p>
+        <h3 className="text-[14px] md:text-2xl font-semibold">{title}</h3>
+        <p className="text-[10px] md:text-[15px] text-[#999EA3]">
+          {description}
+        </p>
       </div>
 
       <Button
         variant={'ghost'}
-        className="border-white border-solid border-[1px] border-opacity-20 h-[46px]"
+        className="border-white border-solid border-[1px] border-opacity-20 h-8 md:h-[46px]"
         onClick={() => window.open(companyUrl)}
       >
         <div className="mr-1">Learn More</div>

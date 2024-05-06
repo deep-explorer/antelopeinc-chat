@@ -33,7 +33,7 @@ export function ProsConsScore({
   return (
     <div className="flex flex-wrap">
       <div className="flex w-[170px] justify-between items-center mr-5">
-        <p>{title}</p>
+        <p className="text-xs md:text-base">{title}</p>
         <PrimaryTooltip
           trigger={
             <InfoCircledIcon className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
@@ -71,19 +71,19 @@ export function ProsConsScore({
                 backgroundColor: flag === 'pros' ? '#24AE8D' : '#C62828'
               }}
             >
-              <Image
-                src="/vitamin/logos/renzo.png"
-                height={windowWidth > 768 ? 36 : 18}
-                width={windowWidth > 768 ? 36 : 18}
-                alt="renzo-indicator"
-                className="absolute top-0 right-0 rounded-full w-[25px] h-[25px] border-2 transition-all duration-500 ease-in-out"
-                style={{
-                  height: windowWidth > 768 ? 36 : 18,
-                  minWidth: windowWidth > 768 ? 36 : 18,
-                  transform: 'translate(9px, -8px)',
-                  borderColor: flag === 'pros' ? '#2E7D32' : '#C62828'
-                }}
-              />
+              <div>
+                <Image
+                  src="/vitamin/logos/renzo.png"
+                  height={windowWidth > 768 ? 36 : 20}
+                  width={windowWidth > 768 ? 36 : 20}
+                  alt="renzo-indicator"
+                  className="absolute top-0 right-0 rounded-full border-2 transition-all duration-500 ease-in-out"
+                  style={{
+                    transform: `translate(9px, ${windowWidth > 768 ? -8 : -4}px)`,
+                    borderColor: flag === 'pros' ? '#2E7D32' : '#C62828'
+                  }}
+                />
+              </div>
             </Progress.Indicator>
           </Progress.Root>
 

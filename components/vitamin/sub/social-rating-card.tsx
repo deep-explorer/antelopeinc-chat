@@ -3,6 +3,7 @@ import { ProsConsScore } from './pros-cons-score'
 import { SocialScoreBar } from './social-score-bar'
 import { PrimaryTooltip } from '@/components/ui/tooltip'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
+import { useWindowSize } from 'usehooks-ts'
 
 interface SocialRatingCardProps {
   icon: string
@@ -23,17 +24,23 @@ export function SocialRatingCard({
   averageScore,
   industryAverageScore
 }: SocialRatingCardProps) {
+  const { width: windowWidth } = useWindowSize()
+
   return (
-    <div className="p-3 md:p-5 flex flex-col gap-3 md:gap-6 bg-[#1E333B] rounded min-w-[454px]">
+    <div className="p-3 md:p-5 flex flex-col gap-3 md:gap-6 bg-[#1E333B] rounded mind-w-[236px] md:min-w-[454px]">
       <div className="flex justify-between">
         <div className="flex gap-3">
-          <Image
-            src={`/image-icons/${icon}.png`}
-            height={48}
-            width={48}
-            alt={icon}
-          />
-          <h2 className="text-2xl font-bold self-center">{title}</h2>
+          <div>
+            <Image
+              src={`/image-icons/${icon}.png`}
+              height={windowWidth > 768 ? 48 : 24}
+              width={windowWidth > 768 ? 48 : 24}
+              alt={icon}
+            />
+          </div>
+          <h2 className="text-[14px] md:text-2xl font-bold self-center">
+            {title}
+          </h2>
         </div>
         <PrimaryTooltip
           trigger={
@@ -42,7 +49,7 @@ export function SocialRatingCard({
           description="Influencer activity looks at the relative share of sponsored mentions and engagement among competitors"
         />
       </div>
-      <p>{description}</p>
+      <p className="text-[10px]">{description}</p>
       <hr className="border-[#35474F]" />
       <div className="flex flex-col gap-5">
         <SocialScoreBar
@@ -57,8 +64,8 @@ export function SocialRatingCard({
           value={averageScore}
           average={industryAverageScore}
         />
-        <div className="flex gap-2">
-          <p className="text-[#788589] text-[18px]">Industry Avg</p>
+        <div className="flex gap-2 text-[#788589] text-[10px] md:text-[18px]">
+          <p>Industry Avg</p>
           <p>-----</p>
         </div>
       </div>

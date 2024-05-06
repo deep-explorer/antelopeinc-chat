@@ -60,7 +60,7 @@ export function SendUsMessage() {
       <h1 className="text-lg md:text-[32px] font-semibold">
         Send Us a Message
       </h1>
-      <p className="text-sm md:text-base">
+      <p className="text-xs md:text-base">
         Have a question or want to learn more? Send us a message and our team
         will be in touch soon.
       </p>
@@ -68,12 +68,12 @@ export function SendUsMessage() {
         <Form.Field className="p-1 md:p-3 w-full md:w-[50%]" name="name">
           <Form.Control asChild>
             <TextField.Root
-              size={windowWidth > 768 ? '3' : '2'}
+              size={windowWidth > 768 ? '3' : '1'}
               radius="large"
               placeholder="Your name"
               required
               style={{
-                height: 50,
+                height: windowWidth > 768 ? 50 : 42,
                 padding: '0 16px',
                 backgroundColor: '#1E333B',
                 backgroundClip: 'padding-box'
@@ -117,13 +117,13 @@ export function SendUsMessage() {
         <Form.Field className="p-1 md:p-3 w-full md:w-[50%]" name="email">
           <Form.Control asChild>
             <TextField.Root
-              size={windowWidth > 768 ? '3' : '2'}
+              size={windowWidth > 768 ? '3' : '1'}
               radius="large"
               placeholder="Company Email"
               type="email"
               required
               style={{
-                height: 50,
+                height: windowWidth > 768 ? 50 : 42,
                 padding: '0 16px',
                 backgroundColor: '#1E333B',
                 backgroundClip: 'padding-box'
@@ -185,13 +185,13 @@ export function SendUsMessage() {
         >
           <Form.Control asChild>
             <TextField.Root
-              size={windowWidth > 768 ? '3' : '2'}
+              size={windowWidth > 768 ? '3' : '1'}
               radius="large"
               placeholder="Phone"
               type="tel"
               required
               style={{
-                height: 50,
+                height: windowWidth > 768 ? 50 : 42,
                 padding: '0 16px',
                 backgroundColor: '#1E333B',
                 backgroundClip: 'padding-box'
@@ -247,12 +247,12 @@ export function SendUsMessage() {
         <Form.Field className="p-1 md:p-3 w-full md:w-[50%]" name="company">
           <Form.Control asChild>
             <TextField.Root
-              size={windowWidth > 768 ? '3' : '2'}
+              size={windowWidth > 768 ? '3' : '1'}
               radius="large"
               placeholder="Company"
               required
               style={{
-                height: 50,
+                height: windowWidth > 768 ? 50 : 42,
                 padding: '0 16px',
                 backgroundColor: '#1E333B',
                 backgroundClip: 'padding-box'
@@ -295,12 +295,12 @@ export function SendUsMessage() {
         <Form.Field className="p-1 md:p-3 w-full" name="subject">
           <Form.Control asChild>
             <TextField.Root
-              size={windowWidth > 768 ? '3' : '2'}
+              size={windowWidth > 768 ? '3' : '1'}
               radius="large"
               placeholder="Subject"
               required
               style={{
-                height: 50,
+                height: windowWidth > 768 ? 50 : 42,
                 padding: '0 16px',
                 backgroundColor: '#1E333B',
                 backgroundClip: 'padding-box'
@@ -341,12 +341,12 @@ export function SendUsMessage() {
           <Form.Control asChild>
             <TextArea
               radius="large"
-              size={windowWidth > 768 ? '3' : '2'}
+              size={windowWidth > 768 ? '3' : '1'}
               resize="vertical"
               placeholder="Tell us about your project"
               required
               style={{
-                height: 186,
+                height: windowWidth > 768 ? 186 : 122,
                 padding: '8px 16px',
                 backgroundColor: '#1E333B',
                 backgroundClip: 'padding-box'
@@ -388,7 +388,7 @@ export function SendUsMessage() {
               style={{ width: '100%' }}
               size={windowWidth > 768 ? '3' : '2'}
             >
-              Start Analysis
+              Submit
             </Button>
           </div>
         </Form.Submit>

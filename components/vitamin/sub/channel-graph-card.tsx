@@ -60,11 +60,11 @@ const renderCustomShape = (props: {
   return (
     <image
       href={`/vitamin/logos/${icon}.png`}
-      x={cx - 24}
-      y={cy - 24}
+      x={cx - (window.innerWidth > 768 ? 24 : 12)}
+      y={cy - (window.innerWidth > 768 ? 24 : 12)}
       // width={windowWidth > 768 ? 48 : 24}
       // height={windowWidth > 768 ? 48 : 24}
-      className="md:w-12 md:h-12 w-6 h-6"
+      className="md:size-12 size-6"
     />
   )
 }
@@ -73,7 +73,7 @@ const CustomTooltip: React.FC<any> = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-primary rounded-md p-2">
-        <p className="">{payload[0].payload.name}</p>
+        <p className="text-[10px] md:text-[14px]">{payload[0].payload.name}</p>
       </div>
     )
   }
@@ -90,11 +90,13 @@ export function ChannelGraphCard() {
         <div className="flex gap-2">
           <Image
             src={'/image-icons/instagram.png'}
-            width={48}
-            height={48}
+            width={windowWidth > 768 ? 48 : 24}
+            height={windowWidth > 768 ? 48 : 24}
             alt="instagram-logo"
           />
-          <h2 className="text-2xl font-bold self-center">Instagram</h2>
+          <h2 className="text-xs md:text-2xl font-bold self-center">
+            Instagram
+          </h2>
         </div>
         <PrimaryTooltip
           trigger={
@@ -103,7 +105,7 @@ export function ChannelGraphCard() {
           description="Influencer activity looks at the relative share of sponsored mentions and engagement among competitors"
         />
       </div>
-      <p>
+      <p className="text-[10px] md:text-sm">
         Instagram engagement metrics suggest a highly active and loyal
         community, with users resonating strongly with visually-driven
         storytelling and behind-the-scenes content.
@@ -126,6 +128,9 @@ export function ChannelGraphCard() {
               if (value === 100) return 'Many'
               return ''
             }}
+            style={{
+              fontSize: windowWidth > 768 ? 14 : 10
+            }}
           >
             <Label
               value="Engagement"
@@ -134,7 +139,8 @@ export function ChannelGraphCard() {
               className="fill-white"
               style={{
                 textAnchor: 'middle',
-                letterSpacing: '1px'
+                letterSpacing: '1px',
+                fontSize: windowWidth > 768 ? 14 : 10
               }}
             />
           </XAxis>
@@ -150,6 +156,9 @@ export function ChannelGraphCard() {
               if (value === 100) return 'High'
               return ''
             }}
+            style={{
+              fontSize: windowWidth > 768 ? 14 : 10
+            }}
           >
             <Label
               value="Content"
@@ -159,7 +168,8 @@ export function ChannelGraphCard() {
               className="fill-white"
               style={{
                 textAnchor: 'middle',
-                letterSpacing: '1px'
+                letterSpacing: '1px',
+                fontSize: windowWidth > 768 ? 14 : 10
               }}
             />
           </YAxis>

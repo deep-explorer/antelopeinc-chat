@@ -41,9 +41,8 @@ export function EmailInputMessage() {
           if (mode === 'production' && !response.success) {
             //  TODO: backend should return a better message
             setError(
-              response.msg === 'Email already exists' || !response.msg
-                ? "We're sorry, but only one email address per chatbot is allowed at this time."
-                : response.msg
+              response.msg ??
+                "We're sorry, but only one email address per chatbot is allowed at this time."
             )
             return
           }

@@ -34,9 +34,7 @@ export function EmailCodeInputMessage() {
       if (mode === 'production' && !response.success) {
         //  TODO: backend should return a better message
         setError(
-          response.msg === 'failure' || !response.msg
-            ? 'Please retry. The code you entered does not match.'
-            : response.msg
+          response.msg ?? 'Please retry. The code you entered does not match.'
         )
         return
       }

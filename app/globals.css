@@ -140,3 +140,7 @@
   --default-font-family: Satoshi-Variable !important;
   font-weight: 400 !important;
 }
+
+.opacity-gradient {
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}

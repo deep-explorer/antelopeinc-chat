@@ -102,7 +102,7 @@ export function EmailInputMessage() {
       </div>
       <Button
         type="submit"
-        style={{ width: '100%' }}
+        style={{ width: '100%', backgroundColor: '#E54D2E', cursor: 'pointer' }}
         size={windowWidth > 768 ? '3' : '2'}
       >
         <LockClosedIcon />

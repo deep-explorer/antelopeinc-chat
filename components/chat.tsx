@@ -80,7 +80,7 @@ export function Chat({
   return (
     <>
       <div className="" ref={chatContainerRef}>
-        <div className={cn('pt-4 md:pt-10 px-3 md:px-6', className)}>
+        <div className={cn('pt-4 md:pt-4', className)}>
           {initialScreen}
           {initialScreen || messages.length ? (
             <ChatList messages={messages} isShared={false} session={session} />
@@ -91,10 +91,7 @@ export function Chat({
         <ChatPanel id={id} input={input} setInput={setInput} />
       </div>
 
-      <div className="w-full flex justify-center mb-6 md:mb-16">
-        <PromptForm input={input} setInput={setInput} />
-        {/* <PromptUsageWidget /> */}
-      </div>
+      <PromptForm input={input} setInput={setInput} />
     </>
   )
 }

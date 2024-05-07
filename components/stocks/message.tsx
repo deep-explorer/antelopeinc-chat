@@ -25,7 +25,7 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
 
   return windowWidth >= 768 ? (
     <div className="grid place-items-end">
-      <div className="group relative flex gap-2 md:gap-4 text-white max-w-[300px] sm:max-w-[600px] lg:max-w-[768px]">
+      <div className="group relative flex gap-2 md:gap-3 text-white max-w-[300px] sm:max-w-[600px] lg:max-w-[816px]">
         <div className="bg-[#18898D] px-3 md:px-6 py-2 md:py-4 rounded-tr-none md:rounded-tr-none rounded-sm md:rounded-lg overflow-x-auto text-sm">
           {children}
         </div>
@@ -47,7 +47,7 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
       </div>
     </div>
   ) : (
-    <div className="group relative flex gap-2 md:gap-4 text-white max-w-[300px] sm:max-w-[600px] lg:max-w-[768px]">
+    <div className="group relative flex gap-2 md:gap-3 text-white max-w-[300px] sm:max-w-[600px] lg:max-w-[816px]">
       <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
         {pathname === '/vitamin-analyzer' ? (
           <Image
@@ -74,7 +74,7 @@ export function BotCard({ children }: { children: React.ReactNode }) {
   const { width: windowWidth } = useWindowSize()
 
   return (
-    <div className="group relative flex gap-2 md:gap-4  max-w-[768px] my-4">
+    <div className="group relative flex gap-2 md:gap-3  max-w-[816px] my-4">
       <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-md ">
         <Image
           src="/header-logo.png"
@@ -179,7 +179,7 @@ export function BotMessage({
           return (
             <div
               className={cn(
-                'group relative flex gap-2 md:gap-4 max-w-[768px] my-4',
+                'group relative flex gap-2 md:gap-3 max-w-[756px] w-full my-4',
                 className
               )}
               key={index}

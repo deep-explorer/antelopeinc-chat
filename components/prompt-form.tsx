@@ -151,78 +151,82 @@ export function PromptForm({
   }
 
   return (
-    <div className="fixed bottom-2 border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
-      <form
-        ref={formRef}
-        onSubmit={onSubmit}
-        className="max-w-[940px] min-w-[370px] w-full flex bg-[#CDE2E7] dark:bg-[#071920] rounded-md md:rounded-lg border-[#35474F] border-2 relative max-h-20 overflow-auto  p-1 md:pl-8 pr-0 cursor-not-allowed"
-      >
-        <div className="flex justify-center items-center">
-          <Button
-            variant="default"
-            {...getRootProps()}
-            type="button"
+    <div className="fixed bottom-0 shadow-lg max-w-[350px] md:max-w-[876px] w-full">
+      <div className="w-full rounded-lg p-2 md:p-4 bg-[#122830]">
+        <form
+          ref={formRef}
+          onSubmit={onSubmit}
+          className="flex bg-[#CDE2E7] dark:bg-[#071920] rounded-md md:rounded-lg border-[#35474F] border-2 relative max-h-20 overflow-auto  p-1 md:pl-8 pr-0 cursor-not-allowed"
+        >
+          <div className="flex justify-center items-center">
+            <Button
+              variant="default"
+              {...getRootProps()}
+              type="button"
+              disabled={true}
+            >
+              <input disabled={true} {...getInputProps()} />
+              <IconPlus />
+              <p className="hidden md:block">File</p>
+            </Button>
+          </div>
+          <Textarea
+            ref={inputRef}
+            tabIndex={0}
+            onKeyDown={onKeyDown}
+            placeholder="Message Antelope"
+            className="min-h-[48px] max-h-16 w-full resize-none bg-transparent p-1 md:pl-4 md:pr-14 py-3 focus-within:outline-none sm:text-sm cursor-not-allowed"
             disabled={true}
-          >
-            <input disabled={true} {...getInputProps()} />
-            <IconPlus />
-            <p className="hidden md:block">File</p>
-          </Button>
-        </div>
-        <Textarea
-          ref={inputRef}
-          tabIndex={0}
-          onKeyDown={onKeyDown}
-          placeholder="Message Antelope"
-          className="min-h-[60px] max-h-16 w-full resize-none bg-transparent p-1 md:pl-4 md:pr-14 py-[1.3rem] focus-within:outline-none sm:text-sm cursor-not-allowed"
-          disabled={true}
-          // autoFocus
-          spellCheck={false}
-          autoComplete="off"
-          autoCorrect="off"
-          name="message"
-          rows={1}
-          value={input}
-          onChange={e => setInput(e.target.value)}
-        />
-        <div className="absolute right-2 top-[13px] sm:right-4">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant={'outline'}
-                type="submit"
-                size="icon"
-                disabled={input === ''}
-              >
-                <span>
-                  <div
-                    role="button"
-                    className="send-btn relative right-[-3px] size-[28px] rounded-lg rount send-btn text-base flex justify-center items-center bg-[transparent] hover:bg-darken2 cursor-pointer opacity-30 pointer-events-none"
-                  >
-                    <svg
-                      className="size-4"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+            // autoFocus
+            spellCheck={false}
+            autoComplete="off"
+            autoCorrect="off"
+            name="message"
+            rows={1}
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            style={{ height: 48 }}
+          />
+          <div className="absolute right-2 top-[13px] sm:right-4">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant={'outline'}
+                  type="submit"
+                  size="icon"
+                  disabled={input === ''}
+                >
+                  <span>
+                    <div
+                      role="button"
+                      className="send-btn relative right-[-3px] size-[28px] rounded-lg rount send-btn text-base flex justify-center items-center bg-[transparent] hover:bg-darken2 cursor-pointer opacity-30 pointer-events-none"
                     >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" />
-                    </svg>
-                  </div>
-                </span>
+                      <svg
+                        className="size-4"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <path d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3" />
+                      </svg>
+                    </div>
+                  </span>
 
-                <span className="sr-only">Send message</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Send message</TooltipContent>
-          </Tooltip>
-        </div>
-      </form>
+                  <span className="sr-only">Send message</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Send message</TooltipContent>
+            </Tooltip>
+          </div>
+        </form>
+      </div>
+      <div className="h-8 bg-gradient-to-b opacity-gradient" />
     </div>
   )
 }

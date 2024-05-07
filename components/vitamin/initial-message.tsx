@@ -64,7 +64,7 @@ export function InitialMessage() {
     <>
       <BotCard>
         <div className="flex flex-col gap-6 text-center">
-          <h2 className="text-2xl md:text-[40px] font-bold mt-2">
+          <h2 className="text-xl md:text-[30px] font-bold mt-2">
             Children&apos;s Vitamins Analysis
           </h2>
           <div className="relative pb-8">
@@ -99,8 +99,8 @@ export function InitialMessage() {
                     max: 464,
                     min: 0
                   },
-                  items: 1,
-                  partialVisibilityGutter: 30
+                  items: 4,
+                  partialVisibilityGutter: 0
                 },
                 tablet: {
                   breakpoint: {

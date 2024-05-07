@@ -20,6 +20,7 @@ import { ThemeToggle } from './theme-toggle'
 import Image from 'next/image'
 import { companyUrl } from '@/lib/constants/config'
 import { usePathname } from 'next/navigation'
+import { useWindowSize } from 'usehooks-ts'
 
 /* 
 async function UserOrLogin() {
@@ -71,13 +72,15 @@ const titles = [
 ]
 
 export function Header() {
+  const { width: windowWidth } = useWindowSize()
+
   const pathname = usePathname()
   const title = titles.find(t => t.pathname === pathname)
 
   const [isScrolled, setIsScrolled] = React.useState(false)
   React.useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 80) {
+      if (window.scrollY > (windowWidth > 768 ? 50 : 20)) {
         setIsScrolled(true)
       } else {
         setIsScrolled(false)
@@ -88,88 +91,93 @@ export function Header() {
   }, [])
 
   return (
-    <header
-      className={`navbar ${isScrolled ? 'scrolled h-[80px] md:h-[120px]' : 'h-[320px] md:h-[500px]'} bg-[#ebf5f8] dark:bg-[#122830] overflow-hidden`}
-    >
-      {isScrolled ? (
-        <div className="p-6 lg:px-20 lg:py-8 flex items-center justify-between w-full ">
-          <div className="flex items-center">
-            <Link href={companyUrl} rel="nofollow" className="flex gap-2">
-              <Image
-                src={`/header-logo.png`}
-                alt="logo"
-                width={32}
-                height={32}
-              />
-              <h2 className="text-xl">Antelope</h2>
-            </Link>
-          </div>
-          <div className="hidden lg:flex gap-2 items-center">
-            <div>
-              <Image
-                src={`/vitamin/logos/renzo.png`}
-                alt="renzologo"
-                width={56}
-                height={56}
-              />
+    <>
+      <header
+        className={`${isScrolled ? 'h-[48px] md:h-[80px]' : 'h-[220px] md:h-[320px]'} overflow-hidden transition-all duration-1000 ease-in-out`}
+      >
+        {isScrolled ? (
+          <>
+            <div className="scrolled p-4 lg:px-12 lg:py-4 flex items-center justify-between w-full bg-[#122830]">
+              <div className="flex items-center">
+                <Link href={companyUrl} rel="nofollow" className="flex gap-2">
+                  <Image
+                    src={`/header-logo.png`}
+                    alt="logo"
+                    width={32}
+                    height={32}
+                  />
+                  <h2 className="text-xl">Antelope</h2>
+                </Link>
+              </div>
+              <div className="hidden lg:flex gap-2 items-center">
+                <div>
+                  <Image
+                    src={`/vitamin/logos/renzo.png`}
+                    alt="renzologo"
+                    width={42}
+                    height={42}
+                  />
+                </div>
+                <p className="text-3xl font-semibold">{title?.title}</p>
+              </div>
+              <div>
+                {/* <ThemeToggle /> */}
+                <Button
+                  onClick={() => window.open(companyUrl, '_blank')}
+                  size={'2'}
+                >
+                  Get in touch
+                </Button>
+              </div>
             </div>
-            <p className="text-3xl font-semibold">{title?.title}</p>
-          </div>
-          <div>
-            {/* <ThemeToggle /> */}
-            <Button
-              onClick={() => window.open(companyUrl, '_blank')}
-              size={'3'}
-            >
-              Get in touch
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <>
-          <div className="p-6 lg:px-20 lg:py-12 flex items-center justify-between w-full ">
-            <div className="flex items-center">
-              <Link href={companyUrl} rel="nofollow" className="flex gap-2">
-                <Image
-                  src={`/header-logo.png`}
-                  alt="logo"
-                  width={32}
-                  height={32}
-                />
-                <h2 className="text-xl">Antelope</h2>
-              </Link>
+          </>
+        ) : (
+          <>
+            <div className="p-4 lg:px-12 lg:py-8 flex items-center justify-between w-full bg-[#122830]">
+              <div className="flex items-center">
+                <Link href={companyUrl} rel="nofollow" className="flex gap-2">
+                  <Image
+                    src={`/header-logo.png`}
+                    alt="logo"
+                    width={32}
+                    height={32}
+                  />
+                  <h2 className="text-xl">Antelope</h2>
+                </Link>
+              </div>
+              <div className="hidden lg:flex items-center justify-end space-x-2 gap-12 text-lg">
+                <Link href={`${companyUrl}/#banner`}>Home</Link>
+                <Link href={`${companyUrl}/#benefits`}>What We Do</Link>
+                <Link href={`${companyUrl}/case-study`}>Our Reports</Link>
+                <Link href={`${companyUrl}/#process`}>Process</Link>
+                <Link href={`${companyUrl}/blog/`}>Blog</Link>
+              </div>
+              <div>
+                {/* <ThemeToggle /> */}
+                <Button
+                  onClick={() => window.open(companyUrl, '_blank')}
+                  size={'2'}
+                >
+                  Get in touch
+                </Button>
+              </div>
             </div>
-            <div className="hidden lg:flex items-center justify-end space-x-2 gap-12 text-lg">
-              <Link href={`${companyUrl}/#banner`}>Home</Link>
-              <Link href={`${companyUrl}/#benefits`}>What We Do</Link>
-              <Link href={`${companyUrl}/case-study`}>Our Reports</Link>
-              <Link href={`${companyUrl}/#process`}>Process</Link>
-              <Link href={`${companyUrl}/blog/`}>Blog</Link>
-            </div>
-            <div>
-              {/* <ThemeToggle /> */}
-              <Button
-                onClick={() => window.open(companyUrl, '_blank')}
-                size={'3'}
+            <div className="text-center pt-8 md:pt-[64px] px-6 flex flex-col gap-4 md:gap-6">
+              <h1
+                className="text-xs md:text-base text-primary font-bold"
+                style={{ letterSpacing: 2 }}
               >
-                Get in touch
-              </Button>
+                ANTELOPE CHATBOT
+              </h1>
+              <h2 className="text-xl md:text-3xl font-bold">{title?.title}</h2>
+              <p className="text-[#B9CAD0] text-sm md:text-lg">
+                {title?.description}
+              </p>
             </div>
-          </div>
-          <div className="text-center pb-12 pt-12 md:pt-[100px] px-6 flex flex-col gap-4 md:gap-6">
-            <h1
-              className="text-xs md:text-base text-primary font-bold"
-              style={{ letterSpacing: 2 }}
-            >
-              ANTELOPE CHATBOT
-            </h1>
-            <h2 className="text-3xl md:text-5xl font-bold">{title?.title}</h2>
-            <p className="text-[#B9CAD0] text-sm md:text-lg">
-              {title?.description}
-            </p>
-          </div>
-        </>
-      )}
-    </header>
+          </>
+        )}
+      </header>
+      {isScrolled && <div className="h-20"></div>}
+    </>
   )
 }

@@ -29,7 +29,7 @@ export function OverviewSpecCard({
           alt={title}
         />
         <div>
-          <h2 className="text-[20px] md:text-[40px] font-bold">{score}</h2>
+          <h2 className="text-lg md:text-2xl font-bold mb-4">{score}</h2>
           <p className="text-xs md:text-base font-medium text-[#788589]">
             {title}
           </p>

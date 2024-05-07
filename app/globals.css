@@ -145,11 +145,7 @@
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
 
-.navbar {
-  transition: all 0.5s ease-in-out;
-}
-
-.navbar.scrolled {
+.scrolled {
   position: fixed;
   top: 0;
   width: 100%;

@@ -48,10 +48,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className="">
+          <div className="bg-[#071920]">
             <Header />
-            <div className="bg-[#071920] py-16 flex justify-center">
-              <main className="px-8 max-w-[940px]">{children}</main>
+            <div className="flex justify-center">
+              <main className="px-4 md:px-8 max-w-[940px] w-full min-h-[100vh]">
+                {children}
+              </main>
             </div>
             {/* <Footer className="py-8" /> */}
           </div>

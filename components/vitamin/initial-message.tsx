@@ -17,6 +17,7 @@ import { nanoid } from 'nanoid'
 import { companyUrl } from '@/lib/constants/config'
 import { sleep } from '@/lib/utils'
 import { useWindowSize } from 'usehooks-ts'
+import Carousel from 'react-multi-carousel'
 
 export function InitialMessage() {
   const { width: windowWidth } = useWindowSize()
@@ -66,45 +67,106 @@ export function InitialMessage() {
           <h2 className="text-2xl md:text-[40px] font-bold mt-2">
             Children&apos;s Vitamins Analysis
           </h2>
-          <div className="flex gap-4 items-center w-full overflow-auto pb-2">
-            <Image
-              src="/vitamin/logos/renzo.png"
-              height={windowWidth > 768 ? 104 : 48}
-              width={windowWidth > 768 ? 104 : 48}
-              className="rounded-full"
-              alt="renzo-logo"
-            />
-            <div className="rounded-full size-8 p-2 bg-[#2F616A]">
-              <p className="text-xs">vs</p>
-            </div>
-            <Image
-              src="/vitamin/logos/flintstonesvitamins.png"
-              height={windowWidth > 768 ? 104 : 48}
-              width={windowWidth > 768 ? 104 : 48}
-              className="rounded-full"
-              alt="flintstones-logo"
-            />
-            <Image
-              src="/vitamin/logos/maryruthorganics.png"
-              height={windowWidth > 768 ? 104 : 48}
-              width={windowWidth > 768 ? 104 : 48}
-              className="rounded-full"
-              alt="flintstones-logo"
-            />
-            <Image
-              src="/vitamin/logos/smartypantsvitamins.png"
-              height={windowWidth > 768 ? 104 : 48}
-              width={windowWidth > 768 ? 104 : 48}
-              className="rounded-full"
-              alt="flintstones-logo"
-            />
-            <Image
-              src="/vitamin/logos/naturesway.png"
-              height={windowWidth > 768 ? 104 : 48}
-              width={windowWidth > 768 ? 104 : 48}
-              className="rounded-full"
-              alt="flintstones-logo"
-            />
+          <div className="relative pb-8">
+            <Carousel
+              additionalTransfrom={0}
+              arrows
+              centerMode={false}
+              className=""
+              containerClass="container"
+              dotListClass=""
+              draggable={false}
+              focusOnSelect={false}
+              itemClass=""
+              keyBoardControl
+              minimumTouchDrag={80}
+              partialVisible
+              pauseOnHover
+              renderArrowsWhenDisabled={false}
+              renderButtonGroupOutside={false}
+              renderDotsOutside={true}
+              responsive={{
+                desktop: {
+                  breakpoint: {
+                    max: 3000,
+                    min: 1024
+                  },
+                  items: 5,
+                  partialVisibilityGutter: 0
+                },
+                mobile: {
+                  breakpoint: {
+                    max: 464,
+                    min: 0
+                  },
+                  items: 1,
+                  partialVisibilityGutter: 30
+                },
+                tablet: {
+                  breakpoint: {
+                    max: 1024,
+                    min: 464
+                  },
+                  items: 2,
+                  partialVisibilityGutter: 30
+                }
+              }}
+              rewind={false}
+              rewindWithAnimation={false}
+              rtl={false}
+              shouldResetAutoplay
+              showDots={true}
+              sliderClass=""
+              slidesToSlide={1}
+              ssr
+              swipeable
+            >
+              <Image
+                src="/vitamin/logos/renzo.png"
+                height={windowWidth > 768 ? 104 : 48}
+                width={windowWidth > 768 ? 104 : 48}
+                className="rounded-full"
+                alt="renzo-logo"
+              />
+              {/* <div className="rounded-full size-8 p-2 bg-[#2F616A]">
+                <p className="text-xs">vs</p>
+              </div> */}
+              <Image
+                src="/vitamin/logos/flintstonesvitamins.png"
+                height={windowWidth > 768 ? 104 : 48}
+                width={windowWidth > 768 ? 104 : 48}
+                className="rounded-full"
+                alt="flintstones-logo"
+              />
+              <Image
+                src="/vitamin/logos/maryruthorganics.png"
+                height={windowWidth > 768 ? 104 : 48}
+                width={windowWidth > 768 ? 104 : 48}
+                className="rounded-full"
+                alt="flintstones-logo"
+              />
+              <Image
+                src="/vitamin/logos/smartypantsvitamins.png"
+                height={windowWidth > 768 ? 104 : 48}
+                width={windowWidth > 768 ? 104 : 48}
+                className="rounded-full"
+                alt="flintstones-logo"
+              />
+              <Image
+                src="/vitamin/logos/naturesway.png"
+                height={windowWidth > 768 ? 104 : 48}
+                width={windowWidth > 768 ? 104 : 48}
+                className="rounded-full"
+                alt="flintstones-logo"
+              />
+              <Image
+                src="/vitamin/logos/flintstonesvitamins.png"
+                height={windowWidth > 768 ? 104 : 48}
+                width={windowWidth > 768 ? 104 : 48}
+                className="rounded-full"
+                alt="flintstones-logo"
+              />
+            </Carousel>
           </div>
           <p className="text-sm md:text-lg px-2">
             This analysis reviews Renzo&apos;s and nine of the largest vitamin

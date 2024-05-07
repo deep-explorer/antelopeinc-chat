@@ -93,7 +93,7 @@ export function Header() {
   return (
     <>
       <header
-        className={`scrolled p-4 lg:px-12 flex items-center justify-between w-full bg-[#122830] overflow-hidden ease-in-out transition-all duration-1000 shadow-2xl ${isScrolled ? 'h-[48px] md:h-[80px]' : 'h-0 py-0'}`}
+        className={`scrolled p-4 lg:px-12 flex items-center justify-between w-full bg-[#122830] overflow-hidden ease-in-out transition-all duration-500 shadow-2xl ${isScrolled ? 'h-[48px] md:h-[80px]' : 'h-0 py-0'}`}
       >
         {isScrolled && (
           <>

@@ -79,30 +79,19 @@ export function Chat({
 
   return (
     <>
-      <div className="relative flex justify-center h-[calc(100vh_-_theme(spacing.28))] ">
-        <div className="max-w-[940px] min-w-[370px] w-full flex">
-          <div
-            className="group w-full overflow-auto  bg-[#CDE2E7] dark:bg-[#071920] rounded-lg border-[#35474F] border-2"
-            ref={chatContainerRef}
-          >
-            <div className={cn('pt-4 md:pt-10 px-3 md:px-6', className)}>
-              {initialScreen}
-              {initialScreen || messages.length ? (
-                <ChatList
-                  messages={messages}
-                  isShared={false}
-                  session={session}
-                />
-              ) : (
-                <EmptyScreen />
-              )}
-            </div>
-            <ChatPanel id={id} input={input} setInput={setInput} />
-          </div>
+      <div className="" ref={chatContainerRef}>
+        <div className={cn('pt-4 md:pt-10 px-3 md:px-6', className)}>
+          {initialScreen}
+          {initialScreen || messages.length ? (
+            <ChatList messages={messages} isShared={false} session={session} />
+          ) : (
+            <EmptyScreen />
+          )}
         </div>
+        <ChatPanel id={id} input={input} setInput={setInput} />
       </div>
 
-      <div className="w-full flex justify-center py-2 md:py-4">
+      <div className="w-full flex justify-center mb-6 md:mb-16">
         <PromptForm input={input} setInput={setInput} />
         {/* <PromptUsageWidget /> */}
       </div>

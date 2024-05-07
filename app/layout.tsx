@@ -9,6 +9,7 @@ import { Providers } from '@/components/providers'
 import { Header } from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
 import { Footer } from '@/components/footer'
+import { Suspense } from 'react'
 
 export const metadata = {
   metadataBase: process.env.VERCEL_URL
@@ -47,10 +48,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className=" p-6 md:px-12 md:py-20 bg-[#ebf5f8] dark:bg-[#122830]">
+          <div className="">
             <Header />
-            <main>{children}</main>
-            <Footer className="py-8" />
+            <div className="bg-[#071920] py-16 flex justify-center">
+              <main className="px-8 max-w-[940px]">{children}</main>
+            </div>
+            {/* <Footer className="py-8" /> */}
           </div>
           {/* <TailwindIndicator /> */}
         </Providers>

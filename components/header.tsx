@@ -80,7 +80,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = React.useState(false)
   React.useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > (windowWidth > 768 ? 50 : 20)) {
+      if (window.scrollY > (windowWidth > 768 ? 300 : 180)) {
         setIsScrolled(true)
       } else {
         setIsScrolled(false)
@@ -93,11 +93,11 @@ export function Header() {
   return (
     <>
       <header
-        className={`${isScrolled ? 'h-[48px] md:h-[80px]' : 'h-[220px] md:h-[320px]'} overflow-hidden transition-all duration-1000 ease-in-out`}
+        className={`${isScrolled ? 'h-[48px] md:h-[80px]' : 'h-[220px] md:h-[320px]'}`}
       >
         {isScrolled ? (
           <>
-            <div className="scrolled p-4 lg:px-12 lg:py-4 flex items-center justify-between w-full bg-[#122830]">
+            <div className="scrolled p-4 lg:px-12 lg:py-4 flex items-center justify-between w-full bg-[#122830] shadow-2xl">
               <div className="flex items-center">
                 <Link href={companyUrl} rel="nofollow" className="flex gap-2">
                   <Image
@@ -133,7 +133,7 @@ export function Header() {
           </>
         ) : (
           <>
-            <div className="p-4 lg:px-12 lg:py-8 flex items-center justify-between w-full bg-[#122830]">
+            <div className="p-4 lg:px-12 lg:py-8 flex items-center justify-between w-full bg-[#122830]  shadow-2xl">
               <div className="flex items-center">
                 <Link href={companyUrl} rel="nofollow" className="flex gap-2">
                   <Image

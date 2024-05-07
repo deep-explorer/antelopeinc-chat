@@ -17,7 +17,7 @@ import { nanoid } from 'nanoid'
 import { companyUrl } from '@/lib/constants/config'
 import { sleep } from '@/lib/utils'
 import { useWindowSize } from 'usehooks-ts'
-import Carousel from 'react-multi-carousel'
+import { Carousel } from '../ui/carousel'
 
 export function InitialMessage() {
   const { width: windowWidth } = useWindowSize()
@@ -68,59 +68,7 @@ export function InitialMessage() {
             Children&apos;s Vitamins Analysis
           </h2>
           <div className="relative pb-8">
-            <Carousel
-              additionalTransfrom={0}
-              arrows
-              centerMode={false}
-              className=""
-              containerClass="container"
-              dotListClass=""
-              draggable={false}
-              focusOnSelect={false}
-              itemClass=""
-              keyBoardControl
-              minimumTouchDrag={80}
-              partialVisible
-              pauseOnHover
-              renderArrowsWhenDisabled={false}
-              renderButtonGroupOutside={false}
-              renderDotsOutside={true}
-              responsive={{
-                desktop: {
-                  breakpoint: {
-                    max: 3000,
-                    min: 1024
-                  },
-                  items: 5,
-                  partialVisibilityGutter: 0
-                },
-                mobile: {
-                  breakpoint: {
-                    max: 464,
-                    min: 0
-                  },
-                  items: 4,
-                  partialVisibilityGutter: 0
-                },
-                tablet: {
-                  breakpoint: {
-                    max: 1024,
-                    min: 464
-                  },
-                  items: 2,
-                  partialVisibilityGutter: 30
-                }
-              }}
-              rewind={false}
-              rewindWithAnimation={false}
-              rtl={false}
-              shouldResetAutoplay
-              showDots={true}
-              sliderClass=""
-              slidesToSlide={1}
-              ssr
-              swipeable
-            >
+            <Carousel itemCountOnMobile={4} itemCountOnDesktop={5}>
               <Image
                 src="/vitamin/logos/renzo.png"
                 height={windowWidth > 768 ? 104 : 48}

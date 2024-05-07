@@ -151,7 +151,7 @@ export function PromptForm({
   }
 
   return (
-    <div className="fixed bottom-0 shadow-lg max-w-[350px] md:max-w-[876px] w-full">
+    <div className="fixed z-10 bottom-0 shadow-lg max-w-[350px] md:max-w-[876px] w-full">
       <div className="w-full rounded-lg p-2 md:p-4 bg-[#122830]">
         <form
           ref={formRef}

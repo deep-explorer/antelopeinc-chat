@@ -80,7 +80,7 @@ export function Chat({
   return (
     <>
       <div className="" ref={chatContainerRef}>
-        <div className={cn('pt-4 md:pt-4', className)}>
+        <div className={cn('py-4 md:py-12', className)}>
           {initialScreen}
           {initialScreen || messages.length ? (
             <ChatList messages={messages} isShared={false} session={session} />

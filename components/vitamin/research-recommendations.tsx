@@ -22,6 +22,10 @@ export function ResearchRecommendations() {
           display: <UserMessage>Send Us a Message</UserMessage>
         }
       ])
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      })
       await sleep(500)
       setMessages(currentMessages => [
         ...currentMessages,

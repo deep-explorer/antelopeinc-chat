@@ -24,6 +24,10 @@ export function ContentPerformance() {
           display: <UserMessage>Suggest Research</UserMessage>
         }
       ])
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      })
       await sleep(500)
       setMessages(currentMessages => [
         ...currentMessages,

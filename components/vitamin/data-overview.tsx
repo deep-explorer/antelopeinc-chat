@@ -25,6 +25,10 @@ export function DataOverview() {
           display: <UserMessage>Start Comparison</UserMessage>
         }
       ])
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      })
       await sleep(500)
       setMessages(currentMessages => [
         ...currentMessages,

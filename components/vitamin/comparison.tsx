@@ -31,6 +31,10 @@ export function Comparison() {
           display: <UserMessage>Feedback Analysis</UserMessage>
         }
       ])
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      })
       await sleep(500)
       setMessages(currentMessages => [
         ...currentMessages,

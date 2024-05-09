@@ -26,6 +26,10 @@ export function FeedbackAnalysis() {
           display: <UserMessage>Content Analysis</UserMessage>
         }
       ])
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      })
       await sleep(500)
       setMessages(currentMessages => [
         ...currentMessages,

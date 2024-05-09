@@ -58,7 +58,6 @@ export function EmailCodeInputMessage() {
           <Input
             placeholder="ABCDEF"
             className="w-full overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] sm:rounded-md border-[1px] border-[#1F3C45]"
-            autoFocus
             value={code}
             onChange={e => {
               setCode(e.target.value)

@@ -77,7 +77,6 @@ export function EmailInputMessage() {
             backgroundColor: '#1E333B',
             backgroundClip: 'padding-box'
           }}
-          autoFocus
           value={email}
           onChange={e => {
             setEmail(e.target.value)

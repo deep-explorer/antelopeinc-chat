@@ -7,6 +7,7 @@ import { BotCard, UserMessage } from '../stocks/message'
 import { SendUsMessage } from '../send-us-message'
 import { companyUrl } from '@/lib/constants/config'
 import { useWindowSize } from 'usehooks-ts'
+import { sleep } from 'openai/core'
 
 export function ResearchRecommendations() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -19,7 +20,11 @@ export function ResearchRecommendations() {
         {
           id: nanoid(),
           display: <UserMessage>Send Us a Message</UserMessage>
-        },
+        }
+      ])
+      await sleep(500)
+      setMessages(currentMessages => [
+        ...currentMessages,
         {
           id: nanoid(),
           display: (

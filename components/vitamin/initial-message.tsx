@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@radix-ui/themes'
+import { Button, Skeleton } from '@radix-ui/themes'
 import { BotCard, UserMessage } from '../stocks/message'
 import Image from 'next/image'
 import { SendUsMessage } from '../send-us-message'
@@ -18,6 +18,7 @@ import { companyUrl } from '@/lib/constants/config'
 import { sleep } from '@/lib/utils'
 import { useWindowSize } from 'usehooks-ts'
 import { Carousel } from '../ui/carousel'
+import { CardSkeleton } from '../ui/card-skeleton'
 
 export function InitialMessage() {
   const { width: windowWidth } = useWindowSize()
@@ -29,10 +30,13 @@ export function InitialMessage() {
         {
           id: nanoid(),
           display: <UserMessage>Start the Analysis</UserMessage>
-        },
+        }
+      ])
+      await sleep(500)
+      setMessages(currentMessages => [
+        ...currentMessages,
         {
           id: nanoid(),
-
           display: (
             <BotCard>
               <Loading />
@@ -41,11 +45,20 @@ export function InitialMessage() {
         }
       ])
       await sleep(3000)
-      setMessages([
+      setMessages(currentMessages => [
+        ...currentMessages.slice(0, -1),
         {
           id: nanoid(),
-          display: <UserMessage>Start the Analysis</UserMessage>
-        },
+          display: (
+            <BotCard>
+              <CardSkeleton />
+            </BotCard>
+          )
+        }
+      ])
+      await sleep(2000)
+      setMessages(currentMessages => [
+        ...currentMessages.slice(0, -1),
         {
           id: nanoid(),
           display: (

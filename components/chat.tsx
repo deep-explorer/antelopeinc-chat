@@ -52,6 +52,7 @@ export function Chat({
 
   useEffect(() => {
     if (chatContainerRef.current) {
+      console.log(chatContainerRef.current.scrollHeight)
       // chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
       chatContainerRef.current.scrollTo({
         top: chatContainerRef.current.scrollHeight,
@@ -80,7 +81,7 @@ export function Chat({
   return (
     <>
       <div className="" ref={chatContainerRef}>
-        <div className={cn('pt-4 md:pt-12 mb-28 md:mb-36', className)}>
+        <div className={cn('pt-4 md:pt-12 mb-64 md:mb-96', className)}>
           {initialScreen}
           {initialScreen || messages.length ? (
             <ChatList messages={messages} isShared={false} session={session} />

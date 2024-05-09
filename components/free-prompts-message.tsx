@@ -30,7 +30,7 @@ export function FreePromptsMessage() {
     ])
     await sleep(3000)
     setMessages(currentMessages => [
-      ...currentMessages.slice(0, -1),
+      ...currentMessages.slice(0, currentMessages.length - 1),
       {
         id: nanoid(),
         display: <ScheduleMessage response={response} />

@@ -10,6 +10,8 @@ import { companyUrl } from '@/lib/constants/config'
 import { ContentPerformance } from './content-performance'
 import { BotCard, UserMessage } from '../stocks/message'
 import { useWindowSize } from 'usehooks-ts'
+import { CardSkeleton } from '../ui/card-skeleton'
+import { sleep } from 'openai/core'
 
 export function FeedbackAnalysis() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -22,7 +24,23 @@ export function FeedbackAnalysis() {
         {
           id: nanoid(),
           display: <UserMessage>Content Analysis</UserMessage>
-        },
+        }
+      ])
+      await sleep(500)
+      setMessages(currentMessages => [
+        ...currentMessages,
+        {
+          id: nanoid(),
+          display: (
+            <BotCard>
+              <CardSkeleton />
+            </BotCard>
+          )
+        }
+      ])
+      await sleep(2000)
+      setMessages(currentMessages => [
+        ...currentMessages.slice(0, -1),
         {
           id: nanoid(),
           display: (

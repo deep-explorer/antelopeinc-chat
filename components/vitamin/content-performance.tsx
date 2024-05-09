@@ -8,6 +8,8 @@ import { BotCard, UserMessage } from '../stocks/message'
 import { ResearchRecommendations } from './research-recommendations'
 import { companyUrl } from '@/lib/constants/config'
 import { useWindowSize } from 'usehooks-ts'
+import { CardSkeleton } from '../ui/card-skeleton'
+import { sleep } from 'openai/core'
 
 export function ContentPerformance() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -20,7 +22,23 @@ export function ContentPerformance() {
         {
           id: nanoid(),
           display: <UserMessage>Suggest Research</UserMessage>
-        },
+        }
+      ])
+      await sleep(500)
+      setMessages(currentMessages => [
+        ...currentMessages,
+        {
+          id: nanoid(),
+          display: (
+            <BotCard>
+              <CardSkeleton />
+            </BotCard>
+          )
+        }
+      ])
+      await sleep(2000)
+      setMessages(currentMessages => [
+        ...currentMessages.slice(0, -1),
         {
           id: nanoid(),
           display: (

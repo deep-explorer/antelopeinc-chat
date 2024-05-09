@@ -14,6 +14,8 @@ import { useWindowSize } from 'usehooks-ts'
 import { EmailInputMessage } from './email-input-message'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { EmailCodeInputMessage } from './email-code-input-message'
+import { CardSkeleton } from '../ui/card-skeleton'
+import { sleep } from 'openai/core'
 
 export function Comparison() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -27,7 +29,23 @@ export function Comparison() {
         {
           id: nanoid(),
           display: <UserMessage>Feedback Analysis</UserMessage>
-        },
+        }
+      ])
+      await sleep(500)
+      setMessages(currentMessages => [
+        ...currentMessages,
+        {
+          id: nanoid(),
+          display: (
+            <BotCard>
+              <CardSkeleton />
+            </BotCard>
+          )
+        }
+      ])
+      await sleep(2000)
+      setMessages(currentMessages => [
+        ...currentMessages.slice(0, -1),
         {
           id: nanoid(),
           display: (

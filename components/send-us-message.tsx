@@ -57,10 +57,8 @@ export function SendUsMessage() {
 
   return (
     <div className="flex flex-col gap-1 md:gap-4">
-      <h1 className="text-lg md:text-[32px] font-semibold">
-        Send Us a Message
-      </h1>
-      <p className="text-xs md:text-base">
+      <h1 className="text-lg md:text-xl font-bold">Send Us a Message</h1>
+      <p className="text-sm md:text-base">
         Have a question or want to learn more? Send us a message and our team
         will be in touch soon.
       </p>

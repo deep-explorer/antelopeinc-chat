@@ -26,7 +26,7 @@ export function SocialScoreBar({
 
   return (
     <div>
-      <h3 className="mb-2 text-[10px] md:text-2xl">{title}</h3>
+      <h3 className="mb-2 text-sm md:text-base">{title}</h3>
       <Progress.Root
         className="relative bg-blackA6 rounded-full min-w-[200px] md:min-w-[280px] h-5 md:h-8 shadow-md bg-[#32474F] self-center"
         style={{

@@ -94,7 +94,7 @@ export function ChannelGraphCard() {
             height={windowWidth > 768 ? 48 : 24}
             alt="instagram-logo"
           />
-          <h2 className="text-xs md:text-2xl font-bold self-center">
+          <h2 className="text-lg md:text-xl font-bold self-center">
             Instagram
           </h2>
         </div>
@@ -105,7 +105,7 @@ export function ChannelGraphCard() {
           description="Influencer activity looks at the relative share of sponsored mentions and engagement among competitors"
         />
       </div>
-      <p className="text-[10px] md:text-sm">
+      <p className="text-sm md:text-base">
         Instagram engagement metrics suggest a highly active and loyal
         community, with users resonating strongly with visually-driven
         storytelling and behind-the-scenes content.

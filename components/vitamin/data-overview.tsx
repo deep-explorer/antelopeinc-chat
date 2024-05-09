@@ -47,7 +47,7 @@ export function DataOverview() {
       </p>
       <div className="flex flex-wrap">
         {overviewSpecs.map((overviewSpec, index) => (
-          <div className="p-1 md:p-2 w-full lg:w-[50%]" key={index}>
+          <div className="p-1 md:p-2 w-[50%]" key={index}>
             <OverviewSpecCard {...overviewSpec} />
           </div>
         ))}

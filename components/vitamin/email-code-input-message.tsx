@@ -47,8 +47,8 @@ export function EmailCodeInputMessage() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4 text-sm">
-      <h1 className="text-[28px] font-semibold">Enter Code</h1>
-      <p className="text-lg">
+      <h1 className="text-lg md:text-xl font-bold">Enter Code</h1>
+      <p className="text-sm md:text-base">
         Please check your email for a confirmation code to receive your full
         analysis. If you don&apos;t see it, please check your spam folder.
       </p>

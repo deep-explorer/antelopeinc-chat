@@ -38,7 +38,7 @@ export function SocialRatingCard({
               alt={icon}
             />
           </div>
-          <h2 className="text-[14px] md:text-2xl font-bold self-center">
+          <h2 className="text-sm md:text-lg font-semibold self-center">
             {title}
           </h2>
         </div>
@@ -49,7 +49,7 @@ export function SocialRatingCard({
           description="Influencer activity looks at the relative share of sponsored mentions and engagement among competitors"
         />
       </div>
-      <p className="text-[10px]">{description}</p>
+      <p className="text-sm md:text-base">{description}</p>
       <hr className="border-[#35474F]" />
       <div className="flex flex-col gap-5">
         <SocialScoreBar
@@ -64,7 +64,7 @@ export function SocialRatingCard({
           value={averageScore}
           average={industryAverageScore}
         />
-        <div className="flex gap-2 text-[#788589] text-[10px] md:text-[18px]">
+        <div className="flex gap-2 text-[#788589] text-sm md:text-base">
           <p>Industry Avg</p>
           <p>-----</p>
         </div>

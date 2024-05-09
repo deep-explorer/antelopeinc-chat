@@ -21,10 +21,10 @@ export function Loading() {
         }}
       />
       <div>
-        <h1 className="text-lg md:text-3xl font-semibold mb-4">
+        <h1 className="text-lg md:text-xl font-bold mb-4">
           Starting Your Analysis
         </h1>
-        <p className="text-[10px] md:text-sm">
+        <p className="text-sm md:text-base">
           To begin, we&apos;ll gather data on Renzo&apos;s and its key
           competitors, such as Flintstones and SmartyPants, focusing on customer
           feedback and social content to gather deep competitive intelligence.

@@ -56,10 +56,10 @@ export function Comparison() {
           }}
         />
         <div>
-          <h1 className="text-lg md:text-3xl font-bold mb-4">
+          <h1 className="text-lg md:text-xl font-bold mb-4">
             Renzo&apos;s, Your Report is Ready.
           </h1>
-          <p className="text-[10px] md:text-sm">
+          <p className="text-sm md:text-base">
             Antelope&apos;s platform has evaluated over 2.3 million data points
             accross ten channels and 12 of your closest competitors in the
             children&apos;s vitamin space. Below is a summary of findings:
@@ -136,7 +136,7 @@ export function Comparison() {
       </div>
       {isEmailVerified ? (
         <>
-          <p className="text-[10px] md:text-sm">
+          <p className="text-sm md:text-base">
             Renzo&apos;s strengths and weaknesses highlight strong reviews yet
             comparatively poor content performance, with brands like Flintstones
             and MaryRuth&apos;s leading. Would you like to drill further into

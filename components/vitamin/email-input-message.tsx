@@ -57,11 +57,11 @@ export function EmailInputMessage() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4 text-sm">
-      <h1 className="text-2xl font-semibold text-center">
+      <h1 className="text-lg md:text-xl font-bold text-center">
         To continue, we&apos;ll need to validate your email address.
       </h1>
 
-      <p className="text-lg">
+      <p className="text-sm md:text-base">
         Please enter your email below, and we&apos;ll send you a validation code
         to continue your analysis.
       </p>

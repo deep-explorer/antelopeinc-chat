@@ -23,7 +23,7 @@ export function RecommendationCard({
 
   return (
     <div
-      className="p-3 md:p-5 flex flex-col justify-between bg-[#1E333B] rounded min-w-[250px] md:min-w-[314px] h-[270px] md:h-[400px] border-2"
+      className="p-3 md:p-5 flex flex-col justify-between bg-[#1E333B] rounded min-w-[250px] md:min-w-[314px] h-[340px] md:h-[400px] border-2"
       style={{
         borderColor:
           flag === 'critical'
@@ -50,10 +50,8 @@ export function RecommendationCard({
             />
           </div>
         </div>
-        <h3 className="text-[14px] md:text-2xl font-semibold">{title}</h3>
-        <p className="text-[10px] md:text-[15px] text-[#999EA3]">
-          {description}
-        </p>
+        <h3 className="text-base md:text-lg font-semibold">{title}</h3>
+        <p className="text-sm md:text-base text-[#999EA3]">{description}</p>
       </div>
 
       <Button

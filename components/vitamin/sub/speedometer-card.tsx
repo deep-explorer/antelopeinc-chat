@@ -28,13 +28,15 @@ export function SpeedometerCard({
     <div className="p-3 md:p-5 flex flex-col gap-3 md:gap-6 bg-[#1E333B] rounded min-w-[180px] md:min-w-[314px]">
       <div className="flex justify-between">
         <div className="flex gap-3">
-          <Image
-            src={`/image-icons/${icon}.png`}
-            height={windowWidth > 768 ? 48 : 30}
-            width={windowWidth > 768 ? 48 : 30}
-            alt={icon}
-          />
-          <h2 className="text-[14px] md:text-2xl font-bold self-center">
+          <div>
+            <Image
+              src={`/image-icons/${icon}.png`}
+              height={windowWidth > 768 ? 48 : 30}
+              width={windowWidth > 768 ? 48 : 30}
+              alt={icon}
+            />
+          </div>
+          <h2 className="text-sm md:text-lg font-semibold self-center">
             {title}
           </h2>
         </div>
@@ -59,7 +61,7 @@ export function SpeedometerCard({
           color: theme === 'dark' ? 'white' : 'black'
         }))}
       />
-      <p className="text-[10px] md:text-sm">{description}</p>
+      <p className="text-sm md:text-base">{description}</p>
     </div>
   )
 }

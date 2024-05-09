@@ -33,7 +33,7 @@ export function ProsConsScore({
   return (
     <div className="flex flex-wrap">
       <div className="flex w-full md:w-[170px] justify-between items-center mb-2 md:mr-5">
-        <p className="text-xs md:text-base">{title}</p>
+        <p className="text-xs md:text-base font-semibold">{title}</p>
         <PrimaryTooltip
           trigger={
             <InfoCircledIcon className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
@@ -43,7 +43,7 @@ export function ProsConsScore({
       </div>
 
       <div>
-        <div className="flex gap-1 md:gap-3 w-[420px]">
+        <div className="flex gap-1 md:gap-3">
           <Image
             src="/vitamin/logos/maryruthorganics.png"
             height={windowWidth > 768 ? 48 : 24}

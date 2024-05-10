@@ -13,6 +13,7 @@ interface SocialRatingCardProps {
   industryAverageTotalRating: number
   averageScore: number
   industryAverageScore: number
+  className?: string
 }
 
 export function SocialRatingCard({
@@ -22,12 +23,15 @@ export function SocialRatingCard({
   totalRating,
   industryAverageTotalRating,
   averageScore,
-  industryAverageScore
+  industryAverageScore,
+  className
 }: SocialRatingCardProps) {
   const { width: windowWidth } = useWindowSize()
 
   return (
-    <div className="p-3 md:p-5 flex flex-col gap-3 md:gap-6 bg-[#1E333B] rounded mind-w-[236px] md:min-w-[454px]">
+    <div
+      className={`p-3 md:p-5 flex flex-col gap-3 md:gap-6 bg-[#1E333B] rounded w-[236px] md:w-[454px] ${className}`}
+    >
       <div className="flex justify-between">
         <div className="flex gap-3">
           <div>

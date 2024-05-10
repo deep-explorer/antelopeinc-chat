@@ -151,3 +151,33 @@
   width: 100%;
   z-index: 9999;
 }
+
+@media screen and (max-width: 768px) {
+  .slick-dots {
+    bottom: -12px !important;
+  }
+  button.slick-arrow {
+    position: absolute;
+    top: calc(100% + 2px) !important;
+  }
+}
+.magic-dots.slick-dots li.slick-active button:before {
+  color: #e76f51 !important;
+}
+
+button.slick-arrow {
+  position: absolute;
+  top: calc(100% + 14px);
+}
+
+button.slick-arrow.slick-next {
+  right: calc(50% - 100px);
+}
+
+button.slick-arrow.slick-prev {
+  left: calc(50% - 100px);
+}
+
+.slick-dots li {
+  margin: 0 !important;
+}

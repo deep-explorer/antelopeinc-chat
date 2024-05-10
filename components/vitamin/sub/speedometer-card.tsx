@@ -13,19 +13,23 @@ interface SpeedometerCardProps {
   title: string
   value: number
   description: string
+  className?: string
 }
 
 export function SpeedometerCard({
   icon,
   title,
   value,
-  description
+  description,
+  className
 }: SpeedometerCardProps) {
   const { width: windowWidth } = useWindowSize()
   const { theme } = useTheme()
 
   return (
-    <div className="p-3 md:p-5 flex flex-col gap-3 md:gap-6 bg-[#1E333B] rounded min-w-[180px] md:min-w-[314px]">
+    <div
+      className={`p-3 md:p-5 flex flex-col gap-3 md:gap-6 bg-[#1E333B] rounded w-[180px] md:w-[314px] ${className}`}
+    >
       <div className="flex justify-between">
         <div className="flex gap-3">
           <div>

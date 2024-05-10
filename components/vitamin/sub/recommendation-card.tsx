@@ -11,19 +11,21 @@ interface RecommendationCardProps {
   icon: string
   title: string
   description: string
+  className?: string
 }
 
 export function RecommendationCard({
   flag,
   icon,
   title,
-  description
+  description,
+  className
 }: RecommendationCardProps) {
   const { width: windowWidth } = useWindowSize()
 
   return (
     <div
-      className="p-3 md:p-5 flex flex-col justify-between bg-[#1E333B] rounded min-w-[250px] md:min-w-[314px] h-[340px] md:h-[400px] border-2"
+      className={`p-3 md:p-5 flex flex-col justify-between bg-[#1E333B] rounded w-[250px] md:w-[314px] h-[340px] md:h-[400px] border-2 ${className}`}
       style={{
         borderColor:
           flag === 'critical'

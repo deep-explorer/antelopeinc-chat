@@ -8,6 +8,7 @@ import { SendUsMessage } from '../send-us-message'
 import { companyUrl } from '@/lib/constants/config'
 import { useWindowSize } from 'usehooks-ts'
 import { sleep } from 'openai/core'
+import { Carousel } from '../ui/carousel'
 
 export function ResearchRecommendations() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -68,11 +69,16 @@ export function ResearchRecommendations() {
           this data, providing actionable insights to help Renzo&apos;s build
           upon ite strengths and address its closest weaknesses:
         </p>
-        <div className="flex gap-3 w-full overflow-x-auto pb-2">
+        <Carousel>
           {criticalCards.map((card, index) => (
-            <RecommendationCard flag="critical" {...card} key={index} />
+            <RecommendationCard
+              flag="critical"
+              {...card}
+              key={index}
+              className="mr-3"
+            />
           ))}
-        </div>
+        </Carousel>
       </div>
       <div className="flex flex-col gap-2">
         <h2 className="text-sm md:text-base font-semibold text-yellow-500">
@@ -83,11 +89,16 @@ export function ResearchRecommendations() {
           this data, providing actionable insights to help Renzo&apos;s build
           upon ite strengths and address its closest weaknesses:
         </p>
-        <div className="flex gap-3 w-full overflow-x-auto pb-2">
+        <Carousel>
           {suggestedCards.map((card, index) => (
-            <RecommendationCard flag="suggested" {...card} key={index} />
+            <RecommendationCard
+              flag="suggested"
+              {...card}
+              key={index}
+              className="mr-3"
+            />
           ))}
-        </div>
+        </Carousel>
       </div>
       <div className="flex flex-col gap-2">
         <h2 className="text-sm md:text-base font-semibold text-green-500">
@@ -98,11 +109,16 @@ export function ResearchRecommendations() {
           this data, providing actionable insights to help Renzo&apos;s build
           upon ite strengths and address its closest weaknesses:
         </p>
-        <div className="flex gap-3 w-full overflow-x-auto pb-2">
+        <Carousel>
           {suggestedCards.map((card, index) => (
-            <RecommendationCard flag="consider" {...card} key={index} />
+            <RecommendationCard
+              flag="consider"
+              {...card}
+              key={index}
+              className="mr-3"
+            />
           ))}
-        </div>
+        </Carousel>
       </div>
       <p className="text-sm md:text-base">
         As a next step, we recommend exploring some of the solutions the

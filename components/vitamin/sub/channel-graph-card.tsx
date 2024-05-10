@@ -81,11 +81,16 @@ const CustomTooltip: React.FC<any> = ({ active, payload }) => {
   return null
 }
 
-export function ChannelGraphCard() {
+interface ChannelGraphCardProps {
+  className?: string
+}
+export function ChannelGraphCard({ className }: ChannelGraphCardProps) {
   const { width: windowWidth } = useWindowSize()
 
   return (
-    <div className="min-w-[280px] md:min-w-[605px] rounded-md bg-[#1E333B] flex flex-col gap-3 md:gap-6 p-4 md:p-8">
+    <div
+      className={`w-[260px] md:w-[605px] rounded-md bg-[#1E333B] flex flex-col gap-3 md:gap-6 p-4 md:p-8 ${className}`}
+    >
       <div className="flex justify-between">
         <div className="flex gap-2">
           <Image

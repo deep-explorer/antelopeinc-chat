@@ -12,6 +12,7 @@ import { BotCard, UserMessage } from '../stocks/message'
 import { useWindowSize } from 'usehooks-ts'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { sleep } from 'openai/core'
+import { Carousel } from '../ui/carousel'
 
 export function FeedbackAnalysis() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -67,27 +68,30 @@ export function FeedbackAnalysis() {
         ingredients, but concerns over taste and texture could be impacting
         repeat purchases.
       </p>
-      <div className="flex gap-3 w-full overflow-x-auto">
+      <Carousel>
         <SpeedometerCard
           icon="total-review"
           title="Total Review"
           value={550}
           description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
+          className="mr-3"
         />
         <SpeedometerCard
           icon="average-score"
           title="Average Score"
           value={740}
           description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
+          className="mr-3"
         />
         <SpeedometerCard
           icon="average-score"
           title="Average Score"
           value={740}
           description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
+          className="mr-3"
         />
-      </div>
-      <div className="flex gap-3 w-full overflow-x-auto">
+      </Carousel>
+      <Carousel>
         <SocialRatingCard
           icon="glassdoor"
           title="Glassdoor"
@@ -96,6 +100,7 @@ export function FeedbackAnalysis() {
           industryAverageTotalRating={32}
           averageScore={46}
           industryAverageScore={65}
+          className="mr-3"
         />
         <SocialRatingCard
           icon="google"
@@ -105,6 +110,7 @@ export function FeedbackAnalysis() {
           industryAverageTotalRating={54}
           averageScore={45}
           industryAverageScore={68}
+          className="mr-3"
         />
         <SocialRatingCard
           icon="google"
@@ -114,8 +120,9 @@ export function FeedbackAnalysis() {
           industryAverageTotalRating={54}
           averageScore={45}
           industryAverageScore={68}
+          className="mr-3"
         />
-      </div>
+      </Carousel>
       <p className="text-sm md:text-base">
         Deeper drilldown into feedback suggests that overall sentiment is
         overwhelmingly positive, with reviewers consistently praising innovative

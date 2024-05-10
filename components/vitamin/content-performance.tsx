@@ -10,6 +10,7 @@ import { companyUrl } from '@/lib/constants/config'
 import { useWindowSize } from 'usehooks-ts'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { sleep } from 'openai/core'
+import { Carousel } from '../ui/carousel'
 
 export function ContentPerformance() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -65,26 +66,29 @@ export function ContentPerformance() {
         articles, but concerns over content relevance and depth could be
         impacting user retention and loyalty.
       </p>
-      <div className="flex gap-3 w-full overflow-x-auto">
+      <Carousel>
         <SpeedometerCard
           icon="engagement"
           title="Engagement"
           value={920}
           description="The content portfolio has achieved a high level of thematic cohesion, indicating a strong brand voice and consistent messaging."
+          className="mr-3"
         />
         <SpeedometerCard
           icon="volume"
           title="Volume"
           value={320}
           description="The content repository has reached an unprecedented scale, with a substantial volume of assets available to support user needs"
+          className="mr-3"
         />
         <SpeedometerCard
           icon="volume"
           title="Volume"
           value={320}
           description="The content repository has reached an unprecedented scale, with a substantial volume of assets available to support user needs"
+          className="mr-3"
         />
-      </div>
+      </Carousel>
 
       <div className="flex flex-col gap-2 md:gap-4">
         <h2 className="text-lg md:text-xl font-bold">Content by Channel</h2>
@@ -93,11 +97,10 @@ export function ContentPerformance() {
           the most positivity, while online retail feedback indicates areas for
           improvement.
         </p>
-
-        <div className="flex gap-3 w-full overflow-x-auto">
-          <ChannelGraphCard />
-          <ChannelGraphCard />
-        </div>
+        <Carousel>
+          <ChannelGraphCard className="mr-2" />
+          <ChannelGraphCard className="mr-2" />
+        </Carousel>
       </div>
 
       <p className="text-sm md:text-base">

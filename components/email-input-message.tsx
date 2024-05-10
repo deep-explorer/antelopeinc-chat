@@ -33,17 +33,14 @@ export function EmailInputMessage() {
         setValidatingEmail(true)
         try {
           const response = await fetcher(
-            `${antelopeEndpoint}/chatbot/validate?email=${email}`
+            `${antelopeEndpoint}/chatbot/validate?email=${email}&origin=${location.href}`
           )
           setValidatingEmail(false)
 
           //  NOTE: in development, we don't care the response
           if (mode === 'production' && !response.success) {
             //  TODO: backend should return a better message
-            setError(
-              response.msg ??
-                "We're sorry, but only one email address per chatbot is allowed at this time."
-            )
+            setError(response.msg ?? 'missing message')
             return
           }
 

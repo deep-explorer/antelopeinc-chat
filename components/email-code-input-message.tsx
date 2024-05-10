@@ -26,16 +26,14 @@ export function EmailCodeInputMessage() {
     setValidatingEmail(true)
     try {
       const response = await fetcher(
-        `${antelopeEndpoint}/chatbot/validate?email=${userEmail}&code=${code}`
+        `${antelopeEndpoint}/chatbot/validate?email=${userEmail}&code=${code}&origin=${location.href}`
       )
       setValidatingEmail(false)
 
       //  NOTE: in development, we don't care the response
       if (mode === 'production' && !response.success) {
         //  TODO: backend should return a better message
-        setError(
-          response.msg ?? 'Please retry. The code you entered does not match.'
-        )
+        setError(response.msg ?? 'missing message')
         return
       }
 

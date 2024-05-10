@@ -76,12 +76,13 @@ export function DataOverview() {
       </div>
       <div className="flex flex-wrap">
         {availableButtons.map((availableButton, index) => (
-          <div className="p-1 w-full md:w-[50%]" key={index}>
+          <div className="p-1 w-[50%]" key={index}>
             <Button
               onClick={() => onClick(index)}
               size={windowWidth > 768 ? '3' : '1'}
               style={{
-                width: '100%'
+                width: '100%',
+                letterSpacing: -0.5
               }}
             >
               {availableButton.caption}
@@ -143,7 +144,7 @@ const availableButtons = [
     caption: 'Start Comparison'
   },
   {
-    caption: 'Tell Me More About Antelope'
+    caption: 'Tell Me About Antelope'
   },
   {
     caption: 'Book a Demo'

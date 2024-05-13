@@ -11,10 +11,12 @@ import { useWindowSize } from 'usehooks-ts'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { sleep } from 'openai/core'
 import { Carousel } from '../ui/carousel'
+import { useState } from 'react'
 
 export function ContentPerformance() {
   const [_, setMessages] = useUIState<typeof AI>()
   const { width: windowWidth } = useWindowSize()
+  const [carouselIndex, setCarouselIndex] = useState(0)
 
   const onClick = async (index: number) => {
     if (index === 0) {
@@ -66,13 +68,14 @@ export function ContentPerformance() {
         articles, but concerns over content relevance and depth could be
         impacting user retention and loyalty.
       </p>
-      <Carousel>
+      <Carousel onChange={i => setCarouselIndex(i)}>
         <CircularGaugeCard
           icon="engagement"
           title="Engagement"
           value={920}
           description="The content portfolio has achieved a high level of thematic cohesion, indicating a strong brand voice and consistent messaging."
           className="mr-3"
+          isInView={carouselIndex === 0}
         />
         <CircularGaugeCard
           icon="volume"
@@ -80,6 +83,7 @@ export function ContentPerformance() {
           value={320}
           description="The content repository has reached an unprecedented scale, with a substantial volume of assets available to support user needs"
           className="mr-3"
+          isInView={carouselIndex === 1}
         />
         <CircularGaugeCard
           icon="volume"
@@ -87,6 +91,7 @@ export function ContentPerformance() {
           value={320}
           description="The content repository has reached an unprecedented scale, with a substantial volume of assets available to support user needs"
           className="mr-3"
+          isInView={carouselIndex === 2}
         />
       </Carousel>
 

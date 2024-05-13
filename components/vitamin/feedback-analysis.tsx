@@ -86,7 +86,10 @@ export function FeedbackAnalysis() {
           value={550}
           description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
           className="mr-3"
-          isInView={gaugeCarouselIndex === 0 || gaugeCarouselIndex === 1}
+          isInView={
+            gaugeCarouselIndex === 1 ||
+            (windowWidth > 768 && gaugeCarouselIndex === 0)
+          }
         />
         <CircularGaugeCard
           icon="average-score"
@@ -94,7 +97,10 @@ export function FeedbackAnalysis() {
           value={660}
           description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
           className="mr-3"
-          isInView={gaugeCarouselIndex === 1 || gaugeCarouselIndex === 2}
+          isInView={
+            gaugeCarouselIndex === 2 ||
+            (windowWidth > 768 && gaugeCarouselIndex === 1)
+          }
         />
       </Carousel>
       <Carousel onChange={i => setSocialRatingCarouselIndex(i)}>

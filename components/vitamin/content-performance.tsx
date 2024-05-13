@@ -1,6 +1,6 @@
 import { Button } from '@radix-ui/themes'
 import { ChannelGraphCard } from './sub/channel-graph-card'
-import { SpeedometerCard } from './sub/speedometer-card'
+import { CircularGaugeCard } from './sub/circular-gauge-card'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
@@ -67,21 +67,21 @@ export function ContentPerformance() {
         impacting user retention and loyalty.
       </p>
       <Carousel>
-        <SpeedometerCard
+        <CircularGaugeCard
           icon="engagement"
           title="Engagement"
           value={920}
           description="The content portfolio has achieved a high level of thematic cohesion, indicating a strong brand voice and consistent messaging."
           className="mr-3"
         />
-        <SpeedometerCard
+        <CircularGaugeCard
           icon="volume"
           title="Volume"
           value={320}
           description="The content repository has reached an unprecedented scale, with a substantial volume of assets available to support user needs"
           className="mr-3"
         />
-        <SpeedometerCard
+        <CircularGaugeCard
           icon="volume"
           title="Volume"
           value={320}

@@ -2,7 +2,7 @@
 
 import { Button } from '@radix-ui/themes'
 import { SocialRatingCard } from './sub/social-rating-card'
-import { SpeedometerCard } from './sub/speedometer-card'
+import { CircularGaugeCard } from './sub/circular-gauge-card'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
@@ -69,21 +69,21 @@ export function FeedbackAnalysis() {
         repeat purchases.
       </p>
       <Carousel>
-        <SpeedometerCard
+        <CircularGaugeCard
           icon="total-review"
           title="Total Review"
-          value={550}
+          value={700}
           description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
           className="mr-3"
         />
-        <SpeedometerCard
+        <CircularGaugeCard
           icon="average-score"
           title="Average Score"
           value={740}
           description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
           className="mr-3"
         />
-        <SpeedometerCard
+        <CircularGaugeCard
           icon="average-score"
           title="Average Score"
           value={740}

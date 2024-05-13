@@ -351,7 +351,7 @@ export function InitialMessage() {
           </div>
         </div>
       </BotCard>
-      {/* 
+
       <BotCard>
         <Loading />
       </BotCard>
@@ -376,7 +376,7 @@ export function InitialMessage() {
       <BotCard>
         <ThankYou />
       </BotCard>
-       */}
+      {/*  */}
     </>
   )
 }

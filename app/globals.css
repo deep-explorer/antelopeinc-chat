@@ -181,3 +181,30 @@ button.slick-arrow.slick-prev {
 .slick-dots li {
   margin: 0 !important;
 }
+
+.orbit {
+  position: relative;
+  width: 220;
+  height: 220;
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(-32px) translateY(96px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(-32px) translateY(96px) rotate(-360deg);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  @keyframes orbit {
+    from {
+      transform: rotate(0deg) translateX(-18px) translateY(51px) rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg) translateX(-18px) translateY(51px)
+        rotate(-360deg);
+    }
+  }
+}

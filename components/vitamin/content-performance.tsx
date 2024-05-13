@@ -126,6 +126,7 @@ export function ContentPerformance() {
               size={windowWidth > 768 ? '3' : '1'}
               style={{
                 width: '100%',
+                height: windowWidth > 768 ? 61 : 36,
                 letterSpacing: -0.5
               }}
             >

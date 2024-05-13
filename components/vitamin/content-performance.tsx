@@ -83,7 +83,9 @@ export function ContentPerformance() {
           value={320}
           description="The content repository has reached an unprecedented scale, with a substantial volume of assets available to support user needs"
           className="mr-3"
-          isInView={carouselIndex === 1}
+          isInView={
+            carouselIndex === 1 || (windowWidth > 768 && carouselIndex === 0)
+          }
         />
         <CircularGaugeCard
           icon="volume"
@@ -91,7 +93,9 @@ export function ContentPerformance() {
           value={320}
           description="The content repository has reached an unprecedented scale, with a substantial volume of assets available to support user needs"
           className="mr-3"
-          isInView={carouselIndex === 2}
+          isInView={
+            carouselIndex === 2 || (windowWidth > 768 && carouselIndex === 1)
+          }
         />
       </Carousel>
 

@@ -9,6 +9,9 @@ interface FreeChatContext {
   setLinkedinPosts: (posts: string) => void
   setUserEmail: (email: string) => void
   setEmailVerified: (verified: boolean) => void
+
+  isScheduleDialogOpened: boolean //  TODO: move to UI context
+  openScheduleDialog: (flag: boolean) => void //  TODO: move to UI context
 }
 
 const FreeChatContext = React.createContext<FreeChatContext>({
@@ -17,7 +20,10 @@ const FreeChatContext = React.createContext<FreeChatContext>({
   isEmailVerified: false,
   setLinkedinPosts: () => {},
   setUserEmail: () => {},
-  setEmailVerified: () => {}
+  setEmailVerified: () => {},
+
+  isScheduleDialogOpened: false,
+  openScheduleDialog: () => {}
 })
 
 export function useFreeChatContext() {
@@ -36,6 +42,7 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
   const [linkedinPosts, setLinkedinPosts] = React.useState('')
   const [userEmail, setUserEmail] = React.useState('')
   const [isEmailVerified, setEmailVerified] = React.useState(false)
+  const [isScheduleDialogOpened, openScheduleDialog] = React.useState(false)
 
   return (
     <FreeChatContext.Provider
@@ -45,7 +52,9 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
         isEmailVerified,
         setLinkedinPosts,
         setUserEmail,
-        setEmailVerified
+        setEmailVerified,
+        isScheduleDialogOpened,
+        openScheduleDialog
       }}
     >
       {children}

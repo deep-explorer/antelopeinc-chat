@@ -46,7 +46,10 @@ export async function GET(request: Request) {
       )
     }
   } catch (error) {
-    return NextResponse.json({ error: 'User not found' }, { status: 400 })
+    return NextResponse.json(
+      { error: 'I am having trouble finding profiles that will actually work' },
+      { status: 400 }
+    )
   }
 }
 

@@ -109,14 +109,16 @@ export function Header() {
               </Link>
             </div>
             <div className="hidden lg:flex gap-2 items-center">
-              <div>
-                <Image
-                  src={`/vitamin/logos/renzo.png`}
-                  alt="renzologo"
-                  width={42}
-                  height={42}
-                />
-              </div>
+              {title?.pathname === '/vitamin-analyzer' && (
+                <div>
+                  <Image
+                    src={`/vitamin/logos/renzo.png`}
+                    alt="renzologo"
+                    width={42}
+                    height={42}
+                  />
+                </div>
+              )}
               <p className="text-3xl font-semibold">{title?.title}</p>
             </div>
             <div>

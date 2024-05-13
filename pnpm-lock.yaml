@@ -125,6 +125,9 @@ dependencies:
   react-slick:
     specifier: ^0.30.2
     version: 0.30.2(react-dom@18.2.0)(react@18.2.0)
+  react-slot-counter:
+    specifier: ^2.3.1
+    version: 2.3.1(react-dom@18.2.0)(react@18.2.0)
   react-syntax-highlighter:
     specifier: ^15.5.0
     version: 15.5.0(react@18.2.0)
@@ -5294,6 +5297,17 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       resize-observer-polyfill: 1.5.1
+    dev: false
+
+  /react-slot-counter@2.3.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-mc7Xdho0zMOeoR7/hzuwFe+dvjgCm3iLCkS67IvxCVkMh+qVZ7o7ph6LqrHd623pjYbjcGRwhEdq5c+uoKVsvA==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-smooth@4.0.1(react-dom@18.2.0)(react@18.2.0):

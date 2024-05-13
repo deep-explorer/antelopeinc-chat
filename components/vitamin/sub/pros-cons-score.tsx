@@ -68,7 +68,7 @@ export function ProsConsScore({
             value={progress}
           >
             <Progress.Indicator
-              className="relative h-full transition-all duration-500 ease-in-out rounded-full"
+              className="relative h-full transition-all duration-1000 ease-in-out rounded-full"
               style={{
                 width: `${progress}%`,
                 backgroundColor: flag === 'pros' ? '#24AE8D' : '#C62828'
@@ -81,7 +81,7 @@ export function ProsConsScore({
                     height={windowWidth > 768 ? 36 : 20}
                     width={windowWidth > 768 ? 36 : 20}
                     alt="renzo-indicator"
-                    className="absolute top-0 right-0 rounded-full border-2 transition-all duration-500 ease-in-out"
+                    className="absolute top-0 right-0 rounded-full border-2 transition-all duration-1000 ease-in-out"
                     style={{
                       transform: `translate(9px, ${windowWidth > 768 ? -8 : -4}px)`,
                       borderColor: flag === 'pros' ? '#2E7D32' : '#C62828'

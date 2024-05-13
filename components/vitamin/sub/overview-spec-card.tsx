@@ -1,8 +1,7 @@
-import Image from 'next/image'
-import * as Tooltip from '@radix-ui/react-tooltip'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
 import { useWindowSize } from 'usehooks-ts'
 import { PrimaryTooltip } from '@/components/ui/tooltip'
+import SlotCounter from 'react-slot-counter'
 
 interface OverviewSpecCardProps {
   icon: string
@@ -30,7 +29,9 @@ export function OverviewSpecCard({
         />
       </div>
       <div>
-        <h2 className="text-base md:text-2xl font-bold  md:mb-4">{score}</h2>
+        <div className="text-base md:text-2xl font-bold  md:mb-4">
+          <SlotCounter value={score} animateOnVisible={{ triggerOnce: true }} />
+        </div>
         <p className="text-[10px] md:text-base font-medium text-[#788589]">
           {title}
         </p>

@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { useWindowSize } from 'usehooks-ts'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
 import { PrimaryTooltip } from '@/components/ui/tooltip'
+import { useEffect, useState } from 'react'
 
 interface CircularGaugeCardProps {
   icon: string
@@ -21,6 +22,12 @@ export function CircularGaugeCard({
   isInView = true
 }: CircularGaugeCardProps) {
   const { width: windowWidth } = useWindowSize()
+  const [isVisible, setVisible] = useState(false)
+  useEffect(() => {
+    if (isInView) {
+      setVisible(true)
+    }
+  }, [isInView])
 
   return (
     <div
@@ -58,8 +65,8 @@ export function CircularGaugeCard({
           <div
             className="absolute top-[45%] left-[45%] md:top-[43%] md:left-[43%] w-[12px] h-[12px] md:w-[28px] md:h-[28px] rounded-full border-[3px] md:border-[6px] bg-white"
             style={{
-              animation: isInView
-                ? `orbit 1s linear ${value / 1000 / 1.115} forwards`
+              animation: isVisible
+                ? `orbit ${((value + 200) / 1000) * 3}s linear ${value / 1000 / 1.115} forwards`
                 : 'none',
               transform:
                 windowWidth > 768
@@ -73,7 +80,7 @@ export function CircularGaugeCard({
             style={{
               color: levels[Math.ceil((value / 1000) * 5) - 1].color,
               animation: `elementor-heading-title ${value / 1000}s linear 1 forwards`,
-              display: isInView ? 'block' : 'none'
+              display: isVisible ? 'block' : 'none'
             }}
           >
             {levels[Math.ceil((value / 1000) * 5) - 1].caption}

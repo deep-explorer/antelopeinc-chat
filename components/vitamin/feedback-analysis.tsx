@@ -79,14 +79,14 @@ export function FeedbackAnalysis() {
         <CircularGaugeCard
           icon="average-score"
           title="Average Score"
-          value={740}
+          value={550}
           description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
           className="mr-3"
         />
         <CircularGaugeCard
           icon="average-score"
           title="Average Score"
-          value={740}
+          value={130}
           description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
           className="mr-3"
         />

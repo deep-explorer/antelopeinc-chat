@@ -8,21 +8,26 @@ interface SocialScoreBar {
   value: number //  0 - 100
   average: number //  0 - 100
   flag: 'pros' | 'cons'
+  isInview?: boolean
 }
 
 export function SocialScoreBar({
   flag,
   title,
   value,
-  average
+  average,
+  isInview = true
 }: SocialScoreBar) {
   const [progress, setProgress] = React.useState(0)
   const { width: windowWidth } = useWindowSize()
 
   React.useEffect(() => {
-    const timer = setTimeout(() => setProgress(value), 1000)
-    return () => clearTimeout(timer)
-  }, [])
+    if (isInview) {
+      setProgress(value)
+    } else {
+      setProgress(0)
+    }
+  }, [isInview])
 
   return (
     <div>
@@ -31,6 +36,7 @@ export function SocialScoreBar({
         className="relative bg-blackA6 rounded-full min-w-[200px] md:min-w-[280px] h-5 md:h-8 shadow-md bg-[#32474F] self-center"
         style={{
           transform: 'translateZ(0)'
+          // visibility: isInview ? 'visible' : 'hidden'
         }}
         value={progress}
       >
@@ -42,7 +48,7 @@ export function SocialScoreBar({
           }}
         >
           <div className="absolute top-0 md:top-1 left-2 md:left-4 text-white text-[14px]">
-            {progress}%
+            {isInview ? `${progress}%` : ''}
           </div>
           <img
             src="/image-icons/progress-bar-indicator.png"
@@ -54,17 +60,19 @@ export function SocialScoreBar({
               left: `${(average / progress) * 100}%`
             }}
           />
-          <Image
-            src="/vitamin/logos/renzo.png"
-            height={windowWidth > 768 ? 60 : 32}
-            width={windowWidth > 768 ? 60 : 32}
-            alt="renzo-indicator"
-            className="absolute top-0 right-0 rounded-full border-[3px] md:border-[6px] transition-all duration-500 ease-in-out"
-            style={{
-              transform: `translate(18px, ${windowWidth > 768 ? -12 : -6}px)`,
-              borderColor: flag === 'pros' ? '#18898D' : '#E76F51'
-            }}
-          />
+          {isInview && (
+            <Image
+              src="/vitamin/logos/renzo.png"
+              height={windowWidth > 768 ? 60 : 32}
+              width={windowWidth > 768 ? 60 : 32}
+              alt="renzo-indicator"
+              className="absolute top-0 right-0 rounded-full border-[3px] md:border-[6px] transition-all duration-500 ease-in-out"
+              style={{
+                transform: `translate(18px, ${windowWidth > 768 ? -12 : -6}px)`,
+                borderColor: flag === 'pros' ? '#18898D' : '#E76F51'
+              }}
+            />
+          )}
         </Progress.Indicator>
       </Progress.Root>
     </div>

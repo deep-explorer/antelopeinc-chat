@@ -14,6 +14,7 @@ interface SocialRatingCardProps {
   averageScore: number
   industryAverageScore: number
   className?: string
+  isInView?: boolean
 }
 
 export function SocialRatingCard({
@@ -24,7 +25,8 @@ export function SocialRatingCard({
   industryAverageTotalRating,
   averageScore,
   industryAverageScore,
-  className
+  className,
+  isInView = true
 }: SocialRatingCardProps) {
   const { width: windowWidth } = useWindowSize()
 
@@ -61,12 +63,14 @@ export function SocialRatingCard({
           title="Total Ratings"
           value={totalRating}
           average={industryAverageTotalRating}
+          isInview={isInView}
         />
         <SocialScoreBar
           flag="pros"
           title="Average Score"
           value={averageScore}
           average={industryAverageScore}
+          isInview={isInView}
         />
         <div className="flex gap-2 text-[#788589] text-sm md:text-base">
           <p>Industry Avg</p>

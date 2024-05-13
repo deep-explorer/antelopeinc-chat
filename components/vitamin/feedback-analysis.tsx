@@ -13,10 +13,13 @@ import { useWindowSize } from 'usehooks-ts'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { sleep } from 'openai/core'
 import { Carousel } from '../ui/carousel'
+import { useState } from 'react'
 
 export function FeedbackAnalysis() {
   const [_, setMessages] = useUIState<typeof AI>()
   const { width: windowWidth } = useWindowSize()
+  const [gaugeCarouselIndex, setGaugeCarouselIndex] = useState(0)
+  const [socialRatingCarouselIndex, setSocialRatingCarouselIndex] = useState(0)
 
   const onClick = async (index: number) => {
     if (index === 0) {
@@ -68,13 +71,14 @@ export function FeedbackAnalysis() {
         ingredients, but concerns over taste and texture could be impacting
         repeat purchases.
       </p>
-      <Carousel>
+      <Carousel onChange={i => setGaugeCarouselIndex(i)}>
         <CircularGaugeCard
           icon="total-review"
           title="Total Review"
           value={700}
           description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
           className="mr-3"
+          isInView={gaugeCarouselIndex === 0}
         />
         <CircularGaugeCard
           icon="average-score"
@@ -82,16 +86,18 @@ export function FeedbackAnalysis() {
           value={550}
           description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
           className="mr-3"
+          isInView={gaugeCarouselIndex === 0 || gaugeCarouselIndex === 1}
         />
         <CircularGaugeCard
           icon="average-score"
           title="Average Score"
-          value={130}
+          value={660}
           description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
           className="mr-3"
+          isInView={gaugeCarouselIndex === 1 || gaugeCarouselIndex === 2}
         />
       </Carousel>
-      <Carousel>
+      <Carousel onChange={i => setSocialRatingCarouselIndex(i)}>
         <SocialRatingCard
           icon="glassdoor"
           title="Glassdoor"
@@ -101,6 +107,7 @@ export function FeedbackAnalysis() {
           averageScore={46}
           industryAverageScore={65}
           className="mr-3"
+          isInView={socialRatingCarouselIndex === 0}
         />
         <SocialRatingCard
           icon="google"
@@ -111,6 +118,7 @@ export function FeedbackAnalysis() {
           averageScore={45}
           industryAverageScore={68}
           className="mr-3"
+          isInView={socialRatingCarouselIndex === 1}
         />
         <SocialRatingCard
           icon="google"
@@ -121,6 +129,7 @@ export function FeedbackAnalysis() {
           averageScore={45}
           industryAverageScore={68}
           className="mr-3"
+          isInView={socialRatingCarouselIndex === 2}
         />
       </Carousel>
       <p className="text-sm md:text-base">

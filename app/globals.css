@@ -208,3 +208,35 @@ button.slick-arrow.slick-prev {
     }
   }
 }
+
+@keyframes elementor-heading-title {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-40px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  @keyframes elementor-heading-title {
+    0% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(-20px);
+    }
+  }
+}

@@ -5,6 +5,7 @@ import React from 'react'
 import Image from 'next/image'
 import { useWindowSize } from 'usehooks-ts'
 import { PrimaryTooltip } from '@/components/ui/tooltip'
+import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 
 export interface Score {
   title: string
@@ -24,11 +25,13 @@ export function ProsConsScore({
 }: ProsConsScoreProps) {
   const { width: windowWidth } = useWindowSize()
   const [progress, setProgress] = React.useState(0)
+  const { isEmailVerified } = useFreeChatContext()
 
   React.useEffect(() => {
-    const timer = setTimeout(() => setProgress(value), 1000)
-    return () => clearTimeout(timer)
-  }, [])
+    if (isEmailVerified) {
+      setProgress(value)
+    }
+  }, [isEmailVerified])
 
   return (
     <div className="flex flex-wrap">
@@ -72,17 +75,19 @@ export function ProsConsScore({
               }}
             >
               <div>
-                <Image
-                  src="/vitamin/logos/renzo.png"
-                  height={windowWidth > 768 ? 36 : 20}
-                  width={windowWidth > 768 ? 36 : 20}
-                  alt="renzo-indicator"
-                  className="absolute top-0 right-0 rounded-full border-2 transition-all duration-500 ease-in-out"
-                  style={{
-                    transform: `translate(9px, ${windowWidth > 768 ? -8 : -4}px)`,
-                    borderColor: flag === 'pros' ? '#2E7D32' : '#C62828'
-                  }}
-                />
+                {isEmailVerified && (
+                  <Image
+                    src="/vitamin/logos/renzo.png"
+                    height={windowWidth > 768 ? 36 : 20}
+                    width={windowWidth > 768 ? 36 : 20}
+                    alt="renzo-indicator"
+                    className="absolute top-0 right-0 rounded-full border-2 transition-all duration-500 ease-in-out"
+                    style={{
+                      transform: `translate(9px, ${windowWidth > 768 ? -8 : -4}px)`,
+                      borderColor: flag === 'pros' ? '#2E7D32' : '#C62828'
+                    }}
+                  />
+                )}
               </div>
             </Progress.Indicator>
           </Progress.Root>

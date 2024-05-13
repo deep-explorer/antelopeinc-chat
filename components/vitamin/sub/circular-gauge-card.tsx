@@ -1,11 +1,6 @@
 import Image from 'next/image'
-import ReactSpeedometer, {
-  CustomSegmentLabelPosition
-} from 'react-d3-speedometer'
 import { useWindowSize } from 'usehooks-ts'
-import { useTheme } from 'next-themes'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
-import React from 'react'
 import { PrimaryTooltip } from '@/components/ui/tooltip'
 
 interface CircularGaugeCardProps {
@@ -14,6 +9,7 @@ interface CircularGaugeCardProps {
   value: number
   description: string
   className?: string
+  isInView?: boolean
 }
 
 export function CircularGaugeCard({
@@ -21,10 +17,10 @@ export function CircularGaugeCard({
   title,
   value,
   description,
-  className
+  className,
+  isInView = true
 }: CircularGaugeCardProps) {
   const { width: windowWidth } = useWindowSize()
-  const { theme } = useTheme()
 
   return (
     <div
@@ -62,34 +58,28 @@ export function CircularGaugeCard({
           <div
             className="absolute top-[45%] left-[45%] md:top-[43%] md:left-[43%] w-[12px] h-[12px] md:w-[28px] md:h-[28px] rounded-full border-[3px] md:border-[6px] bg-white"
             style={{
-              animation: `orbit 2s linear ${value / 1000 / 1.115} forwards`,
+              animation: isInView
+                ? `orbit 1s linear ${value / 1000 / 1.115} forwards`
+                : 'none',
+              transform:
+                windowWidth > 768
+                  ? 'translate(-32px, 96px)'
+                  : 'translate(-18px, 51px)',
               borderColor: levels[Math.ceil((value / 1000) * 5) - 1].color
             }}
           ></div>
           <p
-            className="absolute text-center w-full top-[48px] md:top-[92px] text-base md:text-3xl font-bold"
+            className="absolute text-center w-full top-[72px] md:top-[140px] text-base md:text-3xl font-bold elementor-heading-title"
             style={{
-              color: levels[Math.ceil((value / 1000) * 5) - 1].color
+              color: levels[Math.ceil((value / 1000) * 5) - 1].color,
+              animation: `elementor-heading-title ${value / 1000}s linear 1 forwards`,
+              display: isInView ? 'block' : 'none'
             }}
           >
             {levels[Math.ceil((value / 1000) * 5) - 1].caption}
           </p>
         </div>
       </div>
-      {/* <ReactSpeedometer
-        value={value}
-        currentValueText={levels[Math.ceil((value / 1000) * 5) - 1]}
-        textColor={theme === 'dark' ? 'white' : 'black'}
-        width={windowWidth > 768 ? 250 : 150}
-        height={windowWidth > 768 ? 150 : 100}
-        segmentColors={['#EA3F3F', '#EA9A40', '#EABA3F', '#90B564', '#24AE8D']}
-        customSegmentLabels={levels.map(level => ({
-          text: level,
-          position: CustomSegmentLabelPosition.Outside,
-          fontSize: windowWidth > 768 ? '12px' : '10px',
-          color: theme === 'dark' ? 'white' : 'black'
-        }))}
-      /> */}
       <p className="text-sm md:text-base">{description}</p>
     </div>
   )

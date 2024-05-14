@@ -33,7 +33,7 @@ export function EmailInputMessage() {
         setValidatingEmail(true)
         try {
           const response = await fetcher(
-            `${antelopeEndpoint}/chatbot/validate?email=${email}&origin=${location.href}`
+            `${antelopeEndpoint}/chatbots/validate?email=${email}&origin=${location.href}`
           )
           setValidatingEmail(false)
 

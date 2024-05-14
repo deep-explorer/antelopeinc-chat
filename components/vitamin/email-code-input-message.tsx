@@ -23,7 +23,7 @@ export function EmailCodeInputMessage() {
     setValidatingEmail(true)
     try {
       const response = await fetcher(
-        `${antelopeEndpoint}/chatbot/validate?email=${userEmail}&code=${code}&origin=${location.href}`
+        `${antelopeEndpoint}/chatbots/validate?email=${userEmail}&code=${code}&origin=${location.href}`
       )
       setValidatingEmail(false)
 

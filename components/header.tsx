@@ -68,6 +68,12 @@ const titles = [
     title: "Children's Vitamins Analysis",
     description:
       "Analysis of children's vitamins in the market to assess their benefits and shortcomings."
+  },
+  {
+    pathname: '/content-intelligence',
+    title: 'Content Intelligence',
+    description:
+      'Analyze and tag social content with enriched data for competitive intelligence.'
   }
 ]
 

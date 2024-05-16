@@ -83,7 +83,7 @@ export function BotCard({ children }: { children: React.ReactNode }) {
           height={windowWidth >= 768 ? 48 : 24}
         />
       </div>
-      <div className=" bg-white dark:bg-[#122830] px-3 md:px-6 py-2 md:py-4 rounded-tl-none md:rounded-tl-none rounded-sm md:rounded-lg overflow-x-auto">
+      <div className=" bg-white dark:bg-[#122830] px-3 md:px-6 py-2 md:py-4 rounded-tl-none md:rounded-tl-none rounded-sm md:rounded-lg overflow-x-auto w-full">
         {children}
       </div>
     </div>
@@ -179,7 +179,7 @@ export function BotMessage({
           return (
             <div
               className={cn(
-                'group relative flex gap-2 md:gap-3 max-w-[756px] w-full my-4',
+                'group relative flex gap-2 md:gap-3 w-full my-4',
                 className
               )}
               key={index}

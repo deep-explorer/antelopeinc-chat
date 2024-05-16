@@ -63,7 +63,7 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
     if (typeof window === 'undefined') {
       return
     }
-    const fileExtension = programmingLanguages[language] || '.file'
+    const fileExtension = programmingLanguages[language] || '.txt'
     const suggestedFileName = `file-${generateRandomString(
       3,
       true
@@ -94,7 +94,7 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
 
   return (
     <div className="relative w-full font-sans codeblock bg-zinc-950">
-      <div className="flex items-center justify-between w-full px-6 py-2 pr-4 bg-zinc-800 text-zinc-100">
+      <div className="flex items-center justify-between w-full px-6 py-1 pr-4 bg-zinc-800 text-zinc-100">
         <span className="text-xs lowercase">{language}</span>
         <div className="flex items-center space-x-1">
           <Button
@@ -121,7 +121,7 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
         language={language}
         style={coldarkDark}
         PreTag="div"
-        showLineNumbers
+        // showLineNumbers
         customStyle={{
           margin: 0,
           width: '100%',

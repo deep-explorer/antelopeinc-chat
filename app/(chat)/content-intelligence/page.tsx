@@ -3,10 +3,10 @@ import { AI } from '@/lib/chat/actions'
 import { auth } from '@/auth'
 import { Session } from '@/lib/types'
 import { getMissingKeys } from '@/app/actions'
-import { InitialMessage } from '@/components/vitamin/initial-message'
+import { InitialMessage } from '@/components/content-intelligence/initial-message'
 
 export const metadata = {
-  title: "Antelope Chatbot: Children's Vitamins Analyzer"
+  title: 'Antelope Chatbot: Content Intelligence'
 }
 
 export default async function IndexPage() {
@@ -14,10 +14,10 @@ export default async function IndexPage() {
   const missingKeys = await getMissingKeys()
 
   return (
-    <AI initialAIState={{ chatId: 'vitamin-analyzer', messages: [] }}>
+    <AI initialAIState={{ chatId: 'content-intelligence', messages: [] }}>
       <Chat
         initialScreen={<InitialMessage />}
-        id={'vitamin-analyzer'}
+        id={'content-intelligence'}
         session={session}
         missingKeys={missingKeys}
       />

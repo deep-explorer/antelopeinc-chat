@@ -65,6 +65,33 @@ export function LogoCarousel() {
       </div>
       <div>
         <Image
+          src="/vitamin/logos/maryruthorganics.png"
+          height={windowWidth > 768 ? 104 : 48}
+          width={windowWidth > 768 ? 104 : 48}
+          className="rounded-full mr-2 md:mr-4"
+          alt="flintstones-logo"
+        />
+      </div>
+      <div>
+        <Image
+          src="/vitamin/logos/smartypantsvitamins.png"
+          height={windowWidth > 768 ? 104 : 48}
+          width={windowWidth > 768 ? 104 : 48}
+          className="rounded-full mr-2 md:mr-4"
+          alt="flintstones-logo"
+        />
+      </div>
+      <div>
+        <Image
+          src="/vitamin/logos/naturesway.png"
+          height={windowWidth > 768 ? 104 : 48}
+          width={windowWidth > 768 ? 104 : 48}
+          className="rounded-full mr-2 md:mr-4"
+          alt="flintstones-logo"
+        />
+      </div>
+      <div>
+        <Image
           src="/vitamin/logos/flintstonesvitamins.png"
           height={windowWidth > 768 ? 104 : 48}
           width={windowWidth > 768 ? 104 : 48}
@@ -110,15 +137,6 @@ export function LogoCarousel() {
       </div>
       <div>
         <Image
-          src="/vitamin/logos/flintstonesvitamins.png"
-          height={windowWidth > 768 ? 104 : 48}
-          width={windowWidth > 768 ? 104 : 48}
-          className="rounded-full mr-2 md:mr-4"
-          alt="flintstones-logo"
-        />
-      </div>
-      <div>
-        <Image
           src="/vitamin/logos/maryruthorganics.png"
           height={windowWidth > 768 ? 104 : 48}
           width={windowWidth > 768 ? 104 : 48}
@@ -138,60 +156,6 @@ export function LogoCarousel() {
       <div>
         <Image
           src="/vitamin/logos/naturesway.png"
-          height={windowWidth > 768 ? 104 : 48}
-          width={windowWidth > 768 ? 104 : 48}
-          className="rounded-full mr-2 md:mr-4"
-          alt="flintstones-logo"
-        />
-      </div>
-      <div>
-        <Image
-          src="/vitamin/logos/flintstonesvitamins.png"
-          height={windowWidth > 768 ? 104 : 48}
-          width={windowWidth > 768 ? 104 : 48}
-          className="rounded-full mr-2 md:mr-4"
-          alt="flintstones-logo"
-        />
-      </div>
-      <div>
-        <Image
-          src="/vitamin/logos/flintstonesvitamins.png"
-          height={windowWidth > 768 ? 104 : 48}
-          width={windowWidth > 768 ? 104 : 48}
-          className="rounded-full mr-2 md:mr-4"
-          alt="flintstones-logo"
-        />
-      </div>
-      <div>
-        <Image
-          src="/vitamin/logos/maryruthorganics.png"
-          height={windowWidth > 768 ? 104 : 48}
-          width={windowWidth > 768 ? 104 : 48}
-          className="rounded-full mr-2 md:mr-4"
-          alt="flintstones-logo"
-        />
-      </div>
-      <div>
-        <Image
-          src="/vitamin/logos/smartypantsvitamins.png"
-          height={windowWidth > 768 ? 104 : 48}
-          width={windowWidth > 768 ? 104 : 48}
-          className="rounded-full mr-2 md:mr-4"
-          alt="flintstones-logo"
-        />
-      </div>
-      <div>
-        <Image
-          src="/vitamin/logos/naturesway.png"
-          height={windowWidth > 768 ? 104 : 48}
-          width={windowWidth > 768 ? 104 : 48}
-          className="rounded-full mr-2 md:mr-4"
-          alt="flintstones-logo"
-        />
-      </div>
-      <div>
-        <Image
-          src="/vitamin/logos/flintstonesvitamins.png"
           height={windowWidth > 768 ? 104 : 48}
           width={windowWidth > 768 ? 104 : 48}
           className="rounded-full mr-2 md:mr-4"

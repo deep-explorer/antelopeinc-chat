@@ -7,6 +7,7 @@ import * as Form from '@radix-ui/react-form'
 import { TextArea, Button } from '@radix-ui/themes'
 import { useWindowSize } from 'usehooks-ts'
 import Image from 'next/image'
+import { nanoid } from 'nanoid'
 
 export function InitialMessage() {
   const { width: windowWidth } = useWindowSize()
@@ -18,8 +19,24 @@ export function InitialMessage() {
 
     const data = Object.fromEntries(new FormData(e.target as HTMLFormElement))
 
-    const responseMessage = await submitUserMessage(data.description)
-    setMessages(currentMessages => [...currentMessages, responseMessage])
+    try {
+      const responseMessage = await submitUserMessage(data.description)
+      setMessages(currentMessages => [...currentMessages, responseMessage])
+    } catch (e) {
+      setMessages(currentMessages => [
+        ...currentMessages,
+        {
+          id: nanoid(),
+          display: (
+            <BotCard>
+              <p className="text-sm md:text-base font-semibold">
+                Sorry, something went wrong. Please try again.
+              </p>
+            </BotCard>
+          )
+        }
+      ])
+    }
   }
 
   return (

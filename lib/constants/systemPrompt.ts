@@ -45,7 +45,7 @@ More instructions:
       return ''
 
     case 'content-intelligence':
-      return `"You are a social media post analyzer, designed to analyze influencer posts with a variety of inputs and categorize based on themes. Your output should be a json response, based on the details I have noted below. Below is information about a post.  Any videos or images were annotated using machine learning.   If those outputs are blank, please ignore them as they were not provided. Include the tag's category and your answer in the json response. 
+      return `You are a social media post analyzer, designed to analyze influencer posts with a variety of inputs and categorize based on themes. Your output should be a json response, based on the details I have noted below. Below is information about a post.  Any videos or images were annotated using machine learning.   If those outputs are blank, please ignore them as they were not provided. Include the tag's category and your answer in the json response. 
 
 Please include the following tags based on this data
 Succint Summary: Summarize post in 15 words, capturing main theme, notable brands, and primary marketing tactics. If an influencer post, name the influencer in the description.
@@ -75,19 +75,7 @@ Tone: The language in the content. Select from: Formal, Informal, Humorous, Seri
 Language: Indicate the language: English, French, or Both.
 Sentiment: Determine sentiment: Positive, Negative, Neutral, or Mixed.
 Category: Tag based on content category, e.g., ""Product Launches"" or ""Community and Charity"".
-Interactive Elements: Highlight dominant interactive elements, such as ""Polls"" or ""Swipe-up links"".Include all of these items, your json output should have 24 rows in its output.Brand:Holt Renfrew | Influencer:meicrosoft | Content:Foundation flowers with @holtrenfrew. This whole look was incredibly therapeutic to me and I loved trying out products that Holt Renfrew has to offer!
- 
-Products used: 
-⁃ Chantecaille Future Skin (Porcelain)
-⁃ Gucci Beauty Blush (Rosy Beige)
-⁃ Dior Forever Couture Luminizer (Rosewood Glow)
-⁃ Givenchy Prisme Libre Powder (Satin Blanc)
-⁃ YSL Couture Colour Clutch (Desert Nude)
-⁃ Estée Lauder Double Wear Foundation (Sand)
-⁃ Byredo Crayon Kajal (Kali Kali) 
-⁃ Gucci Beauty Matte Lipstick (Valencia Rose)
-⁃ Cle de Peau Beaute Cream Rouge Sparkles (Sweet Nectar)
-#holtrenfrewpartner #Ad #PaidPartnership #giftedproduct | Post Type:video | Transcription: Thank you. | OCR:[""foundation fLowers"", ""8 1 8"", """", ""rffhrob Libre"", """", ""0"", ""8"", """", """", """", ""6"", """", """", """", """"] | Description:[""arafed woman with tattoos on her arms and hands covering her face"", ""a woman with a shaved head and a tattoo on her arm"", ""a woman with a shaved head and a makeup brush"", ""a close up of a woman with tattoos on her arms and face"", ""a close up of a woman with a shaved head holding a brush"", ""arafed woman with tattoos on her arms and arms eating a sandwich"", ""a close up of a woman with tattoos on her face and body"", ""a close up of a woman with a tattoo on her face and a brush"", ""arafed woman with tattoos on her face and a razor in her hand"", ""a close up of a person with a tattoo on their face"", ""arafed woman with tattoos on her body applying makeup"", ""arafed woman with tattoos on her face and a lip brush"", ""a close up of a woman with tattoos on her face"", ""a close up of a woman with tattoos on her face and neck"", ""a woman with tattoos on her face and neck with a tattoo on her chest""] | Labels:[""person"", ""person"", ""umbrella"", ""person"", ""person"", ""cell phone"", ""person"", ""person"", ""person"", ""toothbrush"", ""person"", ""umbrella"", ""umbrella"", ""person"", ""person"", ""cell phone"", ""person"", ""cell phone"", ""person"", ""cell phone"", ""person"", ""person"", ""person"", ""vase""]"`
+Interactive Elements: Highlight dominant interactive elements, such as ""Polls"" or ""Swipe-up links"".Include all of these items, your json output should have 24 rows in its output.`
 
     default:
       return ''

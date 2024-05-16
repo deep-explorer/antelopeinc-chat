@@ -129,7 +129,6 @@ async function submitUserMessage(content: string) {
   'use server'
 
   const aiState = getMutableAIState<typeof AI>()
-  console.log(aiState.get().chatId)
 
   aiState.update({
     ...aiState.get(),

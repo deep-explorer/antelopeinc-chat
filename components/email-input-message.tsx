@@ -23,7 +23,6 @@ export function EmailInputMessage() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
-    console.log({ antelopeEndpoint })
 
     //  validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/

@@ -25,7 +25,7 @@ export function InitialMessage() {
   return (
     <BotCard>
       <Form.Root onSubmit={onSubmit} className="flex flex-col gap-4 md:gap-8">
-        <p className="font-semibold">
+        <p className="text-sm md:text-base font-semibold">
           To analyze your content, paste it into the field below
         </p>
         <Form.Field className="" name="description">
@@ -61,7 +61,11 @@ export function InitialMessage() {
         </Form.Field>
         <Form.Submit asChild>
           <Button
-            style={{ width: '100%' }}
+            style={{
+              width: '100%',
+              backgroundColor: '#E54D2E',
+              cursor: 'pointer'
+            }}
             size={windowWidth > 768 ? '3' : '2'}
           >
             Submit

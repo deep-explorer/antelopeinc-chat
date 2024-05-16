@@ -137,6 +137,8 @@ const CodeBlock: FC<Props> = memo(({ language, value }) => {
             fontFamily: 'var(--font-mono)'
           }
         }}
+        wrapLines={true}
+        wrapLongLines={true}
       >
         {value}
       </SyntaxHighlighter>

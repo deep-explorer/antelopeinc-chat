@@ -194,7 +194,7 @@ export function BotMessage({
               </div>
               <div className=" bg-white dark:bg-[#122830] px-3 md:px-6 py-2 md:py-4 rounded-tl-none md:rounded-tl-none rounded-sm md:rounded-lg overflow-x-auto">
                 <MemoizedReactMarkdown
-                  className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 text-xs md:text-sm"
+                  className="max-w-[unset] prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 text-xs md:text-sm"
                   remarkPlugins={[remarkGfm, remarkMath]}
                   components={{
                     p({ children }) {

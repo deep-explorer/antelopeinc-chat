@@ -1,13 +1,16 @@
 'use client'
 
 import Image from 'next/image'
-import { ProsCons } from './sub/pros-cons'
 import { Button } from '@radix-ui/themes'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
 import { FeedbackAnalysis } from './feedback-analysis'
-import { companyUrl } from '@/lib/constants/config'
+import {
+  antelopeEndpoint,
+  companyUrl,
+  renzoClientID
+} from '@/lib/constants/config'
 import { BotCard } from '../stocks'
 import { UserMessage } from '../stocks/message'
 import { useWindowSize } from 'usehooks-ts'
@@ -16,11 +19,35 @@ import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { EmailCodeInputMessage } from './email-code-input-message'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { sleep } from 'openai/core'
+import { useEffect, useState } from 'react'
+import { ContentTemplate, IContent } from '../content-template'
+import { fetcher } from '@/lib/utils'
 
 export function Comparison() {
   const [_, setMessages] = useUIState<typeof AI>()
   const { width: windowWidth } = useWindowSize()
   const { userEmail, isEmailVerified } = useFreeChatContext()
+
+  const [strentghContent, setStrengthContent] = useState<IContent | null>(null)
+  const [weaknessContent, setWeaknessContent] = useState<IContent | null>(null)
+
+  //  TODO: combine with server component
+  useEffect(() => {
+    fetcher(
+      `${antelopeEndpoint}/chatbots/strengths?origin=leadgen&clientID=${renzoClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+    )
+      .then(res => {
+        setStrengthContent(res.data)
+      })
+      .catch(e => console.log(e))
+    fetcher(
+      `${antelopeEndpoint}/chatbots/weaknesses?origin=leadgen&clientID=${renzoClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+    )
+      .then(res => {
+        setWeaknessContent(res.data)
+      })
+      .catch(e => console.log(e))
+  }, [])
 
   const onClick = async (index: number) => {
     if (index === 0) {
@@ -91,69 +118,12 @@ export function Comparison() {
       <div
         className={`p-5 rounded-md flex flex-col gap-6 bg-gradient-to-b relative ${isEmailVerified ? 'bg-[#1E333A]' : 'opacity-gradient h-[260px]'}`}
       >
-        <ProsCons
-          flag="pros"
-          title="Renzo's Strengths"
-          description="Renzo's strengths lie in their sentiment, media, and organic reach, demonstrating a robust market presence and customer loyalty across multiple platforms:"
-          scores={[
-            {
-              title: 'Influencer Activity',
-              value: 90,
-              tooltipDescription:
-                'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
-            },
-            {
-              title: 'Ratings',
-              value: 80,
-              tooltipDescription:
-                'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
-            },
-            {
-              title: 'Testimonials',
-              value: 75,
-              tooltipDescription:
-                'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
-            },
-            {
-              title: 'Earn Media',
-              value: 60,
-              tooltipDescription:
-                'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
-            }
-          ]}
-        />
-        {isEmailVerified && (
-          <ProsCons
-            flag="cons"
-            title="Renzo's Weaknesses"
-            description="Renzo's weaknesses are limited product variety and higher pricing compared to competitors, which may hinder market expansion and customer acquisition:"
-            scores={[
-              {
-                title: 'Influencer Activity',
-                value: 30,
-                tooltipDescription:
-                  'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
-              },
-              {
-                title: 'Ratings',
-                value: 25,
-                tooltipDescription:
-                  'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
-              },
-              {
-                title: 'Testimonials',
-                value: 20,
-                tooltipDescription:
-                  'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
-              },
-              {
-                title: 'Earn Media',
-                value: 10,
-                tooltipDescription:
-                  'Influencer activity looks at the relative share of sponsored mentions and engagement among competitors'
-              }
-            ]}
-          />
+        {strentghContent && (
+          <ContentTemplate flag="pros" {...strentghContent} />
+        )}
+
+        {isEmailVerified && weaknessContent && (
+          <ContentTemplate flag="cons" {...weaknessContent} />
         )}
       </div>
       {isEmailVerified ? (

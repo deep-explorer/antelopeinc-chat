@@ -13,15 +13,35 @@ import { ThankYou } from './sub/thank-you'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
-import { companyUrl } from '@/lib/constants/config'
-import { sleep } from '@/lib/utils'
+import {
+  antelopeEndpoint,
+  companyUrl,
+  renzoClientID
+} from '@/lib/constants/config'
+import { fetcher, sleep } from '@/lib/utils'
 import { useWindowSize } from 'usehooks-ts'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { LogoCarousel } from './sub/logo-carousel'
+import { useEffect, useState } from 'react'
 
 export function InitialMessage() {
   const { width: windowWidth } = useWindowSize()
   const [_, setMessages] = useUIState<typeof AI>()
+  const [logos, setLogos] = useState<string[]>([])
+
+  //  TODO: combine with server component
+  useEffect(() => {
+    fetcher(`${antelopeEndpoint}/clients/show?clientID=${renzoClientID}`)
+      .then(res => {
+        // console.log(res)
+        setLogos(
+          Object.values(res.data.brands).map(
+            (key: any) => 'http://' + key.image.replaceAll('\\', '')
+          )
+        )
+      })
+      .catch(e => console.log(e))
+  }, [])
 
   const onClick = async (index: number) => {
     if (index === 0) {
@@ -83,7 +103,7 @@ export function InitialMessage() {
           <h2 className="text-xl md:text-[30px] font-bold mt-2">
             Children&apos;s Vitamins Analysis
           </h2>
-          <LogoCarousel />
+          <LogoCarousel logos={logos} />
           <p className="text-sm md:text-lg px-2">
             This analysis reviews Renzo&apos;s and nine of the largest vitamin
             brands, including Flintstones, MaryRuth&apos;s, and SmartyPants. It

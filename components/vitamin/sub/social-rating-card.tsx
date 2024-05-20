@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { ProsConsScore } from './pros-cons-score'
 import { SocialScoreBar } from './social-score-bar'
 import { PrimaryTooltip } from '@/components/ui/tooltip'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
@@ -59,14 +58,14 @@ export function SocialRatingCard({
       <hr className="border-[#35474F]" />
       <div className="flex flex-col gap-5">
         <SocialScoreBar
-          flag="cons"
+          flag={totalRating > industryAverageTotalRating ? 'pros' : 'cons'}
           title="Total Ratings"
           value={totalRating}
           average={industryAverageTotalRating}
           isInview={isInView}
         />
         <SocialScoreBar
-          flag="pros"
+          flag={averageScore > industryAverageScore ? 'pros' : 'cons'}
           title="Average Score"
           value={averageScore}
           average={industryAverageScore}

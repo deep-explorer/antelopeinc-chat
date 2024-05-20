@@ -2,20 +2,23 @@ import { InfoCircledIcon } from '@radix-ui/react-icons'
 import { useWindowSize } from 'usehooks-ts'
 import { PrimaryTooltip } from '@/components/ui/tooltip'
 import SlotCounter from 'react-slot-counter'
+import { IBasicElement } from '@/components/content-template'
 
-interface OverviewSpecCardProps {
-  icon: string
-  score: string
-  title: string
-  tooltipDescription: string
+export interface IScoreCard extends IBasicElement {
+  type: 'scorecard'
+  value: number
+  prefix?: string //  scorecard
+  suffix?: string //  scorecard
 }
 
-export function OverviewSpecCard({
+export function ScoreCard({
   icon,
-  score,
   title,
-  tooltipDescription
-}: OverviewSpecCardProps) {
+  value,
+  tooltip,
+  prefix,
+  suffix
+}: IScoreCard) {
   const { width: windowWidth } = useWindowSize()
 
   return (
@@ -30,7 +33,10 @@ export function OverviewSpecCard({
       </div>
       <div>
         <div className="text-base md:text-2xl font-bold  md:mb-4">
-          <SlotCounter value={score} animateOnVisible={{ triggerOnce: true }} />
+          <SlotCounter
+            value={`${prefix}${value}${suffix}`}
+            animateOnVisible={{ triggerOnce: true }}
+          />
         </div>
         <p className="text-[10px] md:text-base font-medium text-[#788589]">
           {title}
@@ -41,7 +47,7 @@ export function OverviewSpecCard({
           trigger={
             <InfoCircledIcon className="size-[12px] md:size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
           }
-          description={tooltipDescription}
+          description={tooltip}
         />
       </div>
     </div>

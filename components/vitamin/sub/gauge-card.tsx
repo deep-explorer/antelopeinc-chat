@@ -3,26 +3,28 @@ import { useWindowSize } from 'usehooks-ts'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
 import { PrimaryTooltip } from '@/components/ui/tooltip'
 import { useEffect, useState } from 'react'
+import { IBasicElement } from '@/components/content-template'
 
-interface CircularGaugeCardProps {
-  icon: string
-  title: string
-  value: number
-  description: string
+export interface IGaugeCard extends IBasicElement {
+  type: 'gauge'
+  value: number //  0 - 100
+  texts: string[]
   className?: string
   isInView?: boolean
 }
 
-export function CircularGaugeCard({
+export function GaugeCard({
   icon,
   title,
   value,
-  description,
+  texts,
+  tooltip,
   className,
   isInView = true
-}: CircularGaugeCardProps) {
+}: IGaugeCard) {
   const { width: windowWidth } = useWindowSize()
   const [isVisible, setVisible] = useState(false)
+
   useEffect(() => {
     if (isInView) {
       setVisible(true)
@@ -51,7 +53,7 @@ export function CircularGaugeCard({
           trigger={
             <InfoCircledIcon className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
           }
-          description="Influencer activity looks at the relative share of sponsored mentions and engagement among competitors"
+          description={tooltip}
         />
       </div>
       <div className="w-full flex justify-center">
@@ -66,28 +68,28 @@ export function CircularGaugeCard({
             className="absolute top-[45%] left-[45%] md:top-[43%] md:left-[43%] w-[12px] h-[12px] md:w-[28px] md:h-[28px] rounded-full border-[3px] md:border-[6px] bg-white"
             style={{
               animation: isVisible
-                ? `orbit ${((value + 200) / 1000) * 3}s linear ${value / 1000 / 1.115} forwards`
+                ? `orbit ${((value + 20) / 100) * 3}s linear ${value / 100 / 1.115} forwards`
                 : 'none',
               transform:
                 windowWidth > 768
                   ? 'translate(-32px, 96px)'
                   : 'translate(-18px, 51px)',
-              borderColor: levels[Math.ceil((value / 1000) * 5) - 1].color
+              borderColor: levels[Math.ceil((value / 100) * 5) - 1].color
             }}
           ></div>
           <p
             className="absolute text-center w-full top-[72px] md:top-[140px] text-base md:text-3xl font-bold elementor-heading-title"
             style={{
-              color: levels[Math.ceil((value / 1000) * 5) - 1].color,
-              animation: `elementor-heading-title ${value / 1000}s linear 1 forwards`,
+              color: levels[Math.ceil((value / 100) * 5) - 1].color,
+              animation: `elementor-heading-title ${value / 100}s linear 1 forwards`,
               display: isVisible ? 'block' : 'none'
             }}
           >
-            {levels[Math.ceil((value / 1000) * 5) - 1].caption}
+            {levels[Math.ceil((value / 100) * 5) - 1].caption}
           </p>
         </div>
       </div>
-      <p className="text-sm md:text-base">{description}</p>
+      <p className="text-sm md:text-base">{texts[0]}</p>
     </div>
   )
 }

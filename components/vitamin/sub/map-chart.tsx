@@ -1,3 +1,4 @@
+import { IBasicElement } from '@/components/content-template'
 import { PrimaryTooltip } from '@/components/ui/tooltip'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
@@ -42,30 +43,22 @@ const renderCustomShape = (props: {
   // const { width: windowWidth } = useWindowSize()
 
   const { cx, cy } = props
-  let icon = 'renzo'
-  switch (props.payload.name) {
-    case 'Other1':
-      icon = 'flintstonesvitamins'
-      break
-    case 'Other2':
-      icon = 'maryruthorganics'
-      break
-    case 'Other3':
-      icon = 'naturesway'
-      break
-    case 'Other4':
-      icon = 'smartypantsvitamins'
-  }
 
   return (
-    <image
-      href={`/vitamin/logos/${icon}.png`}
-      x={cx - (window.innerWidth > 768 ? 24 : 12)}
-      y={cy - (window.innerWidth > 768 ? 24 : 12)}
-      // width={windowWidth > 768 ? 48 : 24}
-      // height={windowWidth > 768 ? 48 : 24}
-      className="md:size-12 size-6"
-    />
+    <>
+      <defs>
+        <clipPath id={`round${props.payload.key}`}>
+          <circle cx={cx} cy={cy} r={window.innerWidth > 768 ? 24 : 12} />
+        </clipPath>
+      </defs>
+      <image
+        href={`http://${props.payload.logo}`}
+        x={cx - (window.innerWidth > 768 ? 24 : 12)}
+        y={cy - (window.innerWidth > 768 ? 24 : 12)}
+        className="size-6 md:size-12"
+        clipPath={`url(#round${props.payload.key})`}
+      />
+    </>
   )
 }
 
@@ -81,10 +74,33 @@ const CustomTooltip: React.FC<any> = ({ active, payload }) => {
   return null
 }
 
-interface ChannelGraphCardProps {
+export interface IMapChartProps extends IBasicElement {
+  type: 'map'
+  axes: {
+    x: string
+    y: string
+  }
+  children: IMapElements
   className?: string
 }
-export function ChannelGraphCard({ className }: ChannelGraphCardProps) {
+
+interface IMapElements {
+  [key: string]: {
+    logo: string
+    tooltip: string
+    x: number
+    y: number
+    size: number //   ?
+  }
+}
+export function MapChart({
+  title,
+  tooltip,
+  axes,
+  icon,
+  children,
+  className
+}: IMapChartProps) {
   const { width: windowWidth } = useWindowSize()
 
   return (
@@ -94,32 +110,31 @@ export function ChannelGraphCard({ className }: ChannelGraphCardProps) {
       <div className="flex justify-between">
         <div className="flex gap-2">
           <Image
-            src={'/image-icons/instagram.png'}
+            src={`/image-icons/${icon}.png`}
             width={windowWidth > 768 ? 48 : 24}
             height={windowWidth > 768 ? 48 : 24}
-            alt="instagram-logo"
+            alt={icon}
           />
-          <h2 className="text-lg md:text-xl font-bold self-center">
-            Instagram
-          </h2>
+          <h2 className="text-lg md:text-xl font-bold self-center">{title}</h2>
         </div>
         <PrimaryTooltip
           trigger={
             <InfoCircledIcon className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
           }
-          description="Influencer activity looks at the relative share of sponsored mentions and engagement among competitors"
+          description={tooltip}
         />
       </div>
       <p className="text-sm md:text-base">
-        Instagram engagement metrics suggest a highly active and loyal
-        community, with users resonating strongly with visually-driven
-        storytelling and behind-the-scenes content.
+        {/* TODO: description from Props */}
+        {title} engagement metrics suggest a highly active and loyal community,
+        with users resonating strongly with visually-driven storytelling and
+        behind-the-scenes content.
       </p>
       <ResponsiveContainer width="100%" height={windowWidth > 768 ? 400 : 200}>
         <ScatterChart>
           <CartesianGrid
             strokeOpacity={0.1}
-            enableBackground={'/image-icons/invalid.png'}
+            // enableBackground={'/image-icons/invalid.png'}
           />
           <XAxis
             type="number"
@@ -138,7 +153,7 @@ export function ChannelGraphCard({ className }: ChannelGraphCardProps) {
             }}
           >
             <Label
-              value="Engagement"
+              value={axes.x}
               offset={10}
               position="insideBottom"
               className="fill-white"
@@ -166,7 +181,7 @@ export function ChannelGraphCard({ className }: ChannelGraphCardProps) {
             }}
           >
             <Label
-              value="Content"
+              value={axes.y}
               offset={40}
               angle={-90}
               position="insideLeft"
@@ -184,7 +199,24 @@ export function ChannelGraphCard({ className }: ChannelGraphCardProps) {
           />
           <Scatter
             name="A school"
-            data={data}
+            data={Object.keys(children).map((key, index) => {
+              const maxX = Math.max(
+                ...Object.values(children).map(child => child.x)
+              )
+              const maxY = Math.max(
+                ...Object.values(children).map(child => child.y)
+              )
+
+              return {
+                name: key,
+                x: (children[key].x * 90) / maxX, //  maxX equals to 90 out of 100
+                y: (children[key].y * 90) / maxY,
+                logo: children[key].logo,
+                tooltip: children[key].tooltip,
+                size: children[key].size,
+                key: index
+              }
+            })}
             shape={renderCustomShape as ScatterCustomizedShape}
           />
         </ScatterChart>

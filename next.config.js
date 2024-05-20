@@ -7,6 +7,12 @@ module.exports = {
         hostname: 'avatars.githubusercontent.com',
         port: '',
         pathname: '**'
+      },
+      {
+        protocol: 'http',
+        hostname: 'testing.nextpost.io',
+        port: '',
+        pathname: '**'
       }
     ]
   }

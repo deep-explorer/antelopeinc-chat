@@ -1,25 +1,53 @@
 'use client'
 
 import { Button } from '@radix-ui/themes'
-import { SocialRatingCard } from './sub/social-rating-card'
-import { CircularGaugeCard } from './sub/circular-gauge-card'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
-import { companyUrl } from '@/lib/constants/config'
+import {
+  antelopeEndpoint,
+  companyUrl,
+  renzoClientID
+} from '@/lib/constants/config'
 import { ContentPerformance } from './content-performance'
 import { BotCard, UserMessage } from '../stocks/message'
 import { useWindowSize } from 'usehooks-ts'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { sleep } from 'openai/core'
 import { Carousel } from '../ui/carousel'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { ContentTemplate, IContent } from '../content-template'
+import { fetcher } from '@/lib/utils'
+import { SocialRatingCard } from './sub/social-rating-card'
 
 export function FeedbackAnalysis() {
   const [_, setMessages] = useUIState<typeof AI>()
   const { width: windowWidth } = useWindowSize()
   const [gaugeCarouselIndex, setGaugeCarouselIndex] = useState(0)
   const [socialRatingCarouselIndex, setSocialRatingCarouselIndex] = useState(0)
+
+  const [feedbackContent, setFeedbackContent] = useState<IContent | null>(null)
+  //  TODO: normalization
+  const [channelFeedbackContent, setChannelFeedbackContent] =
+    useState<any>(null)
+
+  //  TODO: combine with server component
+  useEffect(() => {
+    fetcher(
+      `${antelopeEndpoint}/chatbots/feedback?origin=leadgen&clientID=${renzoClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+    )
+      .then(res => {
+        setFeedbackContent(res.data)
+      })
+      .catch(e => console.log(e))
+    fetcher(
+      `${antelopeEndpoint}/chatbots/channelFeedback?origin=leadgen&clientID=${renzoClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+    )
+      .then(res => {
+        setChannelFeedbackContent(res.data)
+      })
+      .catch(e => console.log(e))
+  }, [])
 
   const onClick = async (index: number) => {
     if (index === 0) {
@@ -64,80 +92,36 @@ export function FeedbackAnalysis() {
   }
 
   return (
-    <div className="flex flex-col gap-3 md:gap-6">
-      <h1 className="text-lg md:text-xl font-bold">Feedback Performance</h1>
-      <p className="text-sm md:text-base">
-        Renzo&apos;s feedback suggests high customer appreciation for natural
-        ingredients, but concerns over taste and texture could be impacting
-        repeat purchases.
-      </p>
-      <Carousel onChange={i => setGaugeCarouselIndex(i)}>
-        <CircularGaugeCard
-          icon="total-review"
-          title="Total Review"
-          value={700}
-          description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
-          className="mr-3"
-          isInView={gaugeCarouselIndex === 0}
-        />
-        <CircularGaugeCard
-          icon="average-score"
-          title="Average Score"
-          value={550}
-          description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
-          className="mr-3"
-          isInView={
-            gaugeCarouselIndex === 1 ||
-            (windowWidth > 768 && gaugeCarouselIndex === 0)
+    <div className="flex flex-col gap-2 md:gap-4">
+      {feedbackContent && channelFeedbackContent && (
+        <ContentTemplate
+          {...feedbackContent}
+          footer={
+            <>
+              {/* <ContentTemplate {...channelFeedbackContent} />
+               */}
+            </>
           }
         />
-        <CircularGaugeCard
-          icon="average-score"
-          title="Average Score"
-          value={660}
-          description="Renzo's has amassed a substantial number of reviews, indicating strong customer engagement and widespread usage."
-          className="mr-3"
-          isInView={
-            gaugeCarouselIndex === 2 ||
-            (windowWidth > 768 && gaugeCarouselIndex === 1)
-          }
-        />
-      </Carousel>
-      <Carousel onChange={i => setSocialRatingCarouselIndex(i)}>
-        <SocialRatingCard
-          icon="glassdoor"
-          title="Glassdoor"
-          description="Renzo's employees rave about the company culture, with 92% of reviewers citing 'opportunities for growth' and 'supportive management' as key drivers of their 4.5-star average rating."
-          totalRating={55}
-          industryAverageTotalRating={32}
-          averageScore={46}
-          industryAverageScore={65}
-          className="mr-3"
-          isInView={socialRatingCarouselIndex === 0}
-        />
-        <SocialRatingCard
-          icon="google"
-          title="Google"
-          description="Renzo's employees rave about the company culture, with 92% of reviewers citing 'opportunities for growth' and 'supportive management' as key drivers of their 4.5-star average rating."
-          totalRating={77}
-          industryAverageTotalRating={54}
-          averageScore={45}
-          industryAverageScore={68}
-          className="mr-3"
-          isInView={socialRatingCarouselIndex === 1}
-        />
-        <SocialRatingCard
-          icon="google"
-          title="Google"
-          description="Renzo's employees rave about the company culture, with 92% of reviewers citing 'opportunities for growth' and 'supportive management' as key drivers of their 4.5-star average rating."
-          totalRating={77}
-          industryAverageTotalRating={54}
-          averageScore={45}
-          industryAverageScore={68}
-          className="mr-3"
-          isInView={socialRatingCarouselIndex === 2}
-        />
-      </Carousel>
+      )}
+
+      {channelFeedbackContent && (
+        <Carousel>
+          {channelFeedbackContent.children.map((child: any, index: number) => (
+            <SocialRatingCard
+              icon={child.icon ?? 'customer-reviews'}
+              title={child.header}
+              description={child.texts[0]}
+              totalRating={child.children[0].value.percent}
+              industryAverageTotalRating={child.children[0].industry}
+              averageScore={child.children[1].value.percent}
+              industryAverageScore={child.children[1].industry}
+              className="mr-3"
+              key={index}
+            />
+          ))}
+        </Carousel>
+      )}
       <p className="text-sm md:text-base">
         Deeper drilldown into feedback suggests that overall sentiment is
         overwhelmingly positive, with reviewers consistently praising innovative

@@ -72,8 +72,8 @@ export function ResearchRecommendations() {
                 As a next step, we recommend reviewing these reports in more
                 detail or scheduling a meeting with a member of the Antelope
                 team to learn more about our services and how we can help drive
-                growth and improvement for Renzo's. Alternatively, you can also
-                send us a message and our team will be in touch soon.
+                growth and improvement for Renzo&apos;s. Alternatively, you can
+                also send us a message and our team will be in touch soon.
               </p>
               <div className="flex flex-wrap">
                 {availableButtons.map((availableButton, index) => (

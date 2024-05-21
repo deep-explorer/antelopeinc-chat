@@ -7,7 +7,6 @@ interface LogoCarouselProps {
 }
 
 export function LogoCarousel({ logos }: LogoCarouselProps) {
-  console.log({ logos })
   const { width: windowWidth } = useWindowSize()
 
   return (

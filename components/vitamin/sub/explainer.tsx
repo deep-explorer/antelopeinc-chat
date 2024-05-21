@@ -7,10 +7,11 @@ import { IBasicElement } from '@/components/content-template'
 import { Carousel } from '@/components/ui/carousel'
 import { Button } from '@/components/ui/button'
 
+export type Urgency = 'critical' | 'suggested' | 'consider'
 export interface IExplainer extends IBasicElement {
   display: 'element'
   type: 'explainer'
-  urgency: 'critical' | 'suggested' | 'consider'
+  urgency: Urgency
   texts: string[]
   link: {
     caption: string

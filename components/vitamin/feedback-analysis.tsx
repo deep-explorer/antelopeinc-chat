@@ -16,7 +16,7 @@ import { CardSkeleton } from '../ui/card-skeleton'
 import { sleep } from 'openai/core'
 import { Carousel } from '../ui/carousel'
 import { useEffect, useState } from 'react'
-import { ContentTemplate, IContent } from '../content-template'
+import { ContentTemplate, IContainer } from '../content-template'
 import { fetcher } from '@/lib/utils'
 import { SocialRatingCard } from './sub/social-rating-card'
 
@@ -26,7 +26,9 @@ export function FeedbackAnalysis() {
   const [gaugeCarouselIndex, setGaugeCarouselIndex] = useState(0)
   const [socialRatingCarouselIndex, setSocialRatingCarouselIndex] = useState(0)
 
-  const [feedbackContent, setFeedbackContent] = useState<IContent | null>(null)
+  const [feedbackContent, setFeedbackContent] = useState<IContainer | null>(
+    null
+  )
   //  TODO: normalization
   const [channelFeedbackContent, setChannelFeedbackContent] =
     useState<any>(null)

@@ -12,13 +12,13 @@ import {
 import { useWindowSize } from 'usehooks-ts'
 import { sleep } from 'openai/core'
 import { useEffect, useState } from 'react'
-import { ContentTemplate, IContent } from '../content-template'
+import { ContentTemplate, IContainer } from '../content-template'
 import { fetcher } from '@/lib/utils'
 
 export function ResearchRecommendations() {
   const [_, setMessages] = useUIState<typeof AI>()
   const { width: windowWidth } = useWindowSize()
-  const [recommendation, setRecommendation] = useState<IContent | null>(null)
+  const [recommendation, setRecommendation] = useState<IContainer | null>(null)
 
   //  TODO: combine with server component
   useEffect(() => {

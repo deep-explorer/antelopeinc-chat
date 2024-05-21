@@ -16,7 +16,7 @@ import { CardSkeleton } from '../ui/card-skeleton'
 import { sleep } from 'openai/core'
 import { Carousel } from '../ui/carousel'
 import { useEffect, useState } from 'react'
-import { ContentTemplate, IContent } from '../content-template'
+import { ContentTemplate, IContainer } from '../content-template'
 import { fetcher } from '@/lib/utils'
 
 export function ContentPerformance() {
@@ -24,11 +24,10 @@ export function ContentPerformance() {
   const { width: windowWidth } = useWindowSize()
   const [carouselIndex, setCarouselIndex] = useState(0)
 
-  const [contentPerformance, setContentPerformance] = useState<IContent | null>(
-    null
-  )
+  const [contentPerformance, setContentPerformance] =
+    useState<IContainer | null>(null)
   const [channelContentPerformance, setChannelContentPerformance] =
-    useState<IContent | null>(null)
+    useState<IContainer | null>(null)
 
   //  TODO: combine with server component
   useEffect(() => {

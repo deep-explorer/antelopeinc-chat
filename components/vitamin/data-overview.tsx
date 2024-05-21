@@ -16,12 +16,12 @@ import { CardSkeleton } from '../ui/card-skeleton'
 import { sleep } from 'openai/core'
 import { useEffect, useState } from 'react'
 import { fetcher } from '@/lib/utils'
-import { ContentTemplate, IContent } from '../content-template'
+import { ContentTemplate, IContainer } from '../content-template'
 
 export function DataOverview() {
   const [_, setMessages] = useUIState<typeof AI>()
   const { width: windowWidth } = useWindowSize()
-  const [content, setContent] = useState<IContent | null>(null)
+  const [content, setContent] = useState<IContainer | null>(null)
 
   //  TODO: combine with server component
   useEffect(() => {

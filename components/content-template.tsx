@@ -8,20 +8,21 @@ import Image from 'next/image'
 import { PrimaryTooltip } from './ui/tooltip'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
 import { IMapChartProps, MapChart } from './vitamin/sub/map-chart'
-import { Explainer, IExplainer } from './vitamin/sub/explainer'
+import { Explainer, IExplainer, Urgency } from './vitamin/sub/explainer'
 import { Accordion } from './ui/accordion'
 
-type ContainerType = 'grid' | 'stacked' | 'slider'
+type ContainerType = 'grid' | 'stacked' | 'slider' | 'accordion'
 
-export interface IContent {
+export interface IContainer {
   display: 'container'
   type: ContainerType
   header: string
+  caption?: string //  accordion
   texts?: string[]
   icon?: string
   tooltip?: string
   children: (
-    | IContent
+    | IContainer
     | IScoreCard
     | IScalar
     | IGaugeCard
@@ -38,7 +39,7 @@ export interface IBasicElement {
   tooltip: string
 }
 
-interface ContentTemplateProps extends IContent {
+interface ContentTemplateProps extends IContainer {
   flag?: 'pros' | 'cons'
   footer?: React.ReactNode
   containerClassName?: string
@@ -46,6 +47,7 @@ interface ContentTemplateProps extends IContent {
 
 export const ContentTemplate = ({
   header,
+  caption,
   texts,
   type,
   tooltip,
@@ -72,7 +74,7 @@ export const ContentTemplate = ({
             </div>
           )}
           <h1
-            className={`text-lg md:text-xl font-bold self-center ${children[0].type === 'explainer' ? (children[0].urgency === 'critical' ? 'text-[#EA3F3F]' : children[0].urgency === 'suggested' ? 'text-[#FFA34E]' : 'text-[#24AE8D]') : ''}`}
+            className={`text-lg md:text-xl font-bold self-center ${header === 'Critical' ? 'text-[#EA3F3F]' : header === 'Suggested' ? 'text-[#FFA34E]' : header === 'Consider' ? 'text-[#24AE8D]' : ''}`}
           >
             {header}
           </h1>
@@ -93,7 +95,7 @@ export const ContentTemplate = ({
         </p>
       ))}
 
-      <ElementsWrapper type={type} child={children[0]}>
+      <ElementsWrapper type={type} child={children[0]} caption={caption}>
         {children.map((child, index) => (
           <>
             {child.display === 'container' && (
@@ -138,18 +140,20 @@ export const ContentTemplate = ({
 interface ElementsWrapperProps {
   type: ContainerType
   child:
-    | IContent
+    | IContainer
     | IScoreCard
     | IScalar
     | IGaugeCard
     | IMapChartProps
     | IExplainer
+  caption?: string
   children: ReactElement[]
 }
 
 export const ElementsWrapper = ({
   type,
   child,
+  caption,
   children
 }: ElementsWrapperProps) => {
   const { width: windowWidth } = useWindowSize()
@@ -169,64 +173,64 @@ export const ElementsWrapper = ({
     case 'stacked':
       return <div className="flex flex-col gap-3 w-full">{children}</div>
     case 'slider':
-      if (child.type === 'explainer') {
-        let color
-        let title = <></>
-        switch (child.urgency) {
+      return <Carousel onChange={i => setCarouselIndex(i)}>{children}</Carousel>
+    case 'accordion':
+      let color = '#fff'
+      let title = <>{caption}</>
+
+      let urgency
+      if (child.display === 'container') {
+        urgency = getUrgencyOfContainer(child)
+      } else {
+        urgency = child.type === 'explainer' ? child.urgency : undefined
+      }
+      if (urgency) {
+        title = (
+          <div className="font-semibold flex items-center gap-2">
+            <Image
+              src={`/image-icons/${urgency}.png`}
+              height={20}
+              width={20}
+              alt={urgency}
+            />
+            {caption}
+          </div>
+        )
+        switch (urgency) {
           case 'critical':
             color = '#EA3F3F'
-            title = (
-              <div className="font-semibold flex items-center gap-2">
-                <Image
-                  src={`/image-icons/${child.urgency}.png`}
-                  height={20}
-                  width={20}
-                  alt={child.urgency}
-                />
-                Critical ({children.length})
-              </div>
-            )
             break
           case 'suggested':
+            console.log('here')
             color = '#FFA34E'
-            title = (
-              <div className="font-semibold flex items-center gap-2">
-                <Image
-                  src={`/image-icons/${child.urgency}.png`}
-                  height={20}
-                  width={20}
-                  alt={child.urgency}
-                />
-                Suggested ({children.length})
-              </div>
-            )
             break
           case 'consider':
             color = '#24AE8D'
-            title = (
-              <div className="font-semibold flex items-center gap-2">
-                <Image
-                  src={`/image-icons/${child.urgency}.png`}
-                  height={20}
-                  width={20}
-                  alt={child.urgency}
-                />
-                Consider ({children.length})
-              </div>
-            )
             break
           default:
             break
         }
-
-        return (
-          <Accordion title={title} containerClassName={`border-[${color}]`}>
-            <Carousel onChange={i => setCarouselIndex(i)}>{children}</Carousel>
-          </Accordion>
-        )
       }
-      return <Carousel onChange={i => setCarouselIndex(i)}>{children}</Carousel>
+
+      return (
+        <Accordion title={title} containerBorderColor={color}>
+          {children}
+        </Accordion>
+      )
+    // }
     default:
       return <div>{children}</div>
   }
+}
+
+const getUrgencyOfContainer = (container: IContainer): Urgency | undefined => {
+  if (container.children.length === 0) return undefined
+  if (container.children[0].display === 'container') {
+    return getUrgencyOfContainer(container.children[0])
+  }
+
+  if (container.children[0].type === 'explainer') {
+    return container.children[0].urgency
+  }
+  return undefined
 }

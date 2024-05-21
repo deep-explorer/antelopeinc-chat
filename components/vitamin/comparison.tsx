@@ -20,7 +20,7 @@ import { EmailCodeInputMessage } from './email-code-input-message'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { sleep } from 'openai/core'
 import { useEffect, useState } from 'react'
-import { ContentTemplate, IContent } from '../content-template'
+import { ContentTemplate, IContainer } from '../content-template'
 import { fetcher } from '@/lib/utils'
 
 export function Comparison() {
@@ -28,8 +28,12 @@ export function Comparison() {
   const { width: windowWidth } = useWindowSize()
   const { userEmail, isEmailVerified } = useFreeChatContext()
 
-  const [strentghContent, setStrengthContent] = useState<IContent | null>(null)
-  const [weaknessContent, setWeaknessContent] = useState<IContent | null>(null)
+  const [strentghContent, setStrengthContent] = useState<IContainer | null>(
+    null
+  )
+  const [weaknessContent, setWeaknessContent] = useState<IContainer | null>(
+    null
+  )
 
   //  TODO: combine with server component
   useEffect(() => {

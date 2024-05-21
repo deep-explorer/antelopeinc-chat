@@ -5,21 +5,24 @@ import { ReactElement } from 'react-markdown/lib/react-markdown'
 import './styles.css'
 
 interface AccordionProps {
-  title: ReactElement | string
-  containerClassName?: string
+  title?: ReactElement | string
+  containerBorderColor?: string
   children: ReactElement | ReactElement[]
 }
 
 export function Accordion({
   title,
-  containerClassName,
+  containerBorderColor,
   children
 }: AccordionProps) {
   return (
     <BasicAccordion.Root
-      className={`AccordionRoot border-[1px] ${containerClassName}`}
+      className={`AccordionRoot border-[1px]`}
       type="single"
       collapsible
+      style={{
+        borderColor: containerBorderColor
+      }}
     >
       <BasicAccordion.Item className="AccordionItem" value="item-1">
         <BasicAccordion.Header className="AccordionHeader">

@@ -61,7 +61,7 @@ const parseResponseToString = (posts: any[]) => {
   // Iterate over each post and add a row to the table string
   posts.forEach((post, index) => {
     const resharedText = post.reshared ? 'Yes' : 'No'
-    const textSnippet = post.text.replace(/\n|\|/g, ' ') // Replace newlines with spaces
+    const textSnippet = post.text?.replace(/\n|\|/g, ' ') // Replace newlines with spaces
     tableString += `| ${index + 1} | ${textSnippet} | ${post.post_url} | ${post.num_appreciations} | ${post.num_comments} | ${post.num_empathy} | ${post.num_interests} | ${post.num_likes} | ${post.num_praises} | ${post.num_reposts} | ${post.posted} | ${resharedText} |\n`
   })
 

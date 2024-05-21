@@ -129,11 +129,11 @@ export function BotMessage({
                       width={windowWidth > 768 ? 400 : 250}
                       height={windowWidth > 768 ? 250 : 150}
                       segmentColors={[
-                        '#FF784D',
-                        '#F49650',
-                        '#B6DBD9',
-                        '#18898D',
-                        '#2F616A'
+                        '#EA3F3F',
+                        '#EA9A40',
+                        '#EABA3F',
+                        '#90B564',
+                        '#24AE8D'
                       ]}
                       customSegmentLabels={[
                         {

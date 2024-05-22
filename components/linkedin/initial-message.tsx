@@ -23,6 +23,11 @@ export function InitialMessage() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
+
+    if (!link) {
+      setError('Please enter a LinkedIn profile name')
+      return
+    }
     // const regex = /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[\w-]+\/?$/
     //  process linkedin profile link
     setLoading(true)

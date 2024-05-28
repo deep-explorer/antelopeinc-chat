@@ -112,10 +112,11 @@ const cycleButtons = [
     response: (
       <div>
         <p>
-          Antelope is a strategy and insights team that turns your industry's
-          content and customer feedback into customized research with artificial
-          intelligence. We leverage cutting-edge AI to analyze your customer
-          feedback and content at scale. For more details, visit our website.
+          Antelope is a strategy and insights team that turns your
+          industry&apos;s content and customer feedback into customized research
+          with artificial intelligence. We leverage cutting-edge AI to analyze
+          your customer feedback and content at scale. For more details, visit
+          our website.
         </p>
         <i>
           <Link href={`${companyUrl}/#banner`} target="_blank" rel="noreferrer">
@@ -151,9 +152,9 @@ const cycleButtons = [
     response: (
       <div>
         <p>
-          Antelope works with some of the world's largest brands and agencies
-          across several industries, including financial services, retail, and
-          CPG. For more details, check out our website.
+          Antelope works with some of the world&apos;s largest brands and
+          agencies across several industries, including financial services,
+          retail, and CPG. For more details, check out our website.
           <i>
             <Link
               href={`${companyUrl}/#banner`}
@@ -235,9 +236,9 @@ const cycleButtons = [
     response: (
       <div>
         <p>
-          Antelope's platform uses real customer feedback to better understand
-          your brand health and pinpoint industry white space. Visit our case
-          studies page to learn more.{' '}
+          Antelope&apos;s platform uses real customer feedback to better
+          understand your brand health and pinpoint industry white space. Visit
+          our case studies page to learn more.{' '}
           <i>
             <Link
               href={`${companyUrl}/#banner`}

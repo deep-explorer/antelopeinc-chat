@@ -28,8 +28,14 @@ export const FooterButtonGroup = ({
     useFreeChatContext()
   const footerButtonIndex = useMemo(() => _footerButtonIndex, []) //  set when the component is mounted
 
-  const onClick = async (prompt: string, response: ReactElement) => {
-    setFooterButtonIndex(footerButtonIndex + 1)
+  const onClick = async (
+    prompt: string,
+    response: ReactElement,
+    isCycleButton: boolean
+  ) => {
+    if (isCycleButton) {
+      setFooterButtonIndex(footerButtonIndex + 1)
+    }
 
     setMessages(currentMessages => [
       ...currentMessages,
@@ -59,7 +65,17 @@ export const FooterButtonGroup = ({
       ...currentMessages.slice(0, -1),
       {
         id: nanoid(),
-        display: <BotCard>{response}</BotCard>
+        display: (
+          <BotCard>
+            <div className="flex flex-col gap-4">
+              {response}
+              <FooterButtonGroup
+                submitCaption={submitCaption}
+                onSubmit={onSubmit}
+              />
+            </div>
+          </BotCard>
+        )
       }
     ])
   }
@@ -87,7 +103,11 @@ export const FooterButtonGroup = ({
             <div className="p-2 w-[50%]" key={index}>
               <Button
                 onClick={() =>
-                  onClick(availableButton.caption, availableButton.response)
+                  onClick(
+                    availableButton.caption,
+                    availableButton.response,
+                    index === 0
+                  )
                 }
                 size={windowWidth > 768 ? '3' : '1'}
                 className="bottom-button"

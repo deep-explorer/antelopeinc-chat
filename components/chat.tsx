@@ -13,11 +13,11 @@ import { Message } from '@/lib/chat/actions'
 import { toast } from 'sonner'
 import { PromptForm } from './prompt-form'
 import { PromptUsageWidget } from './prompt-usage-widget'
-import type { AI } from '@/lib/chat/actions'
+import type { AI, ChatId } from '@/lib/chat/actions'
 
 export interface ChatProps extends React.ComponentProps<'div'> {
   initialScreen?: React.ReactNode
-  id?: string
+  id?: ChatId
   session?: Session
   missingKeys: string[]
 }
@@ -38,13 +38,13 @@ export function Chat({
 
   const [_, setNewChatId] = useLocalStorage('newChatId', id)
 
-  useEffect(() => {
-    if (session?.user) {
-      if (!path.includes('chat') && messages.length === 1) {
-        window.history.replaceState({}, '', `/chat/${id}`)
-      }
-    }
-  }, [id, path, session?.user, messages])
+  // useEffect(() => {
+  //   if (session?.user) {
+  //     if (!path.includes('chat') && messages.length === 1) {
+  //       window.history.replaceState({}, '', `/chat/${id}`)
+  //     }
+  //   }
+  // }, [id, path, session?.user, messages])
 
   useEffect(() => {
     setMessages([])

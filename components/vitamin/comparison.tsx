@@ -22,6 +22,7 @@ import { sleep } from 'openai/core'
 import { useEffect, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
 import { fetcher } from '@/lib/utils'
+import { FooterButtonGroup } from './footer-button-group'
 
 export function Comparison() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -53,46 +54,42 @@ export function Comparison() {
       .catch(e => console.log(e))
   }, [])
 
-  const onClick = async (index: number) => {
-    if (index === 0) {
-      setMessages(currentMessages => [
-        ...currentMessages,
-        {
-          id: nanoid(),
-          display: <UserMessage>Feedback Analysis</UserMessage>
-        }
-      ])
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-      })
-      await sleep(500)
-      setMessages(currentMessages => [
-        ...currentMessages,
-        {
-          id: nanoid(),
-          display: (
-            <BotCard>
-              <CardSkeleton />
-            </BotCard>
-          )
-        }
-      ])
-      await sleep(2000)
-      setMessages(currentMessages => [
-        ...currentMessages.slice(0, -1),
-        {
-          id: nanoid(),
-          display: (
-            <BotCard>
-              <FeedbackAnalysis />
-            </BotCard>
-          )
-        }
-      ])
-    } else {
-      window.open(companyUrl, '_blank')
-    }
+  const onClick = async () => {
+    setMessages(currentMessages => [
+      ...currentMessages,
+      {
+        id: nanoid(),
+        display: <UserMessage>Feedback Analysis</UserMessage>
+      }
+    ])
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    })
+    await sleep(500)
+    setMessages(currentMessages => [
+      ...currentMessages,
+      {
+        id: nanoid(),
+        display: (
+          <BotCard>
+            <CardSkeleton />
+          </BotCard>
+        )
+      }
+    ])
+    await sleep(2000)
+    setMessages(currentMessages => [
+      ...currentMessages.slice(0, -1),
+      {
+        id: nanoid(),
+        display: (
+          <BotCard>
+            <FeedbackAnalysis />
+          </BotCard>
+        )
+      }
+    ])
   }
 
   return (
@@ -139,23 +136,10 @@ export function Comparison() {
             the analysis, or learn more about Antelope&apos;s reporting
             solutions?
           </p>
-          <div className="flex flex-wrap">
-            {availableButtons.map((availableButton, index) => (
-              <div className="p-1 w-[50%]" key={index}>
-                <Button
-                  onClick={() => onClick(index)}
-                  size={windowWidth > 768 ? '3' : '1'}
-                  style={{
-                    width: '100%',
-                    height: windowWidth > 768 ? 61 : 36,
-                    letterSpacing: -0.5
-                  }}
-                >
-                  {availableButton.caption}
-                </Button>
-              </div>
-            ))}
-          </div>
+          <FooterButtonGroup
+            submitCaption="Feedback Analysis"
+            onSubmit={onClick}
+          />
         </>
       ) : (
         <div className="flex flex-col gap-6 mt-[-48px] z-10">

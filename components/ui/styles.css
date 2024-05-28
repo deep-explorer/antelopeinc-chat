@@ -86,3 +86,13 @@
     height: 0;
   }
 }
+
+.bottom-button {
+  background-color: #31636a !important;
+  width: 100%;
+  letter-spacing: -0.5;
+}
+
+.bottom-button:hover {
+  background-color: #188b84 !important;
+}

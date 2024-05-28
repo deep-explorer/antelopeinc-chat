@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react'
+import { Fragment, ReactElement, useState } from 'react'
 import { IScoreCard, ScoreCard } from './vitamin/sub/score-card'
 import { IScalar, IScalarElement, Scalar } from './vitamin/sub/scalar'
 import { useWindowSize } from 'usehooks-ts'
@@ -97,7 +97,7 @@ export const ContentTemplate = ({
 
       <ElementsWrapper type={type} child={children[0]} caption={caption}>
         {children.map((child, index) => (
-          <>
+          <Fragment key={index}>
             {child.display === 'container' && (
               <ContentTemplate {...child} containerClassName="gap-1 md:gap-2" />
             )}
@@ -110,7 +110,7 @@ export const ContentTemplate = ({
             {child.type === 'explainer' && (
               <Explainer {...child} className="mr-3" />
             )}
-          </>
+          </Fragment>
         ))}
       </ElementsWrapper>
 

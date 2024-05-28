@@ -402,8 +402,13 @@ export type Message = {
   name?: string
 }
 
+export type ChatId =
+  | 'linkedin-analyzer'
+  | 'vitamin-analyzer'
+  | 'content-intelligence'
+
 export type AIState = {
-  chatId: string
+  chatId: ChatId
   messages: Message[]
 }
 
@@ -418,7 +423,7 @@ export const AI = createAI<AIState, UIState>({
     confirmPurchase
   },
   initialUIState: [],
-  initialAIState: { chatId: nanoid(), messages: [] },
+  initialAIState: { chatId: 'linkedin-analyzer', messages: [] },
   unstable_onGetUIState: async () => {
     'use server'
 

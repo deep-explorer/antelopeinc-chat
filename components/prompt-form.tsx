@@ -16,9 +16,9 @@ import {
 } from '@/components/ui/tooltip'
 import { useEnterSubmit } from '@/lib/hooks/use-enter-submit'
 import { nanoid } from 'nanoid'
-import { useRouter } from 'next/navigation'
 import { fetcher } from '@/lib/utils'
 import { FileIcon, LinkedInLogoIcon } from '@radix-ui/react-icons'
+import { usePathname } from 'next/navigation'
 
 export function PromptForm({
   input,
@@ -27,11 +27,11 @@ export function PromptForm({
   input: string
   setInput: (value: string) => void
 }) {
-  const router = useRouter()
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
   const { submitUserMessage } = useActions()
   const [_, setMessages] = useUIState<typeof AI>()
+  const pathname = usePathname()
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: acceptedFiles => {
@@ -176,8 +176,8 @@ export function PromptForm({
               tabIndex={0}
               onKeyDown={onKeyDown}
               placeholder="Message Antelope"
-              className="min-h-[48px] max-h-16 w-full resize-none bg-transparent p-1 md:pl-4 md:pr-14 py-3 focus-within:outline-none sm:text-sm cursor-not-allowed"
-              disabled={true}
+              className={`min-h-[48px] max-h-16 w-full resize-none bg-transparent p-1 md:pl-4 md:pr-14 py-3 focus-within:outline-none sm:text-sm ${pathname !== '/vitamin-analyzer' ? 'cursor-not-allowed' : ''}`}
+              disabled={pathname !== '/vitamin-analyzer'}
               // autoFocus
               spellCheck={false}
               autoComplete="off"
@@ -195,7 +195,7 @@ export function PromptForm({
                     variant={'outline'}
                     type="submit"
                     size="icon"
-                    disabled={input === ''}
+                    disabled={input === '' && pathname !== '/vitamin-analyzer'}
                   >
                     <span>
                       <div

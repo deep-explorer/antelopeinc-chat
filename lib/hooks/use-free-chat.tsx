@@ -12,6 +12,9 @@ interface FreeChatContext {
 
   isScheduleDialogOpened: boolean //  TODO: move to UI context
   openScheduleDialog: (flag: boolean) => void //  TODO: move to UI context
+
+  footerButtonIndex: number //  TODO: move to UI context
+  setFooterButtonIndex: (index: number) => void //  TODO: move to UI context
 }
 
 const FreeChatContext = React.createContext<FreeChatContext>({
@@ -23,7 +26,9 @@ const FreeChatContext = React.createContext<FreeChatContext>({
   setEmailVerified: () => {},
 
   isScheduleDialogOpened: false,
-  openScheduleDialog: () => {}
+  openScheduleDialog: () => {},
+  footerButtonIndex: 0,
+  setFooterButtonIndex: () => {}
 })
 
 export function useFreeChatContext() {
@@ -43,6 +48,7 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
   const [userEmail, setUserEmail] = React.useState('')
   const [isEmailVerified, setEmailVerified] = React.useState(false)
   const [isScheduleDialogOpened, openScheduleDialog] = React.useState(false)
+  const [footerButtonIndex, setFooterButtonIndex] = React.useState(0)
 
   return (
     <FreeChatContext.Provider
@@ -54,7 +60,9 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
         setUserEmail,
         setEmailVerified,
         isScheduleDialogOpened,
-        openScheduleDialog
+        openScheduleDialog,
+        footerButtonIndex,
+        setFooterButtonIndex
       }}
     >
       {children}

@@ -1,14 +1,13 @@
 'use client'
 
-import { Button } from '@radix-ui/themes'
 import { BotCard, UserMessage } from '../stocks/message'
-import { SendUsMessage } from '../send-us-message'
 import { Loading } from './loading'
 import { DataOverview } from './data-overview'
 import { Comparison } from './comparison'
 import { FeedbackAnalysis } from './feedback-analysis'
 import { ContentPerformance } from './content-performance'
 import { ResearchRecommendations } from './research-recommendations'
+import { SendUsMessage } from '../send-us-message'
 import { ThankYou } from './sub/thank-you'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
@@ -19,13 +18,12 @@ import {
   renzoClientID
 } from '@/lib/constants/config'
 import { fetcher, sleep } from '@/lib/utils'
-import { useWindowSize } from 'usehooks-ts'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { LogoCarousel } from './sub/logo-carousel'
 import { useEffect, useState } from 'react'
+import { FooterButtonGroup } from './footer-button-group'
 
 export function InitialMessage() {
-  const { width: windowWidth } = useWindowSize()
   const [_, setMessages] = useUIState<typeof AI>()
   const [logos, setLogos] = useState<string[]>([])
 
@@ -43,57 +41,54 @@ export function InitialMessage() {
       .catch(e => console.log(e))
   }, [])
 
-  const onClick = async (index: number) => {
-    if (index === 0) {
-      setMessages([
-        {
-          id: nanoid(),
-          display: <UserMessage>Start the Analysis</UserMessage>
-        }
-      ])
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-      })
-      await sleep(500)
-      setMessages(currentMessages => [
-        ...currentMessages,
-        {
-          id: nanoid(),
-          display: (
-            <BotCard>
-              <Loading />
-            </BotCard>
-          )
-        }
-      ])
-      await sleep(3000)
-      setMessages(currentMessages => [
-        ...currentMessages,
-        {
-          id: nanoid(),
-          display: (
-            <BotCard>
-              <CardSkeleton />
-            </BotCard>
-          )
-        }
-      ])
-      await sleep(2000)
-      setMessages(currentMessages => [
-        ...currentMessages.slice(0, -1),
-        {
-          id: nanoid(),
-          display: (
-            <BotCard>
-              <DataOverview />
-            </BotCard>
-          )
-        }
-      ])
-    } else {
-      window.open(companyUrl, '_blank')
-    }
+  const onClick = async () => {
+    setMessages(currentMessages => [
+      ...currentMessages,
+      {
+        id: nanoid(),
+        display: <UserMessage>Start the Analysis</UserMessage>
+      }
+    ])
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    })
+    await sleep(500)
+    setMessages(currentMessages => [
+      ...currentMessages,
+      {
+        id: nanoid(),
+        display: (
+          <BotCard>
+            <Loading />
+          </BotCard>
+        )
+      }
+    ])
+    await sleep(3000)
+    setMessages(currentMessages => [
+      ...currentMessages,
+      {
+        id: nanoid(),
+        display: (
+          <BotCard>
+            <CardSkeleton />
+          </BotCard>
+        )
+      }
+    ])
+    await sleep(2000)
+    setMessages(currentMessages => [
+      ...currentMessages.slice(0, -1),
+      {
+        id: nanoid(),
+        display: (
+          <BotCard>
+            <DataOverview />
+          </BotCard>
+        )
+      }
+    ])
   }
 
   return (
@@ -111,26 +106,10 @@ export function InitialMessage() {
             competitors and offers ways to improve its overall strategy through
             this insight.
           </p>
-          <p className="text-sm md:text-base px-2">
-            To begin, please select an option below:
-          </p>
-          <div className="flex flex-wrap">
-            {availableButtons.map((availableButton, index) => (
-              <div className="p-1 w-[50%]" key={index}>
-                <Button
-                  onClick={() => onClick(index)}
-                  size={windowWidth > 768 ? '3' : '1'}
-                  style={{
-                    width: '100%',
-                    height: windowWidth > 768 ? 61 : 36,
-                    letterSpacing: -0.5
-                  }}
-                >
-                  {availableButton.caption}
-                </Button>
-              </div>
-            ))}
-          </div>
+          <FooterButtonGroup
+            submitCaption="Start the Analysis"
+            onSubmit={onClick}
+          />
         </div>
       </BotCard>
       {/* 
@@ -162,18 +141,3 @@ export function InitialMessage() {
     </>
   )
 }
-
-const availableButtons = [
-  {
-    caption: 'Start the Analysis'
-  },
-  {
-    caption: 'Tell Me About Antelope'
-  },
-  {
-    caption: 'Book a Demo'
-  },
-  {
-    caption: 'Show Me Case Studies'
-  }
-]

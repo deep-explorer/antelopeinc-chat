@@ -1,26 +1,20 @@
 'use client'
 
-import { Button } from '@radix-ui/themes'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
 import { Comparison } from './comparison'
-import {
-  antelopeEndpoint,
-  companyUrl,
-  renzoClientID
-} from '@/lib/constants/config'
+import { antelopeEndpoint, renzoClientID } from '@/lib/constants/config'
 import { BotCard, UserMessage } from '../stocks/message'
-import { useWindowSize } from 'usehooks-ts'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { sleep } from 'openai/core'
 import { useEffect, useState } from 'react'
 import { fetcher } from '@/lib/utils'
 import { ContentTemplate, IContainer } from '../content-template'
+import { FooterButtonGroup } from './footer-button-group'
 
 export function DataOverview() {
   const [_, setMessages] = useUIState<typeof AI>()
-  const { width: windowWidth } = useWindowSize()
   const [content, setContent] = useState<IContainer | null>(null)
 
   //  TODO: combine with server component
@@ -34,46 +28,42 @@ export function DataOverview() {
       .catch(e => console.log(e))
   }, [])
 
-  const onClick = async (index: number) => {
-    if (index === 0) {
-      setMessages(currentMessages => [
-        ...currentMessages,
-        {
-          id: nanoid(),
-          display: <UserMessage>Start Comparison</UserMessage>
-        }
-      ])
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-      })
-      await sleep(500)
-      setMessages(currentMessages => [
-        ...currentMessages,
-        {
-          id: nanoid(),
-          display: (
-            <BotCard>
-              <CardSkeleton />
-            </BotCard>
-          )
-        }
-      ])
-      await sleep(2000)
-      setMessages(currentMessages => [
-        ...currentMessages.slice(0, -1),
-        {
-          id: nanoid(),
-          display: (
-            <BotCard>
-              <Comparison />
-            </BotCard>
-          )
-        }
-      ])
-    } else {
-      window.open(companyUrl, '_blank')
-    }
+  const onClick = async () => {
+    setMessages(currentMessages => [
+      ...currentMessages,
+      {
+        id: nanoid(),
+        display: <UserMessage>Start Comparison</UserMessage>
+      }
+    ])
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    })
+    await sleep(500)
+    setMessages(currentMessages => [
+      ...currentMessages,
+      {
+        id: nanoid(),
+        display: (
+          <BotCard>
+            <CardSkeleton />
+          </BotCard>
+        )
+      }
+    ])
+    await sleep(2000)
+    setMessages(currentMessages => [
+      ...currentMessages.slice(0, -1),
+      {
+        id: nanoid(),
+        display: (
+          <BotCard>
+            <Comparison />
+          </BotCard>
+        )
+      }
+    ])
   }
 
   return (
@@ -82,41 +72,13 @@ export function DataOverview() {
         <ContentTemplate
           {...content}
           footer={
-            <div className="flex flex-wrap">
-              {availableButtons.map((availableButton, index) => (
-                <div className="p-1 w-[50%]" key={index}>
-                  <Button
-                    onClick={() => onClick(index)}
-                    size={windowWidth > 768 ? '3' : '1'}
-                    style={{
-                      width: '100%',
-                      height: windowWidth > 768 ? 61 : 36,
-                      letterSpacing: -0.5
-                    }}
-                  >
-                    {availableButton.caption}
-                  </Button>
-                </div>
-              ))}
-            </div>
+            <FooterButtonGroup
+              submitCaption="Start Comparison"
+              onSubmit={onClick}
+            />
           }
         />
       ) : null}
     </>
   )
 }
-
-const availableButtons = [
-  {
-    caption: 'Start Comparison'
-  },
-  {
-    caption: 'Tell Me About Antelope'
-  },
-  {
-    caption: 'Book a Demo'
-  },
-  {
-    caption: 'Show Me Case Studies'
-  }
-]

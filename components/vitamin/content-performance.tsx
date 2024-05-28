@@ -1,28 +1,18 @@
-import { Button } from '@radix-ui/themes'
-import { MapChart } from './sub/map-chart'
-// import { CircularGaugeCard } from './sub/gauge-card'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
 import { BotCard, UserMessage } from '../stocks/message'
 import { ResearchRecommendations } from './research-recommendations'
-import {
-  antelopeEndpoint,
-  companyUrl,
-  renzoClientID
-} from '@/lib/constants/config'
-import { useWindowSize } from 'usehooks-ts'
+import { antelopeEndpoint, renzoClientID } from '@/lib/constants/config'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { sleep } from 'openai/core'
-import { Carousel } from '../ui/carousel'
 import { useEffect, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
 import { fetcher } from '@/lib/utils'
+import { FooterButtonGroup } from './footer-button-group'
 
 export function ContentPerformance() {
   const [_, setMessages] = useUIState<typeof AI>()
-  const { width: windowWidth } = useWindowSize()
-  const [carouselIndex, setCarouselIndex] = useState(0)
 
   const [contentPerformance, setContentPerformance] =
     useState<IContainer | null>(null)
@@ -47,46 +37,42 @@ export function ContentPerformance() {
       .catch(e => console.log(e))
   }, [])
 
-  const onClick = async (index: number) => {
-    if (index === 0) {
-      setMessages(currentMessages => [
-        ...currentMessages,
-        {
-          id: nanoid(),
-          display: <UserMessage>Suggest Research</UserMessage>
-        }
-      ])
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-      })
-      await sleep(500)
-      setMessages(currentMessages => [
-        ...currentMessages,
-        {
-          id: nanoid(),
-          display: (
-            <BotCard>
-              <CardSkeleton />
-            </BotCard>
-          )
-        }
-      ])
-      await sleep(2000)
-      setMessages(currentMessages => [
-        ...currentMessages.slice(0, -1),
-        {
-          id: nanoid(),
-          display: (
-            <BotCard>
-              <ResearchRecommendations />
-            </BotCard>
-          )
-        }
-      ])
-    } else {
-      window.open(companyUrl, '_blank')
-    }
+  const onClick = async () => {
+    setMessages(currentMessages => [
+      ...currentMessages,
+      {
+        id: nanoid(),
+        display: <UserMessage>Suggest Research</UserMessage>
+      }
+    ])
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    })
+    await sleep(500)
+    setMessages(currentMessages => [
+      ...currentMessages,
+      {
+        id: nanoid(),
+        display: (
+          <BotCard>
+            <CardSkeleton />
+          </BotCard>
+        )
+      }
+    ])
+    await sleep(2000)
+    setMessages(currentMessages => [
+      ...currentMessages.slice(0, -1),
+      {
+        id: nanoid(),
+        display: (
+          <BotCard>
+            <ResearchRecommendations />
+          </BotCard>
+        )
+      }
+    ])
   }
 
   return (
@@ -102,23 +88,10 @@ export function ContentPerformance() {
                 Antelope team provide for research to build upon on your
                 strengths and weaknesses
               </p>
-              <div className="flex flex-wrap">
-                {availableButtons.map((availableButton, index) => (
-                  <div className="p-1 w-[50%]" key={index}>
-                    <Button
-                      onClick={() => onClick(index)}
-                      size={windowWidth > 768 ? '3' : '1'}
-                      style={{
-                        width: '100%',
-                        height: windowWidth > 768 ? 61 : 36,
-                        letterSpacing: -0.5
-                      }}
-                    >
-                      {availableButton.caption}
-                    </Button>
-                  </div>
-                ))}
-              </div>
+              <FooterButtonGroup
+                submitCaption="Suggest Research"
+                onSubmit={onClick}
+              />
             </>
           }
         />
@@ -126,18 +99,3 @@ export function ContentPerformance() {
     </>
   )
 }
-
-const availableButtons = [
-  {
-    caption: 'Suggest Research'
-  },
-  {
-    caption: 'Tell Me About Antelope'
-  },
-  {
-    caption: 'Book a Demo'
-  },
-  {
-    caption: 'Show Me Case Studies'
-  }
-]

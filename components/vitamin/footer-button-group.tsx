@@ -96,188 +96,161 @@ const cycleButtons = [
   {
     caption: 'Tell Me About Antelope',
     response: (
-      <div>
-        <p>
-          Antelope is a strategy and insights team that turns your
-          industry&apos;s content and customer feedback into customized research
-          with artificial intelligence. We leverage cutting-edge AI to analyze
-          your customer feedback and content at scale. For more details, visit
-          our website.
-        </p>
-        <i>
-          <Link href={`${companyUrl}/#banner`} target="_blank" rel="noreferrer">
-            Learn More
-          </Link>
-        </i>
-      </div>
+      <p>
+        Antelope is a strategy and insights team that turns your industry&apos;s
+        content and customer feedback into customized research with artificial
+        intelligence. We leverage cutting-edge AI to analyze your customer
+        feedback and content at scale. For more details,{' '}
+        <Link
+          href={`${companyUrl}/#banner`}
+          target="_blank"
+          rel="noreferrer"
+          className="italic hover:underline text-primary"
+        >
+          visit our website.
+        </Link>
+      </p>
     )
   },
   {
     caption: 'Data Sources',
     response: (
-      <div>
-        <p>
-          Antelope integrates data from all major social networks and over 50
-          top review sources to provide unmatched industry insights. For more
-          details, visit our website.
-          <i>
-            <Link
-              href={`${companyUrl}/#banner`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Learn More
-            </Link>
-          </i>
-        </p>
-      </div>
+      <p>
+        Antelope integrates data from all major social networks and over 50 top
+        review sources to provide unmatched industry insights. For more details,{' '}
+        <Link
+          href={`${companyUrl}/#banner`}
+          target="_blank"
+          rel="noreferrer"
+          className="italic hover:underline text-primary"
+        >
+          visit our website.
+        </Link>
+      </p>
     )
   },
   {
     caption: 'Client Success',
     response: (
-      <div>
-        <p>
-          Antelope works with some of the world&apos;s largest brands and
-          agencies across several industries, including financial services,
-          retail, and CPG. For more details, check out our website.
-          <i>
-            <Link
-              href={`${companyUrl}/#banner`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Learn More
-            </Link>
-          </i>
-        </p>
-      </div>
+      <p>
+        Antelope works with some of the world&apos;s largest brands and agencies
+        across several industries, including financial services, retail, and
+        CPG. For more details,{' '}
+        <Link
+          href={`${companyUrl}/#banner`}
+          target="_blank"
+          rel="noreferrer"
+          className="italic hover:underline text-primary"
+        >
+          check out our website.
+        </Link>
+      </p>
     )
   },
   {
     caption: 'Content AI',
     response: (
-      <div>
-        <p>
-          Our Content AI uses advanced vision analysis to evaluate images and
-          videos across multiple channels. For examples of our work, check out
-          our case studies page.
-          <i>
-            <Link
-              href={`${companyUrl}/#banner`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Learn More
-            </Link>
-          </i>
-        </p>
-      </div>
+      <p>
+        Our Content AI uses advanced vision analysis to evaluate images and
+        videos across multiple channels. For examples of our work,{' '}
+        <Link
+          href={`${companyUrl}/#banner`}
+          target="_blank"
+          rel="noreferrer"
+          className="italic hover:underline text-primary"
+        >
+          check out our case studies page.
+        </Link>
+      </p>
     )
   },
   {
     caption: 'Feedback AI',
     response: (
-      <div>
-        <p>
-          Our Feedback AI uses natural language processing to categorize and
-          summarize customer reviews and comments, providing actionable
-          insights. For examples of our work, check out our case studies page.
-          <i>
-            <Link
-              href={`${companyUrl}/#banner`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Learn More
-            </Link>
-          </i>
-        </p>
-      </div>
+      <p>
+        Our Feedback AI uses natural language processing to categorize and
+        summarize customer reviews and comments, providing actionable insights.
+        For examples of our work,{' '}
+        <Link
+          href={`${companyUrl}/#banner`}
+          target="_blank"
+          rel="noreferrer"
+          className="italic hover:underline text-primary"
+        >
+          check out our case studies page.
+        </Link>
+      </p>
     )
   },
   {
     caption: 'Product Development Insights',
     response: (
-      <div>
-        <p>
-          Antelope helps identify product features that customers value most,
-          guiding your development process to enhance satisfaction and loyalty.
-          Visit our case studies page to learn more.
-          <i>
-            <Link
-              href={`${companyUrl}/#banner`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Learn More
-            </Link>
-          </i>
-        </p>
-      </div>
+      <p>
+        Antelope helps identify product features that customers value most,
+        guiding your development process to enhance satisfaction and loyalty.{' '}
+        <Link
+          href={`${companyUrl}/#banner`}
+          target="_blank"
+          rel="noreferrer"
+          className="italic hover:underline text-primary"
+        >
+          Visit our case studies page
+        </Link>{' '}
+        to learn more.
+      </p>
     )
   },
   {
     caption: 'Branding Insights',
     response: (
-      <div>
-        <p>
-          Antelope&apos;s platform uses real customer feedback to better
-          understand your brand health and pinpoint industry white space. Visit
-          our case studies page to learn more.{' '}
-          <i>
-            <Link
-              href={`${companyUrl}/#banner`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Learn More
-            </Link>
-          </i>
-        </p>
-      </div>
+      <p>
+        Antelope&apos;s platform uses real customer feedback to better
+        understand your brand health and pinpoint industry white space.{' '}
+        <Link
+          href={`${companyUrl}/#banner`}
+          target="_blank"
+          rel="noreferrer"
+          className="italic hover:underline text-primary"
+        >
+          Visit our case studies page
+        </Link>{' '}
+        to learn more.
+      </p>
     )
   },
   {
     caption: 'Marketing Insights',
     response: (
-      <div>
-        <p>
-          Antelope determines the best content, channels, and campaigns to drive
-          awareness and purchase intent, enhancing your marketing strategy.
-          Visit our case studies page to learn more.{' '}
-          <i>
-            <Link
-              href={`${companyUrl}/#banner`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Learn More
-            </Link>
-          </i>
-        </p>
-      </div>
+      <p>
+        Antelope determines the best content, channels, and campaigns to drive
+        awareness and purchase intent, enhancing your marketing strategy.{' '}
+        <Link
+          href={`${companyUrl}/#banner`}
+          target="_blank"
+          rel="noreferrer"
+          className="italic hover:underline text-primary"
+        >
+          Visit our case studies page
+        </Link>
+      </p>
     )
   },
   {
     caption: 'Customer Support and Experience',
     response: (
-      <div>
-        <p>
-          Antelope identifies pain points and issues, providing deeper product
-          and category knowledge to enhance customer support. Visit our case
-          studies page to learn more.{' '}
-          <i>
-            <Link
-              href={`${companyUrl}/#banner`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Learn More
-            </Link>
-          </i>
-        </p>
-      </div>
+      <p>
+        Antelope identifies pain points and issues, providing deeper product and
+        category knowledge to enhance customer support.{' '}
+        <Link
+          href={`${companyUrl}/#banner`}
+          target="_blank"
+          rel="noreferrer"
+          className="italic hover:underline text-primary"
+        >
+          Visit our case studies page
+        </Link>{' '}
+        to learn more.
+      </p>
     )
   }
 ]
@@ -286,23 +259,20 @@ const availableButtons = [
   {
     caption: 'View Case Studies',
     response: (
-      <div>
-        <p>
-          Our case studies section on our website offers an in-depth analysis of
-          our strategic offerings and research, segmented by reporting
-          objectives to provide detailed insights. Please visit our website to
-          explore and access the information.
-          <i>
-            <Link
-              href={`${companyUrl}/case-study`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Learn More
-            </Link>
-          </i>
-        </p>
-      </div>
+      <p>
+        Our case studies section on our website offers an in-depth analysis of
+        our strategic offerings and research, segmented by reporting objectives
+        to provide detailed insights. Please{' '}
+        <Link
+          href={`${companyUrl}/case-study`}
+          target="_blank"
+          rel="noreferrer"
+          className="italic hover:underline text-primary"
+        >
+          visit our website
+        </Link>{' '}
+        to explore and access the information.
+      </p>
     )
   },
   {
@@ -312,30 +282,26 @@ const availableButtons = [
   {
     caption: 'Book a Demo',
     response: (
-      <div>
-        <p>
-          To connect with a member of our team, please{' '}
-          <i>
-            <Link
-              href={`https://go.oncehub.com/DanielRobinson`}
-              target="_blank"
-            >
-              click this link
-            </Link>
-          </i>{' '}
-          to schedule a meeting at your convenience. You can also{' '}
-          <i>
-            <Link
-              href={`${companyUrl}/#get-in-touch`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              send us a message
-            </Link>
-          </i>{' '}
-          or email us at contact@antelopeinc.com.
-        </p>
-      </div>
+      <p>
+        To connect with a member of our team, please{' '}
+        <Link
+          href={`https://go.oncehub.com/DanielRobinson`}
+          target="_blank"
+          className="italic hover:underline text-primary"
+        >
+          click this link
+        </Link>{' '}
+        to schedule a meeting at your convenience. You can also{' '}
+        <Link
+          href={`${companyUrl}/#get-in-touch`}
+          target="_blank"
+          rel="noreferrer"
+          className="italic hover:underline text-primary"
+        >
+          send us a message
+        </Link>{' '}
+        or email us at contact@antelopeinc.com.
+      </p>
     )
   }
 ]

@@ -10,7 +10,8 @@ import {
 import { useWindowSize } from 'usehooks-ts'
 import { useEffect, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
-import { fetcher, showPrompts } from '@/lib/utils'
+import { fetcher } from '@/lib/utils'
+import { showPrompts } from '@/lib/chat/prompt'
 
 export function ResearchRecommendations() {
   const [_, setMessages] = useUIState<typeof AI>()

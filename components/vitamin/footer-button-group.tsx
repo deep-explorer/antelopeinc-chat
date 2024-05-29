@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { ReactElement, useMemo } from 'react'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
-import { showPrompts } from '@/lib/utils'
+import { showPrompts } from '@/lib/chat/prompt'
 
 interface FooterButtonGroupProps {
   submitCaption: string

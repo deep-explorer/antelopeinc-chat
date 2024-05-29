@@ -391,7 +391,8 @@ async function submitUserMessage(content: string) {
 
   return {
     id: nanoid(),
-    display: ui
+    display: ui,
+    role: 'response'
   }
 }
 
@@ -415,7 +416,7 @@ export type AIState = {
 export type UIState = {
   id: string
   display: React.ReactNode
-  role: 'user' | 'assistant' | 'system' | 'function' | 'data' | 'tool'
+  role: 'user' | 'assistant' | 'system' | 'response'
 }[]
 
 export const AI = createAI<AIState, UIState>({
@@ -498,6 +499,7 @@ export const getUIStateFromAIState = (aiState: Chat) => {
           <UserMessage>{message.content}</UserMessage>
         ) : (
           <BotMessage content={message.content} />
-        )
+        ),
+      role: message.role
     }))
 }

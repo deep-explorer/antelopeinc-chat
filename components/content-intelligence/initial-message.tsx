@@ -28,12 +28,11 @@ export function InitialMessage() {
         {
           id: nanoid(),
           display: (
-            <BotCard>
-              <p className="text-sm md:text-base font-semibold">
-                Sorry, something went wrong. Please try again.
-              </p>
-            </BotCard>
-          )
+            <p className="text-sm md:text-base font-semibold">
+              Sorry, something went wrong. Please try again.
+            </p>
+          ),
+          role: 'assistant'
         }
       ])
     }

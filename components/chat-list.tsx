@@ -55,6 +55,7 @@ export function ChatList({ messages, session, isShared }: ChatList) {
           {message.role === 'user' && (
             <UserMessage key={message.id}>{message.display}</UserMessage>
           )}
+          {message.role === 'response' && message.display}
         </>
       ))}
     </div>

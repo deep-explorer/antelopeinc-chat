@@ -1,9 +1,6 @@
 import { clsx, type ClassValue } from 'clsx'
 import { customAlphabet } from 'nanoid'
-import { ReactElement } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { UIState } from './chat/actions'
-import { CardSkeleton } from '../components/ui/card-skeleton'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -89,38 +86,4 @@ export const getMessageFromCode = (resultCode: string) => {
     case ResultCode.UserLoggedIn:
       return 'Logged in!'
   }
-}
-
-export const showPrompts = async (
-  userPrompt: string | ReactElement,
-  assistantPrompt: string | ReactElement,
-  setMessages: (v: UIState | ((v_: UIState) => UIState)) => void
-) => {
-  setMessages(currentMessages => [
-    ...currentMessages,
-    {
-      id: nanoid(),
-      display: userPrompt,
-      role: 'user'
-    },
-    {
-      id: nanoid(),
-      display: <CardSkeleton />,
-      role: 'assistant'
-    }
-  ])
-  await sleep(100) //  NOTE: to wait for actual UI update
-  window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: 'smooth'
-  })
-  await sleep(2000)
-  setMessages(currentMessages => [
-    ...currentMessages.slice(0, -1),
-    {
-      id: nanoid(),
-      display: assistantPrompt,
-      role: 'assistant'
-    }
-  ])
 }

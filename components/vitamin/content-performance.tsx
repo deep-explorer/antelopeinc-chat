@@ -4,8 +4,9 @@ import { ResearchRecommendations } from './research-recommendations'
 import { antelopeEndpoint, renzoClientID } from '@/lib/constants/config'
 import { useEffect, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
-import { fetcher, showPrompts } from '@/lib/utils'
+import { fetcher } from '@/lib/utils'
 import { FooterButtonGroup } from './footer-button-group'
+import { showPrompts } from '@/lib/chat/prompt'
 
 export function ContentPerformance() {
   const [_, setMessages] = useUIState<typeof AI>()

@@ -21,16 +21,6 @@ export function CardSkeleton() {
           fringilla sed commodo sed, aliquet nec magna.
         </p>
       </Skeleton>
-      <Skeleton>
-        <p className="text-sm md:text-base">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          felis tellus, efficitur id convallis a, viverra eget libero. Nam magna
-          erat, fringilla sed commodo sed, aliquet nec magna. Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit. Pellentesque felis tellus,
-          efficitur id convallis a, viverra eget libero. Nam magna erat,
-          fringilla sed commodo sed, aliquet nec magna.
-        </p>
-      </Skeleton>
     </div>
   )
 }

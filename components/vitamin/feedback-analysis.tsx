@@ -7,9 +7,10 @@ import { ContentPerformance } from './content-performance'
 import { Carousel } from '../ui/carousel'
 import { useEffect, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
-import { fetcher, showPrompts } from '@/lib/utils'
+import { fetcher } from '@/lib/utils'
 import { SocialRatingCard } from './sub/social-rating-card'
 import { FooterButtonGroup } from './footer-button-group'
+import { showPrompts } from '@/lib/chat/prompt'
 
 export function FeedbackAnalysis() {
   const [_, setMessages] = useUIState<typeof AI>()

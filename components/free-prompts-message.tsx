@@ -3,7 +3,7 @@ import { sleep } from '@/lib/utils'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
-import { BotCard, UserMessage } from './stocks/message'
+import { BotCard } from './stocks/message'
 import { ChatSpinner } from './stocks/ChatSpinner'
 import { ScheduleMessage } from './schedule-message'
 import { useRef } from 'react'
@@ -19,25 +19,32 @@ export function FreePromptsMessage() {
       ...currentMessages,
       {
         id: nanoid(),
-        display: <UserMessage>{prompt}</UserMessage>
+        display: prompt,
+        role: 'user'
       },
       {
         id: nanoid(),
         display: (
-          <BotCard>
-            <div className="ml-4 h-[32px] flex flex-row items-center flex-1 space-y-2 overflow-hidden px-1">
-              <ChatSpinner />
-            </div>
-          </BotCard>
-        )
+          <div className="ml-4 h-[32px] flex flex-row items-center flex-1 space-y-2 overflow-hidden px-1">
+            <ChatSpinner />
+          </div>
+        ),
+        role: 'assistant'
       }
     ])
+    await sleep(100) //  NOTE: to wait for actual UI update
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    })
+
     await sleep(3000)
     setMessages(currentMessages => [
       ...currentMessages.slice(0, currentMessages.length - 1),
       {
         id: nanoid(),
-        display: <ScheduleMessage response={response} />
+        display: <ScheduleMessage response={response} />,
+        role: 'assistant'
       }
     ])
   }

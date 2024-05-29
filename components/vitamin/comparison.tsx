@@ -11,8 +11,9 @@ import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { EmailCodeInputMessage } from './email-code-input-message'
 import { useEffect, useRef, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
-import { fetcher, showPrompts } from '@/lib/utils'
+import { fetcher } from '@/lib/utils'
 import { FooterButtonGroup } from './footer-button-group'
+import { showPrompts } from '@/lib/chat/prompt'
 
 export function Comparison() {
   const [_, setMessages] = useUIState<typeof AI>()

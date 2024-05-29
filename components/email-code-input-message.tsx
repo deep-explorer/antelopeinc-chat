@@ -5,7 +5,6 @@ import { spinner } from './stocks'
 import { fetcher } from '@/lib/utils'
 import { useActions, useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
-import { BotCard } from './stocks/message'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { antelopeEndpoint, mode } from '@/lib/constants/config'
 
@@ -48,32 +47,30 @@ export function EmailCodeInputMessage() {
   }
 
   return (
-    <BotCard>
-      <form onSubmit={onSubmit} className="flex flex-col gap-4 text-sm">
-        <h1 className="text-xl font-semibold">Enter your code</h1>
-        <p>Check your email for a confirmation code to continue the chat.</p>
-        <div>
-          <Input
-            placeholder="ABCDEF"
-            className="w-full overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] sm:rounded-md border-[1px] border-[#1F3C45]"
-            value={code}
-            onChange={e => {
-              setCode(e.target.value)
-            }}
-          />
-          <div className="flex gap-2 h-6 p-1">
-            {isValidatingEmail ? (
-              <>
-                {spinner}
-                <p>Validating your code...</p>
-              </>
-            ) : (
-              <p className=" text-red-500 italic">{error}</p>
-            )}
-          </div>
+    <form onSubmit={onSubmit} className="flex flex-col gap-4 text-sm">
+      <h1 className="text-xl font-semibold">Enter your code</h1>
+      <p>Check your email for a confirmation code to continue the chat.</p>
+      <div>
+        <Input
+          placeholder="ABCDEF"
+          className="w-full overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] sm:rounded-md border-[1px] border-[#1F3C45]"
+          value={code}
+          onChange={e => {
+            setCode(e.target.value)
+          }}
+        />
+        <div className="flex gap-2 h-6 p-1">
+          {isValidatingEmail ? (
+            <>
+              {spinner}
+              <p>Validating your code...</p>
+            </>
+          ) : (
+            <p className=" text-red-500 italic">{error}</p>
+          )}
         </div>
-        <Button type="submit">Submit Code</Button>
-      </form>
-    </BotCard>
+      </div>
+      <Button type="submit">Submit Code</Button>
+    </form>
   )
 }

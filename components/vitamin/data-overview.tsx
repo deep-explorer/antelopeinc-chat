@@ -5,9 +5,10 @@ import { AI } from '@/lib/chat/actions'
 import { Comparison } from './comparison'
 import { antelopeEndpoint, renzoClientID } from '@/lib/constants/config'
 import { useEffect, useState } from 'react'
-import { fetcher, showPrompts } from '@/lib/utils'
+import { fetcher } from '@/lib/utils'
 import { ContentTemplate, IContainer } from '../content-template'
 import { FooterButtonGroup } from './footer-button-group'
+import { showPrompts } from '@/lib/chat/prompt'
 
 export function DataOverview() {
   const [_, setMessages] = useUIState<typeof AI>()

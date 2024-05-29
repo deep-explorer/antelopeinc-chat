@@ -69,38 +69,35 @@ export function PromptForm({
     reference?: string
   ) => {
     // Optimistically add user message UI
-    let display = <></>
+    let display: React.ReactElement | string = <></>
 
     switch (type) {
       case 'file':
         display = (
-          <UserMessage>
-            <div className="flex gap-2">
-              <FileIcon />
-              {reference}
-            </div>
-          </UserMessage>
+          <div className="flex gap-2">
+            <FileIcon />
+            {reference}
+          </div>
         )
         break
       case 'profileLink':
         display = (
-          <UserMessage>
-            <div className="flex gap-2">
-              <LinkedInLogoIcon />
-              {reference}
-            </div>
-          </UserMessage>
+          <div className="flex gap-2">
+            <LinkedInLogoIcon />
+            {reference}
+          </div>
         )
         break
       default:
-        display = <UserMessage>{text}</UserMessage>
+        display = text
     }
 
     setMessages(currentMessages => [
       ...currentMessages,
       {
         id: nanoid(),
-        display
+        display,
+        role: 'user'
       }
     ])
 
@@ -110,7 +107,8 @@ export function PromptForm({
         ...currentMessages,
         {
           id: nanoid(),
-          display: <SpinnerMessage />
+          display: <SpinnerMessage />,
+          role: 'assistant'
         }
       ])
       const response = await fetcher(`/api?profileUrl=${input}`)

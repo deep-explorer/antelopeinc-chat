@@ -83,7 +83,9 @@ export function BotCard({
     <div
       className="max-w-[816px] my-4"
       style={{
-        minHeight: isLastMessage ? 'calc(100vh - 320px)' : ''
+        minHeight: isLastMessage
+          ? `calc(100vh - ${windowWidth > 768 ? '320px' : '280px'})`
+          : ''
       }}
     >
       <div className="relative flex gap-2 md:gap-3">

@@ -6,7 +6,6 @@ import { fetcher } from '@/lib/utils'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
-import { BotCard } from './stocks/message'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { diposableEmailBlocklist } from '@/lib/constants/diposable-email-blocklist'
 import { EmailCodeInputMessage } from './email-code-input-message'
@@ -48,7 +47,8 @@ export function EmailInputMessage() {
             ...currentMessages,
             {
               id: nanoid(),
-              display: <EmailCodeInputMessage />
+              display: <EmailCodeInputMessage />,
+              role: 'assistant'
             }
           ])
         } catch (e: any) {
@@ -64,38 +64,36 @@ export function EmailInputMessage() {
   }
 
   return (
-    <BotCard>
-      <form onSubmit={onSubmit} className="flex flex-col gap-4 text-sm">
-        <h1 className="text-xl font-semibold">Report Ready</h1>
-        <p>Thank you for providing your profile details.</p>
-        <p>
-          To receive the analysis, which includes a detailed breakdown of the
-          selected profile&apos;s strengths, weaknesses, key tactics, and best
-          practices, please enter your email below.
-        </p>
-        <div>
-          <Input
-            placeholder="yourname@email.com"
-            className="w-full overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] sm:rounded-md border-[1px] border-[#1F3C45]"
-            autoFocus
-            value={email}
-            onChange={e => {
-              setEmail(e.target.value)
-            }}
-          />
-          <div className="flex gap-2 h-6 p-1">
-            {isValidatingEmail ? (
-              <>
-                {spinner}
-                <p>Validating your email...</p>
-              </>
-            ) : (
-              <p className=" text-red-500 italic">{error}</p>
-            )}
-          </div>
+    <form onSubmit={onSubmit} className="flex flex-col gap-4 text-sm">
+      <h1 className="text-xl font-semibold">Report Ready</h1>
+      <p>Thank you for providing your profile details.</p>
+      <p>
+        To receive the analysis, which includes a detailed breakdown of the
+        selected profile&apos;s strengths, weaknesses, key tactics, and best
+        practices, please enter your email below.
+      </p>
+      <div>
+        <Input
+          placeholder="yourname@email.com"
+          className="w-full overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] sm:rounded-md border-[1px] border-[#1F3C45]"
+          autoFocus
+          value={email}
+          onChange={e => {
+            setEmail(e.target.value)
+          }}
+        />
+        <div className="flex gap-2 h-6 p-1">
+          {isValidatingEmail ? (
+            <>
+              {spinner}
+              <p>Validating your email...</p>
+            </>
+          ) : (
+            <p className=" text-red-500 italic">{error}</p>
+          )}
         </div>
-        <Button type="submit">Send Full Report</Button>
-      </form>
-    </BotCard>
+      </div>
+      <Button type="submit">Send Full Report</Button>
+    </form>
   )
 }

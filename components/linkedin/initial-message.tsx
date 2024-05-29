@@ -43,19 +43,19 @@ export function InitialMessage() {
         {
           id: nanoid(),
           display: (
-            <UserMessage>
-              <div className="flex gap-2">
-                <div className="flex items-center">
-                  <LinkedInLogoIcon />
-                </div>
-                {link}
+            <div className="flex gap-2">
+              <div className="flex items-center">
+                <LinkedInLogoIcon />
               </div>
-            </UserMessage>
-          )
+              {link}
+            </div>
+          ),
+          role: 'user'
         },
         {
           id: nanoid(),
-          display: <EmailInputMessage />
+          display: <EmailInputMessage />,
+          role: 'assistant'
         }
       ])
     } catch (e: any) {

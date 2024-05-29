@@ -1,14 +1,10 @@
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
-import { nanoid } from 'nanoid'
-import { BotCard, UserMessage } from '../stocks/message'
 import { ResearchRecommendations } from './research-recommendations'
 import { antelopeEndpoint, renzoClientID } from '@/lib/constants/config'
-import { CardSkeleton } from '../ui/card-skeleton'
-import { sleep } from 'openai/core'
 import { useEffect, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
-import { fetcher } from '@/lib/utils'
+import { fetcher, showPrompts } from '@/lib/utils'
 import { FooterButtonGroup } from './footer-button-group'
 
 export function ContentPerformance() {
@@ -38,41 +34,11 @@ export function ContentPerformance() {
   }, [])
 
   const onClick = async () => {
-    setMessages(currentMessages => [
-      ...currentMessages,
-      {
-        id: nanoid(),
-        display: <UserMessage>Suggest Research</UserMessage>
-      }
-    ])
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: 'smooth'
-    })
-    await sleep(500)
-    setMessages(currentMessages => [
-      ...currentMessages,
-      {
-        id: nanoid(),
-        display: (
-          <BotCard>
-            <CardSkeleton />
-          </BotCard>
-        )
-      }
-    ])
-    await sleep(2000)
-    setMessages(currentMessages => [
-      ...currentMessages.slice(0, -1),
-      {
-        id: nanoid(),
-        display: (
-          <BotCard>
-            <ResearchRecommendations />
-          </BotCard>
-        )
-      }
-    ])
+    await showPrompts(
+      'Suggest Research',
+      <ResearchRecommendations />,
+      setMessages
+    )
   }
 
   return (

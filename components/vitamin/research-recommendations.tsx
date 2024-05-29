@@ -1,8 +1,6 @@
 import { useUIState } from 'ai/rsc'
 import { Button } from '@radix-ui/themes'
 import { AI } from '@/lib/chat/actions'
-import { nanoid } from 'nanoid'
-import { BotCard, UserMessage } from '../stocks/message'
 import { SendUsMessage } from '../send-us-message'
 import {
   antelopeEndpoint,
@@ -10,10 +8,9 @@ import {
   renzoClientID
 } from '@/lib/constants/config'
 import { useWindowSize } from 'usehooks-ts'
-import { sleep } from 'openai/core'
 import { useEffect, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
-import { fetcher } from '@/lib/utils'
+import { fetcher, showPrompts } from '@/lib/utils'
 
 export function ResearchRecommendations() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -33,29 +30,7 @@ export function ResearchRecommendations() {
 
   const onClick = async (index: number) => {
     if (index === 1) {
-      setMessages(currentMessages => [
-        ...currentMessages,
-        {
-          id: nanoid(),
-          display: <UserMessage>Send Us a Message</UserMessage>
-        }
-      ])
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-      })
-      await sleep(500)
-      setMessages(currentMessages => [
-        ...currentMessages,
-        {
-          id: nanoid(),
-          display: (
-            <BotCard>
-              <SendUsMessage />
-            </BotCard>
-          )
-        }
-      ])
+      await showPrompts('Send Us a Message', <SendUsMessage />, setMessages)
     } else {
       window.open(companyUrl, '_blank')
     }

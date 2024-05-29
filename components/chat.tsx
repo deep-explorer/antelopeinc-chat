@@ -80,7 +80,7 @@ export function Chat({
   return (
     <>
       <div className="" ref={chatContainerRef}>
-        <div className={cn('pt-4 md:pt-12 mb-[80vh]', className)}>
+        <div className={cn('pt-4 md:pt-12 mb-[100px]', className)}>
           {initialScreen}
           {initialScreen || messages.length ? (
             <ChatList messages={messages} isShared={false} session={session} />

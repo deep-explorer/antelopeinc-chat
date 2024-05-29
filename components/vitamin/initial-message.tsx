@@ -1,6 +1,6 @@
 'use client'
 
-import { BotCard, UserMessage } from '../stocks/message'
+import { BotCard } from '../stocks/message'
 import { Loading } from './loading'
 import { DataOverview } from './data-overview'
 import { Comparison } from './comparison'
@@ -12,11 +12,7 @@ import { ThankYou } from './sub/thank-you'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
-import {
-  antelopeEndpoint,
-  companyUrl,
-  renzoClientID
-} from '@/lib/constants/config'
+import { antelopeEndpoint, renzoClientID } from '@/lib/constants/config'
 import { fetcher, sleep } from '@/lib/utils'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { LogoCarousel } from './sub/logo-carousel'
@@ -46,35 +42,27 @@ export function InitialMessage() {
       ...currentMessages,
       {
         id: nanoid(),
-        display: <UserMessage>Start the Analysis</UserMessage>
+        display: 'Start the Analysis',
+        role: 'user'
+      },
+      {
+        id: nanoid(),
+        display: <Loading />,
+        role: 'assistant'
       }
     ])
+    await sleep(100) //  NOTE: to wait for actual UI update
     window.scrollTo({
       top: document.body.scrollHeight,
       behavior: 'smooth'
     })
-    await sleep(500)
+    await sleep(2000)
     setMessages(currentMessages => [
       ...currentMessages,
       {
         id: nanoid(),
-        display: (
-          <BotCard>
-            <Loading />
-          </BotCard>
-        )
-      }
-    ])
-    await sleep(3000)
-    setMessages(currentMessages => [
-      ...currentMessages,
-      {
-        id: nanoid(),
-        display: (
-          <BotCard>
-            <CardSkeleton />
-          </BotCard>
-        )
+        display: <CardSkeleton />,
+        role: 'assistant'
       }
     ])
     await sleep(2000)
@@ -82,11 +70,8 @@ export function InitialMessage() {
       ...currentMessages.slice(0, -1),
       {
         id: nanoid(),
-        display: (
-          <BotCard>
-            <DataOverview />
-          </BotCard>
-        )
+        display: <DataOverview />,
+        role: 'assistant'
       }
     ])
   }

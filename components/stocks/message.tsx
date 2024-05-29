@@ -70,21 +70,34 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
   )
 }
 
-export function BotCard({ children }: { children: React.ReactNode }) {
+export function BotCard({
+  children,
+  isLastMessage
+}: {
+  children: React.ReactNode
+  isLastMessage?: boolean
+}) {
   const { width: windowWidth } = useWindowSize()
 
   return (
-    <div className="group relative flex gap-2 md:gap-3  max-w-[816px] my-4">
-      <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-md ">
-        <Image
-          src="/header-logo.png"
-          alt="bot-logo"
-          width={windowWidth >= 768 ? 48 : 24}
-          height={windowWidth >= 768 ? 48 : 24}
-        />
-      </div>
-      <div className=" bg-white dark:bg-[#122830] px-3 md:px-6 py-2 md:py-4 rounded-tl-none md:rounded-tl-none rounded-sm md:rounded-lg overflow-x-auto w-full">
-        {children}
+    <div
+      className="max-w-[816px] my-4"
+      style={{
+        minHeight: isLastMessage ? 'calc(100vh - 320px)' : ''
+      }}
+    >
+      <div className="relative flex gap-2 md:gap-3">
+        <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-md ">
+          <Image
+            src="/header-logo.png"
+            alt="bot-logo"
+            width={windowWidth >= 768 ? 48 : 24}
+            height={windowWidth >= 768 ? 48 : 24}
+          />
+        </div>
+        <div className=" bg-white dark:bg-[#122830] px-3 md:px-6 py-2 md:py-4 rounded-tl-none md:rounded-tl-none rounded-sm md:rounded-lg overflow-x-auto w-full">
+          {children}
+        </div>
       </div>
     </div>
   )

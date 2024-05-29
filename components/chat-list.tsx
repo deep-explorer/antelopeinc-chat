@@ -3,6 +3,7 @@ import { UIState } from '@/lib/chat/actions'
 import { Session } from '@/lib/types'
 import Link from 'next/link'
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
+import { BotCard, UserMessage } from './stocks/message'
 
 export interface ChatList {
   messages: UIState
@@ -42,10 +43,19 @@ export function ChatList({ messages, session, isShared }: ChatList) {
       ) : null} */}
 
       {messages.map((message, index) => (
-        <div key={message.id}>
-          {message.display}
-          {index < messages.length - 1 && <Separator className="my-4" />}
-        </div>
+        <>
+          {message.role === 'assistant' && (
+            <BotCard
+              isLastMessage={index === messages.length - 1}
+              key={message.id}
+            >
+              {message.display}
+            </BotCard>
+          )}
+          {message.role === 'user' && (
+            <UserMessage key={message.id}>{message.display}</UserMessage>
+          )}
+        </>
       ))}
     </div>
   )

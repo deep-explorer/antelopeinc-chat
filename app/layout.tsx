@@ -55,7 +55,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <div className="bg-[#071920]">
             <Header />
             <div className="flex justify-center">
-              <main className="px-4 md:px-8 max-w-[940px] w-full min-h-[150vh]">
+              <main className="px-4 md:px-8 max-w-[940px] w-full min-h-[100vh]">
                 {children}
               </main>
             </div>

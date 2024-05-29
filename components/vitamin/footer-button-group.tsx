@@ -8,10 +8,7 @@ import Link from 'next/link'
 import { ReactElement, useMemo } from 'react'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
-import { nanoid } from 'nanoid'
-import { BotCard, UserMessage } from '../stocks/message'
-import { sleep } from '@/lib/utils'
-import { CardSkeleton } from '../ui/card-skeleton'
+import { showPrompts } from '@/lib/utils'
 
 interface FooterButtonGroupProps {
   submitCaption: string
@@ -37,49 +34,16 @@ export const FooterButtonGroup = ({
       setFooterButtonIndex(footerButtonIndex + 1)
     }
 
-    setMessages(currentMessages => [
-      ...currentMessages,
-      {
-        id: nanoid(),
-        display: <UserMessage>{prompt}</UserMessage>
-      }
-    ])
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: 'smooth'
-    })
-    await sleep(500)
-    setMessages(currentMessages => [
-      ...currentMessages,
-      {
-        id: nanoid(),
-        display: (
-          <BotCard>
-            <CardSkeleton />
-          </BotCard>
-        )
-      }
-    ])
-    await sleep(2000)
-    setMessages(currentMessages => [
-      ...currentMessages.slice(0, -1),
-      {
-        id: nanoid(),
-        display: (
-          <BotCard>
-            <div className="flex flex-col gap-4">
-              {response}
-              <hr className="border-gray-500" />
-              <p>To continue, select below:</p>
-              <FooterButtonGroup
-                submitCaption={submitCaption}
-                onSubmit={onSubmit}
-              />
-            </div>
-          </BotCard>
-        )
-      }
-    ])
+    await showPrompts(
+      prompt,
+      <div className="flex flex-col gap-4">
+        {response}
+        <hr className="border-gray-500" />
+        <p>To continue, select below:</p>
+        <FooterButtonGroup submitCaption={submitCaption} onSubmit={onSubmit} />
+      </div>,
+      setMessages
+    )
   }
 
   return (

@@ -415,6 +415,7 @@ export type AIState = {
 export type UIState = {
   id: string
   display: React.ReactNode
+  role: 'user' | 'assistant' | 'system' | 'function' | 'data' | 'tool'
 }[]
 
 export const AI = createAI<AIState, UIState>({
@@ -424,22 +425,22 @@ export const AI = createAI<AIState, UIState>({
   },
   initialUIState: [],
   initialAIState: { chatId: 'linkedin-analyzer', messages: [] },
-  unstable_onGetUIState: async () => {
-    'use server'
+  // unstable_onGetUIState: async () => {
+  //   'use server'
 
-    const session = await auth()
+  //   const session = await auth()
 
-    if (session && session.user) {
-      const aiState = getAIState()
+  //   if (session && session.user) {
+  //     const aiState = getAIState()
 
-      if (aiState) {
-        const uiState = getUIStateFromAIState(aiState)
-        return uiState
-      }
-    } else {
-      return
-    }
-  },
+  //     if (aiState) {
+  //       const uiState = getUIStateFromAIState(aiState)
+  //       return uiState
+  //     }
+  //   } else {
+  //     return
+  //   }
+  // },
   unstable_onSetAIState: async ({ state, done }) => {
     'use server'
 

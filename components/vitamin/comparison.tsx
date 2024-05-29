@@ -1,27 +1,17 @@
 'use client'
 
 import Image from 'next/image'
-import { Button } from '@radix-ui/themes'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
-import { nanoid } from 'nanoid'
 import { FeedbackAnalysis } from './feedback-analysis'
-import {
-  antelopeEndpoint,
-  companyUrl,
-  renzoClientID
-} from '@/lib/constants/config'
-import { BotCard } from '../stocks'
-import { UserMessage } from '../stocks/message'
+import { antelopeEndpoint, renzoClientID } from '@/lib/constants/config'
 import { useWindowSize } from 'usehooks-ts'
 import { EmailInputMessage } from './email-input-message'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { EmailCodeInputMessage } from './email-code-input-message'
-import { CardSkeleton } from '../ui/card-skeleton'
-import { sleep } from 'openai/core'
 import { useEffect, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
-import { fetcher } from '@/lib/utils'
+import { fetcher, showPrompts } from '@/lib/utils'
 import { FooterButtonGroup } from './footer-button-group'
 
 export function Comparison() {
@@ -55,41 +45,7 @@ export function Comparison() {
   }, [])
 
   const onClick = async () => {
-    setMessages(currentMessages => [
-      ...currentMessages,
-      {
-        id: nanoid(),
-        display: <UserMessage>Feedback Analysis</UserMessage>
-      }
-    ])
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: 'smooth'
-    })
-    await sleep(500)
-    setMessages(currentMessages => [
-      ...currentMessages,
-      {
-        id: nanoid(),
-        display: (
-          <BotCard>
-            <CardSkeleton />
-          </BotCard>
-        )
-      }
-    ])
-    await sleep(2000)
-    setMessages(currentMessages => [
-      ...currentMessages.slice(0, -1),
-      {
-        id: nanoid(),
-        display: (
-          <BotCard>
-            <FeedbackAnalysis />
-          </BotCard>
-        )
-      }
-    ])
+    await showPrompts('Feedback Analysis', <FeedbackAnalysis />, setMessages)
   }
 
   return (
@@ -150,18 +106,3 @@ export function Comparison() {
     </div>
   )
 }
-
-const availableButtons = [
-  {
-    caption: 'Feedback Analysis'
-  },
-  {
-    caption: 'Tell Me About Antelope'
-  },
-  {
-    caption: 'Book a Demo'
-  },
-  {
-    caption: 'Show Me Case Studies'
-  }
-]

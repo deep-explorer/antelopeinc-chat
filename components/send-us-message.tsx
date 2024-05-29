@@ -10,12 +10,12 @@ import {
 import * as Form from '@radix-ui/react-form'
 import { TextArea, TextField, Button } from '@radix-ui/themes'
 import { nanoid } from 'nanoid'
-import { BotCard } from './stocks'
 import { ThankYou } from './vitamin/sub/thank-you'
 import { useWindowSize } from 'usehooks-ts'
 import Image from 'next/image'
 import { useState } from 'react'
 import { phone } from 'phone'
+import { sleep } from '@/lib/utils'
 
 export function SendUsMessage() {
   const { width: windowWidth } = useWindowSize()
@@ -46,13 +46,15 @@ export function SendUsMessage() {
       ...currentMessages,
       {
         id: nanoid(),
-        display: (
-          <BotCard>
-            <ThankYou />
-          </BotCard>
-        )
+        display: <ThankYou />,
+        role: 'assistant'
       }
     ])
+    await sleep(100) //  NOTE: to wait for actual UI update
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    })
   }
 
   return (

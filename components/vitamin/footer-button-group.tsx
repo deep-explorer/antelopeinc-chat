@@ -38,8 +38,6 @@ export const FooterButtonGroup = ({
       prompt,
       <div className="flex flex-col gap-4">
         {response}
-        <hr className="border-gray-500" />
-        <p>To continue, select below:</p>
         <FooterButtonGroup submitCaption={submitCaption} onSubmit={onSubmit} />
       </div>,
       setMessages
@@ -48,6 +46,8 @@ export const FooterButtonGroup = ({
 
   return (
     <>
+      <hr className="border-gray-500" />
+      <p className="text-left">To continue, select below:</p>
       <Button
         size={windowWidth > 768 ? '3' : '1'}
         style={{
@@ -60,7 +60,7 @@ export const FooterButtonGroup = ({
       >
         {submitCaption} <ArrowRightIcon height="32" width="32" />
       </Button>
-      <p className="text-sm md:text-base">
+      <p className="text-sm md:text-base text-left">
         Or, learn more by selecting an option below:
       </p>
       <div className="flex flex-wrap">

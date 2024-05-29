@@ -416,7 +416,14 @@ export type AIState = {
 export type UIState = {
   id: string
   display: React.ReactNode
-  role: 'user' | 'assistant' | 'system' | 'response'
+  role:
+    | 'user'
+    | 'assistant'
+    | 'system'
+    | 'function'
+    | 'data'
+    | 'tool'
+    | 'response'
 }[]
 
 export const AI = createAI<AIState, UIState>({

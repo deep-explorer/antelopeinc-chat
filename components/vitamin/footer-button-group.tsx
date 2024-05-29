@@ -69,6 +69,8 @@ export const FooterButtonGroup = ({
           <BotCard>
             <div className="flex flex-col gap-4">
               {response}
+              <hr className="border-gray-500" />
+              <p>To continue, select below:</p>
               <FooterButtonGroup
                 submitCaption={submitCaption}
                 onSubmit={onSubmit}
@@ -94,7 +96,7 @@ export const FooterButtonGroup = ({
       >
         {submitCaption} <ArrowRightIcon height="32" width="32" />
       </Button>
-      <p className="text-sm md:text-base text-left px-2">
+      <p className="text-sm md:text-base">
         Or, learn more by selecting an option below:
       </p>
       <div className="flex flex-wrap">

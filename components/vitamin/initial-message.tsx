@@ -37,6 +37,7 @@ export function InitialMessage() {
       .catch(e => console.log(e))
   }, [])
 
+  const loadingTime = 2000
   const onClick = async () => {
     setMessages(currentMessages => [
       ...currentMessages,
@@ -47,7 +48,7 @@ export function InitialMessage() {
       },
       {
         id: nanoid(),
-        display: <Loading />,
+        display: <Loading loadingTime={loadingTime} />,
         role: 'assistant'
       }
     ])
@@ -56,7 +57,7 @@ export function InitialMessage() {
       top: document.body.scrollHeight,
       behavior: 'smooth'
     })
-    await sleep(2000)
+    await sleep(loadingTime)
     setMessages(currentMessages => [
       ...currentMessages,
       {

@@ -57,6 +57,7 @@ export function ContentPerformance() {
               </p>
               <FooterButtonGroup
                 submitCaption="Suggest Research"
+                helperText="To get strategic recommendations, select below:"
                 onSubmit={onClick}
               />
             </>

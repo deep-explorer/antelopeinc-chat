@@ -94,6 +94,7 @@ export function InitialMessage() {
           </p>
           <FooterButtonGroup
             submitCaption="Start the Analysis"
+            helperText="To begin the analysis, select below:"
             onSubmit={onClick}
           />
         </div>

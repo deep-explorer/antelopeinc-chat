@@ -108,6 +108,7 @@ export function Comparison() {
           </p>
           <FooterButtonGroup
             submitCaption="Feedback Analysis"
+            helperText="To compare customer feedback, select below:"
             onSubmit={onClick}
           />
         </>

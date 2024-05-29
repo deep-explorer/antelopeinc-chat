@@ -12,11 +12,13 @@ import { showPrompts } from '@/lib/chat/prompt'
 
 interface FooterButtonGroupProps {
   submitCaption: string
+  helperText?: string
   onSubmit: () => void
 }
 
 export const FooterButtonGroup = ({
   submitCaption,
+  helperText,
   onSubmit
 }: FooterButtonGroupProps) => {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -47,7 +49,7 @@ export const FooterButtonGroup = ({
   return (
     <>
       <hr className="border-gray-500" />
-      <p className="text-left">To continue, select below:</p>
+      <p className="text-left">{helperText ?? 'To continue, select below:'}</p>
       <Button
         size={windowWidth > 768 ? '3' : '1'}
         style={{

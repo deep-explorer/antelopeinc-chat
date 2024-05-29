@@ -37,6 +37,7 @@ export function DataOverview() {
           footer={
             <FooterButtonGroup
               submitCaption="Start Comparison"
+              helperText="To run the comparison, select below:"
               onSubmit={onClick}
             />
           }

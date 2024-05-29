@@ -80,7 +80,11 @@ export function FeedbackAnalysis() {
         overwhelmingly positive, with reviewers consistently praising innovative
         products and exceptional customer experiences
       </p>
-      <FooterButtonGroup submitCaption="Content Analysis" onSubmit={onClick} />
+      <FooterButtonGroup
+        submitCaption="Content Analysis"
+        helperText="To compare content performance, select below:"
+        onSubmit={onClick}
+      />
     </div>
   )
 }

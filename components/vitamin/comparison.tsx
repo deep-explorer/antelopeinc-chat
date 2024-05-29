@@ -9,7 +9,7 @@ import { useWindowSize } from 'usehooks-ts'
 import { EmailInputMessage } from './email-input-message'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { EmailCodeInputMessage } from './email-code-input-message'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
 import { fetcher, showPrompts } from '@/lib/utils'
 import { FooterButtonGroup } from './footer-button-group'
@@ -18,6 +18,7 @@ export function Comparison() {
   const [_, setMessages] = useUIState<typeof AI>()
   const { width: windowWidth } = useWindowSize()
   const { userEmail, isEmailVerified } = useFreeChatContext()
+  const elementRef = useRef<HTMLDivElement>(null)
 
   const [strentghContent, setStrengthContent] = useState<IContainer | null>(
     null
@@ -44,12 +45,24 @@ export function Comparison() {
       .catch(e => console.log(e))
   }, [])
 
+  useEffect(() => {
+    if (isEmailVerified && elementRef.current) {
+      const elementTop =
+        elementRef.current.getBoundingClientRect().top + window.scrollY
+      const offset = windowWidth > 768 ? 200 : 100
+      window.scrollTo({
+        top: elementTop - offset,
+        behavior: 'smooth'
+      })
+    }
+  }, [isEmailVerified])
+
   const onClick = async () => {
     await showPrompts('Feedback Analysis', <FeedbackAnalysis />, setMessages)
   }
 
   return (
-    <div className="flex flex-col gap-4 md:gap-6">
+    <div className="flex flex-col gap-4 md:gap-6" ref={elementRef}>
       <div className="flex flex-col md:flex-row gap-2 md:gap-4">
         <Image
           src="/vitamin/logos/renzo.png"

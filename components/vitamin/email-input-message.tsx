@@ -90,7 +90,7 @@ export function EmailInputMessage() {
               <p>Validating your email...</p>
             </>
           ) : userEmail ? (
-            <p className="text-[#18898D]">Your email have a valid address</p>
+            <p className="text-[#18898D]">You have entered a valid address</p>
           ) : (
             <p className="text-red-500 italic">{error}</p>
           )}

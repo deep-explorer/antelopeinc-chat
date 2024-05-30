@@ -11,7 +11,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { Footer } from '@/components/footer'
 import { Suspense } from 'react'
 import { openGraphImage } from './shared-metadata'
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 
 export const metadata: Metadata = {
   // metadataBase: new URL('https://chat.antelopeinc.com'),
@@ -42,7 +42,12 @@ export const metadata: Metadata = {
   }
 }
 
-export const viewport = {
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
     { media: '(prefers-color-scheme: dark)', color: 'black' }
@@ -56,10 +61,6 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1"
-      />
       <body>
         <Toaster position="top-center" />
         <Providers

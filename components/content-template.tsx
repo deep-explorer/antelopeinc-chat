@@ -173,7 +173,14 @@ export const ElementsWrapper = ({
     case 'stacked':
       return <div className="flex flex-col gap-3 w-full">{children}</div>
     case 'slider':
-      return <Carousel onChange={i => setCarouselIndex(i)}>{children}</Carousel>
+      return (
+        <Carousel
+          slidesToShow={windowWidth > 768 ? 2.2 : 1.5}
+          onChange={i => setCarouselIndex(i)}
+        >
+          {children}
+        </Carousel>
+      )
     case 'accordion':
       let color = '#fff'
       let title = <>{caption}</>

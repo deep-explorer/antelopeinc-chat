@@ -11,23 +11,20 @@ import { Toaster } from '@/components/ui/sonner'
 import { Footer } from '@/components/footer'
 import { Suspense } from 'react'
 import { openGraphImage } from './shared-metadata'
+import { Metadata } from 'next'
 
-export const metadata = {
-  metadataBase: process.env.VERCEL_URL
-    ? new URL(`https://${process.env.VERCEL_URL}`)
-    : undefined,
-  title: {
-    default: 'Antelope Chatbot'
-  },
+export const metadata: Metadata = {
+  metadataBase: new URL('https://chat.antelopinc.com'),
+  title: 'Antelope Chatbot',
   description: 'Antelope Chatbot',
+  keywords: ['Chatbot', 'Antelope', 'Analyzer', 'AI', 'NLP', 'ML', 'Next.js'],
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
     apple: '/favicon.svg'
   },
   openGraph: {
-    ...openGraphImage,
-    title: 'Home'
+    images: '/thumbnail.png'
   }
 }
 
@@ -48,7 +45,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
-      ></meta>
+      />
       <body>
         <Toaster position="top-center" />
         <Providers

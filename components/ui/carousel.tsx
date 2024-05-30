@@ -5,20 +5,25 @@ import 'slick-carousel/slick/slick-theme.css'
 import MagicSliderDots from 'react-magic-slider-dots'
 
 interface CarouselProps {
+  slidesToShow?: number
   onChange?: (index: number) => void
   children: React.ReactNode | React.ReactNode[]
 }
 
-export const Carousel = ({ onChange, children }: CarouselProps) => {
+export const Carousel = ({
+  slidesToShow,
+  onChange,
+  children
+}: CarouselProps) => {
   const settings = {
     arrows: true,
-    className: 'slider variable-width',
+    // className: 'slider variable-width',
     dots: true,
     infinite: false,
     // centerMode: true,
-    slidesToShow: 1,
+    slidesToShow: slidesToShow ?? 1,
     slidesToScroll: 1,
-    variableWidth: true,
+    // variableWidth: true,
     beforeChange: onChange
       ? (oldIndex: number, newIndex: number) => onChange(newIndex)
       : undefined,

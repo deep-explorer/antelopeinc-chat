@@ -59,7 +59,7 @@ export function FeedbackAnalysis() {
       )}
 
       {channelFeedbackContent && (
-        <Carousel>
+        <Carousel slidesToShow={1.5}>
           {channelFeedbackContent.children.map((child: any, index: number) => (
             <SocialRatingCard
               icon={child.icon ?? 'customer-reviews'}
@@ -69,7 +69,6 @@ export function FeedbackAnalysis() {
               industryAverageTotalRating={child.children[0].industry}
               averageScore={child.children[1].value.percent}
               industryAverageScore={child.children[1].industry}
-              className="mr-3"
               key={index}
             />
           ))}

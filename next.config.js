@@ -13,6 +13,12 @@ module.exports = {
         hostname: 'testing.nextpost.io',
         port: '',
         pathname: '**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'antelopeinc.com',
+        port: '',
+        pathname: '**'
       }
     ]
   }

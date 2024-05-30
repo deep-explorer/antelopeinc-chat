@@ -10,7 +10,7 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
   const { width: windowWidth } = useWindowSize()
 
   return (
-    <Carousel>
+    <Carousel slidesToShow={windowWidth > 768 ? 6 : 3}>
       <div>
         <Image
           src="/vitamin/logos/renzo.png"

@@ -6,7 +6,22 @@ import { getMissingKeys } from '@/app/actions'
 import { InitialMessage } from '@/components/linkedin/initial-message'
 
 export const metadata = {
-  title: 'Antelope Chatbot: LinkedIn Analyzer'
+  title: 'Antelope Chatbot: LinkedIn Analyzer',
+  openGraph: {
+    title: 'Antelope Chatbot: LinkedIn Analyzer',
+    description: 'Antelope Chatbot: LinkedIn Analyzer',
+    url: 'https://chat.antelopeinc.com',
+    siteName: 'Antelope Chatbot: LinkedIn Analyzer',
+    images: [
+      {
+        url: 'https://chat.antelopeinc.com/og.png',
+        width: 1200,
+        height: 630
+      }
+    ],
+    locale: 'en_US',
+    type: 'website'
+  }
 }
 
 export default async function IndexPage() {

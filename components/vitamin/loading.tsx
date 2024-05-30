@@ -36,7 +36,7 @@ export function Loading({ loadingTime }: LoadingProps) {
             />
           </div>
           <h1 className="text-lg md:text-xl font-bold">
-            Starting Your Analysis
+            {isLoading ? 'Starting Your Analysis' : 'Data is Ready'}
           </h1>
         </div>
         <p className="text-sm md:text-base">

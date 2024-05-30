@@ -14,7 +14,7 @@ import { openGraphImage } from './shared-metadata'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://chat.antelopinc.com'),
+  // metadataBase: new URL('https://chat.antelopeinc.com'),
   title: 'Antelope Chatbot',
   description: 'Antelope Chatbot',
   keywords: ['Chatbot', 'Antelope', 'Analyzer', 'AI', 'NLP', 'ML', 'Next.js'],
@@ -23,8 +23,23 @@ export const metadata: Metadata = {
     shortcut: '/favicon.svg',
     apple: '/favicon.svg'
   },
+  // openGraph: {
+  //   images: '/thumbnail.png'
+  // }
   openGraph: {
-    images: '/thumbnail.png'
+    title: 'Antelope Chatbot',
+    description: 'Antelope Chatbot',
+    url: 'https://chat.antelopeinc.com',
+    siteName: 'Antelope Chatbot',
+    images: [
+      {
+        url: 'https://chat.antelopeinc.com/og.png',
+        width: 1200,
+        height: 630
+      }
+    ],
+    locale: 'en_US',
+    type: 'website'
   }
 }
 

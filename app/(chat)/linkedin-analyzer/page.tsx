@@ -10,7 +10,6 @@ export const metadata = {
   openGraph: {
     title: 'Antelope Chatbot: LinkedIn Analyzer',
     description: 'Antelope Chatbot: LinkedIn Analyzer',
-    url: 'https://chat.antelopeinc.com',
     siteName: 'Antelope Chatbot: LinkedIn Analyzer',
     images: [
       {

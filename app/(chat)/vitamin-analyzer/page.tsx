@@ -10,7 +10,6 @@ export const metadata = {
   openGraph: {
     title: "Antelope Chatbot: Children's Vitamins Analyzer",
     description: "Antelope Chatbot: Children's Vitamins Analyzer",
-    url: 'https://chat.antelopeinc.com',
     siteName: "Antelope Chatbot: Children's Vitamins Analyzer",
     images: [
       {

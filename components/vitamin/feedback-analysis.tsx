@@ -11,9 +11,12 @@ import { fetcher } from '@/lib/utils'
 import { SocialRatingCard } from './sub/social-rating-card'
 import { FooterButtonGroup } from './footer-button-group'
 import { showPrompts } from '@/lib/chat/prompt'
+import { useWindowSize } from 'usehooks-ts'
 
 export function FeedbackAnalysis() {
   const [_, setMessages] = useUIState<typeof AI>()
+  const { width: windowWidth } = useWindowSize()
+  const [carouselIndex, setCarouselIndex] = useState(0)
 
   const [feedbackContent, setFeedbackContent] = useState<IContainer | null>(
     null
@@ -59,7 +62,10 @@ export function FeedbackAnalysis() {
       )}
 
       {channelFeedbackContent && (
-        <Carousel slidesToShow={1.5}>
+        <Carousel
+          slidesToShow={windowWidth > 768 ? 1.5 : 1.18}
+          onChange={i => setCarouselIndex(Math.ceil(i))}
+        >
           {channelFeedbackContent.children.map((child: any, index: number) => (
             <SocialRatingCard
               icon={child.icon ?? 'customer-reviews'}
@@ -70,6 +76,7 @@ export function FeedbackAnalysis() {
               averageScore={child.children[1].value.percent}
               industryAverageScore={child.children[1].industry}
               key={index}
+              isInView={index <= carouselIndex}
             />
           ))}
         </Carousel>

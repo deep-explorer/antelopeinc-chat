@@ -101,7 +101,7 @@ export function InitialMessage() {
       </BotCard>
       {/* 
       <BotCard>
-        <Loading />
+        <Loading loadingTime={2000} />
       </BotCard>
       <BotCard>
         <DataOverview />

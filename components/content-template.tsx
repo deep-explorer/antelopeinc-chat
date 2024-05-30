@@ -58,6 +58,7 @@ export const ContentTemplate = ({
   containerClassName
 }: ContentTemplateProps) => {
   const { width: windowWidth } = useWindowSize()
+  const [carouselIndex, setCarouselIndex] = useState(0)
 
   return (
     <div className={`flex flex-col gap-2 md:gap-4 ${containerClassName}`}>
@@ -95,7 +96,12 @@ export const ContentTemplate = ({
         </p>
       ))}
 
-      <ElementsWrapper type={type} child={children[0]} caption={caption}>
+      <ElementsWrapper
+        type={type}
+        child={children[0]}
+        caption={caption}
+        setCarouselIndex={setCarouselIndex}
+      >
         {children.map((child, index) => (
           <Fragment key={index}>
             {child.display === 'container' && (
@@ -104,12 +110,13 @@ export const ContentTemplate = ({
             {child.type === 'scorecard' && <ScoreCard {...child} />}
             {child.type === 'scalar' && <Scalar flag={flag} {...child} />}
             {child.type === 'gauge' && (
-              <GaugeCard {...child} className="mr-3" />
+              <GaugeCard
+                {...child}
+                isInView={index <= carouselIndex + (windowWidth > 768 ? 1 : 0)}
+              />
             )}
-            {child.type === 'map' && <MapChart {...child} className="mr-3" />}
-            {child.type === 'explainer' && (
-              <Explainer {...child} className="mr-3" />
-            )}
+            {child.type === 'map' && <MapChart {...child} />}
+            {child.type === 'explainer' && <Explainer {...child} />}
           </Fragment>
         ))}
       </ElementsWrapper>
@@ -148,16 +155,17 @@ interface ElementsWrapperProps {
     | IExplainer
   caption?: string
   children: ReactElement[]
+  setCarouselIndex: (index: number) => void
 }
 
 export const ElementsWrapper = ({
   type,
   child,
   caption,
-  children
+  children,
+  setCarouselIndex
 }: ElementsWrapperProps) => {
   const { width: windowWidth } = useWindowSize()
-  const [carouselIndex, setCarouselIndex] = useState(0)
 
   switch (type) {
     case 'grid':
@@ -175,8 +183,16 @@ export const ElementsWrapper = ({
     case 'slider':
       return (
         <Carousel
-          slidesToShow={windowWidth > 768 ? 2.2 : 1.5}
-          onChange={i => setCarouselIndex(i)}
+          slidesToShow={
+            windowWidth > 768
+              ? child.type === 'map'
+                ? 1.15
+                : 2.2
+              : child.type === 'map'
+                ? 1.07
+                : 1.5
+          }
+          onChange={i => setCarouselIndex(Math.ceil(i))}
         >
           {children}
         </Carousel>
@@ -208,7 +224,6 @@ export const ElementsWrapper = ({
             color = '#EA3F3F'
             break
           case 'suggested':
-            console.log('here')
             color = '#FFA34E'
             break
           case 'consider':

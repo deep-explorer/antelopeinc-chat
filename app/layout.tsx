@@ -10,6 +10,7 @@ import { Header } from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
 import { Footer } from '@/components/footer'
 import { Suspense } from 'react'
+import { openGraphImage } from './shared-metadata'
 
 export const metadata = {
   metadataBase: process.env.VERCEL_URL
@@ -23,6 +24,10 @@ export const metadata = {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
     apple: '/favicon.svg'
+  },
+  openGraph: {
+    ...openGraphImage,
+    title: 'Home'
   }
 }
 

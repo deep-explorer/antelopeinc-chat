@@ -54,13 +54,17 @@ export const FooterButtonGroup = ({
         size={windowWidth > 768 ? '3' : '1'}
         style={{
           width: '100%',
-          height: windowWidth > 768 ? 61 : 36,
+          height: windowWidth > 768 ? 61 : 42,
           fontSize: windowWidth > 768 ? 22 : 16,
-          borderRadius: 14
+          borderRadius: windowWidth > 768 ? 14 : 8
         }}
         onClick={onSubmit}
       >
-        {submitCaption} <ArrowRightIcon height="32" width="32" />
+        {submitCaption}{' '}
+        <ArrowRightIcon
+          height={windowWidth > 768 ? 32 : 20}
+          width={windowWidth > 768 ? 32 : 20}
+        />
       </Button>
       <p className="text-sm md:text-base text-left">
         Or, learn more by selecting an option below:
@@ -68,7 +72,7 @@ export const FooterButtonGroup = ({
       <div className="flex flex-wrap">
         {[cycleButtons[footerButtonIndex], ...availableButtons].map(
           (availableButton, index) => (
-            <div className="p-2 w-[50%]" key={index}>
+            <div className="p-1 md:p-2 w-[50%]" key={index}>
               <Button
                 onClick={() =>
                   onClick(
@@ -80,8 +84,8 @@ export const FooterButtonGroup = ({
                 size={windowWidth > 768 ? '3' : '1'}
                 className="bottom-button"
                 style={{
-                  height: windowWidth > 768 ? 61 : 36,
-                  borderRadius: 14
+                  height: windowWidth > 768 ? 61 : 42,
+                  borderRadius: windowWidth > 768 ? 14 : 8
                 }}
               >
                 {availableButton.caption}

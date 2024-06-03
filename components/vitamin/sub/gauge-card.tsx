@@ -68,7 +68,7 @@ export function GaugeCard({
             className="absolute top-[45%] left-[45%] md:top-[43%] md:left-[43%] w-[12px] h-[12px] md:w-[28px] md:h-[28px] rounded-full border-[3px] md:border-[6px] bg-white"
             style={{
               animation: isVisible
-                ? `orbit ${((value + 20) / 100) * 3}s linear ${value / 100 / 1.115} forwards`
+                ? `orbit ${((value + 20) / 100) * 5}s linear ${value / 100 / 1.115} forwards`
                 : 'none',
               transform:
                 windowWidth > 768
@@ -89,7 +89,7 @@ export function GaugeCard({
           </p>
         </div>
       </div>
-      <p className="text-sm md:text-base">{texts[0]}</p>
+      <p className="text-xs md:text-base">{texts[0]}</p>
     </div>
   )
 }

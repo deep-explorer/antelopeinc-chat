@@ -124,7 +124,7 @@ export function MapChart({
           description={tooltip}
         />
       </div>
-      <p className="text-sm md:text-base">
+      <p className="text-xs md:text-lg">
         {/* TODO: description from Props */}
         {title} engagement metrics suggest a highly active and loyal community,
         with users resonating strongly with visually-driven storytelling and

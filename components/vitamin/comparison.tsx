@@ -21,7 +21,7 @@ export function Comparison() {
   const { userEmail, isEmailVerified } = useFreeChatContext()
   const elementRef = useRef<HTMLDivElement>(null)
 
-  const [strentghContent, setStrengthContent] = useState<IContainer | null>(
+  const [strengthContent, setStrengthContent] = useState<IContainer | null>(
     null
   )
   const [weaknessContent, setWeaknessContent] = useState<IContainer | null>(
@@ -87,10 +87,10 @@ export function Comparison() {
         </div>
       </div>
       <div
-        className={`p-5 rounded-md flex flex-col gap-6 bg-gradient-to-b relative ${isEmailVerified ? 'bg-[#1E333A]' : 'opacity-gradient h-[260px]'}`}
+        className={`p-3 md:p-5 rounded-md flex flex-col gap-6 bg-gradient-to-b relative ${isEmailVerified ? 'bg-[#1E333A]' : 'opacity-gradient h-[260px]'}`}
       >
-        {strentghContent && (
-          <ContentTemplate flag="pros" {...strentghContent} />
+        {strengthContent && (
+          <ContentTemplate flag="pros" {...strengthContent} />
         )}
 
         {isEmailVerified && weaknessContent && (

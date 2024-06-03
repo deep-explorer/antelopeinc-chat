@@ -15,6 +15,9 @@ interface FreeChatContext {
 
   footerButtonIndex: number //  TODO: move to UI context
   setFooterButtonIndex: (index: number) => void //  TODO: move to UI context
+
+  loadingMessage: string
+  setLoadingMessage: (message: string) => void
 }
 
 const FreeChatContext = React.createContext<FreeChatContext>({
@@ -28,7 +31,10 @@ const FreeChatContext = React.createContext<FreeChatContext>({
   isScheduleDialogOpened: false,
   openScheduleDialog: () => {},
   footerButtonIndex: 0,
-  setFooterButtonIndex: () => {}
+  setFooterButtonIndex: () => {},
+
+  loadingMessage: '',
+  setLoadingMessage: (message: string) => {}
 })
 
 export function useFreeChatContext() {
@@ -49,6 +55,7 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
   const [isEmailVerified, setEmailVerified] = React.useState(false)
   const [isScheduleDialogOpened, openScheduleDialog] = React.useState(false)
   const [footerButtonIndex, setFooterButtonIndex] = React.useState(0)
+  const [loadingMessage, setLoadingMessage] = React.useState('')
 
   return (
     <FreeChatContext.Provider
@@ -62,7 +69,9 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
         isScheduleDialogOpened,
         openScheduleDialog,
         footerButtonIndex,
-        setFooterButtonIndex
+        setFooterButtonIndex,
+        loadingMessage,
+        setLoadingMessage
       }}
     >
       {children}

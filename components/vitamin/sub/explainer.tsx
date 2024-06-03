@@ -42,10 +42,10 @@ export function Explainer({
 
   return (
     <div
-      className={`p-3 md:p-5 flex flex-col justify-between bg-[#293D45] rounded-xl w-[250px] md:w-[314px] h-[340px] md:h-[284px] border-2 border-[#3E5057] ${className}`}
+      className={`p-3 md:p-5 flex flex-col justify-between bg-[#293D45] rounded-xl w-[224px] md:w-[290px] h-[180px] md:h-[284px] border-2 border-[#3E5057] ${className}`}
     >
       <div className="flex flex-col gap-2 md:gap-3">
-        <div className="flex justify-between mb-3">
+        <div className="flex justify-between">
           <div className="flex gap-3">
             <Image
               src={`/image-icons/${icon}.png`}
@@ -53,7 +53,7 @@ export function Explainer({
               width={windowWidth < 768 ? 44 : 64}
               alt={icon}
             />
-            <h3 className="text-lg md:text-2xl font-semibold">{title}</h3>
+            <h3 className="text-base md:text-2xl font-semibold">{title}</h3>
           </div>
           <div>
             <Image
@@ -65,13 +65,13 @@ export function Explainer({
           </div>
         </div>
 
-        <p className="text-xs md:text-sm h-[78px] overflow-hidden">
+        <p className="text-xs md:text-sm h-[48px] md:h-[78px] overflow-hidden">
           {texts[0]}
         </p>
       </div>
 
       <Button
-        variant={'ghost'}
+        // variant={'ghost'}
         className="border-white border-solid border-[1px] border-opacity-20 h-8 md:h-[46px]"
         onClick={() => window.open(link.target)}
       >

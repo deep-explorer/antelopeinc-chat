@@ -11,12 +11,10 @@ import { fetcher } from '@/lib/utils'
 import { SocialRatingCard } from './sub/social-rating-card'
 import { FooterButtonGroup } from './footer-button-group'
 import { showPrompts } from '@/lib/chat/prompt'
-import { useWindowSize } from 'usehooks-ts'
 
 export function FeedbackAnalysis() {
   const [_, setMessages] = useUIState<typeof AI>()
-  const { width: windowWidth } = useWindowSize()
-  const [carouselIndex, setCarouselIndex] = useState(0)
+  const [carouselProgress, setCarouselProgress] = useState(0)
 
   const [feedbackContent, setFeedbackContent] = useState<IContainer | null>(
     null
@@ -62,24 +60,31 @@ export function FeedbackAnalysis() {
       )}
 
       {channelFeedbackContent && (
-        <Carousel
-          slidesToShow={windowWidth > 768 ? 1.5 : 1.18}
-          onChange={i => setCarouselIndex(Math.ceil(i))}
-        >
-          {channelFeedbackContent.children.map((child: any, index: number) => (
-            <SocialRatingCard
-              icon={child.icon ?? 'customer-reviews'}
-              title={child.header}
-              description={child.texts[0]}
-              totalRating={child.children[0].value.percent}
-              industryAverageTotalRating={child.children[0].industry}
-              averageScore={child.children[1].value.percent}
-              industryAverageScore={child.children[1].industry}
-              key={index}
-              isInView={index <= carouselIndex}
-            />
-          ))}
-        </Carousel>
+        <div>
+          <Carousel onChange={progress => setCarouselProgress(progress)}>
+            {channelFeedbackContent.children.map(
+              (child: any, index: number) => (
+                <>
+                  <SocialRatingCard
+                    icon={child.icon ?? 'customer-reviews'}
+                    title={child.header}
+                    description={child.texts[0]}
+                    totalRating={child.children[0].value.percent}
+                    industryAverageTotalRating={child.children[0].industry}
+                    averageScore={child.children[1].value.percent}
+                    industryAverageScore={child.children[1].industry}
+                    key={index}
+                    isInView={
+                      index <=
+                      (channelFeedbackContent.children.length - 1) *
+                        carouselProgress
+                    }
+                  />
+                </>
+              )
+            )}
+          </Carousel>
+        </div>
       )}
       <p className="text-sm md:text-base">
         Deeper drilldown into feedback suggests that overall sentiment is

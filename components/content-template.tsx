@@ -58,7 +58,7 @@ export const ContentTemplate = ({
   containerClassName
 }: ContentTemplateProps) => {
   const { width: windowWidth } = useWindowSize()
-  const [carouselIndex, setCarouselIndex] = useState(0)
+  const [carouselProgress, setCarouselProgress] = useState(0)
 
   return (
     <div className={`flex flex-col gap-2 md:gap-4 ${containerClassName}`}>
@@ -91,7 +91,7 @@ export const ContentTemplate = ({
       </div>
 
       {texts?.map((text, index) => (
-        <p className="text-sm md:text-base" key={index}>
+        <p className="text-xs md:text-base" key={index}>
           {text}
         </p>
       ))}
@@ -100,7 +100,7 @@ export const ContentTemplate = ({
         type={type}
         child={children[0]}
         caption={caption}
-        setCarouselIndex={setCarouselIndex}
+        setCarouselProgress={setCarouselProgress}
       >
         {children.map((child, index) => (
           <Fragment key={index}>
@@ -110,10 +110,14 @@ export const ContentTemplate = ({
             {child.type === 'scorecard' && <ScoreCard {...child} />}
             {child.type === 'scalar' && <Scalar flag={flag} {...child} />}
             {child.type === 'gauge' && (
-              <GaugeCard
-                {...child}
-                isInView={index <= carouselIndex + (windowWidth > 768 ? 1 : 0)}
-              />
+              <>
+                <GaugeCard
+                  {...child}
+                  isInView={
+                    index <= (children.length - 1) * carouselProgress + 1
+                  }
+                />
+              </>
             )}
             {child.type === 'map' && <MapChart {...child} />}
             {child.type === 'explainer' && <Explainer {...child} />}
@@ -128,14 +132,9 @@ export const ContentTemplate = ({
             <p>-----</p>
           </div>
         ) : (
-          <div className="flex flex-wrap">
-            <div className="w-[190px] hidden md:block" />
-            <img
-              src="/image-icons/ruler.png"
-              height={36}
-              width={420}
-              alt="ruler"
-            />
+          <div className="hidden md:flex flex-wrap">
+            <div className="w-[180px]" />
+            <img src="/image-icons/ruler.png" height={36} alt="ruler" />
           </div>
         ))}
 
@@ -155,7 +154,7 @@ interface ElementsWrapperProps {
     | IExplainer
   caption?: string
   children: ReactElement[]
-  setCarouselIndex: (index: number) => void
+  setCarouselProgress: (index: number) => void
 }
 
 export const ElementsWrapper = ({
@@ -163,10 +162,8 @@ export const ElementsWrapper = ({
   child,
   caption,
   children,
-  setCarouselIndex
+  setCarouselProgress
 }: ElementsWrapperProps) => {
-  const { width: windowWidth } = useWindowSize()
-
   switch (type) {
     case 'grid':
       return (
@@ -182,18 +179,7 @@ export const ElementsWrapper = ({
       return <div className="flex flex-col gap-3 w-full">{children}</div>
     case 'slider':
       return (
-        <Carousel
-          slidesToShow={
-            windowWidth > 768
-              ? child.type === 'map'
-                ? 1.15
-                : 2.2
-              : child.type === 'map'
-                ? 1.07
-                : 1.5
-          }
-          onChange={i => setCarouselIndex(Math.ceil(i))}
-        >
+        <Carousel onChange={progress => setCarouselProgress(progress)}>
           {children}
         </Carousel>
       )

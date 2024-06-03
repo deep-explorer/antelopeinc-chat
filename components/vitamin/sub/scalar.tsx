@@ -59,8 +59,8 @@ export function Scalar({
 
   return (
     <div className="flex flex-wrap">
-      <div className="flex w-full md:w-[170px] justify-between items-center mb-2 md:mr-5">
-        <p className="text-xs md:text-base font-semibold">{title}</p>
+      <div className="flex w-full md:w-[160px] justify-between items-center mb-2 md:mr-5">
+        <p className="text-xs md:text-base">{title}</p>
         <PrimaryTooltip
           trigger={
             <InfoCircledIcon className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
@@ -69,90 +69,93 @@ export function Scalar({
         />
       </div>
 
-      <div>
-        <div className="flex gap-1 md:gap-3">
-          {low && (
-            <Image
-              src={'http://' + low.logo}
-              height={windowWidth > 768 ? 48 : 24}
-              width={windowWidth > 768 ? 48 : 24}
-              alt="renzo-trails"
-              className="rounded-full w-[48px] h-[48px] border-2 border-[#EA3F3F]"
-              style={{
-                height: windowWidth > 768 ? 48 : 24,
-                width: windowWidth > 768 ? 48 : 24
-              }}
-            />
-          )}
-
-          <Progress.Root
-            className="relative bg-blackA6 rounded-full min-w-[180px] md:min-w-[300px] h-[10px] md:h-4 shadow-md bg-[#32474F] self-center"
+      <div className="flex justify-between gap-1 md:gap-3 w-full md:w-auto">
+        {low && (
+          <Image
+            src={'http://' + low.logo}
+            height={windowWidth > 768 ? 48 : 24}
+            width={windowWidth > 768 ? 48 : 24}
+            alt="renzo-trails"
+            className="rounded-full w-[48px] h-[48px] border-2 border-[#EA3F3F]"
             style={{
-              // Fix overflow clipping in Safari
-              // https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0
-              transform: 'translateZ(0)'
+              height: windowWidth > 768 ? 48 : 24,
+              width: windowWidth > 768 ? 48 : 24
             }}
-            value={progress}
+          />
+        )}
+
+        <Progress.Root
+          className="relative bg-blackA6 rounded-full min-w-[180px] w-[inherit] md:min-w-[365px] h-[10px] md:h-4 shadow-md bg-[#32474F] self-center"
+          style={{
+            // Fix overflow clipping in Safari
+            // https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0
+            transform: 'translateZ(0)'
+          }}
+          value={progress}
+        >
+          <Progress.Indicator
+            className="relative h-full transition-all duration-1000 ease-in-out rounded-full"
+            style={{
+              width: `${progress}%`,
+              backgroundColor: internalFlag === 'pros' ? '#24AE8D' : '#EA3F3F'
+            }}
           >
-            <Progress.Indicator
-              className="relative h-full transition-all duration-1000 ease-in-out rounded-full"
-              style={{
-                width: `${progress}%`,
-                backgroundColor: internalFlag === 'pros' ? '#24AE8D' : '#EA3F3F'
-              }}
-            >
-              {industry && (
-                <>
-                  <div className="absolute top-0 md:top-1 left-2 md:left-4 text-white text-[14px]">
-                    {progress > 0 ? `${progress}%` : ''}
-                  </div>
-                  <img
-                    src="/image-icons/progress-bar-indicator.png"
-                    height={windowWidth > 768 ? 32 : 20}
-                    width={windowWidth > 768 ? 2 : 1.2}
-                    alt="progress-bar-indicator"
-                    className="relative transition-all duration-1000 ease-in-out"
-                    style={{
-                      left: `${(industry / progress) * 100}%`
-                    }}
-                  />
-                </>
+            {industry && (
+              <>
+                <div className="absolute top-0 md:top-1 left-2 md:left-4 text-white text-[14px]">
+                  {progress > 0 ? `${progress}%` : ''}
+                </div>
+                <img
+                  src="/image-icons/progress-bar-indicator.png"
+                  height={windowWidth > 768 ? 32 : 20}
+                  width={windowWidth > 768 ? 2 : 1.2}
+                  alt="progress-bar-indicator"
+                  className="relative transition-all duration-1000 ease-in-out"
+                  style={{
+                    left: `${(industry / progress) * 100}%`
+                  }}
+                />
+              </>
+            )}
+
+            <div>
+              {isEmailVerified && (
+                <Image
+                  src={'http://' + value.logo}
+                  height={windowWidth > 768 ? 36 : 20}
+                  width={windowWidth > 768 ? 36 : 20}
+                  alt="renzo-indicator"
+                  className="absolute top-0 right-0 rounded-full border-2 transition-all duration-1000 ease-in-out"
+                  style={{
+                    transform: `translate(9px, ${windowWidth > 768 ? -8 : -4}px)`,
+                    borderColor: internalFlag === 'pros' ? '#24AE8D' : '#EA3F3F'
+                  }}
+                />
               )}
+            </div>
+          </Progress.Indicator>
+        </Progress.Root>
 
-              <div>
-                {isEmailVerified && (
-                  <Image
-                    src={'http://' + value.logo}
-                    height={windowWidth > 768 ? 36 : 20}
-                    width={windowWidth > 768 ? 36 : 20}
-                    alt="renzo-indicator"
-                    className="absolute top-0 right-0 rounded-full border-2 transition-all duration-1000 ease-in-out"
-                    style={{
-                      transform: `translate(9px, ${windowWidth > 768 ? -8 : -4}px)`,
-                      borderColor:
-                        internalFlag === 'pros' ? '#24AE8D' : '#EA3F3F'
-                    }}
-                  />
-                )}
-              </div>
-            </Progress.Indicator>
-          </Progress.Root>
-
-          {high && (
-            <Image
-              src={'http://' + high.logo}
-              height={windowWidth > 768 ? 48 : 24}
-              width={windowWidth > 768 ? 48 : 24}
-              alt="renzo-leads"
-              className="rounded-full w-[48px] h-[48px] border-2 border-[#24AE8D]"
-              style={{
-                height: windowWidth > 768 ? 48 : 24,
-                width: windowWidth > 768 ? 48 : 24
-              }}
-            />
-          )}
-        </div>
+        {high && (
+          <Image
+            src={'http://' + high.logo}
+            height={windowWidth > 768 ? 48 : 24}
+            width={windowWidth > 768 ? 48 : 24}
+            alt="renzo-leads"
+            className="rounded-full w-[48px] h-[48px] border-2 border-[#24AE8D]"
+            style={{
+              height: windowWidth > 768 ? 48 : 24,
+              width: windowWidth > 768 ? 48 : 24
+            }}
+          />
+        )}
       </div>
+      <img
+        src="/image-icons/ruler.png"
+        height={36}
+        alt="ruler"
+        className="md:hidden mt-1 w-full"
+      />
     </div>
   )
 }

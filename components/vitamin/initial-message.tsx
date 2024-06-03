@@ -30,7 +30,7 @@ export function InitialMessage() {
         // console.log(res)
         setLogos(
           Object.values(res.data.brands).map(
-            (key: any) => 'http://' + key.image.replaceAll('\\', '')
+            (key: any) => 'https://' + key.image.replaceAll('\\', '')
           )
         )
       })

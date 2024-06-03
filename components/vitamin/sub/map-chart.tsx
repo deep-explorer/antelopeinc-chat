@@ -52,7 +52,7 @@ const renderCustomShape = (props: {
         </clipPath>
       </defs>
       <image
-        href={`https://${props.payload.logo}`}
+        href={`http://${props.payload.logo}`}
         x={cx - (window.innerWidth > 768 ? 24 : 12)}
         y={cy - (window.innerWidth > 768 ? 24 : 12)}
         className="size-6 md:size-12"

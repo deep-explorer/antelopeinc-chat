@@ -1,7 +1,6 @@
 import '@/app/globals.css'
 import '@/app/satoshi.css'
 import '@radix-ui/themes/styles.css'
-import 'react-multi-carousel/lib/styles.css'
 
 import { cn } from '@/lib/utils'
 import { TailwindIndicator } from '@/components/tailwind-indicator'

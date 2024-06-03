@@ -32,7 +32,10 @@ export function EmailCodeInputMessage() {
       //  NOTE: in development, we don't care the response
       if (mode === 'production' && !response.success) {
         //  TODO: backend should return a better message
-        setError(response.msg ?? 'missing message')
+        setError(
+          response.msg ??
+            'No response. Please try again. If the problem persists, email us at contact@antelopeinc.com.'
+        )
         return
       }
 
@@ -42,7 +45,10 @@ export function EmailCodeInputMessage() {
       setMessages(currentMessages => [...currentMessages, responseMessage])
     } catch (e: any) {
       setValidatingEmail(false)
-      setError(e.message || 'The code is not valid.')
+      setError(
+        e.message ||
+          'Invalid code. Double-check and enter a valid one. If the problem persists, email us at contact@antelopeinc.com.'
+      )
     }
   }
 

@@ -38,7 +38,10 @@ export function EmailInputMessage() {
           //  NOTE: in development, we don't care the response
           if (mode === 'production' && !response.success) {
             //  TODO: backend should return a better message
-            setError(response.msg ?? 'missing message')
+            setError(
+              response.msg ??
+                'No response. Please try again. If the problem persists, email us at contact@antelopeinc.com.'
+            )
             return
           }
 
@@ -53,13 +56,20 @@ export function EmailInputMessage() {
           ])
         } catch (e: any) {
           setValidatingEmail(false)
-          setError(e.message || 'This email is not allowed.')
+          setError(
+            e.message ||
+              'The email you entered is not valid. Please check and re-enter. If the problem persists, email us at contact@antelopeinc.com..'
+          )
         }
       } else {
-        setError('This email domain is not allowed.')
+        setError(
+          'This email cannot be used. Please choose a different email domain. If the problem persists, email us at contact@antelopeinc.com.'
+        )
       }
     } else {
-      setError('Please enter a valid email')
+      setError(
+        'The email you entered is not valid. Please check and re-enter. If the problem persists, email us at contact@antelopeinc.com.'
+      )
     }
   }
 

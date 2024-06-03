@@ -41,14 +41,20 @@ export async function GET(request: Request) {
       return Response.json({ data: parseResponseToString(response.data) })
     } else {
       return NextResponse.json(
-        { error: 'The user has posted nothing' },
+        {
+          error:
+            'This user has not made any posts. Please try a user who actively posts on LinkedIn.'
+        },
         { status: 404 }
       )
     }
   } catch (error) {
     console.log(error)
     return NextResponse.json(
-      { error: 'I am having trouble finding profiles that will actually work' },
+      {
+        error:
+          "Can't find profiles that meet the criteria. Please try another handle. If the problem persists, email us at contact@antelopeinc.com."
+      },
       { status: 400 }
     )
   }

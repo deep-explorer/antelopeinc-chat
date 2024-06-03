@@ -25,7 +25,7 @@ export function InitialMessage() {
     setError('')
 
     if (!link) {
-      setError('Please enter a LinkedIn profile name')
+      setError('Enter LinkedIn profile name or URL.')
       return
     }
     // const regex = /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[\w-]+\/?$/
@@ -60,7 +60,7 @@ export function InitialMessage() {
       ])
     } catch (e: any) {
       setLoading(false)
-      setError(e.message || 'Please enter vaild LinkedIn profile name')
+      setError(e.message || 'Please provide a correct LinkedIn profile name.')
     }
   }
 

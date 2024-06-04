@@ -23,10 +23,10 @@ export function Loading({ loadingTime }: LoadingProps) {
         <div className="flex gap-4 items-center">
           <div>
             <Image
-              src="/vitamin/logos/renzo.png"
+              src="/vitamin/logos/renzos.png"
               height={windowWidth > 768 ? 92 : 56}
               width={windowWidth > 768 ? 92 : 56}
-              alt="renzo-loading"
+              alt="renzos-loading"
               style={{
                 marginTop: 4,
                 marginLeft: 4,
@@ -48,8 +48,8 @@ export function Loading({ loadingTime }: LoadingProps) {
       </div>
       <div className="hidden md:flex gap-4">
         <img
-          src="/vitamin/logos/renzo.png"
-          alt="renzo-loading"
+          src="/vitamin/logos/renzos.png"
+          alt="renzos-loading"
           style={{
             marginTop: 4,
             marginLeft: 4,

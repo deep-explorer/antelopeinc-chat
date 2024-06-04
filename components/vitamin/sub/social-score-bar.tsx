@@ -59,10 +59,10 @@ export function SocialScoreBar({
           />
           {progress > 0 && (
             <Image
-              src="/vitamin/logos/renzo.png"
+              src="/vitamin/logos/renzos.png"
               height={windowWidth > 768 ? 60 : 32}
               width={windowWidth > 768 ? 60 : 32}
-              alt="renzo-indicator"
+              alt="renzos-indicator"
               className="absolute top-0 right-0 rounded-full border-[3px] md:border-[6px] transition-all duration-1000 ease-in-out"
               style={{
                 transform: `translate(18px, ${windowWidth > 768 ? -12 : -6}px)`,

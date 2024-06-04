@@ -12,7 +12,7 @@ import { ThankYou } from './sub/thank-you'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
-import { antelopeEndpoint, renzoClientID } from '@/lib/constants/config'
+import { antelopeEndpoint, renzosClientID } from '@/lib/constants/config'
 import { fetcher, sleep } from '@/lib/utils'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { LogoCarousel } from './sub/logo-carousel'
@@ -25,7 +25,7 @@ export function InitialMessage() {
 
   //  TODO: combine with server component
   useEffect(() => {
-    fetcher(`${antelopeEndpoint}/clients/show?clientID=${renzoClientID}`)
+    fetcher(`${antelopeEndpoint}/clients/show?clientID=${renzosClientID}`)
       .then(res => {
         // console.log(res)
         setLogos(

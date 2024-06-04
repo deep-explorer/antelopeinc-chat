@@ -17,7 +17,7 @@ import { useWindowSize } from 'usehooks-ts'
 
 const data = [
   { name: 'Other1', x: 10, y: 60 },
-  { name: 'Renzo', x: 20, y: 20 },
+  { name: 'Renzos', x: 20, y: 20 },
   {
     name: 'Other2',
     x: 60,

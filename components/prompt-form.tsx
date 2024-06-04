@@ -174,8 +174,8 @@ export function PromptForm({
               tabIndex={0}
               onKeyDown={onKeyDown}
               placeholder="Message Antelope"
-              className={`min-h-[48px] max-h-16 w-full resize-none bg-transparent p-1 md:pl-4 md:pr-14 py-3 focus-within:outline-none sm:text-sm ${pathname !== '/vitamin-analyzer' ? 'cursor-not-allowed' : ''}`}
-              disabled={pathname !== '/vitamin-analyzer'}
+              className={`min-h-[48px] max-h-16 w-full resize-none bg-transparent p-1 md:pl-4 md:pr-14 py-3 focus-within:outline-none sm:text-sm ${pathname !== '/renzos' ? 'cursor-not-allowed' : ''}`}
+              disabled={pathname !== '/renzos'}
               // autoFocus
               spellCheck={false}
               autoComplete="off"
@@ -193,7 +193,7 @@ export function PromptForm({
                     variant={'outline'}
                     type="submit"
                     size="icon"
-                    disabled={input === '' && pathname !== '/vitamin-analyzer'}
+                    disabled={input === '' && pathname !== '/renzos'}
                   >
                     <span>
                       <div

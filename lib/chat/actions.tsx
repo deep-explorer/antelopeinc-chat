@@ -403,10 +403,7 @@ export type Message = {
   name?: string
 }
 
-export type ChatId =
-  | 'linkedin-analyzer'
-  | 'vitamin-analyzer'
-  | 'content-intelligence'
+export type ChatId = 'leadgen' | 'linkedin-analyzer' | 'content-intelligence'
 
 export type AIState = {
   chatId: ChatId

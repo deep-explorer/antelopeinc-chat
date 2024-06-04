@@ -75,7 +75,7 @@ export function Scalar({
             src={'http://' + low.logo}
             height={windowWidth > 768 ? 48 : 24}
             width={windowWidth > 768 ? 48 : 24}
-            alt="renzo-trails"
+            alt="renzos-trails"
             className="rounded-full w-[48px] h-[48px] border-2 border-[#EA3F3F]"
             style={{
               height: windowWidth > 768 ? 48 : 24,
@@ -124,7 +124,7 @@ export function Scalar({
                   src={'http://' + value.logo}
                   height={windowWidth > 768 ? 36 : 20}
                   width={windowWidth > 768 ? 36 : 20}
-                  alt="renzo-indicator"
+                  alt="renzos-indicator"
                   className="absolute top-0 right-0 rounded-full border-2 transition-all duration-1000 ease-in-out"
                   style={{
                     transform: `translate(9px, ${windowWidth > 768 ? -8 : -4}px)`,
@@ -141,7 +141,7 @@ export function Scalar({
             src={'http://' + high.logo}
             height={windowWidth > 768 ? 48 : 24}
             width={windowWidth > 768 ? 48 : 24}
-            alt="renzo-leads"
+            alt="renzos-leads"
             className="rounded-full w-[48px] h-[48px] border-2 border-[#24AE8D]"
             style={{
               height: windowWidth > 768 ? 48 : 24,

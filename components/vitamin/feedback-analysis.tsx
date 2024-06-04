@@ -2,7 +2,7 @@
 
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
-import { antelopeEndpoint, renzoClientID } from '@/lib/constants/config'
+import { antelopeEndpoint, renzosClientID } from '@/lib/constants/config'
 import { ContentPerformance } from './content-performance'
 import { Carousel } from '../ui/carousel'
 import { useEffect, useState } from 'react'
@@ -26,14 +26,14 @@ export function FeedbackAnalysis() {
   //  TODO: combine with server component
   useEffect(() => {
     fetcher(
-      `${antelopeEndpoint}/chatbots/feedback?origin=leadgen&clientID=${renzoClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+      `${antelopeEndpoint}/chatbots/feedback?origin=leadgen&clientID=${renzosClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
     )
       .then(res => {
         setFeedbackContent(res.data)
       })
       .catch(e => console.log(e))
     fetcher(
-      `${antelopeEndpoint}/chatbots/channelFeedback?origin=leadgen&clientID=${renzoClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+      `${antelopeEndpoint}/chatbots/channelFeedback?origin=leadgen&clientID=${renzosClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
     )
       .then(res => {
         setChannelFeedbackContent(res.data)

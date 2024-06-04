@@ -5,7 +5,7 @@ import { SendUsMessage } from '../send-us-message'
 import {
   antelopeEndpoint,
   companyUrl,
-  renzoClientID
+  renzosClientID
 } from '@/lib/constants/config'
 import { useWindowSize } from 'usehooks-ts'
 import { useEffect, useState } from 'react'
@@ -21,7 +21,7 @@ export function ResearchRecommendations() {
   //  TODO: combine with server component
   useEffect(() => {
     fetcher(
-      `${antelopeEndpoint}/chatbots/recos?origin=leadgen&clientID=${renzoClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+      `${antelopeEndpoint}/chatbots/recos?origin=leadgen&clientID=${renzosClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
     )
       .then(res => {
         setRecommendation(res.data)

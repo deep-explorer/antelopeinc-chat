@@ -21,5 +21,14 @@ module.exports = {
         pathname: '**'
       }
     ]
+  },
+  redirects: async () => {
+    return [
+      {
+        source: '/linkedin-analyzer',
+        destination: '/tools/linkedin-analyzer',
+        permanent: true
+      }
+    ]
   }
 }

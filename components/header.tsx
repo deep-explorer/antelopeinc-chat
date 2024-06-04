@@ -58,19 +58,19 @@ async function UserOrLogin() {
 
 const titles = [
   {
-    pathname: '/linkedin-analyzer',
-    title: 'LinkedIn Profile Analyzer',
-    description:
-      "Reverse engineer the strengths and weaknesses of anyone's LinkedIn content strategy"
-  },
-  {
-    pathname: '/vitamin-analyzer',
+    pathname: '/renzos',
     title: "Children's Vitamins Analysis",
     description:
       "Analysis of children's vitamins in the market to assess their benefits and shortcomings."
   },
   {
-    pathname: '/content-intelligence',
+    pathname: '/tools/linkedin-analyzer',
+    title: 'LinkedIn Profile Analyzer',
+    description:
+      "Reverse engineer the strengths and weaknesses of anyone's LinkedIn content strategy"
+  },
+  {
+    pathname: '/tools/content-intelligence',
     title: 'Content Intelligence',
     description:
       'Analyze and tag social content with enriched data for competitive intelligence.'
@@ -115,11 +115,11 @@ export function Header() {
               </Link>
             </div>
             <div className="hidden lg:flex gap-2 items-center">
-              {title?.pathname === '/vitamin-analyzer' && (
+              {title?.pathname === '/renzos' && (
                 <div>
                   <Image
-                    src={`/vitamin/logos/renzo.png`}
-                    alt="renzologo"
+                    src={`/vitamin/logos/renzos.png`}
+                    alt="renzoslogo"
                     width={42}
                     height={42}
                   />

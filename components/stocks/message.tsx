@@ -30,9 +30,9 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
           {children}
         </div>
         <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
-          {pathname === '/vitamin-analyzer' ? (
+          {pathname === '/renzos' ? (
             <Image
-              src={'/vitamin/logos/renzo.png'}
+              src={'/vitamin/logos/renzos.png'}
               width={windowWidth >= 768 ? 48 : 24}
               height={windowWidth >= 768 ? 48 : 24}
               alt="user-logo"
@@ -49,9 +49,9 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
   ) : (
     <div className="group relative flex gap-2 md:gap-3 text-white max-w-[300px] sm:max-w-[600px] lg:max-w-[816px]">
       <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
-        {pathname === '/vitamin-analyzer' ? (
+        {pathname === '/renzos' ? (
           <Image
-            src={'/vitamin/logos/renzo.png'}
+            src={'/vitamin/logos/renzos.png'}
             width={windowWidth >= 768 ? 48 : 24}
             height={windowWidth >= 768 ? 48 : 24}
             alt="user-logo"

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { FeedbackAnalysis } from './feedback-analysis'
-import { antelopeEndpoint, renzoClientID } from '@/lib/constants/config'
+import { antelopeEndpoint, renzosClientID } from '@/lib/constants/config'
 import { useWindowSize } from 'usehooks-ts'
 import { EmailInputMessage } from './email-input-message'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
@@ -31,14 +31,14 @@ export function Comparison() {
   //  TODO: combine with server component
   useEffect(() => {
     fetcher(
-      `${antelopeEndpoint}/chatbots/strengths?origin=leadgen&clientID=${renzoClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+      `${antelopeEndpoint}/chatbots/strengths?origin=leadgen&clientID=${renzosClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
     )
       .then(res => {
         setStrengthContent(res.data)
       })
       .catch(e => console.log(e))
     fetcher(
-      `${antelopeEndpoint}/chatbots/weaknesses?origin=leadgen&clientID=${renzoClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+      `${antelopeEndpoint}/chatbots/weaknesses?origin=leadgen&clientID=${renzosClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
     )
       .then(res => {
         setWeaknessContent(res.data)
@@ -66,10 +66,10 @@ export function Comparison() {
     <div className="flex flex-col gap-4 md:gap-6" ref={elementRef}>
       <div className="flex flex-col md:flex-row gap-2 md:gap-4">
         <Image
-          src="/vitamin/logos/renzo.png"
+          src="/vitamin/logos/renzos.png"
           height={80}
           width={80}
-          alt="renzo-loading"
+          alt="renzos-loading"
           style={{
             height: windowWidth > 768 ? 80 : 64,
             width: windowWidth > 768 ? 80 : 64

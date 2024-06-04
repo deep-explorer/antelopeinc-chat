@@ -62,9 +62,6 @@ export function Scalar({
       <div className="flex w-full md:w-[160px] justify-between items-center mb-2 md:mr-5">
         <p className="text-xs md:text-base">{title}</p>
         <PrimaryTooltip
-          trigger={
-            <InfoCircledIcon className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
-          }
           description={tooltip || 'No description'}
         />
       </div>

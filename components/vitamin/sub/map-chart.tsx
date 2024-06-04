@@ -118,9 +118,6 @@ export function MapChart({
           <h2 className="text-lg md:text-xl font-bold self-center">{title}</h2>
         </div>
         <PrimaryTooltip
-          trigger={
-            <InfoCircledIcon className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
-          }
           description={tooltip}
         />
       </div>

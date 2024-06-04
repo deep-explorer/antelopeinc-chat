@@ -82,9 +82,6 @@ export const ContentTemplate = ({
         </div>
         {tooltip && (
           <PrimaryTooltip
-            trigger={
-              <InfoCircledIcon className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
-            }
             description={tooltip}
           />
         )}

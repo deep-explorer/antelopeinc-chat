@@ -64,7 +64,6 @@ export function FeedbackAnalysis() {
           <Carousel onChange={progress => setCarouselProgress(progress)}>
             {channelFeedbackContent.children.map(
               (child: any, index: number) => (
-                <>
                   <SocialRatingCard
                     icon={child.icon ?? 'customer-reviews'}
                     title={child.header}
@@ -80,7 +79,6 @@ export function FeedbackAnalysis() {
                         carouselProgress
                     }
                   />
-                </>
               )
             )}
           </Carousel>

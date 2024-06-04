@@ -44,9 +44,6 @@ export function ScoreCard({
       </div>
       <div className="absolute top-2 md:top-5 right-2 md:right-5">
         <PrimaryTooltip
-          trigger={
-            <InfoCircledIcon className="size-[12px] md:size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
-          }
           description={tooltip}
         />
       </div>

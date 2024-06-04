@@ -29,20 +29,26 @@ TooltipContent.displayName = TooltipPrimitive.Content.displayName
 
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }
 
+import { useState } from 'react'
 import * as BasicTooltip from '@radix-ui/react-tooltip'
+import { InfoCircledIcon } from '@radix-ui/react-icons'
 
 interface PrimaryTooltipProps {
-  trigger: React.ReactNode
   description: string
 }
 
-export function PrimaryTooltip({ trigger, description }: PrimaryTooltipProps) {
+export function PrimaryTooltip({ description }: PrimaryTooltipProps) {
+  const [isTooltipClicked, setIsTooltipClicked] = useState(false)
+  
   return (
     <BasicTooltip.Provider>
-      <BasicTooltip.Root delayDuration={200}>
+      <BasicTooltip.Root delayDuration={200} open={isTooltipClicked} >
         <BasicTooltip.Trigger asChild>
-          {trigger}
-          {/* <InfoCircledIcon className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer" /> */}
+          <InfoCircledIcon
+            className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer"
+            onClick={() => setIsTooltipClicked(true)}
+            onMouseEnter={() => setIsTooltipClicked(true)}
+            onMouseLeave={() => setIsTooltipClicked(false)} />
         </BasicTooltip.Trigger>
         <BasicTooltip.Portal>
           <BasicTooltip.Content
@@ -54,6 +60,7 @@ export function PrimaryTooltip({ trigger, description }: PrimaryTooltipProps) {
               transform: 'translateX(8px)',
               fontFamily: 'Satoshi-Variable'
             }}
+            onPointerDownOutside={() => setIsTooltipClicked(false)}
           >
             {description}
             <BasicTooltip.Arrow

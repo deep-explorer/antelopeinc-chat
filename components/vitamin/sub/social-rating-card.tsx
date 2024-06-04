@@ -48,9 +48,6 @@ export function SocialRatingCard({
           </h2>
         </div>
         <PrimaryTooltip
-          trigger={
-            <InfoCircledIcon className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer" />
-          }
           description="Influencer activity looks at the relative share of sponsored mentions and engagement among competitors"
         />
       </div>

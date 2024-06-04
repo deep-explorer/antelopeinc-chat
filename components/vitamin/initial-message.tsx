@@ -99,7 +99,7 @@ export function InitialMessage() {
           />
         </div>
       </BotCard>
-      {/* 
+      
       <BotCard>
         <Loading loadingTime={2000} />
       </BotCard>
@@ -124,7 +124,7 @@ export function InitialMessage() {
       <BotCard>
         <ThankYou />
       </BotCard>
-      */}
+      {/* */}
     </>
   )
 }

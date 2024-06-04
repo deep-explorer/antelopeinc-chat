@@ -78,7 +78,7 @@ export function Chat({
   }, [missingKeys])
 
   //  TODO: whitelisting with BE
-  if (path !== 'renzos') {
+  if (path !== '/renzos') {
     return <p>This brand is not available now.</p>
   }
 

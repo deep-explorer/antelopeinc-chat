@@ -31,6 +31,15 @@ export function Chat({
 }: ChatProps) {
   const router = useRouter()
   const path = usePathname()
+  //  TODO: whitelisting with BE
+  if (
+    path !== '/renzos' &&
+    path !== '/tools/linkedin-analyzer' &&
+    path !== '/tools/content-intelligence'
+  ) {
+    return <p>This brand is not available now.</p>
+  }
+
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const [input, setInput] = useState('')
   const [messages, setMessages] = useUIState<typeof AI>()
@@ -76,11 +85,6 @@ export function Chat({
       toast.error(`Missing ${key} environment variable!`)
     })
   }, [missingKeys])
-
-  //  TODO: whitelisting with BE
-  if (path !== '/renzos') {
-    return <p>This brand is not available now.</p>
-  }
 
   return (
     <>

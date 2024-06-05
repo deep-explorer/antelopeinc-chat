@@ -2,7 +2,7 @@
 
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
-import { antelopeEndpoint, renzosClientID } from '@/lib/constants/config'
+import { antelopeEndpoint } from '@/lib/constants/config'
 import { ContentPerformance } from './content-performance'
 import { Carousel } from '../ui/carousel'
 import { useEffect, useState } from 'react'
@@ -11,9 +11,11 @@ import { fetcher } from '@/lib/utils'
 import { SocialRatingCard } from './sub/social-rating-card'
 import { FooterButtonGroup } from './footer-button-group'
 import { showPrompts } from '@/lib/chat/prompt'
+import { useParams } from 'next/navigation'
 
 export function FeedbackAnalysis() {
   const [_, setMessages] = useUIState<typeof AI>()
+  const { brand } = useParams()
   const [carouselProgress, setCarouselProgress] = useState(0)
 
   const [feedbackContent, setFeedbackContent] = useState<IContainer | null>(
@@ -26,14 +28,14 @@ export function FeedbackAnalysis() {
   //  TODO: combine with server component
   useEffect(() => {
     fetcher(
-      `${antelopeEndpoint}/chatbots/feedback?origin=leadgen&clientID=${renzosClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+      `${antelopeEndpoint}/chatbots/feedback?origin=leadgen&shortcode=${brand}`
     )
       .then(res => {
         setFeedbackContent(res.data)
       })
       .catch(e => console.log(e))
     fetcher(
-      `${antelopeEndpoint}/chatbots/channelFeedback?origin=leadgen&clientID=${renzosClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+      `${antelopeEndpoint}/chatbots/channelFeedback?origin=leadgen&shortcode=${brand}`
     )
       .then(res => {
         setChannelFeedbackContent(res.data)
@@ -64,21 +66,21 @@ export function FeedbackAnalysis() {
           <Carousel onChange={progress => setCarouselProgress(progress)}>
             {channelFeedbackContent.children.map(
               (child: any, index: number) => (
-                  <SocialRatingCard
-                    icon={child.icon ?? 'customer-reviews'}
-                    title={child.header}
-                    description={child.texts[0]}
-                    totalRating={child.children[0].value.percent}
-                    industryAverageTotalRating={child.children[0].industry}
-                    averageScore={child.children[1].value.percent}
-                    industryAverageScore={child.children[1].industry}
-                    key={index}
-                    isInView={
-                      index <=
-                      (channelFeedbackContent.children.length - 1) *
-                        carouselProgress
-                    }
-                  />
+                <SocialRatingCard
+                  icon={child.icon ?? 'customer-reviews'}
+                  title={child.header}
+                  description={child.texts[0]}
+                  totalRating={child.children[0].value.percent}
+                  industryAverageTotalRating={child.children[0].industry}
+                  averageScore={child.children[1].value.percent}
+                  industryAverageScore={child.children[1].industry}
+                  key={index}
+                  isInView={
+                    index <=
+                    (channelFeedbackContent.children.length - 1) *
+                      carouselProgress
+                  }
+                />
               )
             )}
           </Carousel>

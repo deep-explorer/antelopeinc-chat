@@ -1,4 +1,3 @@
-import { InfoCircledIcon } from '@radix-ui/react-icons'
 import { useWindowSize } from 'usehooks-ts'
 import { PrimaryTooltip } from '@/components/ui/tooltip'
 import SlotCounter from 'react-slot-counter'
@@ -25,7 +24,7 @@ export function ScoreCard({
     <div className="p-2 md:p-5 relative flex gap-2 md:gap-4 bg-[#1E333B] rounded">
       <div>
         <img
-          src={`/image-icons/${icon}.png`}
+          src={icon}
           height={windowWidth > 768 ? 80 : 24}
           width={windowWidth > 768 ? 80 : 24}
           alt={title}
@@ -43,9 +42,7 @@ export function ScoreCard({
         </p>
       </div>
       <div className="absolute top-2 md:top-5 right-2 md:right-5">
-        <PrimaryTooltip
-          description={tooltip}
-        />
+        <PrimaryTooltip description={tooltip} />
       </div>
     </div>
   )

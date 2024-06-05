@@ -1,15 +1,17 @@
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { ResearchRecommendations } from './research-recommendations'
-import { antelopeEndpoint, renzosClientID } from '@/lib/constants/config'
+import { antelopeEndpoint } from '@/lib/constants/config'
 import { useEffect, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
 import { fetcher } from '@/lib/utils'
 import { FooterButtonGroup } from './footer-button-group'
 import { showPrompts } from '@/lib/chat/prompt'
+import { useParams } from 'next/navigation'
 
 export function ContentPerformance() {
   const [_, setMessages] = useUIState<typeof AI>()
+  const { brand } = useParams()
 
   const [contentPerformance, setContentPerformance] =
     useState<IContainer | null>(null)
@@ -19,14 +21,14 @@ export function ContentPerformance() {
   //  TODO: combine with server component
   useEffect(() => {
     fetcher(
-      `${antelopeEndpoint}/chatbots/content?origin=leadgen&clientID=${renzosClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+      `${antelopeEndpoint}/chatbots/content?origin=leadgen&shortcode=${brand}`
     )
       .then(res => {
         setContentPerformance(res.data)
       })
       .catch(e => console.log(e))
     fetcher(
-      `${antelopeEndpoint}/chatbots/channelContent?origin=leadgen&clientID=${renzosClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+      `${antelopeEndpoint}/chatbots/channelContent?origin=leadgen&shortcode=${brand}`
     )
       .then(res => {
         setChannelContentPerformance(res.data)

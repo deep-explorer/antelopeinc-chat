@@ -18,19 +18,23 @@ import { CardSkeleton } from '../ui/card-skeleton'
 import { LogoCarousel } from './sub/logo-carousel'
 import { useEffect, useState } from 'react'
 import { FooterButtonGroup } from './footer-button-group'
+import { useParams } from 'next/navigation'
 
 export function InitialMessage() {
   const [_, setMessages] = useUIState<typeof AI>()
+  const { brand } = useParams()
   const [logos, setLogos] = useState<string[]>([])
 
   //  TODO: combine with server component
   useEffect(() => {
-    fetcher(`${antelopeEndpoint}/clients/show?clientID=271`)
+    fetcher(
+      `${antelopeEndpoint}/chatbots/intro?origin=leadgen&shortcode=${brand}`
+    )
       .then(res => {
         // console.log(res)
         setLogos(
-          Object.values(res.data.brands).map(
-            (key: any) => 'http://' + key.image.replaceAll('\\', '')
+          res.data.children[1].urls.map((url: string) =>
+            url.replaceAll('\\', '')
           )
         )
       })

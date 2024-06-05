@@ -19,6 +19,12 @@ module.exports = {
         hostname: 'antelopeinc.com',
         port: '',
         pathname: '**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.antelopeinc.com',
+        port: '',
+        pathname: '**'
       }
     ]
   },

@@ -2,26 +2,24 @@ import { useUIState } from 'ai/rsc'
 import { Button } from '@radix-ui/themes'
 import { AI } from '@/lib/chat/actions'
 import { SendUsMessage } from '../send-us-message'
-import {
-  antelopeEndpoint,
-  companyUrl,
-  renzosClientID
-} from '@/lib/constants/config'
+import { antelopeEndpoint, companyUrl } from '@/lib/constants/config'
 import { useWindowSize } from 'usehooks-ts'
 import { useEffect, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
 import { fetcher } from '@/lib/utils'
 import { showPrompts } from '@/lib/chat/prompt'
+import { useParams } from 'next/navigation'
 
 export function ResearchRecommendations() {
   const [_, setMessages] = useUIState<typeof AI>()
+  const { brand } = useParams()
   const { width: windowWidth } = useWindowSize()
   const [recommendation, setRecommendation] = useState<IContainer | null>(null)
 
   //  TODO: combine with server component
   useEffect(() => {
     fetcher(
-      `${antelopeEndpoint}/chatbots/recos?origin=leadgen&clientID=${renzosClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+      `${antelopeEndpoint}/chatbots/recos?origin=leadgen&shortcode=${brand}`
     )
       .then(res => {
         setRecommendation(res.data)

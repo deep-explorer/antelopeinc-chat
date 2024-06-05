@@ -1,6 +1,5 @@
 import { useWindowSize } from 'usehooks-ts'
 import { Carousel } from '../../ui/carousel'
-import Image from 'next/image'
 
 interface LogoCarouselProps {
   logos: string[]
@@ -12,7 +11,7 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
   return (
     <Carousel>
       <div>
-        <Image
+        <img
           src="/vitamin/logos/renzos.png"
           height={windowWidth > 768 ? 104 : 48}
           width={windowWidth > 768 ? 104 : 48}
@@ -25,7 +24,7 @@ export function LogoCarousel({ logos }: LogoCarouselProps) {
       </div>
       {logos.map((logo, index) => (
         <div key={index}>
-          <Image
+          <img
             src={logo}
             height={windowWidth > 768 ? 104 : 48}
             width={windowWidth > 768 ? 104 : 48}

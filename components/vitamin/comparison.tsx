@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { FeedbackAnalysis } from './feedback-analysis'
-import { antelopeEndpoint, renzosClientID } from '@/lib/constants/config'
+import { antelopeEndpoint } from '@/lib/constants/config'
 import { useWindowSize } from 'usehooks-ts'
 import { EmailInputMessage } from './email-input-message'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
@@ -14,10 +14,12 @@ import { ContentTemplate, IContainer } from '../content-template'
 import { fetcher } from '@/lib/utils'
 import { FooterButtonGroup } from './footer-button-group'
 import { showPrompts } from '@/lib/chat/prompt'
+import { useParams } from 'next/navigation'
 
 export function Comparison() {
   const [_, setMessages] = useUIState<typeof AI>()
   const { width: windowWidth } = useWindowSize()
+  const { brand } = useParams()
   const { userEmail, isEmailVerified } = useFreeChatContext()
   const elementRef = useRef<HTMLDivElement>(null)
 
@@ -31,14 +33,14 @@ export function Comparison() {
   //  TODO: combine with server component
   useEffect(() => {
     fetcher(
-      `${antelopeEndpoint}/chatbots/strengths?origin=leadgen&clientID=${renzosClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+      `${antelopeEndpoint}/chatbots/strengths?origin=leadgen&shortcode=${brand}`
     )
       .then(res => {
         setStrengthContent(res.data)
       })
       .catch(e => console.log(e))
     fetcher(
-      `${antelopeEndpoint}/chatbots/weaknesses?origin=leadgen&clientID=${renzosClientID}&brand=Renzo%27s%20Vitamins&since=20230401&until=20240401`
+      `${antelopeEndpoint}/chatbots/weaknesses?origin=leadgen&shortcode=${brand}`
     )
       .then(res => {
         setWeaknessContent(res.data)

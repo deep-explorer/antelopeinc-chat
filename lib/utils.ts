@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from 'clsx'
 import { customAlphabet } from 'nanoid'
 import { twMerge } from 'tailwind-merge'
+import { antelopeEndpoint } from '@/lib/constants/config'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -85,5 +86,23 @@ export const getMessageFromCode = (resultCode: string) => {
       return 'Something went wrong, please try again!'
     case ResultCode.UserLoggedIn:
       return 'Logged in!'
+  }
+}
+
+export const getMetaDataOnClient = async (brand: string | string[]) => {
+  try {
+    const response = await fetch(
+      `${antelopeEndpoint}/chatbots/intro?origin=leadgen&shortcode=${brand}`
+    )
+    const { data } = await response.json()
+    return {
+      title: data.header,
+      desc: data.texts,
+      footer: data.footer,
+      continuationText: data.continuationText,
+      children: data.children
+    }
+  } catch (err) {
+    return null
   }
 }

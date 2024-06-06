@@ -21,7 +21,9 @@ import Image from 'next/image'
 import { companyUrl } from '@/lib/constants/config'
 import { usePathname } from 'next/navigation'
 import { useWindowSize } from 'usehooks-ts'
-
+import { useParams } from 'next/navigation'
+import { getMetaDataOnClient } from '@/lib/utils'
+import { ClientMetadata } from '@/lib/types'
 /* 
 async function UserOrLogin() {
   const session = (await auth()) as Session
@@ -56,34 +58,41 @@ async function UserOrLogin() {
 }
 */
 
-const titles = [
-  {
-    pathname: '/renzos',
-    title: "Children's Vitamins Analysis",
-    description:
-      "Analysis of children's vitamins in the market to assess their benefits and shortcomings."
-  },
-  {
-    pathname: '/tools/linkedin-analyzer',
-    title: 'LinkedIn Profile Analyzer',
-    description:
-      "Reverse engineer the strengths and weaknesses of anyone's LinkedIn content strategy"
-  },
-  {
-    pathname: '/tools/content-intelligence',
-    title: 'Content Intelligence',
-    description:
-      'Analyze and tag social content with enriched data for competitive intelligence.'
-  }
-]
 
-export function Header() {
+// const titles = [
+//   {
+//     pathname: '/renzos',
+//     title: "Children's Vitamins Analysis",
+//     description:
+//       "Analysis of children's vitamins in the market to assess their benefits and shortcomings."
+//   },
+//   {
+//     pathname: '/tools/linkedin-analyzer',
+//     title: 'LinkedIn Profile Analyzer',
+//     description:
+//       "Reverse engineer the strengths and weaknesses of anyone's LinkedIn content strategy"
+//   },
+//   {
+//     pathname: '/tools/content-intelligence',
+//     title: 'Content Intelligence',
+//     description:
+//       'Analyze and tag social content with enriched data for competitive intelligence.'
+//   }
+// ]
+
+
+
+export const Header = () => {
   const { width: windowWidth } = useWindowSize()
 
   const pathname = usePathname()
-  const title = titles.find(t => t.pathname === pathname)
+  const params = useParams()
 
+  const [metadata, setMetadata] = React.useState<ClientMetadata | null>(null)
   const [isScrolled, setIsScrolled] = React.useState(false)
+
+  const { brand } = params
+
   React.useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > (windowWidth > 768 ? 350 : 220)) {
@@ -96,6 +105,11 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  React.useEffect(() => {
+    getMetaDataOnClient(brand).then((data) => {
+      setMetadata(data)
+    })
+  }, [])
   return (
     <>
       <header
@@ -115,7 +129,7 @@ export function Header() {
               </Link>
             </div>
             <div className="hidden lg:flex gap-2 items-center">
-              {title?.pathname === '/renzos' && (
+              {brand === 'renzos' && (
                 <div>
                   <Image
                     src={`/vitamin/logos/renzos.png`}
@@ -125,7 +139,7 @@ export function Header() {
                   />
                 </div>
               )}
-              <p className="text-3xl font-semibold">{title?.title}</p>
+              <p className="text-3xl font-semibold">{metadata?.title}</p>
             </div>
             <div>
               {/* <ThemeToggle /> */}
@@ -176,10 +190,14 @@ export function Header() {
           >
             ANTELOPE CHATBOT
           </h1>
-          <h2 className="text-xl md:text-3xl font-bold">{title?.title}</h2>
-          <p className="text-[#B9CAD0] text-sm md:text-lg">
-            {title?.description}
-          </p>
+          <h2 className="text-xl md:text-3xl font-bold">{metadata?.title}</h2>
+          <div className="text-[#B9CAD0] text-sm md:text-lg">
+            {
+              metadata?.desc.map((d, i) => (
+                <p key={i}>{d}</p>
+              ))
+            }
+          </div>
         </div>
       </header>
     </>

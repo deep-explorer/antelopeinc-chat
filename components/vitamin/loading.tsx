@@ -2,6 +2,8 @@ import Image from 'next/image'
 import { RoundSpinner } from '../stocks/ChatSpinner'
 import { useWindowSize } from 'usehooks-ts'
 import { useEffect, useState } from 'react'
+import { useParams } from 'next/navigation'
+import { getMetaDataOnClient } from '@/lib/utils'
 
 interface LoadingProps {
   loadingTime: number
@@ -9,12 +11,20 @@ interface LoadingProps {
 
 export function Loading({ loadingTime }: LoadingProps) {
   const { width: windowWidth } = useWindowSize()
+  const params = useParams()
   const [isLoading, setLoading] = useState(true)
+  const [continuationText, setContinuationText] = useState<string | null>(null)
+
+  const { brand } = params
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
     }, loadingTime)
+
+    getMetaDataOnClient(brand).then((data) => {
+      setContinuationText(data?.continuationText)
+    })
   }, [])
 
   return (
@@ -40,10 +50,7 @@ export function Loading({ loadingTime }: LoadingProps) {
           </h1>
         </div>
         <p className="text-sm md:text-base">
-          To begin, we&apos;ll gather data on Renzo&apos;s and its key
-          competitors, such as Flintstones and SmartyPants, focusing on customer
-          feedback and social content to gather deep competitive intelligence.
-          Please give me a moment.
+          {continuationText}
         </p>
       </div>
       <div className="hidden md:flex gap-4">
@@ -64,10 +71,7 @@ export function Loading({ loadingTime }: LoadingProps) {
             {isLoading ? 'Starting Your Analysis' : 'Data is Ready'}
           </h1>
           <p className="text-sm md:text-base">
-            To begin, we&apos;ll gather data on Renzo&apos;s and its key
-            competitors, such as Flintstones and SmartyPants, focusing on
-            customer feedback and social content to gather deep competitive
-            intelligence. Please give me a moment.
+            {continuationText}
           </p>
         </div>
       </div>

@@ -19,26 +19,25 @@ import { LogoCarousel } from './sub/logo-carousel'
 import { useEffect, useState } from 'react'
 import { FooterButtonGroup } from './footer-button-group'
 import { useParams } from 'next/navigation'
+import { getMetaDataOnClient } from '@/lib/utils'
+import { ClientMetadata } from '@/lib/types'
 
 export function InitialMessage() {
   const [_, setMessages] = useUIState<typeof AI>()
   const { brand } = useParams()
   const [logos, setLogos] = useState<string[]>([])
+  const [metadata, setMetadata] = useState<ClientMetadata | null>(null)
 
   //  TODO: combine with server component
   useEffect(() => {
-    fetcher(
-      `${antelopeEndpoint}/chatbots/intro?origin=leadgen&shortcode=${brand}`
-    )
-      .then(res => {
-        // console.log(res)
-        setLogos(
-          res.data.children[1].urls.map((url: string) =>
-            url.replaceAll('\\', '')
-          )
+    getMetaDataOnClient(brand).then((data) => {
+      setMetadata(data)
+      setLogos(
+        data?.children[1].urls.map((url: string) =>
+          url.replaceAll('\\', '')
         )
-      })
-      .catch(e => console.log(e))
+      )
+    })
   }, [])
 
   const loadingTime = 2000
@@ -89,13 +88,13 @@ export function InitialMessage() {
             Children&apos;s Vitamins Analysis
           </h2>
           <LogoCarousel logos={logos} />
-          <p className="text-sm md:text-lg px-2">
-            This analysis reviews Renzo&apos;s and nine of the largest vitamin
-            brands, including Flintstones, MaryRuth&apos;s, and SmartyPants. It
-            reveals Renzo&apos;s strengths and weaknesses against these
-            competitors and offers ways to improve its overall strategy through
-            this insight.
-          </p>
+          <div className="flex flex-col gap-2">
+            {
+              metadata?.footer.map((f, i) => (
+                <p className="text-sm md:text-lg px-2" key={i}>{f}</p>
+              ))
+            }
+          </div>
           <FooterButtonGroup
             submitCaption="Start the Analysis"
             helperText="To begin the analysis, select below:"

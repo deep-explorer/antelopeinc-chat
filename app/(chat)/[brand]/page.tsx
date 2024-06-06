@@ -25,14 +25,14 @@ export async function generateMetadata(
     }
   }
   return {
-    title: metadata.header,
+    title: metadata.preview.title,
     openGraph: {
-      title: metadata.header,
-      description: metadata.texts,
-      siteName: metadata.header,
+      title: metadata.preview.title,
+      description: metadata.preview.description,
+      siteName: "https://chat.antelopeinc.com",
       images: [
         {
-          url: 'https://chat.antelopeinc.com/og.png',
+          url: metadata.preview.image,
           width: 1200,
           height: 630
         }

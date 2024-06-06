@@ -151,13 +151,11 @@ export const Header = () => {
               )}
               {
                 isLoading ? (
-                  <Skeleton >
-                    <h2 className="text-3xl font-semibold">Children's Vitamins Analysis</h2>
+                  <Skeleton>
+                    <h2 className="text-3xl font-semibold">Children&apos;s Vitamins Analysis</h2>
                   </Skeleton>
                 ) : (
-                  <>
-                    <p className="text-3xl font-semibold">{metadata?.title}</p>
-                  </>
+                  <p className="text-3xl font-semibold">{metadata?.title}</p>
                 )
               }
             </div>
@@ -215,13 +213,13 @@ export const Header = () => {
             isLoading ? (
               <div className="flex flex-col gap-4 py-1 md:py-2 justify-center items-center">
                 <Skeleton >
-                  <h2 className="text-3xl font-semibold">Children's Vitamins Analysis</h2>
+                  <h2 className="text-3xl font-semibold">Children&apos;s Vitamins Analysis</h2>
                 </Skeleton>
-                <div className="text-[#B9CAD0] text-sm md:text-lg">
-                  <Skeleton >
-                    Analysis of children's vitamins in the market to assess their benefits and shortcomings.
-                  </Skeleton>
-                </div>
+                <Skeleton >
+                  <div className="text-[#B9CAD0] text-sm md:text-lg">
+                    Analysis of children&apos;s vitamins in the market to assess their benefits and shortcomings.
+                  </div>
+                </Skeleton>
               </div>
             ) : (
               <>

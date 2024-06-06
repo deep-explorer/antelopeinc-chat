@@ -151,9 +151,9 @@ export const Header = () => {
               )}
               {
                 isLoading ? (
-                  <div className="flex flex-col gap-4 py-1 md:py-2 justify-center items-center">
-                    <Skeleton width={'40%'} height={'24px'} />
-                  </div>
+                  <Skeleton >
+                    <h2 className="text-3xl font-semibold">Children's Vitamins Analysis</h2>
+                  </Skeleton>
                 ) : (
                   <>
                     <p className="text-3xl font-semibold">{metadata?.title}</p>
@@ -214,8 +214,14 @@ export const Header = () => {
           {
             isLoading ? (
               <div className="flex flex-col gap-4 py-1 md:py-2 justify-center items-center">
-                <Skeleton width={'40%'} height={'24px'} />
-                <Skeleton width={'60%'} height={'24px'} />
+                <Skeleton >
+                  <h2 className="text-3xl font-semibold">Children's Vitamins Analysis</h2>
+                </Skeleton>
+                <div className="text-[#B9CAD0] text-sm md:text-lg">
+                  <Skeleton >
+                    Analysis of children's vitamins in the market to assess their benefits and shortcomings.
+                  </Skeleton>
+                </div>
               </div>
             ) : (
               <>

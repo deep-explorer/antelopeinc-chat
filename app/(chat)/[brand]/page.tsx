@@ -18,10 +18,11 @@ type Props = {
 
 export const getMetadata = cache(async (brand: string) => {
   try {
-    const response = await fetcher(
+    const res = await fetcher(
       `${antelopeEndpoint}/chatbots/intro?origin=leadgen&shortcode=${brand}`
     )
-    return response.data
+
+    return res.data
   } catch (err) {
     console.log('error------>', err)
     return null
@@ -36,7 +37,7 @@ export async function generateMetadata(
   const metadata = await getMetadata(brand)
   if (!metadata) {
     return {
-      title: 'Not Found11'
+      title: 'Not Found'
     }
   }
   return {

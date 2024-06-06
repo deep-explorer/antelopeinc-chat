@@ -24,6 +24,8 @@ import { useWindowSize } from 'usehooks-ts'
 import { useParams } from 'next/navigation'
 import { getMetaDataOnClient } from '@/lib/utils'
 import { ClientMetadata } from '@/lib/types'
+import { Skeleton } from '@radix-ui/themes'
+
 /* 
 async function UserOrLogin() {
   const session = (await auth()) as Session
@@ -57,30 +59,29 @@ async function UserOrLogin() {
   )
 }
 */
+interface StaticTitles {
+  title: string
+  desc: string[]
+}
 
-
-// const titles = [
-//   {
-//     pathname: '/renzos',
-//     title: "Children's Vitamins Analysis",
-//     description:
-//       "Analysis of children's vitamins in the market to assess their benefits and shortcomings."
-//   },
-//   {
-//     pathname: '/tools/linkedin-analyzer',
-//     title: 'LinkedIn Profile Analyzer',
-//     description:
-//       "Reverse engineer the strengths and weaknesses of anyone's LinkedIn content strategy"
-//   },
-//   {
-//     pathname: '/tools/content-intelligence',
-//     title: 'Content Intelligence',
-//     description:
-//       'Analyze and tag social content with enriched data for competitive intelligence.'
-//   }
-// ]
-
-
+const staticTitles = [
+  {
+    pathname: '/tools/linkedin-analyzer',
+    data: {
+      title: 'LinkedIn Profile Analyzer',
+      desc:
+        ["Reverse engineer the strengths and weaknesses of anyone's LinkedIn content strategy"]
+    }
+  },
+  {
+    pathname: '/tools/content-intelligence',
+    data: {
+      title: 'Content Intelligence',
+      desc:
+        ['Analyze and tag social content with enriched data for competitive intelligence.']
+    }
+  }
+]
 
 export const Header = () => {
   const { width: windowWidth } = useWindowSize()
@@ -88,8 +89,9 @@ export const Header = () => {
   const pathname = usePathname()
   const params = useParams()
 
-  const [metadata, setMetadata] = React.useState<ClientMetadata | null>(null)
+  const [metadata, setMetadata] = React.useState<ClientMetadata | StaticTitles | null>(null)
   const [isScrolled, setIsScrolled] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false)
 
   const { brand } = params
 
@@ -106,10 +108,18 @@ export const Header = () => {
   }, [])
 
   React.useEffect(() => {
-    getMetaDataOnClient(brand).then((data) => {
-      setMetadata(data)
-    })
-  }, [])
+    if (brand) {
+      setIsLoading(true)
+      getMetaDataOnClient(brand).then((data) => {
+        setMetadata(data)
+        setIsLoading(false)
+      })
+    } else {
+      setIsLoading(false)
+      const foundTitle = staticTitles.find((t) => t.pathname === pathname)?.data;
+      setMetadata(foundTitle || null);
+    }
+  }, [params])
   return (
     <>
       <header
@@ -139,7 +149,17 @@ export const Header = () => {
                   />
                 </div>
               )}
-              <p className="text-3xl font-semibold">{metadata?.title}</p>
+              {
+                isLoading ? (
+                  <div className="flex flex-col gap-4 py-1 md:py-2 justify-center items-center">
+                    <Skeleton width={'40%'} height={'24px'} />
+                  </div>
+                ) : (
+                  <>
+                    <p className="text-3xl font-semibold">{metadata?.title}</p>
+                  </>
+                )
+              }
             </div>
             <div>
               {/* <ThemeToggle /> */}
@@ -190,14 +210,27 @@ export const Header = () => {
           >
             ANTELOPE CHATBOT
           </h1>
-          <h2 className="text-xl md:text-3xl font-bold">{metadata?.title}</h2>
-          <div className="text-[#B9CAD0] text-sm md:text-lg">
-            {
-              metadata?.desc.map((d, i) => (
-                <p key={i}>{d}</p>
-              ))
-            }
-          </div>
+
+          {
+            isLoading ? (
+              <div className="flex flex-col gap-4 py-1 md:py-2 justify-center items-center">
+                <Skeleton width={'40%'} height={'24px'} />
+                <Skeleton width={'60%'} height={'24px'} />
+              </div>
+            ) : (
+              <>
+                <p className="text-3xl font-semibold">{metadata?.title}</p>
+                <div className="text-[#B9CAD0] text-sm md:text-lg">
+                  {
+                    metadata?.desc.map((d, i) => (
+                      <p key={i}>{d}</p>
+                    ))
+                  }
+                </div>
+              </>
+            )
+          }
+
         </div>
       </header>
     </>

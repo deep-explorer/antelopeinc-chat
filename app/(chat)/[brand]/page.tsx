@@ -29,7 +29,7 @@ export async function generateMetadata(
     openGraph: {
       title: metadata.preview.title,
       description: metadata.preview.description,
-      siteName: "https://chat.antelopeinc.com",
+      siteName: "chat.antelopeinc.com",
       images: [
         {
           url: metadata.preview.image,

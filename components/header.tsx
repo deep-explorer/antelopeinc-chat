@@ -169,6 +169,7 @@ export const Header = () => {
               {ENVIRONMENT === 'development' && (
                 <div className="flex gap-2">
                   <Switch
+                    checked={isBypassMode}
                     size="3"
                     style={{ cursor: 'pointer' }}
                     onCheckedChange={checked => setBypassMode(checked)}
@@ -215,6 +216,7 @@ export const Header = () => {
             {ENVIRONMENT === 'development' && (
               <div className="flex gap-2">
                 <Switch
+                  checked={isBypassMode}
                   size="3"
                   style={{ cursor: 'pointer' }}
                   onCheckedChange={checked => setBypassMode(checked)}

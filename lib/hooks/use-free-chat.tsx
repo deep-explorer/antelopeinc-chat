@@ -69,7 +69,7 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
     if (ENVIRONMENT === 'development') {
       _setBypassMode(flag)
     } else {
-      throw Error(
+      console.warn(
         'This is a production environment. Bypass mode is not allowed.'
       )
     }

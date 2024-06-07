@@ -30,12 +30,10 @@ export function InitialMessage() {
 
   //  TODO: combine with server component
   useEffect(() => {
-    getMetaDataOnClient(brand).then((data) => {
+    getMetaDataOnClient(brand).then(data => {
       setMetadata(data)
       setLogos(
-        data?.children[1].urls.map((url: string) =>
-          url.replaceAll('\\', '')
-        )
+        data?.children[1].urls.map((url: string) => url.replaceAll('\\', ''))
       )
     })
   }, [])
@@ -85,15 +83,15 @@ export function InitialMessage() {
       <BotCard>
         <div className="flex flex-col gap-6 text-center">
           <h2 className="text-xl md:text-[30px] font-bold mt-2">
-            Children&apos;s Vitamins Analysis
+            Children&apos;s Vitamins Analysis (${process.env.NODE_ENV})
           </h2>
           <LogoCarousel logos={logos} />
           <div className="flex flex-col gap-2">
-            {
-              metadata?.footer.map((f, i) => (
-                <p className="text-sm md:text-lg px-2" key={i}>{f}</p>
-              ))
-            }
+            {metadata?.footer.map((f, i) => (
+              <p className="text-sm md:text-lg px-2" key={i}>
+                {f}
+              </p>
+            ))}
           </div>
           <FooterButtonGroup
             submitCaption="Start the Analysis"

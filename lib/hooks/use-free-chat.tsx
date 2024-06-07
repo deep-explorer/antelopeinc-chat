@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { ENVIRONMENT } from '../constants/config'
 
 interface FreeChatContext {
   linkedinPosts: string //  TODO: parse linkedin posts
@@ -18,6 +19,9 @@ interface FreeChatContext {
 
   loadingMessage: string
   setLoadingMessage: (message: string) => void
+
+  isBypassMode: boolean
+  setBypassMode: (flag: boolean) => void
 }
 
 const FreeChatContext = React.createContext<FreeChatContext>({
@@ -34,7 +38,10 @@ const FreeChatContext = React.createContext<FreeChatContext>({
   setFooterButtonIndex: () => {},
 
   loadingMessage: '',
-  setLoadingMessage: (message: string) => {}
+  setLoadingMessage: (message: string) => {},
+
+  isBypassMode: false,
+  setBypassMode: () => {}
 })
 
 export function useFreeChatContext() {
@@ -56,6 +63,17 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
   const [isScheduleDialogOpened, openScheduleDialog] = React.useState(false)
   const [footerButtonIndex, setFooterButtonIndex] = React.useState(0)
   const [loadingMessage, setLoadingMessage] = React.useState('')
+  const [isBypassMode, _setBypassMode] = React.useState(false)
+
+  const setBypassMode = (flag: boolean) => {
+    if (ENVIRONMENT === 'development') {
+      _setBypassMode(flag)
+    } else {
+      throw Error(
+        'This is a production environment. Bypass mode is not allowed.'
+      )
+    }
+  }
 
   return (
     <FreeChatContext.Provider
@@ -71,7 +89,9 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
         footerButtonIndex,
         setFooterButtonIndex,
         loadingMessage,
-        setLoadingMessage
+        setLoadingMessage,
+        isBypassMode,
+        setBypassMode
       }}
     >
       {children}

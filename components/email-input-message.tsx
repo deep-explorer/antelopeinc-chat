@@ -9,7 +9,7 @@ import { nanoid } from 'nanoid'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { diposableEmailBlocklist } from '@/lib/constants/diposable-email-blocklist'
 import { EmailCodeInputMessage } from './email-code-input-message'
-import { antelopeEndpoint, mode } from '@/lib/constants/config'
+import { antelopeEndpoint } from '@/lib/constants/config'
 
 export function EmailInputMessage() {
   const [email, setEmail] = useState('')
@@ -17,7 +17,7 @@ export function EmailInputMessage() {
   const [isValidatingEmail, setValidatingEmail] = useState(false)
 
   const [_, setMessages] = useUIState<typeof AI>()
-  const { setUserEmail } = useFreeChatContext()
+  const { setUserEmail, isBypassMode } = useFreeChatContext()
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -35,9 +35,7 @@ export function EmailInputMessage() {
           )
           setValidatingEmail(false)
 
-          //  NOTE: in development, we don't care the response
-          if (mode === 'production' && !response.success) {
-            //  TODO: backend should return a better message
+          if (!isBypassMode && !response.success) {
             setError(
               response.msg ??
                 'No response. Please try again. If the problem persists, email us at contact@antelopeinc.com.'

@@ -4,7 +4,7 @@ import { spinner } from '../stocks'
 import { fetcher } from '@/lib/utils'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { diposableEmailBlocklist } from '@/lib/constants/diposable-email-blocklist'
-import { antelopeEndpoint, mode } from '@/lib/constants/config'
+import { antelopeEndpoint } from '@/lib/constants/config'
 import { useWindowSize } from 'usehooks-ts'
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons'
 
@@ -14,7 +14,7 @@ export function EmailInputMessage() {
   const [error, setError] = useState('')
   const [isValidatingEmail, setValidatingEmail] = useState(false)
 
-  const { userEmail, setUserEmail } = useFreeChatContext()
+  const { userEmail, setUserEmail, isBypassMode } = useFreeChatContext()
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -32,9 +32,7 @@ export function EmailInputMessage() {
           )
           setValidatingEmail(false)
 
-          //  NOTE: in development, we don't care the response
-          if (mode === 'production' && !response.success) {
-            //  TODO: backend should return a better message
+          if (!isBypassMode && !response.success) {
             setError(
               response.msg ??
                 'No response. Please try again. If the problem persists, email us at contact@antelopeinc.com.'

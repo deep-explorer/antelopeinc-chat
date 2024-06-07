@@ -3,7 +3,7 @@ import { TextField, Button } from '@radix-ui/themes'
 import { spinner } from '../stocks'
 import { fetcher } from '@/lib/utils'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
-import { antelopeEndpoint, mode } from '@/lib/constants/config'
+import { antelopeEndpoint } from '@/lib/constants/config'
 import { KeyboardIcon } from '@radix-ui/react-icons'
 import { useWindowSize } from 'usehooks-ts'
 
@@ -13,7 +13,7 @@ export function EmailCodeInputMessage() {
   const [error, setError] = useState('')
   const [isValidatingEmail, setValidatingEmail] = useState(false)
 
-  const { userEmail, setEmailVerified } = useFreeChatContext()
+  const { userEmail, setEmailVerified, isBypassMode } = useFreeChatContext()
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -27,9 +27,7 @@ export function EmailCodeInputMessage() {
       )
       setValidatingEmail(false)
 
-      //  NOTE: in development, we don't care the response
-      if (mode === 'production' && !response.success) {
-        //  TODO: backend should return a better message
+      if (!isBypassMode && !response.success) {
         setError(
           response.msg ??
             'No response. Please try again. If the problem persists, email us at contact@antelopeinc.com.'

@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
 import { auth } from '@/auth'
-import { Button } from '@radix-ui/themes'
+import { Button, Switch } from '@radix-ui/themes'
 import {
   IconGitHub,
   IconNextChat,
@@ -18,13 +18,14 @@ import { ChatHistory } from './chat-history'
 import { Session } from '@/lib/types'
 import { ThemeToggle } from './theme-toggle'
 import Image from 'next/image'
-import { companyUrl } from '@/lib/constants/config'
+import { companyUrl, ENVIRONMENT } from '@/lib/constants/config'
 import { usePathname } from 'next/navigation'
 import { useWindowSize } from 'usehooks-ts'
 import { useParams } from 'next/navigation'
 import { getMetaDataOnClient } from '@/lib/utils'
 import { ClientMetadata } from '@/lib/types'
 import { Skeleton } from '@radix-ui/themes'
+import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 
 /* 
 async function UserOrLogin() {
@@ -69,16 +70,18 @@ const staticTitles = [
     pathname: '/tools/linkedin-analyzer',
     data: {
       title: 'LinkedIn Profile Analyzer',
-      desc:
-        ["Reverse engineer the strengths and weaknesses of anyone's LinkedIn content strategy"]
+      desc: [
+        "Reverse engineer the strengths and weaknesses of anyone's LinkedIn content strategy"
+      ]
     }
   },
   {
     pathname: '/tools/content-intelligence',
     data: {
       title: 'Content Intelligence',
-      desc:
-        ['Analyze and tag social content with enriched data for competitive intelligence.']
+      desc: [
+        'Analyze and tag social content with enriched data for competitive intelligence.'
+      ]
     }
   }
 ]
@@ -89,11 +92,14 @@ export const Header = () => {
   const pathname = usePathname()
   const params = useParams()
 
-  const [metadata, setMetadata] = React.useState<ClientMetadata | StaticTitles | null>(null)
+  const [metadata, setMetadata] = React.useState<
+    ClientMetadata | StaticTitles | null
+  >(null)
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
   const { brand } = params
+  const { isBypassMode, setBypassMode } = useFreeChatContext()
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -110,14 +116,14 @@ export const Header = () => {
   React.useEffect(() => {
     if (brand) {
       setIsLoading(true)
-      getMetaDataOnClient(brand).then((data) => {
+      getMetaDataOnClient(brand).then(data => {
         setMetadata(data)
         setIsLoading(false)
       })
     } else {
       setIsLoading(false)
-      const foundTitle = staticTitles.find((t) => t.pathname === pathname)?.data;
-      setMetadata(foundTitle || null);
+      const foundTitle = staticTitles.find(t => t.pathname === pathname)?.data
+      setMetadata(foundTitle || null)
     }
   }, [params])
   return (
@@ -149,17 +155,31 @@ export const Header = () => {
                   />
                 </div>
               )}
-              {
-                isLoading ? (
-                  <Skeleton>
-                    <h2 className="text-3xl font-semibold">Children&apos;s Vitamins Analysis</h2>
-                  </Skeleton>
-                ) : (
-                  <p className="text-3xl font-semibold">{metadata?.title}</p>
-                )
-              }
+              {isLoading ? (
+                <Skeleton>
+                  <h2 className="text-3xl font-semibold">
+                    Children&apos;s Vitamins Analysis
+                  </h2>
+                </Skeleton>
+              ) : (
+                <p className="text-3xl font-semibold">{metadata?.title}</p>
+              )}
             </div>
-            <div>
+            <div className="flex gap-4 items-center">
+              {ENVIRONMENT === 'development' && (
+                <div className="flex gap-2">
+                  <Switch
+                    size="3"
+                    style={{ cursor: 'pointer' }}
+                    onCheckedChange={checked => setBypassMode(checked)}
+                  />
+                  {isBypassMode ? (
+                    <span>Bypass Mode</span>
+                  ) : (
+                    <span>Normal Mode</span>
+                  )}
+                </div>
+              )}
               {/* <ThemeToggle /> */}
               <Button
                 onClick={() => window.open(companyUrl, '_blank')}
@@ -191,7 +211,21 @@ export const Header = () => {
             <Link href={`${companyUrl}/#process`}>Process</Link>
             <Link href={`${companyUrl}/blog/`}>Blog</Link>
           </div>
-          <div>
+          <div className="flex gap-4 items-center">
+            {ENVIRONMENT === 'development' && (
+              <div className="flex gap-2">
+                <Switch
+                  size="3"
+                  style={{ cursor: 'pointer' }}
+                  onCheckedChange={checked => setBypassMode(checked)}
+                />
+                {isBypassMode ? (
+                  <span>Bypass Mode</span>
+                ) : (
+                  <span>Normal Mode</span>
+                )}
+              </div>
+            )}
             {/* <ThemeToggle /> */}
             <Button
               onClick={() => window.open(companyUrl, '_blank')}
@@ -209,32 +243,28 @@ export const Header = () => {
             ANTELOPE CHATBOT
           </h1>
 
-          {
-            isLoading ? (
-              <div className="flex flex-col gap-4 py-1 md:py-2 justify-center items-center">
-                <Skeleton >
-                  <h2 className="text-3xl font-semibold">Children&apos;s Vitamins Analysis</h2>
-                </Skeleton>
-                <Skeleton >
-                  <div className="text-[#B9CAD0] text-sm md:text-lg">
-                    Analysis of children&apos;s vitamins in the market to assess their benefits and shortcomings.
-                  </div>
-                </Skeleton>
-              </div>
-            ) : (
-              <>
-                <p className="text-3xl font-semibold">{metadata?.title}</p>
+          {isLoading ? (
+            <div className="flex flex-col gap-4 py-1 md:py-2 justify-center items-center">
+              <Skeleton>
+                <h2 className="text-3xl font-semibold">
+                  Children&apos;s Vitamins Analysis
+                </h2>
+              </Skeleton>
+              <Skeleton>
                 <div className="text-[#B9CAD0] text-sm md:text-lg">
-                  {
-                    metadata?.desc.map((d, i) => (
-                      <p key={i}>{d}</p>
-                    ))
-                  }
+                  Analysis of children&apos;s vitamins in the market to assess
+                  their benefits and shortcomings.
                 </div>
-              </>
-            )
-          }
-
+              </Skeleton>
+            </div>
+          ) : (
+            <>
+              <p className="text-3xl font-semibold">{metadata?.title}</p>
+              <div className="text-[#B9CAD0] text-sm md:text-lg">
+                {metadata?.desc.map((d, i) => <p key={i}>{d}</p>)}
+              </div>
+            </>
+          )}
         </div>
       </header>
     </>

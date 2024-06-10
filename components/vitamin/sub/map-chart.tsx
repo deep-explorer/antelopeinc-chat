@@ -117,9 +117,7 @@ export function MapChart({
           />
           <h2 className="text-lg md:text-xl font-bold self-center">{title}</h2>
         </div>
-        <PrimaryTooltip
-          description={tooltip}
-        />
+        <PrimaryTooltip description={tooltip} />
       </div>
       <p className="text-xs md:text-lg">
         {/* TODO: description from Props */}
@@ -211,7 +209,7 @@ export function MapChart({
                 logo: children[key].logo,
                 tooltip: children[key].tooltip,
                 size: children[key].size,
-                key: index
+                key: title + index
               }
             })}
             shape={renderCustomShape as ScatterCustomizedShape}

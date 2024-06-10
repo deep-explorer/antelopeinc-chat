@@ -48,9 +48,7 @@ export function GaugeCard({
             {title}
           </h2>
         </div>
-        <PrimaryTooltip
-          description={tooltip}
-        />
+        <PrimaryTooltip description={tooltip} />
       </div>
       <div className="w-full flex justify-center">
         <div className="orbit">
@@ -85,7 +83,7 @@ export function GaugeCard({
           </p>
         </div>
       </div>
-      <p className="text-xs md:text-base">{texts[0]}</p>
+      <p className="text-xs md:text-base h-24 overflow-hidden">{texts[0]}</p>
     </div>
   )
 }

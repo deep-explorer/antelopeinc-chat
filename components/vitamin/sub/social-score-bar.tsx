@@ -20,7 +20,6 @@ export function SocialScoreBar({
 }: SocialScoreBar) {
   const [progress, setProgress] = React.useState(0)
   const { width: windowWidth } = useWindowSize()
-  console.log('title', title, average)
   React.useEffect(() => {
     if (isInview) {
       setProgress(value)

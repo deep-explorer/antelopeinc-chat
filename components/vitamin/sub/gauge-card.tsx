@@ -30,7 +30,6 @@ export function GaugeCard({
       setVisible(true)
     }
   }, [isInView])
-console.log(icon)
   return (
     <div
       className={`p-3 md:p-5 flex flex-col gap-3 md:gap-6 bg-[#1E333B] rounded w-[180px] md:w-[314px] ${className}`}

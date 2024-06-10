@@ -46,7 +46,6 @@ export function FeedbackAnalysis() {
   const onClick = async () => {
     await showPrompts('Content Analysis', <ContentPerformance />, setMessages)
   }
-
   return (
     <div className="flex flex-col gap-2 md:gap-4">
       {feedbackContent && channelFeedbackContent && (
@@ -71,8 +70,10 @@ export function FeedbackAnalysis() {
                   title={child.header}
                   description={child.texts[0]}
                   totalRating={child.children[0].value.percent}
+                  totalRatingInset = {child.children[0].inset}
                   industryAverageTotalRating={child.children[0].industry}
                   averageScore={child.children[1].value.percent}
+                  averageScoreInset = {child.children[1].inset}
                   industryAverageScore={child.children[1].industry}
                   key={index}
                   isInView={

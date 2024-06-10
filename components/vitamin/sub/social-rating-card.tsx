@@ -9,8 +9,10 @@ interface SocialRatingCardProps {
   title: string
   description: string
   totalRating: number // 0 - 100
+  totalRatingInset: string
   industryAverageTotalRating: number
   averageScore: number
+  averageScoreInset: string
   industryAverageScore: number
   className?: string
   isInView?: boolean
@@ -21,8 +23,10 @@ export function SocialRatingCard({
   title,
   description,
   totalRating,
+  totalRatingInset,
   industryAverageTotalRating,
   averageScore,
+  averageScoreInset,
   industryAverageScore,
   className,
   isInView = true
@@ -58,6 +62,7 @@ export function SocialRatingCard({
           flag={totalRating > industryAverageTotalRating ? 'pros' : 'cons'}
           title="Total Ratings"
           value={totalRating}
+          inset = {totalRatingInset}
           average={industryAverageTotalRating}
           isInview={isInView}
         />
@@ -65,6 +70,7 @@ export function SocialRatingCard({
           flag={averageScore > industryAverageScore ? 'pros' : 'cons'}
           title="Average Score"
           value={averageScore}
+          inset = {averageScoreInset}
           average={industryAverageScore}
           isInview={isInView}
         />

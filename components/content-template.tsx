@@ -59,20 +59,18 @@ export const ContentTemplate = ({
 }: ContentTemplateProps) => {
   const { width: windowWidth } = useWindowSize()
   const [carouselProgress, setCarouselProgress] = useState(0)
-
+  
   return (
     <div className={`flex flex-col gap-2 md:gap-4 ${containerClassName}`}>
       <div className="flex justify-between">
         <div className="flex gap-3">
           {icon && (
-            <div>
               <Image
-                src={`/image-icons/${icon}.png`}
+                src={icon}
                 height={windowWidth > 768 ? 48 : 30}
                 width={windowWidth > 768 ? 48 : 30}
-                alt={icon}
+                alt={`/image-icons/${icon}.png`}
               />
-            </div>
           )}
           <h1
             className={`text-lg md:text-xl font-bold self-center ${header === 'Critical' ? 'text-[#EA3F3F]' : header === 'Suggested' ? 'text-[#FFA34E]' : header === 'Consider' ? 'text-[#24AE8D]' : ''}`}

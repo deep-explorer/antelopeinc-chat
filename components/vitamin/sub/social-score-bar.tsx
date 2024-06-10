@@ -30,12 +30,12 @@ export function SocialScoreBar({
   return (
     <div>
       <h3 className="mb-3 text-sm md:text-base">{title}</h3>
-      <div className="flex  items-center gap-1 md:gap-3 md:mx-[4px] mx-[2px]">
+      <div className="flex  items-center gap-1 md:gap-3 ">
         <div className="text-white text-[10px] md:text-[14px] z-10 w-[32px] md:w-[62px]">
           {inset}
         </div>
         <Progress.Root
-          className="relative grow  bg-blackA6 rounded-full min-w-[150px] md:min-w-[280px] h-5 md:h-8 shadow-md bg-[#32474F] self-center"
+          className="relative grow  bg-blackA6 rounded-full min-w-[150px] md:min-w-[280px] h-5 md:h-8 shadow-md bg-[#32474F] self-center mr-4"
           style={{
             transform: 'translateZ(0)'
           }}

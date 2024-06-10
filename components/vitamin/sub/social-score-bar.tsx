@@ -20,13 +20,12 @@ export function SocialScoreBar({
 }: SocialScoreBar) {
   const [progress, setProgress] = React.useState(0)
   const { width: windowWidth } = useWindowSize()
-
+  console.log('title', title, average)
   React.useEffect(() => {
     if (isInview) {
       setProgress(value)
     }
   }, [isInview])
-
   return (
     <div>
       <h3 className="mb-2 text-sm md:text-base">{title}</h3>
@@ -40,14 +39,16 @@ export function SocialScoreBar({
         <Progress.Indicator
           className="relative h-full transition-all duration-1000 ease-in-out rounded-full"
           style={{
-            width: `${progress}%`,
+            width: `${progress < 7 ? 7 : progress}%`,
             backgroundColor: flag === 'pros' ? '#18898D' : '#EA3F3F'
           }}
         >
-          <div className="absolute top-0 md:top-1 left-2 md:left-4 text-white text-[14px]">
-            {progress > 0 ? `${progress}%` : ''}
+          <div
+            className={`absolute top-0 md:top-1 left-2 md:left-${progress < 25 ? 24 : 4} text-white text-[14px] z-10`}
+          >
+            {progress >= 0 ? `${progress.toFixed(2)}%` : ''}
           </div>
-          <img
+          <Image
             src="/image-icons/progress-bar-indicator.png"
             height={windowWidth > 768 ? 32 : 20}
             width={windowWidth > 768 ? 2 : 1.2}
@@ -57,18 +58,21 @@ export function SocialScoreBar({
               left: `${(average / progress) * 100}%`
             }}
           />
-          {progress > 0 && (
-            <Image
-              src="/vitamin/logos/renzos.png"
-              height={windowWidth > 768 ? 60 : 32}
-              width={windowWidth > 768 ? 60 : 32}
-              alt="renzos-indicator"
-              className="absolute top-0 right-0 rounded-full border-[3px] md:border-[6px] transition-all duration-1000 ease-in-out"
-              style={{
-                transform: `translate(18px, ${windowWidth > 768 ? -12 : -6}px)`,
-                borderColor: flag === 'pros' ? '#18898D' : '#EA3F3F'
-              }}
-            />
+          {progress >= 0 && (
+            <div className="flex">
+              <Image
+                src="/vitamin/logos/renzos.png"
+                height={windowWidth > 768 ? 60 : 32}
+                width={windowWidth > 768 ? 60 : 32}
+                alt="renzos-indicator"
+                className="absolute top-0 right-0 rounded-full border-[3px] md:border-[6px] transition-all duration-1000 ease-in-out"
+                style={{
+                  transform: `translate(18px, ${windowWidth > 768 ? -12 : -6}px)`,
+                  borderColor: flag === 'pros' ? '#18898D' : '#EA3F3F',
+                  maxWidth: 'fit-content'
+                }}
+              />
+            </div>
           )}
         </Progress.Indicator>
       </Progress.Root>

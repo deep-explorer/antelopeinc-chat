@@ -52,7 +52,7 @@ const renderCustomShape = (props: {
         </clipPath>
       </defs>
       <image
-        href={`http://${props.payload.logo}`}
+        href={`${props.payload.logo}`}
         x={cx - (window.innerWidth > 768 ? 24 : 12)}
         y={cy - (window.innerWidth > 768 ? 24 : 12)}
         className="size-6 md:size-12"
@@ -110,10 +110,10 @@ export function MapChart({
       <div className="flex justify-between">
         <div className="flex gap-2">
           <Image
-            src={`/image-icons/${icon}.png`}
+            src={icon}
             width={windowWidth > 768 ? 48 : 24}
             height={windowWidth > 768 ? 48 : 24}
-            alt={icon}
+            alt={`/image-icons/${icon}.png`}
           />
           <h2 className="text-lg md:text-xl font-bold self-center">{title}</h2>
         </div>

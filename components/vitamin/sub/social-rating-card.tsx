@@ -37,10 +37,10 @@ export function SocialRatingCard({
         <div className="flex gap-3">
           <div>
             <Image
-              src={`/image-icons/${icon}.png`}
+              src={icon}
               height={windowWidth > 768 ? 48 : 24}
               width={windowWidth > 768 ? 48 : 24}
-              alt={icon}
+              alt={`/image-icons/${icon}.png`}
             />
           </div>
           <h2 className="text-sm md:text-lg font-semibold self-center">

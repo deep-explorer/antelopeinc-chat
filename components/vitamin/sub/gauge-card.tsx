@@ -30,7 +30,6 @@ export function GaugeCard({
       setVisible(true)
     }
   }, [isInView])
-
   return (
     <div
       className={`p-3 md:p-5 flex flex-col gap-3 md:gap-6 bg-[#1E333B] rounded w-[180px] md:w-[314px] ${className}`}
@@ -39,10 +38,10 @@ export function GaugeCard({
         <div className="flex gap-3">
           <div>
             <Image
-              src={`/image-icons/${icon}.png`}
+              src={icon}
               height={windowWidth > 768 ? 48 : 30}
               width={windowWidth > 768 ? 48 : 30}
-              alt={icon}
+              alt={`/image-icons/${icon}.png`}
             />
           </div>
           <h2 className="text-sm md:text-lg font-semibold self-center">

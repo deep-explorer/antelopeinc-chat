@@ -69,7 +69,7 @@ export function Scalar({
       <div className="flex justify-between gap-1 md:gap-3 w-full md:w-auto">
         {low && (
           <Image
-            src={'http://' + low.logo}
+            src={low.logo}
             height={windowWidth > 768 ? 48 : 24}
             width={windowWidth > 768 ? 48 : 24}
             alt="renzos-trails"
@@ -118,7 +118,7 @@ export function Scalar({
             <div>
               {isEmailVerified && (
                 <Image
-                  src={'http://' + value.logo}
+                  src={value.logo}
                   height={windowWidth > 768 ? 36 : 20}
                   width={windowWidth > 768 ? 36 : 20}
                   alt="renzos-indicator"
@@ -135,7 +135,7 @@ export function Scalar({
 
         {high && (
           <Image
-            src={'http://' + high.logo}
+            src={high.logo}
             height={windowWidth > 768 ? 48 : 24}
             width={windowWidth > 768 ? 48 : 24}
             alt="renzos-leads"

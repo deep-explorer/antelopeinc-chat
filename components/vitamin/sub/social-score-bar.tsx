@@ -8,6 +8,7 @@ interface SocialScoreBar {
   value: number //  0 - 100
   average: number //  0 - 100
   flag: 'pros' | 'cons'
+  inset: string
   isInview?: boolean
 }
 
@@ -16,6 +17,7 @@ export function SocialScoreBar({
   title,
   value,
   average,
+  inset,
   isInview = true
 }: SocialScoreBar) {
   const [progress, setProgress] = React.useState(0)
@@ -27,37 +29,36 @@ export function SocialScoreBar({
   }, [isInview])
   return (
     <div>
-      <h3 className="mb-2 text-sm md:text-base">{title}</h3>
-      <Progress.Root
-        className="relative bg-blackA6 rounded-full min-w-[200px] md:min-w-[280px] h-5 md:h-8 shadow-md bg-[#32474F] self-center"
-        style={{
-          transform: 'translateZ(0)'
-        }}
-        value={progress}
-      >
-        <Progress.Indicator
-          className="relative h-full transition-all duration-1000 ease-in-out rounded-full"
+      <h3 className="mb-3 text-sm md:text-base">{title}</h3>
+      <div className="flex  items-center gap-1 md:gap-3 md:mx-[4px] mx-[2px]">
+        <div className="text-white text-[10px] md:text-[14px] z-10 w-[32px] md:w-[62px]">
+          {inset}
+        </div>
+        <Progress.Root
+          className="relative grow  bg-blackA6 rounded-full min-w-[150px] md:min-w-[280px] h-5 md:h-8 shadow-md bg-[#32474F] self-center"
           style={{
-            width: `${progress < 7 ? 7 : progress}%`,
-            backgroundColor: flag === 'pros' ? '#18898D' : '#EA3F3F'
+            transform: 'translateZ(0)'
           }}
+          value={progress}
         >
-          <div
-            className={`absolute top-0 md:top-1 left-2 md:left-${progress < 25 ? 24 : 4} text-white text-[14px] z-10`}
-          >
-            {progress >= 0 ? `${progress.toFixed(2)}%` : ''}
-          </div>
-          <Image
-            src="/image-icons/progress-bar-indicator.png"
-            height={windowWidth > 768 ? 32 : 20}
-            width={windowWidth > 768 ? 2 : 1.2}
-            alt="progress-bar-indicator"
-            className="relative transition-all duration-1000 ease-in-out"
+          <Progress.Indicator
+            className="relative h-full transition-all duration-1000 ease-in-out rounded-full"
             style={{
-              left: `${(average / progress) * 100}%`
+              width: `${progress}%`,
+              backgroundColor: flag === 'pros' ? '#18898D' : '#EA3F3F'
             }}
-          />
-          {progress >= 0 && (
+          >
+            <Image
+              src="/image-icons/progress-bar-indicator.png"
+              height={windowWidth > 768 ? 32 : 20}
+              width={windowWidth > 768 ? 2 : 1.2}
+              alt="progress-bar-indicator"
+              className="relative transition-all duration-1000 ease-in-out"
+              style={{
+                left: `${(average / progress) * 100}%`
+              }}
+            />
+            {progress >= 0 && (
               <Image
                 src="/vitamin/logos/renzos.png"
                 height={windowWidth > 768 ? 60 : 32}
@@ -70,9 +71,10 @@ export function SocialScoreBar({
                   maxWidth: 'fit-content'
                 }}
               />
-          )}
-        </Progress.Indicator>
-      </Progress.Root>
+            )}
+          </Progress.Indicator>
+        </Progress.Root>
+      </div>
     </div>
   )
 }

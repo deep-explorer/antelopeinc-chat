@@ -58,7 +58,6 @@ export function SocialScoreBar({
             }}
           />
           {progress >= 0 && (
-            <div className="flex">
               <Image
                 src="/vitamin/logos/renzos.png"
                 height={windowWidth > 768 ? 60 : 32}
@@ -71,7 +70,6 @@ export function SocialScoreBar({
                   maxWidth: 'fit-content'
                 }}
               />
-            </div>
           )}
         </Progress.Indicator>
       </Progress.Root>

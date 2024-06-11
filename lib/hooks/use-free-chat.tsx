@@ -68,7 +68,7 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
   const setBypassMode = (flag: boolean) => {
     if (ENVIRONMENT === 'development') {
       _setBypassMode(flag)
-      setEmailVerified(flag ? true : false)
+      setEmailVerified(flag)
     } else {
       console.warn(
         'This is a production environment. Bypass mode is not allowed.'

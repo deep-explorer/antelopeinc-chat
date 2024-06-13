@@ -25,8 +25,8 @@ export function ScoreCard({
       <div>
         <img
           src={icon}
-          height={windowWidth > 768 ? 80 : 24}
-          width={windowWidth > 768 ? 80 : 24}
+          height={windowWidth > 768 ? 64 : 24}
+          width={windowWidth > 768 ? 64 : 24}
           alt={title}
         />
       </div>

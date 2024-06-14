@@ -47,7 +47,7 @@ export const PrimaryTooltip: React.FC<PrimaryTooltipProps> = ({
 }) => {
   const [isTooltipClicked, setIsTooltipClicked] = useState(false)
 
-  if (description && description.length > 0){
+  if (description && description.length > 0) {
     return (
       <BasicTooltip.Provider>
         <BasicTooltip.Root delayDuration={200} open={isTooltipClicked}>
@@ -73,7 +73,7 @@ export const PrimaryTooltip: React.FC<PrimaryTooltipProps> = ({
             <BasicTooltip.Content
               side="bottom"
               align="end"
-              className={`max-w-[200px] data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade text-violet11 select-none rounded-[4px] ${bgColor ? '' : 'bg-primary'} p-[10px] leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity] text-sm font-extralight`}
+              className={`max-w-[200px] data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade text-violet11 select-none rounded-[4px] ${bgColor ? '' : 'bg-primary'} ${children ? 'p-[6px]' : 'p-[8px]'} leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity] text-sm font-extralight`}
               sideOffset={4}
               style={{
                 transform: 'translateX(8px)',
@@ -84,8 +84,8 @@ export const PrimaryTooltip: React.FC<PrimaryTooltipProps> = ({
             >
               {description}
               <BasicTooltip.Arrow
-                className="fill-primary"
-                style={{ transform: 'translateX(8px)' }}
+                className={`${bgColor ? '' : 'fill-primary'}`}
+                style={{ transform: 'translateX(8px)', fill: bgColor }}
               />
             </BasicTooltip.Content>
           </BasicTooltip.Portal>

@@ -56,29 +56,31 @@ export function Scalar({
       ? 'cons'
       : 'pros'
     : flag
-
   return (
     <div className="flex flex-wrap">
       <div className="flex w-full md:w-[160px] justify-between items-center mb-2 md:mr-5">
         <p className="text-xs md:text-base">{title}</p>
-        <PrimaryTooltip
-          description={tooltip || 'No description'}
-        />
+        <PrimaryTooltip description={tooltip || 'No description'} />
       </div>
 
       <div className="flex justify-between gap-1 md:gap-3 w-full md:w-auto">
         {low && (
-          <Image
-            src={low.logo}
-            height={windowWidth > 768 ? 48 : 24}
-            width={windowWidth > 768 ? 48 : 24}
-            alt="renzos-trails"
-            className="rounded-full w-[48px] h-[48px] border-2 border-[#EA3F3F]"
-            style={{
-              height: windowWidth > 768 ? 48 : 24,
-              width: windowWidth > 768 ? 48 : 24
-            }}
-          />
+          <PrimaryTooltip
+            description={low?.tooltip}
+            bgColor={internalFlag == 'pros' ? '#24ae8d' : '#ea3f3f'}
+          >
+            <Image
+              src={low.logo}
+              height={windowWidth > 768 ? 48 : 24}
+              width={windowWidth > 768 ? 48 : 24}
+              alt="renzos-trails"
+              className="rounded-full w-[48px] h-[48px] border-2 border-[#EA3F3F]  cursor-pointer"
+              style={{
+                height: windowWidth > 768 ? 48 : 24,
+                width: windowWidth > 768 ? 48 : 24
+              }}
+            />
+          </PrimaryTooltip>
         )}
 
         <Progress.Root
@@ -134,17 +136,22 @@ export function Scalar({
         </Progress.Root>
 
         {high && (
-          <Image
-            src={high.logo}
-            height={windowWidth > 768 ? 48 : 24}
-            width={windowWidth > 768 ? 48 : 24}
-            alt="renzos-leads"
-            className="rounded-full w-[48px] h-[48px] border-2 border-[#24AE8D]"
-            style={{
-              height: windowWidth > 768 ? 48 : 24,
-              width: windowWidth > 768 ? 48 : 24
-            }}
-          />
+          <PrimaryTooltip
+            description={high?.tooltip}
+            bgColor={internalFlag == 'pros' ? '#24ae8d' : '#ea3f3f'}
+          >
+            <Image
+              src={high.logo}
+              height={windowWidth > 768 ? 48 : 24}
+              width={windowWidth > 768 ? 48 : 24}
+              alt="renzos-leads"
+              className="rounded-full w-[48px] h-[48px] border-2 border-[#24AE8D]  cursor-pointer"
+              style={{
+                height: windowWidth > 768 ? 48 : 24,
+                width: windowWidth > 768 ? 48 : 24
+              }}
+            />
+          </PrimaryTooltip>
         )}
       </div>
       <img

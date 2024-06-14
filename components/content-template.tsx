@@ -59,7 +59,6 @@ export const ContentTemplate = ({
 }: ContentTemplateProps) => {
   const { width: windowWidth } = useWindowSize()
   const [carouselProgress, setCarouselProgress] = useState(0)
-  
   return (
     <div className={`flex flex-col gap-2 md:gap-4 ${containerClassName}`}>
       <div className="flex justify-between">

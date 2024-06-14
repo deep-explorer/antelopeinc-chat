@@ -67,14 +67,14 @@ export function Scalar({
         {low && (
           <PrimaryTooltip
             description={low?.tooltip}
-            bgColor={internalFlag == 'pros' ? '#24ae8d' : '#ea3f3f'}
+            bgColor='#ea3f3f'
           >
             <Image
               src={low.logo}
               height={windowWidth > 768 ? 48 : 24}
               width={windowWidth > 768 ? 48 : 24}
               alt="renzos-trails"
-              className="rounded-full w-[48px] h-[48px] border-2 border-[#EA3F3F]  cursor-pointer"
+              className="rounded-full w-[48px] h-[48px] border-2 hover:border-[#EA3F3F]  cursor-pointer"
               style={{
                 height: windowWidth > 768 ? 48 : 24,
                 width: windowWidth > 768 ? 48 : 24
@@ -138,14 +138,14 @@ export function Scalar({
         {high && (
           <PrimaryTooltip
             description={high?.tooltip}
-            bgColor={internalFlag == 'pros' ? '#24ae8d' : '#ea3f3f'}
+            bgColor="#24ae8d"
           >
             <Image
               src={high.logo}
               height={windowWidth > 768 ? 48 : 24}
               width={windowWidth > 768 ? 48 : 24}
               alt="renzos-leads"
-              className="rounded-full w-[48px] h-[48px] border-2 border-[#24AE8D]  cursor-pointer"
+              className="rounded-full w-[48px] h-[48px] border-2 hover:border-[#24AE8D]  cursor-pointer"
               style={{
                 height: windowWidth > 768 ? 48 : 24,
                 width: windowWidth > 768 ? 48 : 24

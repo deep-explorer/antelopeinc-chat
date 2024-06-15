@@ -45,7 +45,7 @@ export default function Stylizer({
     <div className="flex flex-col gap-4">
       <p className="text-sm md:text-base font-semibold">
         Thank you for your answers, to compile this into a compelling piece of
-        content, please can you tell me how you'd like your post built.
+        content, please can you tell me how you&apos;d like your post built.
       </p>
 
       <div className="flex flex-wrap mb-4 md:mb-8 ">

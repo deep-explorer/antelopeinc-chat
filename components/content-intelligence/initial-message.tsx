@@ -18,7 +18,6 @@ export function InitialMessage() {
     e.preventDefault()
 
     const data = Object.fromEntries(new FormData(e.target as HTMLFormElement))
-
     try {
       const responseMessage = await submitUserMessage(data.description)
       setMessages(currentMessages => [...currentMessages, responseMessage])

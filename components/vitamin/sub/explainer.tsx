@@ -33,7 +33,7 @@ export function Explainer({
 }: IExplainer) {
   const { width: windowWidth } = useWindowSize()
   const [isVisible, setVisible] = useState(false)
-
+  
   useEffect(() => {
     if (isInView) {
       setVisible(true)

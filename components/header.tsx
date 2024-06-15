@@ -83,6 +83,15 @@ const staticTitles = [
         'Analyze and tag social content with enriched data for competitive intelligence.'
       ]
     }
+  },
+  {
+    pathname: '/tools/reddit-writer',
+    data: {
+      title: 'Reddit Ideator',
+      desc: [
+        'Turn on active Reddit thread into a compelling piece of content'
+      ]
+    }
   }
 ]
 

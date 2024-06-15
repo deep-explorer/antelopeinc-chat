@@ -19,7 +19,7 @@ export function ScoreCard({
   suffix
 }: IScoreCard) {
   const { width: windowWidth } = useWindowSize()
-
+  console.log(icon)
   return (
     <div className="p-2 md:p-5 relative flex gap-2 md:gap-4 bg-[#1E333B] rounded">
       <div>

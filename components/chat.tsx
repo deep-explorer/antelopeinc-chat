@@ -82,7 +82,8 @@ export function Chat({
   if (
     path !== '/renzos' &&
     path !== '/tools/linkedin-analyzer' &&
-    path !== '/tools/content-intelligence'
+    path !== '/tools/content-intelligence' &&
+    path !== '/tools/reddit-writer'
   ) {
     return <p>This brand is not available now.</p>
   }

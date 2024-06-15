@@ -127,9 +127,8 @@ export const maxDuration = 300
 
 async function submitUserMessage(content: string) {
   'use server'
-
+  console.log('---------------------content1--------------------------',content)
   const aiState = getMutableAIState<typeof AI>()
-
   aiState.update({
     ...aiState.get(),
     messages: [
@@ -147,11 +146,10 @@ async function submitUserMessage(content: string) {
 
   const chatId = aiState.get().chatId
   let systemPrompt = getSystemPrompt(aiState.get().chatId)
-
   const ui = render({
     model: 'gpt-4o',
     provider: openai,
-    initial: <SpinnerMessage />,
+    initial: chatId === 'reddit-writer' ? '' : <SpinnerMessage />,
     messages: [
       {
         role: 'system',
@@ -171,6 +169,7 @@ async function submitUserMessage(content: string) {
 
       if (done) {
         //  if this is the first time
+        console.log('----------------------content2---------------------', content)
         textNode = (
           <>
             {textNode}
@@ -194,7 +193,6 @@ async function submitUserMessage(content: string) {
       } else {
         textStream.update(delta)
       }
-
       return textNode
     },
     functions: {
@@ -230,7 +228,6 @@ async function submitUserMessage(content: string) {
               }
             ]
           })
-
           return (
             <BotCard>
               <Stocks props={stocks} />
@@ -403,7 +400,11 @@ export type Message = {
   name?: string
 }
 
-export type ChatId = 'leadgen' | 'linkedin-analyzer' | 'content-intelligence'
+export type ChatId =
+  | 'leadgen'
+  | 'linkedin-analyzer'
+  | 'content-intelligence'
+  | 'reddit-writer'
 
 export type AIState = {
   chatId: ChatId

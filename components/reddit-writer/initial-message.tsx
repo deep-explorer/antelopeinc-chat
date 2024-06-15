@@ -79,8 +79,8 @@ export function InitialMessage() {
       new Array(5).fill(0).forEach((_, i) => {
         let match = questionsMessage?.match(
           new RegExp(`<Question ${i + 1}>(.*?)<\/Question ${i + 1}>`)
-        )
-        if (match) {
+        ) || []
+        if (match && match[1]) {
           setQuestions(currentQuestions => [
             ...currentQuestions.slice(0, i),
             match[1],

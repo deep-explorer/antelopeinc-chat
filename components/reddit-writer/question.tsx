@@ -46,7 +46,7 @@ export default function Question({
           Thank you for adding the link. This Textost speaks about AGI and
           estimates a potential timeline for it. To help build a piece of
           content around this topic, please can you answer the following
-          questions. If you'd like to skip a post, you can leave the box empty.
+          questions. If you&apos;d like to skip a post, you can leave the box empty.
         </Text>
         <div>
           <Text as="div" weight="bold" size="2" mb="0">

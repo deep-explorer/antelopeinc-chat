@@ -31,14 +31,14 @@ export default async function IndexPage() {
       >
         Content Intelligence
       </Link>
-      {/* <Link
-        href={`https://www.reddit.com/api/v1/authorize?client_id=${process.env.REDDIT_CLIENT_ID}&response_type=code&state=random_string&redirect_uri=${ENVIRONMENT=='development'?`http://localhost:3000${process.env.REDDIT_REDIRECT_URL}`:`https://chat.antelopeinc.com/renzos${process.env.REDDIT_REDIRECT_URL}`}&duration=permanent&scope=read`}
-        className="italic hover:underline text-primary"
-      > */}
       <Link
+        href={`https://www.reddit.com/api/v1/authorize?client_id=${process.env.REDDIT_CLIENT_ID}&response_type=code&state=random_string&redirect_uri=${process.env.REDDIT_REDIRECT_URL}&duration=permanent&scope=read`}
+       className="italic hover:underline text-[#2f393d00]"
+      >
+      {/* <Link
         href={`https://www.reddit.com/api/v1/authorize?client_id=${process.env.REDDIT_CLIENT_ID}&response_type=code&state=random_string&redirect_uri=${`https://antelopeinc-chat-dev-full.vercel.app${process.env.REDDIT_REDIRECT_URL}`}&duration=permanent&scope=read`}
         className="italic hover:underline text-[#2f393d00]"
-      >
+      > */}
         Reddit Ideator
       </Link>
     </div>

@@ -173,7 +173,7 @@ export const Header = () => {
               )}
             </div>
             <div className="flex gap-4 items-center">
-              {ENVIRONMENT === 'development' && (
+              {(ENVIRONMENT === 'local' || ENVIRONMENT === 'development') && (
                 <div className="flex gap-2">
                   <Switch
                     checked={isBypassMode}

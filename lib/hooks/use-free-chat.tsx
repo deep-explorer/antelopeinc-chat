@@ -78,7 +78,7 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
   const [redditQuestions, setRedditQuestions] = React.useState<string[]>([])
 
   const setBypassMode = (flag: boolean) => {
-    if (ENVIRONMENT === 'development') {
+    if (ENVIRONMENT ==='local' || ENVIRONMENT === 'development') {
       _setBypassMode(flag)
       setEmailVerified(flag)
     } else {

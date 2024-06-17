@@ -39,7 +39,7 @@ export function SocialRatingCard({
     >
       <div className="flex justify-between">
         <div className="flex gap-3">
-          <div>
+          <div className="w-8 md:w-16 h-8 md:h-16 rounded p-1 md:p-2 bg-[#35474F]">
             <Image
               src={icon}
               height={windowWidth > 768 ? 48 : 24}
@@ -51,9 +51,7 @@ export function SocialRatingCard({
             {title}
           </h2>
         </div>
-        <PrimaryTooltip
-          description="Influencer activity looks at the relative share of sponsored mentions and engagement among competitors"
-        />
+        <PrimaryTooltip description="Influencer activity looks at the relative share of sponsored mentions and engagement among competitors" />
       </div>
       <p className="text-sm md:text-base">{description}</p>
       <hr className="border-[#35474F]" />
@@ -62,7 +60,7 @@ export function SocialRatingCard({
           flag={totalRating > industryAverageTotalRating ? 'pros' : 'cons'}
           title="Total Ratings"
           value={totalRating}
-          inset = {totalRatingInset}
+          inset={totalRatingInset}
           average={industryAverageTotalRating}
           isInview={isInView}
         />
@@ -70,7 +68,7 @@ export function SocialRatingCard({
           flag={averageScore > industryAverageScore ? 'pros' : 'cons'}
           title="Average Score"
           value={averageScore}
-          inset = {averageScoreInset}
+          inset={averageScoreInset}
           average={industryAverageScore}
           isInview={isInView}
         />

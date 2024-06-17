@@ -64,24 +64,20 @@ export const ContentTemplate = ({
       <div className="flex justify-between">
         <div className="flex gap-3">
           {icon && (
-              <Image
-                src={icon}
-                height={windowWidth > 768 ? 48 : 30}
-                width={windowWidth > 768 ? 48 : 30}
-                alt={`/image-icons/${icon}.png`}
-              />
+            <img
+              src={icon}
+              height={windowWidth > 768 ? 48 : 30}
+              width={windowWidth > 768 ? 48 : 30}
+              alt={`/image-icons/${icon}.png`}
+            />
           )}
           <h1
-            className={`text-lg md:text-xl font-bold self-center ${header === 'Critical' ? 'text-[#EA3F3F]' : header === 'Suggested' ? 'text-[#FFA34E]' : header === 'Consider' ? 'text-[#24AE8D]' : ''}`}
+            className={`text-lg md:text-xl font-extrabold self-center ${header === 'Critical' ? 'text-[#EA3F3F]' : header === 'Suggested' ? 'text-[#FFA34E]' : header === 'Consider' ? 'text-[#24AE8D]' : ''}`}
           >
             {header}
           </h1>
         </div>
-        {tooltip && (
-          <PrimaryTooltip
-            description={tooltip}
-          />
-        )}
+        {tooltip && <PrimaryTooltip description={tooltip} />}
       </div>
 
       {texts?.map((text, index) => (
@@ -190,7 +186,7 @@ export const ElementsWrapper = ({
       if (urgency) {
         title = (
           <div className="font-semibold flex items-center gap-2">
-            <Image
+            <img
               src={`/image-icons/${urgency}.png`}
               height={20}
               width={20}

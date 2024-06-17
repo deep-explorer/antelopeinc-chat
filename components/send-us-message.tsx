@@ -89,7 +89,7 @@ export function SendUsMessage() {
             match="valid"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/valid.png"
                 height={14}
                 width={14}
@@ -103,7 +103,7 @@ export function SendUsMessage() {
             match="valueMissing"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/invalid.png"
                 height={14}
                 width={14}
@@ -139,7 +139,7 @@ export function SendUsMessage() {
             match="valid"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/valid.png"
                 height={14}
                 width={14}
@@ -153,7 +153,7 @@ export function SendUsMessage() {
             match="valueMissing"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/invalid.png"
                 height={14}
                 width={14}
@@ -167,7 +167,7 @@ export function SendUsMessage() {
             match="typeMismatch"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/invalid.png"
                 height={14}
                 width={14}
@@ -207,7 +207,7 @@ export function SendUsMessage() {
             match="valid"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/valid.png"
                 height={14}
                 width={14}
@@ -221,7 +221,7 @@ export function SendUsMessage() {
             match="valueMissing"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/invalid.png"
                 height={14}
                 width={14}
@@ -233,7 +233,7 @@ export function SendUsMessage() {
           {serverErrors.phoneNumber && (
             <Form.Message className="flex gap-1 py-1 opacity-[0.8] text-red-500 text-xs md:text-sm">
               <div className="self-center">
-                <Image
+                <img
                   src="/image-icons/invalid.png"
                   height={14}
                   width={14}
@@ -268,7 +268,7 @@ export function SendUsMessage() {
             match="valid"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/valid.png"
                 height={14}
                 width={14}
@@ -282,7 +282,7 @@ export function SendUsMessage() {
             match="valueMissing"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/invalid.png"
                 height={14}
                 width={14}
@@ -312,7 +312,7 @@ export function SendUsMessage() {
             match="valid"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/valid.png"
                 height={14}
                 width={14}
@@ -326,7 +326,7 @@ export function SendUsMessage() {
             match="valueMissing"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/invalid.png"
                 height={14}
                 width={14}
@@ -358,7 +358,7 @@ export function SendUsMessage() {
             match="valid"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/valid.png"
                 height={14}
                 width={14}
@@ -372,7 +372,7 @@ export function SendUsMessage() {
             match="valueMissing"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/invalid.png"
                 height={14}
                 width={14}

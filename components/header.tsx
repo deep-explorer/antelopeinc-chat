@@ -42,7 +42,7 @@ async function UserOrLogin() {
         </>
       ) : (
         <Link href={companyUrl} rel="nofollow" className="flex gap-2">
-          <Image src={`/header-logo.png`} alt="logo" width={32} height={32} />
+          <img src={`/header-logo.png`} alt="logo" width={32} height={32} />
           <h2 className="text-xl">Antelope</h2>
         </Link>
       )}
@@ -88,9 +88,7 @@ const staticTitles = [
     pathname: '/tools/reddit-writer',
     data: {
       title: 'Reddit Ideator',
-      desc: [
-        'Turn on active Reddit thread into a compelling piece of content'
-      ]
+      desc: ['Turn on active Reddit thread into a compelling piece of content']
     }
   }
 ]
@@ -144,7 +142,7 @@ export const Header = () => {
           <>
             <div className="flex items-center">
               <Link href={companyUrl} rel="nofollow" className="flex gap-2">
-                <Image
+                <img
                   src={`/header-logo.png`}
                   alt="logo"
                   width={32}
@@ -156,7 +154,7 @@ export const Header = () => {
             <div className="hidden lg:flex gap-2 items-center">
               {brand === 'renzos' && (
                 <div>
-                  <Image
+                  <img
                     src={`/vitamin/logos/renzos.png`}
                     alt="renzoslogo"
                     width={42}
@@ -205,12 +203,7 @@ export const Header = () => {
         <div className="p-4 lg:px-12 lg:py-8 flex items-center justify-between w-full bg-[#122830]  shadow-2xl">
           <div className="flex items-center">
             <Link href={companyUrl} rel="nofollow" className="flex gap-2">
-              <Image
-                src={`/header-logo.png`}
-                alt="logo"
-                width={32}
-                height={32}
-              />
+              <img src={`/header-logo.png`} alt="logo" width={32} height={32} />
               <h2 className="text-xl">Antelope</h2>
             </Link>
           </div>

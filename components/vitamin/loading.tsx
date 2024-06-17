@@ -22,7 +22,7 @@ export function Loading({ loadingTime }: LoadingProps) {
       setLoading(false)
     }, loadingTime)
 
-    getMetaDataOnClient(brand).then((data) => {
+    getMetaDataOnClient(brand).then(data => {
       setContinuationText(data?.continuationText)
     })
   }, [])
@@ -32,7 +32,7 @@ export function Loading({ loadingTime }: LoadingProps) {
       <div className="md:hidden flex flex-col gap-4">
         <div className="flex gap-4 items-center">
           <div>
-            <Image
+            <img
               src="/vitamin/logos/renzos.png"
               height={windowWidth > 768 ? 92 : 56}
               width={windowWidth > 768 ? 92 : 56}
@@ -49,9 +49,7 @@ export function Loading({ loadingTime }: LoadingProps) {
             {isLoading ? 'Starting Your Analysis' : 'Data is Ready'}
           </h1>
         </div>
-        <p className="text-sm md:text-base">
-          {continuationText}
-        </p>
+        <p className="text-sm md:text-base">{continuationText}</p>
       </div>
       <div className="hidden md:flex gap-4">
         <img
@@ -70,9 +68,7 @@ export function Loading({ loadingTime }: LoadingProps) {
           <h1 className="text-lg md:text-xl font-bold">
             {isLoading ? 'Starting Your Analysis' : 'Data is Ready'}
           </h1>
-          <p className="text-sm md:text-base">
-            {continuationText}
-          </p>
+          <p className="text-sm md:text-base">{continuationText}</p>
         </div>
       </div>
       {isLoading ? (

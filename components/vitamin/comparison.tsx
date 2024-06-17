@@ -67,7 +67,7 @@ export function Comparison() {
   return (
     <div className="flex flex-col gap-4 md:gap-6" ref={elementRef}>
       <div className="flex flex-col md:flex-row gap-2 md:gap-4">
-        <Image
+        <img
           src="/vitamin/logos/renzos.png"
           height={80}
           width={80}

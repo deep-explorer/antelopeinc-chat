@@ -40,8 +40,6 @@ const renderCustomShape = (props: {
   cy: number
   payload: any
 }): JSX.Element => {
-  // const { width: windowWidth } = useWindowSize()
-
   const { cx, cy } = props
 
   return (
@@ -203,10 +201,34 @@ export function MapChart({
                 ...Object.values(children).map(child => child.y)
               )
 
+              const minX = Math.min(
+                ...Object.values(children).map(child => child.x)
+              )
+              const minY = Math.min(
+                ...Object.values(children).map(child => child.y)
+              )
+
+              const avgX =
+                Object.values(children).reduce(
+                  (acc, child) => acc + child.x,
+                  0
+                ) / Object.keys(children).length
+              const avgY =
+                Object.values(children).reduce(
+                  (acc, child) => acc + child.y,
+                  0
+                ) / Object.keys(children).length
+
               return {
                 name: key,
-                x: (children[key].x * 90) / maxX, //  maxX equals to 90 out of 100
-                y: (children[key].y * 90) / maxY,
+                x:
+                  children[key].x > avgX
+                    ? 50 + ((children[key].x - avgX) / (maxX - avgX)) * 45
+                    : 50 - ((avgX - children[key].x) / (avgX - minX)) * 45,
+                y:
+                  children[key].y > avgY
+                    ? 50 + ((children[key].y - avgY) / (maxY - avgY)) * 45
+                    : 50 - ((avgY - children[key].y) / (avgY - minY)) * 45,
                 logo: children[key].logo,
                 tooltip: children[key].tooltip,
                 size: children[key].size,

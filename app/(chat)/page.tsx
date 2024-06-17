@@ -34,7 +34,7 @@ export default async function IndexPage() {
       </Link>
       <Link
         href={`https://www.reddit.com/api/v1/authorize?client_id=${process.env.REDDIT_CLIENT_ID}&response_type=code&state=random_string&redirect_uri=${`https://chat.antelopeinc.com${process.env.REDDIT_REDIRECT_URL}`}&duration=permanent&scope=read`}
-        className="italic hover:underline text-primary"
+        className="italic hover:underline text-[#2f393d00]"
       >
         Reddit Ideator
       </Link>

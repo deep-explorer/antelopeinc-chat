@@ -64,7 +64,7 @@ export function InitialMessage() {
             match="valueMissing"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/invalid.png"
                 height={14}
                 width={14}

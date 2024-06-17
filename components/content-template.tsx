@@ -64,7 +64,7 @@ export const ContentTemplate = ({
       <div className="flex justify-between">
         <div className="flex gap-3">
           {icon && (
-            <Image
+            <img
               src={icon}
               height={windowWidth > 768 ? 48 : 30}
               width={windowWidth > 768 ? 48 : 30}
@@ -186,7 +186,7 @@ export const ElementsWrapper = ({
       if (urgency) {
         title = (
           <div className="font-semibold flex items-center gap-2">
-            <Image
+            <img
               src={`/image-icons/${urgency}.png`}
               height={20}
               width={20}

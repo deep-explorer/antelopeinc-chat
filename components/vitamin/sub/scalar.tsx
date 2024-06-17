@@ -66,7 +66,7 @@ export function Scalar({
       <div className="flex justify-between gap-1 md:gap-3 w-full md:w-auto">
         {low && (
           <PrimaryTooltip description={low?.tooltip} bgColor="#ea3f3f">
-            <Image
+            <img
               src={low.logo}
               height={windowWidth > 768 ? 48 : 24}
               width={windowWidth > 768 ? 48 : 24}
@@ -116,7 +116,7 @@ export function Scalar({
 
             <div>
               {isEmailVerified && (
-                <Image
+                <img
                   src={value.logo}
                   height={windowWidth > 768 ? 36 : 20}
                   width={windowWidth > 768 ? 36 : 20}
@@ -134,7 +134,7 @@ export function Scalar({
 
         {high && (
           <PrimaryTooltip description={high?.tooltip} bgColor="#24ae8d">
-            <Image
+            <img
               src={high.logo}
               height={windowWidth > 768 ? 48 : 24}
               width={windowWidth > 768 ? 48 : 24}

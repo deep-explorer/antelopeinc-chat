@@ -107,7 +107,7 @@ export function MapChart({
     >
       <div className="flex justify-between">
         <div className="flex gap-2">
-          <Image
+          <img
             src={icon}
             width={windowWidth > 768 ? 48 : 24}
             height={windowWidth > 768 ? 48 : 24}

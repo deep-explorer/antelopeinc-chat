@@ -40,8 +40,8 @@ export function InitialMessage() {
     })
   }, [])
 
-  const loadingTime = 2000
   const onClick = async () => {
+    const loadingTime = 2000
     setMessages(currentMessages => [
       ...currentMessages,
       {

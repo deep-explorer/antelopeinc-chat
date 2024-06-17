@@ -45,6 +45,7 @@ export function InitialMessage() {
     setLoading(true)
     setUrlSubmitted(true)
     setQuestions([])
+    setShowStylizer(false)
     if (!link) {
       setError('Please enter a reddit URL.')
       return

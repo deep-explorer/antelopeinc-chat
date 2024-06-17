@@ -36,11 +36,7 @@ export function ScoreCard({
       <div>
         <div className="text-sm md:text-4xl font-bold  md:mb-4">
           <SlotCounter
-            value={
-              value.toString().length === 1 && suffix?.toUpperCase() === 'K'
-                ? `${value}000`
-                : `${prefix}${value}${suffix?.toUpperCase()}`
-            }
+            value={`${prefix}${value}${suffix?.toUpperCase()}`}
             animateOnVisible={{ triggerOnce: true }}
           />
         </div>

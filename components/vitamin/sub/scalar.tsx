@@ -59,16 +59,13 @@ export function Scalar({
   return (
     <div className="flex flex-wrap">
       <div className="flex w-full md:w-[160px] justify-between items-center mb-2 md:mr-5">
-        <p className="text-xs md:text-base">{title}</p>
+        <p className="text-xs md:text-base font-bold">{title}</p>
         <PrimaryTooltip description={tooltip || 'No description'} />
       </div>
 
       <div className="flex justify-between gap-1 md:gap-3 w-full md:w-auto">
         {low && (
-          <PrimaryTooltip
-            description={low?.tooltip}
-            bgColor='#ea3f3f'
-          >
+          <PrimaryTooltip description={low?.tooltip} bgColor="#ea3f3f">
             <Image
               src={low.logo}
               height={windowWidth > 768 ? 48 : 24}
@@ -136,10 +133,7 @@ export function Scalar({
         </Progress.Root>
 
         {high && (
-          <PrimaryTooltip
-            description={high?.tooltip}
-            bgColor="#24ae8d"
-          >
+          <PrimaryTooltip description={high?.tooltip} bgColor="#24ae8d">
             <Image
               src={high.logo}
               height={windowWidth > 768 ? 48 : 24}

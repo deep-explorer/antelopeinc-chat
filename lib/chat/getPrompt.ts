@@ -15,10 +15,10 @@ import { UIState, Message } from '@/lib/chat/actions'
 import { useFreeChatContext } from '../hooks/use-free-chat'
 
 type RoleType = Pick<Message, 'role'>
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  dangerouslyAllowBrowser: true
-})
+// const openai = new OpenAI({
+//   apiKey: process.env.OPENAI_API_KEY,
+//   dangerouslyAllowBrowser: true
+// })
 
 export async function getPrompt(content: any, systemPromptType?:string, role?: any) {
 
@@ -39,18 +39,19 @@ export async function getPrompt(content: any, systemPromptType?:string, role?: a
     default:
       systemPrompt = getSystemPrompt('reddit-writer')
   }
-  const answer = await openai.chat.completions.create({
-    messages: [
-      {
-        role: 'system',
-        content: systemPrompt
-      },
-      { 
-        role: 'user', 
-        content: content 
-      }
-    ],
-    model: 'gpt-4o'
-  })
-  return answer.choices[0].message.content
+  // const answer = await openai.chat.completions.create({
+  //   messages: [
+  //     {
+  //       role: 'system',
+  //       content: systemPrompt
+  //     },
+  //     { 
+  //       role: 'user', 
+  //       content: content 
+  //     }
+  //   ],
+  //   model: 'gpt-4o'
+  // })
+  // return answer.choices[0].message.content
+  return null
 }

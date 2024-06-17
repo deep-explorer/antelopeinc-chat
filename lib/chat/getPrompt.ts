@@ -16,7 +16,7 @@ import { useFreeChatContext } from '../hooks/use-free-chat'
 
 type RoleType = Pick<Message, 'role'>
 const openai = new OpenAI({
-  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
   dangerouslyAllowBrowser: true
 })
 

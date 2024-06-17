@@ -53,5 +53,5 @@ export async function getPrompt(content: any, systemPromptType?:string, role?: a
   //   model: 'gpt-4o'
   // })
   // return answer.choices[0].message.content
-  return null
+  return ''
 }

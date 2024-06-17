@@ -39,7 +39,6 @@ export function SendUsMessage() {
       })
     }
     // data.phone = phone(data.phone as string).phoneNumber
-    console.log(data)
     //  TODO: Send data to the server
 
     setMessages(currentMessages => [

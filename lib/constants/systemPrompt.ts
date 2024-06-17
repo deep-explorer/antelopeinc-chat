@@ -112,7 +112,7 @@ Product Features: Highlight up to 3 distinct product features or characteristics
 Products/Services: Detail any specific products or services mentoined in the post. 
 Influencer Mentions: Tag any influencer explicitly named, prioritizing handles or usernames. Note them with an ampersand (e.g.: @karliekloss).
 Trends/Hashtags: Extract all hashtagged phrases directly from content (e.g.: #beauty). Separate with commas.
-User-Generated Content: Indicate if content is user-generated as opposed to branded. Tag ""Yes"" if present, otherwise ""N/A"".
+User-Generated style: Indicate if content is user-generated as opposed to branded. Tag ""Yes"" if present, otherwise ""N/A"".
 Visual Elements: Summarize up to 3 main visual aspects within 4 words, like ""product photo"" or ""outdoor model shot"". Separate with commas.
 Calls to Action: Highlight specific CTAs in 3-4 words. If absent, use ""N/A"".
 Questions to Audience: Note direct questions posed to the audience. If absent, tag ""N/A"".
@@ -165,15 +165,7 @@ Please present your outline in the following format:
    c. ...
 Make sure to keep your outline robust and comprehensive, capturing the key aspects of the topic and the nuances of my perspective.
 `
-
-    default:
-      return ''
-  }
-}
-
-export const getRedditPrompt = (type: RedditSummarizer) => {
-  switch (type) {
-    case 'thread':
+case 'thread':
       return `You will be provided with the title and header message from a Reddit thread. Your task is to read them carefully and write a one sentence summary about what the Reddit post contains.
 
 Read the title and header closely. Then, write a concise one sentence summary capturing the key information about what this Reddit post is about. Avoid any unncessary language (e.g.: this reddit post is about) and focus specifically on what it is focused on succintly.
@@ -191,7 +183,8 @@ This is the context of the thread:
 
 Below are the comments. Consider the score figure that is provided as well, which is used to gather how helpful and effective users found the response. Comments with high scores are considered to be the most useful:
 
-<INSERT COMMENTS AND SCORE>`
+Below is the post and its comments with score, and after that, I have included my opinion on some questions to this post\n
+At last I have included styles in which the answer is to be written\n`
 
     case 'feedback':
       return `You will be provided with the details and comments from a Reddit thread. Your task is to read the details and comments and summarize the main feedback provided.
@@ -213,7 +206,376 @@ This is the context of the thread:
 <INSERT POST SUMMARY> 
 
 Below are the comments. Consider the score figure that is provided as well, which is used to gather how helpful and effective users found the response. Comments with high scores are considered to be the most useful. Now, take a DEEP BREATH, and ensure you read every single comment before producing the table.:`
+    
     default:
       return ''
   }
 }
+
+
+export const channelList = [
+  {
+    name: 'Facebook',
+    type:'channel',
+    style:
+      'Tone: Friendly, community-focused, and engaging. Style: Conversational and approachable. Focus: Highlight community engagement, share user-generated content, and encourage discussions. Audience: A broad demographic including families, community groups, and older adults.'
+  },
+  {
+    name: 'Instagram',
+    type:'channel',
+    style:
+      'Tone: Visual, inspirational, and trendy. Style: Concise and visually driven with hashtags. Focus: Use high-quality images and videos, leverage Stories and Reels, and employ popular hashtags. Audience: Younger adults, creatives, and lifestyle enthusiasts.'
+  },
+  {
+    name: 'Twitter',
+    type:'channel',
+
+    style:
+      'Tone: Informative, witty, and concise. Style: Short, punchy tweets with relevant hashtags. Focus: Share real-time updates, engage in trending topics, and use retweets and replies. Audience: Professionals, tech-savvy individuals, and news followers.'
+  },
+  {
+    name: 'Linkedin',
+    type:'channel',
+
+    style:
+      'Tone: Professional, authoritative, and insightful. Style: Formal and detailed. Focus: Share industry insights, company news, and professional achievements. Audience: Business professionals, industry leaders, and job seekers.'
+  },
+  {
+    name: 'Tik Tok',
+    type:'channel',
+    style:
+      'Tone: Fun, energetic, and creative. Style: Short-form video content with trending sounds and effects. Focus: Participate in trends, create challenges, and use popular hashtags. Audience: Gen Z, young adults, and trendsetters.'
+  },
+  {
+    name: 'Pinterest',
+    type:'channel',
+    style:
+      'Tone: Inspirational, informative, and aesthetic. Style: Visual-centric with detailed descriptions. Focus: Share visually appealing pins, create boards, and use keywords for search optimization. Audience: DIY enthusiasts, planners, and hobbyists.'
+  },
+  {
+    name: 'YouTube',
+    type:'channel',
+    style:
+      'Tone: Educational, engaging, and entertaining. Style: Long-form video content, tutorials, and vlogs. Focus: Create informative and engaging videos, use thumbnails and descriptions effectively, and interact through comments. Audience: A wide range of viewers including those looking for entertainment, education, and tutorials.'
+  },
+  {
+    name: 'Snapchat',
+    type:'channel',
+    style:
+      'Tone: Casual, spontaneous, and playful. Style: Short, ephemeral content with filters and effects. Focus: Share behind-the-scenes content, daily updates, and leverage AR filters. Audience: Teenagers and young adults looking for quick, engaging content.'
+  },
+  {
+    name: 'Reddit',
+    type:'channel',
+    style:
+      'Tone: Informative, conversational, and community-driven. Style: Detailed posts and comments. Focus: Participate in relevant subreddits, answer questions, and share insights. Audience: Niche communities, enthusiasts, and informed users'
+  },
+  {
+    name: 'Discord',
+    type:'channel',
+    style:
+      'Tone: Casual, community-focused, and interactive. Style: Text and voice chat with real-time interaction. Focus: Build and manage communities, host events, and share multimedia content. Audience: Gamers, tech enthusiasts, and niche community groups.'
+  }
+]
+
+export const writingStyleList = [
+  {
+    name: 'Professional',
+    type:'writingStyle',
+    style:
+      'Tone: Formal, authoritative, and polished. Style: Detailed and clear, with a focus on accuracy and precision. Avoids slang and uses industry-specific terminology. Audience: Business professionals, industry leaders, and stakeholders.'
+  },
+  {
+    name: 'Witty',
+    type:'writingStyle',
+    style:
+      'Tone: Humorous, clever, and engaging. Style: Uses puns, wordplay, and light-hearted humor. Keeps the content entertaining while conveying the message. Audience: Younger adults, social media followers, and a broad online audience.'
+  },
+  {
+    name: 'Casual',
+    type:'writingStyle',
+    style:
+      'Tone: Relaxed, friendly, and conversational. Style: Simple language, short sentences, and a personal touch. Often uses contractions and informal expressions. Audience: General public, community groups, and social media users.'
+  },
+  {
+    name: 'Inspirational',
+    type:'writingStyle',
+    style:
+      'Tone: Motivational, uplifting, and positive. Style: Uses encouraging language, quotes, and stories. Focuses on inspiring and empowering the audience. Audience: Individuals seeking motivation, personal growth enthusiasts, and lifestyle followers.'
+  },
+  {
+    name: 'Educational',
+    type:'writingStyle',
+    style:
+      'Tone: Informative, clear, and authoritative. Style: Detailed explanations, step-by-step guides, and factual information. Uses diagrams and examples to clarify complex ideas. Audience: Students, professionals seeking knowledge, and a curious audience.'
+  }
+]
+
+export const lengthList = [
+  {
+    name: 'Extremely short',
+    type:'length',
+    style:
+      'Length: Extremely short, often under 50 words. Style: Single sentences or phrases. Usage: Headlines, tweets, and brief social media updates.'
+  },
+  {
+    name: 'Short',
+    type:'length',
+    style:
+      'Length: Short, typically 50-100 words. Style: Brief sentences and bullet points. Usage: Quick information for busy readers, short announcements.'
+  },
+  {
+    name: 'Moderate',
+    type:'length',
+    style:
+      'Length: Moderate, typically 100-300 words. Style: Balanced with some detail. Usage: General blog posts, social media updates, and online articles.'
+  },
+  {
+    name: 'Long',
+    type:'length',
+    style:
+      'Length: Long, typically 300-1000 words. Style: In-depth explanations and extensive descriptions. Usage: Detailed articles, reports, and thorough content pieces.'
+  },
+  {
+    name: 'Extremely long',
+    type:'length',
+    style:
+      'Length: Very long, typically over 1000 words. Style: Comprehensive and multi-paragraph. Usage: Whitepapers, e-books, and comprehensive guides.'
+  }
+]
+
+export const audienceList = [
+  {
+    name: 'Friends',
+    type:'audience',
+    style:
+      'Tone: Casual, personal, and relatable. Style: Informal language, use of slang, and personal anecdotes. Focus: Sharing personal experiences, updates, and engaging in friendly conversations. Usage: Social media posts, personal blogs, and messaging apps.'
+  },
+  {
+    name: 'Collegues',
+    type:'audience',
+    style:
+      'Tone: Professional, respectful, and collaborative. Style: Clear and concise language, avoiding jargon. Focus: Sharing work-related updates, project details, and professional achievements. Usage: Emails, LinkedIn posts, and internal communication platforms.'
+  },
+  {
+    name: 'Customers',
+    type:'audience',
+    style:
+      'Tone: Friendly, helpful, and customer-focused. Style: Clear, straightforward language with a focus on benefits and support. Focus: Providing product information, solving problems, and building relationships. Usage: Marketing emails, social media updates, and customer service communications.'
+  },
+  {
+    name: 'Clients',
+    type:'audience',
+    style:
+      'Tone: Professional, persuasive, and respectful. Style: Clear, concise, and tailored to client needs. Focus: Highlighting benefits, providing solutions, and building trust. Usage: Proposals, presentations, and business communications.'
+  },
+  {
+    name: 'Students',
+    type:'audience',
+    style:
+      'Tone: Informative, engaging, and encouraging. Style: Clear explanations, step-by-step instructions, and supportive language. Focus: Educating, motivating, and providing resources. Usage: Educational materials, tutorials, and study guides.'
+  }
+]
+
+// export const channelList = [
+//   {
+//     name: 'Facebook',
+//     tone: ' Friendly, community-focused, and engaging.',
+//     style: 'Conversational and approachable.',
+//     focus:
+//       'Conversational and approachable. Focus: Highlight community engagement, share user-generated content, and encourage discussions.',
+//     audience:
+//       'A broad demographic including families, community groups, and older adults.'
+//   },
+//   {
+//     name: 'Instagram',
+//     tone: 'Visual, inspirational, and trendy.',
+//     style: 'Concise and visually driven with hashtags.',
+//     focus:
+//       'Use high-quality images and videos, leverage Stories and Reels, and employ popular hashtags',
+//     audience: 'Younger adults, creatives, and lifestyle enthusiasts.'
+//   },
+//   {
+//     name: 'Twitter',
+//     tone: ' Informative, witty, and concise',
+//     style: 'Short, punchy tweets with relevant hashtags. ',
+//     focus:
+//       'Share real-time updates, engage in trending topics, and use retweets and replies',
+//     audience: 'Professionals, tech-savvy individuals, and news followers.'
+//   },
+//   {
+//     name: 'Linkedin',
+//     tone: 'Professional, authoritative, and insightful.',
+//     style: 'Formal and detailed.',
+//     focus:
+//       'Share industry insights, company news, and professional achievements.',
+//     audience: 'Business professionals, industry leaders, and job seekers.'
+//   },
+//   {
+//     name: 'Tik Tok',
+//     tone: 'Fun, energetic, and creative.',
+//     style: 'Short-form video content with trending sounds and effects. ',
+//     focus:
+//       'Participate in trends, create challenges, and use popular hashtags.',
+//     audience: 'Gen Z, young adults, and trendsetters.'
+//   },
+//   {
+//     name: 'Pinterest',
+//     tone: 'Inspirational, informative, and aesthetic.',
+//     style: 'Visual-centric with detailed descriptions.',
+//     focus:
+//       'Share visually appealing pins, create boards, and use keywords for search optimization. ',
+//     audience: 'DIY enthusiasts, planners, and hobbyists.'
+//   },
+//   {
+//     name: 'YouTube',
+//     tone: 'Educational, engaging, and entertaining.',
+//     style: 'Long-form video content, tutorials, and vlogs.',
+//     focus:
+//       ' Create informative and engaging videos, use thumbnails and descriptions effectively, and interact through comments.',
+//     audience:
+//       'A wide range of viewers including those looking for entertainment, education, and tutorials.'
+//   },
+//   {
+//     name: 'Snapchat',
+//     tone: 'Casual, spontaneous, and playful.',
+//     style: ' Short, ephemeral content with filters and effects.',
+//     focus:
+//       'Share behind-the-scenes content, daily updates, and leverage AR filters.',
+//     audience: 'Teenagers and young adults looking for quick, engaging content.'
+//   },
+//   {
+//     name: 'Reddit',
+//     tone: 'Informative, conversational, and community-driven.',
+//     style: 'Detailed posts and comments.',
+//     focus:
+//       'Participate in relevant subreddits, answer questions, and share insights.',
+//     audience: 'Niche communities, enthusiasts, and informed users'
+//   },
+//   {
+//     name: 'Discord',
+//     tone: 'Casual, community-focused, and interactive. ',
+//     style: 'Text and voice chat with real-time interaction.',
+//     focus:
+//       'Build and manage communities, host events, and share multimedia content.',
+//     audience: 'Gamers, tech enthusiasts, and niche community groups.'
+//   }
+// ]
+
+// export const writingStyleList = [
+//   {
+//     name: 'Professional',
+//     tone: 'Formal, authoritative, and polished.',
+//     style:
+//       'Detailed and clear, with a focus on accuracy and precision. Avoids slang and uses industry-specific terminology.',
+//     audience: 'Business professionals, industry leaders, and stakeholders.'
+//   },
+//   {
+//     name: 'Witty',
+//     tone: 'Humorous, clever, and engaging.',
+//     style:
+//       'Uses puns, wordplay, and light-hearted humor. Keeps the content entertaining while conveying the message.',
+//     audience:
+//       'Younger adults, social media followers, and a broad online audience.'
+//   },
+//   {
+//     name: 'Casual',
+//     tone: 'Relaxed, friendly, and conversational.',
+//     style:
+//       'Simple language, short sentences, and a personal touch. Often uses contractions and informal expressions.',
+//     audience: 'General public, community groups, and social media users.'
+//   },
+//   {
+//     name: 'Inspirational',
+//     tone: 'Motivational, uplifting, and positive.',
+//     style:
+//       'Uses encouraging language, quotes, and stories. Focuses on inspiring and empowering the audience.',
+//     audience:
+//       ' Individuals seeking motivation, personal growth enthusiasts, and lifestyle followers.'
+//   },
+//   {
+//     name: 'Educational',
+//     tone: 'Informative, clear, and authoritative.',
+//     style:
+//       'Detailed explanations, step-by-step guides, and factual information. Uses diagrams and examples to clarify complex ideas.',
+//     audience:
+//       'Students, professionals seeking knowledge, and a curious audience.'
+//   }
+// ]
+
+// export const lengthList = [
+//   {
+//     name: 'Extremely short',
+//     length: 'Extremely short, often under 50 words.',
+//     style: 'Single sentences or phrases.',
+//     usage: 'Headlines, tweets, and brief social media updates.'
+//   },
+//   {
+//     name: 'Short',
+//     length: 'Short, typically 50-100 words.',
+//     style: 'Brief sentences and bullet points. ',
+//     usage: 'Quick information for busy readers, short announcements.'
+//   },
+//   {
+//     name: 'Moderate',
+//     length: 'Moderate, typically 100-300 words. ',
+//     style: 'Balanced with some detail.',
+//     usage: 'General blog posts, social media updates, and online articles.'
+//   },
+//   {
+//     name: 'Long',
+//     length: 'Long, typically 300-1000 words.',
+//     style: 'In-depth explanations and extensive descriptions',
+//     usage: ' Detailed articles, reports, and thorough content pieces.'
+//   },
+//   {
+//     name: 'Extremely long',
+//     length: 'Very long, typically over 1000 words.',
+//     style: 'Comprehensive and multi-paragraph.',
+//     usage: 'Whitepapers, e-books, and comprehensive guides.'
+//   }
+// ]
+
+// export const audienceList = [
+//   {
+//     name: 'Friends',
+//     tone: 'Casual, personal, and relatable. ',
+//     style: 'Informal language, use of slang, and personal anecdotes.',
+//     focus:
+//       'Sharing personal experiences, updates, and engaging in friendly conversations. ',
+//     usage: 'Social media posts, personal blogs, and messaging apps.'
+//   },
+//   {
+//     name: 'Collegues',
+//     tone: 'Professional, respectful, and collaborative.',
+//     style: 'Clear and concise language, avoiding jargon.',
+//     focus:
+//       'Sharing work-related updates, project details, and professional achievements.',
+//     usage: 'Emails, LinkedIn posts, and internal communication platforms.'
+//   },
+//   {
+//     name: 'Customers',
+//     tone: 'Friendly, helpful, and customer-focused.',
+//     style:
+//       'Clear, straightforward language with a focus on benefits and support. ',
+//     focus:
+//       'Providing product information, solving problems, and building relationships.',
+//     usage:
+//       ' Marketing emails, social media updates, and customer service communications.'
+//   },
+//   {
+//     name: 'Clients',
+//     tone: 'Professional, persuasive, and respectful. ',
+//     style: 'Clear, concise, and tailored to client needs.',
+//     focus: 'Highlighting benefits, providing solutions, and building trust.',
+//     usage: 'Proposals, presentations, and business communications.'
+//   },
+//   {
+//     name: 'Students',
+//     tone: 'Informative, engaging, and encouraging.',
+//     style:
+//       'Clear explanations, step-by-step instructions, and supportive language.',
+//     focus: 'Educating, motivating, and providing resources.',
+//     usage: 'Educational materials, tutorials, and study guides.'
+//   }
+// ]

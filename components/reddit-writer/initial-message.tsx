@@ -13,12 +13,17 @@ import { EmailInputMessage } from '../email-input-message'
 import { useActions, useUIState } from 'ai/rsc'
 import Question from './question'
 import { getSystemPrompt } from '@/lib/constants/systemPrompt'
-import { getPrompt } from '@/lib/chat/getPrompt'
+import { getStaticAIAnswer } from '@/lib/chat/getStaticAIAnswer'
 import { url } from 'inspector'
 import { IconSpinner } from '../ui/icons'
 import { ChatSpinner, RoundSpinner } from '../stocks/ChatSpinner'
 import Stylizer from './stylizer'
 import { useSearchParams } from 'next/navigation'
+type Response = {
+  title: string
+  comments: string
+
+}
 export function InitialMessage() {
   const code = useSearchParams().get('code')
   const state = useSearchParams().get('state')
@@ -38,7 +43,7 @@ export function InitialMessage() {
   const [stylePrompt, setStylePrompt] = useState<string>('')
   const [threadAnswer, setThreadAnswer] = useState<string>('')
   const [summary, setSummary] = useState<string>('')
-  const [response, setResponse] = useState<string>('')
+  const [response, setResponse] = useState<Response>({ title: '', comments: '' })
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
@@ -60,12 +65,11 @@ export function InitialMessage() {
     // TODO: Call reddit scraper API
     let res: any
     try {
-      res = await fetcher(`/api/tools/reddit-writer?code=${code}`, {
+      res = await fetcher(`/api/tools/reddit-writer?code=${code}`, { 
         method: 'POST',
         body: JSON.stringify({ post_id })
       })
-      setResponse(res)
-      setLoading(false)
+      setResponse(res.data)
     } catch (e: any) {
       setLoading(false)
       setError(e.message || 'Please provide a correct post URL.')
@@ -74,14 +78,14 @@ export function InitialMessage() {
     //TODO: Call the AI system prompt
     try {
       setQuestionSpinner(true)
-      let title = await getPrompt(res.data.title, 'thread')
+      let title = await getStaticAIAnswer(res.data.title, 'thread')
       title = `Thank you for adding the link. ${title ? title : link}
        To help build a piece of content around this topic, please can you answer the following questions.\n
        If you'd like to skip a question, you can leave the box empty.`
       setSummary(title)
 
-      let q = await getPrompt(res.data.comments, 'reddit-writer')
-
+      let q = await getStaticAIAnswer(res.data.comments, 'reddit-writer')
+      setLoading(false)
       setQuestionSpinner(false)
       //TODO: Parse the questions from the response
       new Array(5).fill(0).forEach((_, i) => {
@@ -123,25 +127,19 @@ export function InitialMessage() {
       })
     })
     await new Promise(resolve => setTimeout(resolve, 0))
-
     setShowStylizer(true)
   }
 
-  const handleStyle = async (styles: object[]) => {
-    // console.log('styles', styles)
-    // let format = `
-    //     Please write this outline into a compelling Linkedin post. 
-    //     Keep the`
-    // styles.forEach(style => {
-    //   Object.entries(style).forEach(([key, value]) => {
-    //     format += ` ${key} in ${value}, `
-    //   })
-    // })
-    // console.log(format)
-    // setStylePrompt(format)
-    // const responseMessage = await submitUserMessage(response + answerPrompt + format)
-    // console.log(answerPrompt + format)
-    // setMessages(currentMessages => [...currentMessages, responseMessage])
+  const handleStyle = async (styles: string) => {
+    setStylePrompt(styles)
+    var prompt = getSystemPrompt('comment') 
+              +response.comments  + answerPrompt 
+              + styles
+              +'\n So far, I have included all the comments and answers to the questions, Please write the response as required'
+
+    const responseMessage = await submitUserMessage(prompt,'comment')
+    // console.log(answerPrompt + styler)
+    setMessages(currentMessages => [...currentMessages, responseMessage])
   }
   return (
     <div>
@@ -179,11 +177,11 @@ export function InitialMessage() {
           </div>
         </BotCard>
       )}
-      {questionSpinner && !error && (
+      {/* {questionSpinner && !error && (
         <BotCard>
           <ChatSpinner />
         </BotCard>
-      )}
+      )} */}
       {questions.length > 0 && (
         <BotCard>
           <Question

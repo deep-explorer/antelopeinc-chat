@@ -39,7 +39,6 @@ export function EmailCodeInputMessage() {
 
       //  TODO: verify signature using public key
       // Submit and get response message
-      console.log(linkedinPosts)
       const responseMessage = await submitUserMessage(linkedinPosts)
       setMessages(currentMessages => [...currentMessages, responseMessage])
     } catch (e: any) {

@@ -21,25 +21,45 @@ import { Button } from '@radix-ui/themes'
 import { useWindowSize } from 'usehooks-ts'
 import { nanoid } from 'nanoid'
 import { useState, forwardRef, RefObject, ReactNode, useRef } from 'react'
-
-const channelList= ['Channel1', 'Channel2', 'Channel3']
-const lengthList = ['Short', 'Medium', 'Long']
-const writingStyleList = ['English Level A', 'English Level B', 'English Level C']
+import {
+  channelList,
+  writingStyleList,
+  lengthList,
+  audienceList
+} from '@/lib/constants/systemPrompt'
 export default function Stylizer({
   onStyle
 }: {
-  onStyle: (style: object[]) => void
+  onStyle: (style: string) => void
 }) {
   const { width: windowWidth } = useWindowSize()
   const [_, setMessages] = useUIState<typeof AI>()
 
-  const [channel, setChannel] = useState<string>(channelList[0])
-  const [length, setLength] = useState<string>(lengthList[0])
-  const [writingStyle, setWritingStyle] = useState<string>(writingStyleList[0])
-
+  const [channel, setChannel] = useState<any>(channelList[0].name)
+  const [length, setLength] = useState<any>(lengthList[0].name)
+  const [writingStyle, setWritingStyle] = useState<any>(
+    writingStyleList[0].name
+  )
+  const [audience, setAudience] = useState<any>(audienceList[0].name)
   const handleSubmit = () => {
-    console.log('ssssdf')
-    onStyle([{channel}, {length}, {writingStyle}])
+    let styler = `
+    ------------------------Style of the answer you have to prepare -----------------------------\n
+        Please write this outline into a compelling post with the below style.\n`
+    const styles = [channel, length, writingStyle, audience]
+    channelList.find(e => e.name === channel)
+    styler += `Post is for ${channel} channel, Tone, style, something you have to focus and audience of this post is like belows:
+           ${channelList.find(e => e.name === channel)?.style} \n\n`
+
+    styler += `Post length has to be ${length} , style and usage for this post is like belows:
+        ${lengthList.find(e => e.name === length)?.style}\n\n`
+
+    styler += `Writing style is for ${writingStyle} , details of it are like belows:
+            ${writingStyleList.find((e: any) => e.name === writingStyle)?.style}\n\n`
+    styler += `Post is for ${audience} , details of it are like belows:
+            ${audienceList.find((e: any) => e.name === audience)?.style}\n\n`
+    styler += `---------------------------------------End of style guide-----------------------------------\n`
+
+    onStyle(styler)
   }
   return (
     <div className="flex flex-col gap-4">
@@ -53,7 +73,10 @@ export default function Stylizer({
           <strong className="mb-1">Channel</strong>
           <div className="pr-0 md:pr-2 w-full ">
             <div className="border-[1px] border-white w-full rounded-md">
-              <Select onValueChange={value => setChannel(value)} defaultValue={channelList[0]}>
+              <Select
+                onValueChange={value => setChannel(value)}
+                defaultValue={channelList[0].name}
+              >
                 <SelectTrigger aria-label="Food">
                   <SelectValue placeholder="Select a channel..." />
                 </SelectTrigger>
@@ -61,8 +84,8 @@ export default function Stylizer({
                   <SelectGroup>
                     {channelList.map((channel, i) => {
                       return (
-                        <SelectItem key={i} value={channel}>
-                          {channel}
+                        <SelectItem key={i} value={channel.name}>
+                          {channel.name}
                         </SelectItem>
                       )
                     })}
@@ -76,16 +99,19 @@ export default function Stylizer({
           <strong className="mb-1">Length</strong>
           <div className="pr-0 md:pr-2 w-full ">
             <div className="border-[1px] border-white w-full rounded-md">
-              <Select onValueChange={value => setLength(value)} defaultValue={lengthList[0]}>
+              <Select
+                onValueChange={value => setLength(value)}
+                defaultValue={lengthList[0].name}
+              >
                 <SelectTrigger aria-label="Food">
                   <SelectValue placeholder="Select a length..." />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    {['Short', 'Medium', 'Long'].map((length, i) => {
+                    {lengthList.map((len, i) => {
                       return (
-                        <SelectItem key={i} value={length}>
-                          {length}
+                        <SelectItem key={i} value={len.name}>
+                          {len.name}
                         </SelectItem>
                       )
                     })}
@@ -95,20 +121,49 @@ export default function Stylizer({
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-start w-full md:w-1/2 mr-0 ">
+        <div className="flex flex-col items-start w-full md:w-1/2 mr-0 mb-2 md:mb-8 ">
           <strong className="mb-1">Writing Style</strong>
           <div className="pr-0 md:pr-2 w-full ">
             <div className="border-[1px] border-white w-full rounded-md">
-              <Select onValueChange={value => setWritingStyle(value)} defaultValue={writingStyleList[0]}>
+              <Select
+                onValueChange={value => setWritingStyle(value)}
+                defaultValue={writingStyleList[0].name}
+              >
                 <SelectTrigger aria-label="Food">
                   <SelectValue placeholder="Select a writing style..." />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    {['English Level A', 'English Level B', 'English Level C'].map((writingStyle, i) => {
+                    {writingStyleList.map((writingStyle, i) => {
                       return (
-                        <SelectItem key={i} value={writingStyle}>
-                          {writingStyle}
+                        <SelectItem key={i} value={writingStyle.name}>
+                          {writingStyle.name}
+                        </SelectItem>
+                      )
+                    })}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col items-start w-full md:w-1/2 mr-0 mb-2 md:mb-8  ">
+          <strong className="mb-1">Audience</strong>
+          <div className="pr-0 md:pr-2 w-full ">
+            <div className="border-[1px] border-white w-full rounded-md">
+              <Select
+                onValueChange={value => setAudience(value)}
+                defaultValue={audienceList[0].name}
+              >
+                <SelectTrigger aria-label="Food">
+                  <SelectValue placeholder="Select a writing style..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {audienceList.map((audience, i) => {
+                      return (
+                        <SelectItem key={i} value={audience.name}>
+                          {audience.name}
                         </SelectItem>
                       )
                     })}

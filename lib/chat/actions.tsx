@@ -125,7 +125,7 @@ async function confirmPurchase(symbol: string, price: number, amount: number) {
 
 export const maxDuration = 300
 
-async function submitUserMessage(content: string) {
+async function submitUserMessage(content: string, chId?: ChatId) {
   'use server'
   const aiState = getMutableAIState<typeof AI>()
   aiState.update({
@@ -143,8 +143,8 @@ async function submitUserMessage(content: string) {
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>
   let textNode: undefined | React.ReactNode
 
-  const chatId = aiState.get().chatId
-  let systemPrompt = getSystemPrompt(aiState.get().chatId)
+  const chatId = chId ? chId : aiState.get().chatId
+  let systemPrompt = getSystemPrompt(chatId)
   const ui = render({
     model: 'gpt-4o',
     provider: openai,
@@ -403,11 +403,12 @@ export type ChatId =
   | 'linkedin-analyzer'
   | 'content-intelligence'
   | 'reddit-writer'
-
-export type RedditSummarizer = 
   | 'thread'
   | 'comment'
   | 'feedback'
+
+
+export type RedditSummarizer = 'thread' | 'comment' | 'feedback'
 
 export type AIState = {
   chatId: ChatId

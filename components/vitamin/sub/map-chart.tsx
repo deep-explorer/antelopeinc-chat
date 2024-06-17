@@ -114,6 +114,7 @@ export function MapChart({
             width={windowWidth > 768 ? 48 : 24}
             height={windowWidth > 768 ? 48 : 24}
             alt={`/image-icons/${icon}.png`}
+            className="rounded-md"
           />
           <h2 className="text-lg md:text-xl font-bold self-center">{title}</h2>
         </div>

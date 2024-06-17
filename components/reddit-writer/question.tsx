@@ -12,9 +12,11 @@ import { useState } from 'react'
 import Stylizer from './stylizer'
 
 export default function Question({
+  summary,
   questions,
   onAnswers
 }: {
+  summary: string
   questions: string[]
   onAnswers: (answers: string[]) => void
 }) {
@@ -42,11 +44,17 @@ export default function Question({
         className="flex flex-col gap-2 md:gap-4"
         onSubmit={handleSubmit}
       >
-        <Text as="p" className="text-sm md:text-base font-semibold">
-          Thank you for adding the link. This Textost speaks about AGI and
+        <Text as="div" className="text-sm md:text-base font-semibold">
+          {/* Thank you for adding the link. This Textost speaks about AGI and
           estimates a potential timeline for it. To help build a piece of
           content around this topic, please can you answer the following
-          questions. If you&apos;d like to skip a post, you can leave the box empty.
+          questions. If you&apos;d like to skip a post, you can leave the box empty. */}
+          {summary.split('\n').map((line, index) => (
+            <p key={index}>
+              {line}
+              <br />
+            </p>
+          ))}
         </Text>
         <div>
           <Text as="div" weight="bold" size="2" mb="0">

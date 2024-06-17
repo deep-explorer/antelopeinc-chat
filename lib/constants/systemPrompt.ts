@@ -1,4 +1,4 @@
-import { ChatId } from '../chat/actions'
+import { ChatId, RedditSummarizer } from '../chat/actions'
 
 export const getSystemPrompt = (chatId: ChatId) => {
   switch (chatId) {
@@ -134,14 +134,14 @@ Please carefully read through these comments to grasp the main topic being discu
 Next, come up with five thought-provoking questions to ask me that will help you better understand my opinion on the core idea. List each of these questions as your response.
 Each of these questions should have a brief explanation of what the comments say, and then a question for my point of view.
 This section must have the format as below:
-  Comment 1 //Please write this in bold font
+  Comment 1 //Please write this in headline
     <Explanation 1>[explanation 1 sentence here]</Explanation 2>:
     <Question 1> [question1 sentence here] </Question 1>
-  Comment 2 //Please write this in bold font
+  Comment 2 //Please write this in headline
     <Explanation 2>[explanation 2 sentence here] </Explanation 2>
     <Question 2> [question2 sentence here]</Question 2>
   ...
-  Comment 5 //Please write this in bold font
+  Comment 5 //Please write this in headline
     <Explanation 5>[explanation 5 sentence here] </Explanation 5>
     <Question 5> [question5 sentence here]</Question 5>
 
@@ -166,6 +166,53 @@ Please present your outline in the following format:
 Make sure to keep your outline robust and comprehensive, capturing the key aspects of the topic and the nuances of my perspective.
 `
 
+    default:
+      return ''
+  }
+}
+
+export const getRedditPrompt = (type: RedditSummarizer) => {
+  switch (type) {
+    case 'thread':
+      return `You will be provided with the title and header message from a Reddit thread. Your task is to read them carefully and write a one sentence summary about what the Reddit post contains.
+
+Read the title and header closely. Then, write a concise one sentence summary capturing the key information about what this Reddit post is about. Avoid any unncessary language (e.g.: this reddit post is about) and focus specifically on what it is focused on succintly.
+
+Here are the details:
+`
+    case 'comment':
+      return `You will be provided with the details and comments from a Reddit thread. Your task is to read the details and comments and summarize the main feedback provided.
+
+Read the summary and the comments closely. Then, write a summary capturing the overall comment details provided. Attempt to do this in 3 succinct sentences, avoiding redundant words (e.g.: this reddit thread is about) and focusing only on the key learnings.
+
+This is the context of the thread:
+
+<INSERT POST SUMMARY>
+
+Below are the comments. Consider the score figure that is provided as well, which is used to gather how helpful and effective users found the response. Comments with high scores are considered to be the most useful:
+
+<INSERT COMMENTS AND SCORE>`
+
+    case 'feedback':
+      return `You will be provided with the details and comments from a Reddit thread. Your task is to read the details and comments and summarize the main feedback provided.
+
+Read the summary and the comments closely. Then, produce a detailed table of the key ideas and feedback provided. These should relate back to the context of the thread and the question being asked.
+
+Your table should include the following:
+-Feedback Name (a short 1-5 word summary of the feedback)
+-Feedback Details (a one sentence summary of the feedback with more details)
+-Volume (how many times this piece of feedback was received)
+-Overall Score (an overall score, which multiplies the volume of feedback with the provided score figure). Rank the table by this measure.
+-Sentiment (whether or not the feedback was positive, negative and neutral)
+-Sample Quotes (example quotes taken verbatim from the analysis with a maximum of three)
+
+IMPORTANT: limit this table to ten rows, focusing on only the most important and common pieces of feedback based on volume and scores. Rank by overall score.
+
+This is the context of the thread:
+
+<INSERT POST SUMMARY> 
+
+Below are the comments. Consider the score figure that is provided as well, which is used to gather how helpful and effective users found the response. Comments with high scores are considered to be the most useful. Now, take a DEEP BREATH, and ensure you read every single comment before producing the table.:`
     default:
       return ''
   }

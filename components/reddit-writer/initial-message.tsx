@@ -36,6 +36,9 @@ export function InitialMessage() {
   const [answerPrompt, setAnswerPrompt] = useState<string>('')
   const [showStylizer, setShowStylizer] = useState(false)
   const [stylePrompt, setStylePrompt] = useState<string>('')
+  const [threadAnswer, setThreadAnswer] = useState<string>('')
+  const [summary, setSummary] = useState<string>('')
+  const [response, setResponse] = useState<string>('')
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
@@ -54,14 +57,13 @@ export function InitialMessage() {
       return
     }
     // TODO: Call reddit scraper API
-    let comments: any
-    console.log(code)
+    let res: any
     try {
-      comments = await fetcher(`/api/tools/reddit-writer?code=${code}`, {
+      res = await fetcher(`/api/tools/reddit-writer?code=${code}`, {
         method: 'POST',
         body: JSON.stringify({ post_id })
       })
-      console.log(comments)
+      setResponse(res)
       setLoading(false)
     } catch (e: any) {
       setLoading(false)
@@ -71,15 +73,21 @@ export function InitialMessage() {
     //TODO: Call the AI system prompt
     try {
       setQuestionSpinner(true)
-      const content = await getPrompt(comments.data)
-      const questionsMessage = content.choices[0].message.content
+      let title = await getPrompt(res.data.title, 'thread')
+      title = `Thank you for adding the link. ${title ? title : link}
+       To help build a piece of content around this topic, please can you answer the following questions.\n
+       If you'd like to skip a question, you can leave the box empty.`
+      setSummary(title)
+
+      let q = await getPrompt(res.data.comments, 'reddit-writer')
 
       setQuestionSpinner(false)
       //TODO: Parse the questions from the response
       new Array(5).fill(0).forEach((_, i) => {
-        let match = questionsMessage?.match(
-          new RegExp(`<Question ${i + 1}>(.*?)<\/Question ${i + 1}>`)
-        ) || []
+        let match =
+          q?.match(
+            new RegExp(`<Question ${i + 1}>(.*?)<\/Question ${i + 1}>`)
+          ) || []
         if (match && match[1]) {
           setQuestions(currentQuestions => [
             ...currentQuestions.slice(0, i),
@@ -103,47 +111,37 @@ export function InitialMessage() {
       ])
     }
   }
-  const handleAnswers = async(answers: string[]) => {
-    console.log('answers', answers)
-
-    console.log('1111111')
+  const handleAnswers = async (answers: string[]) => {
     new Array(5).fill(0).forEach((_, i) => {
-      setAnswerPrompt(
-        answerPrompt => {
-      console.log('222222222')
-
-          return `
+      setAnswerPrompt(answerPrompt => {
+        return `
         ${answerPrompt}
         - Question ${i + 1}: ${questions[i]}
         - Answer: ${answers[i].length > 0 ? answers[i] : 'Skip this question'}
-        `}
-      )
-    })
-    await new Promise(resolve => setTimeout(resolve, 0));
-
-    const responseMessage = await submitUserMessage(answerPrompt)
-    setMessages(currentMessages => [...currentMessages, responseMessage])
-    setShowStylizer(true)
-  }
-  console.log(answerPrompt)
-
-  const handleStyle = async (styles: object[]) => {
-    console.log('styles', styles)
-    let format = `
-        Please write this outline into a compelling Linkedin post. 
-        Keep the`
-    styles.forEach(style => {
-      Object.entries(style).forEach(([key, value]) => {
-        format += ` ${key} in ${value}, `
+        `
       })
     })
-    console.log(format)
-    setStylePrompt(format)
-    const responseMessage = await submitUserMessage(answerPrompt + format)
-    console.log(answerPrompt + format)
-    setMessages(currentMessages => [...currentMessages, responseMessage])
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    setShowStylizer(true)
   }
-  console.log(answerPrompt)
+
+  const handleStyle = async (styles: object[]) => {
+    // console.log('styles', styles)
+    // let format = `
+    //     Please write this outline into a compelling Linkedin post. 
+    //     Keep the`
+    // styles.forEach(style => {
+    //   Object.entries(style).forEach(([key, value]) => {
+    //     format += ` ${key} in ${value}, `
+    //   })
+    // })
+    // console.log(format)
+    // setStylePrompt(format)
+    // const responseMessage = await submitUserMessage(response + answerPrompt + format)
+    // console.log(answerPrompt + format)
+    // setMessages(currentMessages => [...currentMessages, responseMessage])
+  }
   return (
     <div>
       <BotCard>
@@ -187,7 +185,11 @@ export function InitialMessage() {
       )}
       {questions.length > 0 && (
         <BotCard>
-          <Question questions={questions} onAnswers={handleAnswers} />
+          <Question
+            summary={summary}
+            questions={questions}
+            onAnswers={handleAnswers}
+          />
         </BotCard>
       )}
       {showStylizer && (

@@ -127,7 +127,6 @@ export const maxDuration = 300
 
 async function submitUserMessage(content: string) {
   'use server'
-  console.log('---------------------content1--------------------------',content)
   const aiState = getMutableAIState<typeof AI>()
   aiState.update({
     ...aiState.get(),
@@ -169,7 +168,6 @@ async function submitUserMessage(content: string) {
 
       if (done) {
         //  if this is the first time
-        console.log('----------------------content2---------------------', content)
         textNode = (
           <>
             {textNode}
@@ -405,6 +403,11 @@ export type ChatId =
   | 'linkedin-analyzer'
   | 'content-intelligence'
   | 'reddit-writer'
+
+export type RedditSummarizer = 
+  | 'thread'
+  | 'comment'
+  | 'feedback'
 
 export type AIState = {
   chatId: ChatId

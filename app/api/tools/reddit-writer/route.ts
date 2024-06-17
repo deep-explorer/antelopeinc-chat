@@ -4,6 +4,10 @@ import { fetcher } from '@/lib/utils'
 import { NextResponse, NextRequest } from 'next/server'
 import { cookies } from 'next/headers'
 import { access } from 'fs'
+
+export async function GET(request: NextRequest, response: NextResponse) {
+  console.log('get')
+  }
 export async function POST(request: NextRequest, response: NextResponse) {
   const { REDDIT_CLIENT_ID, REDDIT_SECRET, REDDIT_REDIRECT_URL } = process.env
   const { searchParams } = new URL(request.url)
@@ -12,6 +16,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
   const { post_id: postId } = await request.json()
 
   let token = cookies().get('session')?.value
+  console.log('sdfsd', token)
   if (!code) {
     const redditAuthUrl = `https://www.reddit.com/api/v1/authorize?client_id=${REDDIT_CLIENT_ID}&response_type=code&state=random_state&redirect_uri=${REDDIT_REDIRECT_URL}&duration=temperary&scope=read`
     return NextResponse.redirect(redditAuthUrl)
@@ -56,6 +61,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
         )
       }
     }
+    console.log('Token:', token)
     //TODO: get the post and its comments
     let postAndComments = await fetchPostComments(postId, token!)
     if (postAndComments) {

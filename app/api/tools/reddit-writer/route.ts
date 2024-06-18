@@ -79,7 +79,8 @@ async function fetchPostInfo(postId: string, accessToken: string) {
       `https://oauth.reddit.com/api/info?id=t3_${postId}`,
       {
         headers: {
-          Authorization: `Bearer ${accessToken}`
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
           // 'User-Agent': 'Your User Agent' // Reddit requires a User-Agent header
         }
       }
@@ -103,7 +104,8 @@ async function fetchPostComments(postId: string, accessToken: string) {
       `https://oauth.reddit.com/comments/${postId}`,
       {
         headers: {
-          Authorization: `Bearer ${accessToken}`
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
           // 'User-Agent': 'Your User Agent' // Reddit requires a User-Agent header
         }
       }

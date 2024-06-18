@@ -22,7 +22,6 @@ import { useSearchParams } from 'next/navigation'
 type Response = {
   title: string
   comments: string
-
 }
 export function InitialMessage() {
   const code = useSearchParams().get('code')
@@ -32,6 +31,7 @@ export function InitialMessage() {
   const [isLoading, setLoading] = useState(false)
   const [urlSubmitted, setUrlSubmitted] = useState(false)
   const [questionSpinner, setQuestionSpinner] = useState(false)
+  const [wentWrong, setWentWrong] = useState(false) 
   const { submitUserMessage } = useActions()
 
   const [_, setMessages] = useUIState<typeof AI>()
@@ -43,8 +43,11 @@ export function InitialMessage() {
   const [stylePrompt, setStylePrompt] = useState<string>('')
   const [threadAnswer, setThreadAnswer] = useState<string>('')
   const [summary, setSummary] = useState<string>('')
-  const [response, setResponse] = useState<Response>({ title: '', comments: '' })
- 
+  const [response, setResponse] = useState<Response>({
+    title: '',
+    comments: ''
+  })
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
@@ -52,6 +55,7 @@ export function InitialMessage() {
     setUrlSubmitted(true)
     setQuestions([])
     setShowStylizer(false)
+    setWentWrong(false)
     if (!link) {
       setError('Please enter a reddit URL.')
       return
@@ -66,7 +70,8 @@ export function InitialMessage() {
     // TODO: Call reddit scraper API
     let res: any
     try {
-      res = await fetcher(`/api/tools/reddit-writer?code=${code}`, { 
+
+      res = await fetcher(`/api/tools/reddit-writer?code=${code}`, {
         method: 'POST',
         body: JSON.stringify({ post_id })
       })
@@ -104,18 +109,21 @@ export function InitialMessage() {
         }
       })
     } catch (e) {
-      setMessages(currentMessages => [
-        ...currentMessages,
-        {
-          id: nanoid(),
-          display: (
-            <p className="text-sm md:text-base font-semibold">
-              Sorry, something went wrong. Please try again.
-            </p>
-          ),
-          role: 'assistant'
-        }
-      ])
+      // setMessages(currentMessages => [
+      //   ...currentMessages,
+      //   {
+      //     id: nanoid(),
+      //     display: (
+      //       <p className="text-sm md:text-base font-semibold">
+      //         Sorry, something went wrong. Please try again.
+      //       </p>
+      //     ),
+      //     role: 'assistant'
+      //   }
+      // ])
+      setLoading(false)
+      setWentWrong(true)
+      setQuestionSpinner(false)
     }
   }
   const handleAnswers = async (answers: string[]) => {
@@ -134,13 +142,14 @@ export function InitialMessage() {
 
   const handleStyle = async (styles: string) => {
     setStylePrompt(styles)
-    var prompt = getSystemPrompt('comment') 
-              +response.comments  + answerPrompt 
-              + styles
-              +'\n So far, I have included all the comments and answers to the questions, Please write the response as required'
-
-    const responseMessage = await submitUserMessage(prompt,'comment')
-    // console.log(answerPrompt + styler)
+    var prompt =
+      getSystemPrompt('comment') +
+      response.comments +
+      answerPrompt +
+      styles +
+      '\n So far, I have included all the comments and answers to the questions, Please write the response as required'
+    console.log(prompt)
+    const responseMessage = await submitUserMessage(prompt, 'reddit-writter')
     setMessages(currentMessages => [...currentMessages, responseMessage])
   }
   return (
@@ -157,7 +166,7 @@ export function InitialMessage() {
             To begin, please input the URL of an active Reddit thread you would
             like to write about:
           </p>
-          <div>
+          <div className="flex flex-col">
             <Input
               placeholder="https://www.reddit.com/r/content_marketing/comments/1ddabnu/does_somebody_want_to_build_his_or_her_personal/"
               className="w-full overflow-hidden bg-[#FFFFFF] dark:bg-[#071920] sm:rounded-md border-[1px] border-[#1F3C45]"
@@ -167,6 +176,7 @@ export function InitialMessage() {
                 setLink(e.target.value)
               }}
             />
+            {error && <div className="text-primary">{error}</div>}
           </div>
           <Button type="submit">Submit</Button>
         </form>
@@ -179,11 +189,15 @@ export function InitialMessage() {
           </div>
         </BotCard>
       )}
-      {/* {questionSpinner && !error && (
-        <BotCard>
-          <ChatSpinner />
-        </BotCard>
-      )} */}
+      {
+        wentWrong && (
+          <BotCard>
+            <p className="text-sm md:text-base font-semibold">
+              Sorry, something went wrong. Please try again.
+            </p>
+          </BotCard>
+        )
+      }
       {questions.length > 0 && (
         <BotCard>
           <Question

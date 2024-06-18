@@ -7,8 +7,6 @@ import { ENVIRONMENT } from '@/lib/constants/config'
 export const metadata = {
   title: 'Antelope Chatbot'
 }
-console.log(process.env.NEXT_PUBLIC_VERCEL_ENV)
-  console.log(process.env.REDDIT_CLIENT_ID)
 export default async function IndexPage() {
   // const id = nanoid()
   // const session = (await auth()) as Session
@@ -34,7 +32,7 @@ export default async function IndexPage() {
       </Link>
       <Link
         href={`https://www.reddit.com/api/v1/authorize?client_id=${process.env.REDDIT_CLIENT_ID}&response_type=code&state=random_string&redirect_uri=${process.env.REDDIT_REDIRECT_URL}&duration=permanent&scope=read`}
-       className="italic hover:underline text-[#2f393d00]"
+       className="italic hover:underline text-primary"
       >
       {/* <Link
         href={`https://www.reddit.com/api/v1/authorize?client_id=${process.env.REDDIT_CLIENT_ID}&response_type=code&state=random_string&redirect_uri=${`https://antelopeinc-chat-dev-full.vercel.app${process.env.REDDIT_REDIRECT_URL}`}&duration=permanent&scope=read`}

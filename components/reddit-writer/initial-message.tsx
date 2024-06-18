@@ -121,7 +121,7 @@ export function InitialMessage() {
     setShowStylizer(true)
     await sleep(100) //  NOTE: to wait for actual UI update
       window.scrollTo({
-        top: document.body.scrollHeight,
+        top: 800,
         behavior: 'smooth'
       })
     new Array(5).fill(0).forEach((_, i) => {
@@ -139,7 +139,10 @@ export function InitialMessage() {
 
   const handleStyle = async (styles: string) => {
     setStylePrompt(styles)
-    
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    })
     var prompt =
       getSystemPrompt('comment') +
       response.comments +
@@ -150,13 +153,6 @@ export function InitialMessage() {
     const responseMessage = await submitUserMessage(prompt, 'reddit-writter')
     
     setMessages(currentMessages => [...currentMessages, responseMessage])
-    await new Promise(resolve => setTimeout(resolve, 0))
-console.log('sdfsd')
-    // await sleep(5000)
-    // window.scrollTo({
-    //   top: 1000,
-    //   behavior: 'smooth'
-    // })
   }
   return (
     <div>
@@ -184,7 +180,7 @@ console.log('sdfsd')
             />
             {error && <div className="text-primary">{error}</div>}
           </div>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={urlSubmitted && !error}>Submit</Button>
         </form>
       </BotCard>
       {urlSubmitted && !error && (

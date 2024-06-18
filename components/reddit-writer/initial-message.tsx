@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
 import { spinner } from '../stocks'
-import { fetcher , sleep} from '@/lib/utils'
+import { fetcher, sleep } from '@/lib/utils'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
 import { BotCard, UserMessage } from '../stocks/message'
@@ -56,6 +56,7 @@ export function InitialMessage() {
     setQuestions([])
     setShowStylizer(false)
     setWentWrong(false)
+
     if (!link) {
       setError('Please enter a reddit URL.')
       return
@@ -63,10 +64,12 @@ export function InitialMessage() {
 
     const match = link.match(/\/comments\/(.*?)\//)
     const post_id = match ? match[1] : null
+
     if (!post_id) {
       setError('Please provide a correct post URL.')
       return
     }
+
     // TODO: Call reddit scraper API
     let res: any
     try {
@@ -74,7 +77,6 @@ export function InitialMessage() {
         method: 'POST',
         body: JSON.stringify({ post_id })
       })
-      console.log(res.data)
       setResponse(res.data)
     } catch (e: any) {
       setLoading(false)
@@ -84,14 +86,24 @@ export function InitialMessage() {
     //TODO: Call the AI system prompt
     try {
       setQuestionSpinner(true)
-      let title = await getStaticAIAnswer(res.data.title, 'thread')
+      let title = (await getStaticAIAnswer(res.data.title, 'thread')) || ''
+      if (title.length == 0) {
+        setError('Internal Error!  Please try again later.')
+        return
+      }
       title = `Thank you for adding the link. ${title ? title : link}
        To help build a piece of content around this topic, please can you answer the following questions.\n
        If you'd like to skip a question, you can leave the box empty.`
       setSummary(title)
-      let q = await getStaticAIAnswer(res.data.comments, 'reddit-writer')
+
+      let q = (await getStaticAIAnswer(res.data.comments, 'reddit-writer')) || ''
+      if (q.length == 0) {
+        setError('Internal Error! Please try again later.')
+        return
+      }
       setLoading(false)
       setQuestionSpinner(false)
+
       //TODO: Parse the questions from the response
       new Array(5).fill(0).forEach((_, i) => {
         let match =
@@ -118,29 +130,30 @@ export function InitialMessage() {
     }
   }
   const handleAnswers = async (answers: string[]) => {
-    setAnswerPrompt('------------------------Answers to the questions on above comments-----------------------------\n')
+    setAnswerPrompt(
+      '------------------------Answers to the questions on above comments------------------------\n'
+    )
     setShowStylizer(true)
     await sleep(100) //  NOTE: to wait for actual UI update
-      window.scrollTo({
-        top: 800,
-        behavior: 'smooth'
-      })
+    window.scrollTo({
+      top: 800,
+      behavior: 'smooth'
+    })
     new Array(5).fill(0).forEach((_, i) => {
       setAnswerPrompt(answerPrompt => {
         return `
         ${answerPrompt}
         - Question ${i + 1}: ${questions[i]}
-        - Answer: ${answers[i].length > 0 ? answers[i] : 'I don\'t know'}
+        - Answer: ${answers[i].length > 0 ? answers[i] : "I don\'t know"}
         `
       })
     })
     await new Promise(resolve => setTimeout(resolve, 0))
-    
   }
 
   const handleStyle = async (styles: string) => {
     setStylePrompt(styles)
-    
+
     window.scrollTo({
       top: document.body.scrollHeight,
       behavior: 'smooth'
@@ -158,7 +171,7 @@ export function InitialMessage() {
       `
     // console.log(prompt)
     const responseMessage = await submitUserMessage(prompt, 'reddit-writter')
-    
+
     setMessages(currentMessages => [...currentMessages, responseMessage])
     setUrlSubmitted(false)
   }
@@ -188,10 +201,12 @@ export function InitialMessage() {
             />
             {error && <div className="text-primary">{error}</div>}
           </div>
-          <Button type="submit" disabled={ urlSubmitted  && !wentWrong }>Submit</Button>
+          <Button type="submit" disabled={urlSubmitted && !wentWrong}>
+            Submit
+          </Button>
         </form>
       </BotCard>
-      {urlSubmitted && !error && !wentWrong &&(
+      {urlSubmitted && !error && !wentWrong && (
         <BotCard>
           <div className="flex gap-2 h-6 p-1">
             <div>Thank you, processing...</div>

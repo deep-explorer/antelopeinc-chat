@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import React, { useEffect, useState } from 'react'
 import { Input } from '../ui/input'
 import { spinner } from '../stocks'
-import { fetcher } from '@/lib/utils'
+import { fetcher , sleep} from '@/lib/utils'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
 import { BotCard, UserMessage } from '../stocks/message'
@@ -31,7 +31,7 @@ export function InitialMessage() {
   const [isLoading, setLoading] = useState(false)
   const [urlSubmitted, setUrlSubmitted] = useState(false)
   const [questionSpinner, setQuestionSpinner] = useState(false)
-  const [wentWrong, setWentWrong] = useState(false) 
+  const [wentWrong, setWentWrong] = useState(false)
   const { submitUserMessage } = useActions()
 
   const [_, setMessages] = useUIState<typeof AI>()
@@ -70,7 +70,6 @@ export function InitialMessage() {
     // TODO: Call reddit scraper API
     let res: any
     try {
-
       res = await fetcher(`/api/tools/reddit-writer?code=${code}`, {
         method: 'POST',
         body: JSON.stringify({ post_id })
@@ -107,49 +106,57 @@ export function InitialMessage() {
           ])
         }
       })
+      await sleep(100) //  NOTE: to wait for actual UI update
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      })
     } catch (e) {
-      // setMessages(currentMessages => [
-      //   ...currentMessages,
-      //   {
-      //     id: nanoid(),
-      //     display: (
-      //       <p className="text-sm md:text-base font-semibold">
-      //         Sorry, something went wrong. Please try again.
-      //       </p>
-      //     ),
-      //     role: 'assistant'
-      //   }
-      // ])
       setLoading(false)
       setWentWrong(true)
       setQuestionSpinner(false)
     }
   }
   const handleAnswers = async (answers: string[]) => {
+    setShowStylizer(true)
+    await sleep(100) //  NOTE: to wait for actual UI update
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      })
     new Array(5).fill(0).forEach((_, i) => {
       setAnswerPrompt(answerPrompt => {
         return `
         ${answerPrompt}
         - Question ${i + 1}: ${questions[i]}
-        - Answer: ${answers[i].length > 0 ? answers[i] : 'Skip this question'}
+        - Answer: ${answers[i].length > 0 ? answers[i] : 'I don\'t know'}
         `
       })
     })
     await new Promise(resolve => setTimeout(resolve, 0))
-    setShowStylizer(true)
+    
   }
 
   const handleStyle = async (styles: string) => {
     setStylePrompt(styles)
+    
     var prompt =
       getSystemPrompt('comment') +
       response.comments +
       answerPrompt +
       styles +
       '\n So far, I have included all the comments and answers to the questions, Please write the response as required'
-    // console.log(prompt)
+    console.log(prompt)
     const responseMessage = await submitUserMessage(prompt, 'reddit-writter')
+    
     setMessages(currentMessages => [...currentMessages, responseMessage])
+    await new Promise(resolve => setTimeout(resolve, 0))
+console.log('sdfsd')
+    // await sleep(5000)
+    // window.scrollTo({
+    //   top: 1000,
+    //   behavior: 'smooth'
+    // })
   }
   return (
     <div>
@@ -188,15 +195,13 @@ export function InitialMessage() {
           </div>
         </BotCard>
       )}
-      {
-        wentWrong && (
-          <BotCard>
-            <p className="text-sm md:text-base font-semibold">
-              Sorry, something went wrong. Please try again.
-            </p>
-          </BotCard>
-        )
-      }
+      {wentWrong && (
+        <BotCard>
+          <p className="text-sm md:text-base font-semibold">
+            Sorry, something went wrong. Please try again.
+          </p>
+        </BotCard>
+      )}
       {questions.length > 0 && (
         <BotCard>
           <Question

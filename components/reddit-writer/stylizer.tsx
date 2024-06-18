@@ -69,7 +69,7 @@ export default function Stylizer({
         content, please can you tell me how you&apos;d like your post built.
       </p>
 
-      <div className="flex flex-wrap mb-4 md:mb-8 ">
+      <div className="flex flex-wrap mb-2 md:mb-4 ">
         <div className="flex flex-col items-start w-full md:w-1/2 mr-0 mb-2 md:mb-8">
           <strong className="mb-1">Channel</strong>
           <div className="pr-0 md:pr-2 w-full ">
@@ -122,7 +122,7 @@ export default function Stylizer({
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-start w-full md:w-1/2 mr-0 mb-2 md:mb-8 ">
+        <div className="flex flex-col items-start w-full md:w-1/2  ">
           <strong className="mb-1">Writing Style</strong>
           <div className="pr-0 md:pr-2 w-full ">
             <div className="border-[1px] border-white w-full rounded-md">
@@ -148,7 +148,7 @@ export default function Stylizer({
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-start w-full md:w-1/2 mr-0 mb-2 md:mb-8  ">
+        <div className="flex flex-col items-start w-full md:w-1/2 mr-0">
           <strong className="mb-1">Audience</strong>
           <div className="pr-0 md:pr-2 w-full ">
             <div className="border-[1px] border-white w-full rounded-md">

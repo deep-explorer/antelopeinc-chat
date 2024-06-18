@@ -3,16 +3,15 @@
 import { fetcher } from '@/lib/utils'
 import { NextResponse, NextRequest } from 'next/server'
 import { cookies, headers } from 'next/headers'
+import { table } from 'console'
 
 export async function GET(request: NextRequest, response: NextResponse) {}
 
 export async function POST(request: NextRequest, response: NextResponse) {
   const { REDDIT_CLIENT_ID, REDDIT_SECRET, REDDIT_REDIRECT_URL } = process.env
   const { searchParams } = new URL(request.url)
-  // const profileUrl = searchParams.get('profileUrl')
   const code = searchParams.get('code')
   const { post_id: postId } = await request.json()
-  //  headers().forEach((header) => console.log(header))
 
   let token = cookies().get('session')?.value
   if (!code) {
@@ -83,7 +82,6 @@ async function fetchPostInfo(postId: string, accessToken: string) {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/x-www-form-urlencoded'
-          // 'User-Agent': 'Your User Agent' // Reddit requires a User-Agent header
         }
       }
     )
@@ -108,7 +106,6 @@ async function fetchPostComments(postId: string, accessToken: string) {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/x-www-form-urlencoded'
-          // 'User-Agent': 'Your User Agent' // Reddit requires a User-Agent header
         }
       }
     )
@@ -148,9 +145,10 @@ const parseResponseToString = (posts: any[], comments: any[]) => {
   let tableString = ` Post Title : ${title}\n\n Post Url   : https://www.reddit.com${posts[0].data.permalink}\n\n`
   tableString += `| Comment Number |  Score |   Author Name   |  Content |\n`
   tableString += `|----------------|--------|-----------------|----------|\n`
-  let flattenedComments = flattenComments(comments)
+  let sliceLength = 50    // Number of comments to display
+  let flattenedComments = flattenComments(comments).sort((a:any,b:any)=>b.score-a.score).slice(0, sliceLength)
   flattenedComments.forEach((comment: any, index: number) => {
-    if (!!comment.body && comment.body.length > 0) {
+    if (!!comment.body && comment.body.length > 0 && comment.score > 1) {
       tableString += `|       ${index + 1}        |  ${comment.score}  | ${comment.author}   |  ${comment.body} |\n`
     }
   })

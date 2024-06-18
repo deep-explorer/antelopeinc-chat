@@ -70,6 +70,7 @@ export function InitialMessage() {
         method: 'POST',
         body: JSON.stringify({ post_id })
       })
+      console.log(res.data)
       setResponse(res.data)
     } catch (e: any) {
       setLoading(false)

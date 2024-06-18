@@ -35,10 +35,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
               Authorization: `Basic ${Buffer.from(
                 `${REDDIT_CLIENT_ID}:${REDDIT_SECRET}`
               ).toString('base64')}`,
-              'Access-Control-Allow-Origin': '*',
-              'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
-              'Access-Control-Allow-Headers':
-                'X-Requested-With, Content-Type, Authorization',
               'Content-Type': 'application/x-www-form-urlencoded'
             }
           }
@@ -86,9 +82,6 @@ async function fetchPostInfo(postId: string, accessToken: string) {
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
-          'Access-Control-Allow-Headers':'X-Requested-With, Content-Type, Authorization',
           'Content-Type': 'application/x-www-form-urlencoded'
           // 'User-Agent': 'Your User Agent' // Reddit requires a User-Agent header
         }
@@ -114,10 +107,6 @@ async function fetchPostComments(postId: string, accessToken: string) {
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
-          'Access-Control-Allow-Headers':
-            'X-Requested-With, Content-Type, Authorization',
           'Content-Type': 'application/x-www-form-urlencoded'
           // 'User-Agent': 'Your User Agent' // Reddit requires a User-Agent header
         }

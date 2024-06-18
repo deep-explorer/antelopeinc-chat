@@ -80,7 +80,7 @@ async function fetchPostInfo(postId: string, accessToken: string) {
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
           // 'User-Agent': 'Your User Agent' // Reddit requires a User-Agent header
         }
       }
@@ -105,7 +105,7 @@ async function fetchPostComments(postId: string, accessToken: string) {
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
           // 'User-Agent': 'Your User Agent' // Reddit requires a User-Agent header
         }
       }

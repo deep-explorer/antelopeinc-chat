@@ -2,7 +2,7 @@
 
 import { fetcher } from '@/lib/utils'
 import { NextResponse, NextRequest } from 'next/server'
-import { cookies ,headers} from 'next/headers'
+import { cookies, headers } from 'next/headers'
 
 export async function GET(request: NextRequest, response: NextResponse) {}
 
@@ -12,8 +12,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
   // const profileUrl = searchParams.get('profileUrl')
   const code = searchParams.get('code')
   const { post_id: postId } = await request.json()
-  console.log('response-----', response)
-   headers().forEach((header) => console.log(header))
+  //  headers().forEach((header) => console.log(header))
+
   let token = cookies().get('session')?.value
   if (!code) {
     const redditAuthUrl = `https://www.reddit.com/api/v1/authorize?client_id=${REDDIT_CLIENT_ID}&response_type=code&state=random_state&redirect_uri=${REDDIT_REDIRECT_URL}&duration=temperary&scope=read`
@@ -35,13 +35,16 @@ export async function POST(request: NextRequest, response: NextResponse) {
               Authorization: `Basic ${Buffer.from(
                 `${REDDIT_CLIENT_ID}:${REDDIT_SECRET}`
               ).toString('base64')}`,
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+              'Access-Control-Allow-Headers':
+                'X-Requested-With, Content-Type, Authorization',
               'Content-Type': 'application/x-www-form-urlencoded'
             }
           }
         )
         if (tokenResponse.ok) {
-          const { access_token: accessToken, refresh_token } =
-            await tokenResponse.json()
+          const { access_token: accessToken, refresh_token } = await tokenResponse.json()
           cookies().set({
             name: 'session',
             sameSite: 'none',
@@ -61,6 +64,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
     }
     //TODO: get the post and its comments
     let postAndComments = await fetchPostComments(postId, token!)
+   headers().forEach((header) => console.log(header))
+
     if (postAndComments) {
       let post = postAndComments[0].data.children
       let comments = postAndComments[1].data.children
@@ -81,7 +86,10 @@ async function fetchPostInfo(postId: string, accessToken: string) {
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+          'Access-Control-Allow-Headers':'X-Requested-With, Content-Type, Authorization',
+          'Content-Type': 'application/x-www-form-urlencoded'
           // 'User-Agent': 'Your User Agent' // Reddit requires a User-Agent header
         }
       }
@@ -106,7 +114,11 @@ async function fetchPostComments(postId: string, accessToken: string) {
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+          'Access-Control-Allow-Headers':
+            'X-Requested-With, Content-Type, Authorization',
+          'Content-Type': 'application/x-www-form-urlencoded'
           // 'User-Agent': 'Your User Agent' // Reddit requires a User-Agent header
         }
       }

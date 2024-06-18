@@ -47,9 +47,9 @@ export async function POST(request: NextRequest, response: NextResponse) {
           const { access_token: accessToken, refresh_token } = await tokenResponse.json()
           cookies().set({
             name: 'session',
-            sameSite: 'none',
+            // sameSite: 'none',
             value: accessToken,
-            httpOnly: true,
+            httpOnly: false,
             path: '/',
             maxAge: undefined
           })

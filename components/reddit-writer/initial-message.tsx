@@ -75,7 +75,6 @@ export function InitialMessage() {
         method: 'POST',
         body: JSON.stringify({ post_id })
       })
-      console.log(res.data)
       setResponse(res.data)
     } catch (e: any) {
       setLoading(false)
@@ -148,7 +147,7 @@ export function InitialMessage() {
       answerPrompt +
       styles +
       '\n So far, I have included all the comments and answers to the questions, Please write the response as required'
-    console.log(prompt)
+    // console.log(prompt)
     const responseMessage = await submitUserMessage(prompt, 'reddit-writter')
     setMessages(currentMessages => [...currentMessages, responseMessage])
   }

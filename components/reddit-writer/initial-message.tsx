@@ -74,6 +74,7 @@ export function InitialMessage() {
         method: 'POST',
         body: JSON.stringify({ post_id })
       })
+      console.log(res.data)
       setResponse(res.data)
     } catch (e: any) {
       setLoading(false)
@@ -88,7 +89,6 @@ export function InitialMessage() {
        To help build a piece of content around this topic, please can you answer the following questions.\n
        If you'd like to skip a question, you can leave the box empty.`
       setSummary(title)
-
       let q = await getStaticAIAnswer(res.data.comments, 'reddit-writer')
       setLoading(false)
       setQuestionSpinner(false)
@@ -150,7 +150,12 @@ export function InitialMessage() {
       response.comments +
       answerPrompt +
       styles +
-      '\n So far, I have included all the comments and answers to the questions, Please write the response as required'
+      `\n So far, I have included all the comments and answers to the questions, Please write the response as required\n
+      You start writing with the below.
+      "Thank you!, Here is your post:
+      ------------------------------------------------------------------------------------------
+      <Your answer here>
+      `
     // console.log(prompt)
     const responseMessage = await submitUserMessage(prompt, 'reddit-writter')
     
@@ -183,10 +188,10 @@ export function InitialMessage() {
             />
             {error && <div className="text-primary">{error}</div>}
           </div>
-          <Button type="submit" disabled={urlSubmitted && !error}>Submit</Button>
+          <Button type="submit" disabled={ urlSubmitted  && !wentWrong }>Submit</Button>
         </form>
       </BotCard>
-      {urlSubmitted && !error && (
+      {urlSubmitted && !error && !wentWrong &&(
         <BotCard>
           <div className="flex gap-2 h-6 p-1">
             <div>Thank you, processing...</div>

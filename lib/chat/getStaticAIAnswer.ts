@@ -39,18 +39,24 @@ export async function getStaticAIAnswer(content: any, systemPromptType?:string, 
     default:
       systemPrompt = getSystemPrompt('reddit-writer')
   }
-  const answer = await openai.chat.completions.create({
-    messages: [
-      {
-        role: 'system',
-        content: systemPrompt
-      },
-      { 
-        role: 'user', 
-        content: content 
-      }
-    ],
-    model: 'gpt-4o'
-  })
-  return answer.choices[0].message.content
+  try {
+    const answer = await openai.chat.completions.create({
+      messages: [
+        {
+          role: 'system',
+          content: systemPrompt
+        },
+        { 
+          role: 'user', 
+          content: content 
+        }
+      ],
+      model: 'gpt-4o'
+    })
+    return answer.choices[0].message.content
+  } catch (error) {
+    console.log(error)
+    return ''
+  }
+  
 }

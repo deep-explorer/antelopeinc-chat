@@ -7,12 +7,13 @@ import { ENVIRONMENT } from '@/lib/constants/config'
 export const metadata = {
   title: 'Antelope Chatbot'
 }
-
+console.log(process.env.NEXT_PUBLIC_VERCEL_ENV)
+  console.log(process.env.REDDIT_CLIENT_ID)
 export default async function IndexPage() {
   // const id = nanoid()
   // const session = (await auth()) as Session
   // const missingKeys = await getMissingKeys()
-
+  
   return (
     <div className="flex flex-col gap-2">
       <p className="text-xl font-semibold">Select an analyzer</p>

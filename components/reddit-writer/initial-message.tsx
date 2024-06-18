@@ -44,6 +44,7 @@ export function InitialMessage() {
   const [threadAnswer, setThreadAnswer] = useState<string>('')
   const [summary, setSummary] = useState<string>('')
   const [response, setResponse] = useState<Response>({ title: '', comments: '' })
+ 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')

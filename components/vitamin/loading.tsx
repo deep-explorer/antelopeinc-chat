@@ -14,7 +14,7 @@ export function Loading({ loadingTime }: LoadingProps) {
   const params = useParams()
   const [isLoading, setLoading] = useState(true)
   const [continuationText, setContinuationText] = useState<string | null>(null)
-
+  
   const { brand } = params
 
   useEffect(() => {

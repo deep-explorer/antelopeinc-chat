@@ -32,6 +32,7 @@ export default function Stylizer({
 }: {
   onStyle: (style: string) => void
 }) {
+  
   const { width: windowWidth } = useWindowSize()
   const [_, setMessages] = useUIState<typeof AI>()
 

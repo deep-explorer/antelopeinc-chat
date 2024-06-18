@@ -29,7 +29,8 @@ export function InitialMessage() {
   const [logos, setLogos] = useState<string[]>([])
   const [metadata, setMetadata] = useState<ClientMetadata | null>(null)
   const { isBypassMode } = useFreeChatContext()
-
+  console.log(process.env.NEXT_PUBLIC_VERCEL_ENV)
+  console.log(process.env.REDDIT_CLIENT_ID)
   //  TODO: combine with server component
   useEffect(() => {
     getMetaDataOnClient(brand).then(data => {

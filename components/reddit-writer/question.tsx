@@ -30,7 +30,9 @@ export default function Question({
   }
   const handleAnswers =
     (index: number) => (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      console.log('sdfsd', e.target.value,'  ',index)
       let newAnswers = [...answers]
+      console.log('newAnswers',newAnswers)
       newAnswers[index] = e.target.value
       setAnswers(newAnswers)
     }

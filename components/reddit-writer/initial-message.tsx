@@ -118,6 +118,7 @@ export function InitialMessage() {
     }
   }
   const handleAnswers = async (answers: string[]) => {
+    setAnswerPrompt('------------------------Answers to the questions on above comments-----------------------------\n')
     setShowStylizer(true)
     await sleep(100) //  NOTE: to wait for actual UI update
       window.scrollTo({
@@ -139,6 +140,7 @@ export function InitialMessage() {
 
   const handleStyle = async (styles: string) => {
     setStylePrompt(styles)
+    
     window.scrollTo({
       top: document.body.scrollHeight,
       behavior: 'smooth'
@@ -149,10 +151,11 @@ export function InitialMessage() {
       answerPrompt +
       styles +
       '\n So far, I have included all the comments and answers to the questions, Please write the response as required'
-    console.log(prompt)
+    // console.log(prompt)
     const responseMessage = await submitUserMessage(prompt, 'reddit-writter')
     
     setMessages(currentMessages => [...currentMessages, responseMessage])
+    setUrlSubmitted(false)
   }
   return (
     <div>

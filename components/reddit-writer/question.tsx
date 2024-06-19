@@ -72,7 +72,7 @@ export default function Question({
               radius="large"
               size={windowWidth > 768 ? '3' : '1'}
               resize="vertical"
-              placeholder="Tell us about your project"
+              placeholder="Please write your answer here."
               // required
               autoFocus
               value={answers[questionIndex as number] || ''}

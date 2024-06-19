@@ -59,8 +59,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
     }
     //TODO: get the post and its comments
     let postAndComments = await fetchPostComments(postId, token!)
-
-    if (postAndComments) {
+    console.log(postAndComments)
+    if (!!postAndComments) {
       let post = postAndComments[0].data.children
       let comments = postAndComments[1].data.children
       let data = parseResponseToString(post, comments)

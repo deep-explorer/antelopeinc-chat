@@ -201,7 +201,7 @@ export function InitialMessage() {
             />
             {error && <div className="text-primary">{error}</div>}
           </div>
-          <Button type="submit" disabled={urlSubmitted && !wentWrong}>
+          <Button type="submit" disabled={urlSubmitted && !wentWrong && !error}>
             Submit
           </Button>
         </form>

@@ -55,7 +55,6 @@ export async function getStaticAIAnswer(content: any, systemPromptType?:string, 
     })
     return answer.choices[0].message.content
   } catch (error) {
-    console.log(error)
     return ''
   }
   

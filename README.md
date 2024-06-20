@@ -1,4 +1,4 @@
-<a href="https://chat.vercel.ai/">
+<a href="https://chat.antelopeinc.com/">
   <h1 align="center">Antelope AI Chatbot</h1>
 </a>
 

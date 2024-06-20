@@ -131,7 +131,7 @@ export function InitialMessage() {
   }
   const handleAnswers = async (answers: string[]) => {
     setAnswerPrompt(
-      '------------------------Answers to the questions on above comments------------------------\n'
+      '------------------------My answers to the questions on above comments------------------------\n'
     )
     setShowStylizer(true)
     await sleep(100) //  NOTE: to wait for actual UI update

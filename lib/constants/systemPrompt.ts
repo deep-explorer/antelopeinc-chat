@@ -177,14 +177,11 @@ Here are the details:
 
 Read the summary and the comments closely. Then, write a summary capturing the overall comment details provided. Attempt to do this in 3 succinct sentences, avoiding redundant words (e.g.: this reddit thread is about) and focusing only on the key learnings.
 
-This is the context of the thread:
 
-<INSERT POST SUMMARY>
+Below is the post and its comments with score, Consider the score figure that is provided as well, which is used to gather how helpful and effective users found the response. Comments with high scores are considered to be the most useful:
 
-Below are the comments. Consider the score figure that is provided as well, which is used to gather how helpful and effective users found the response. Comments with high scores are considered to be the most useful:
-
-Below is the post and its comments with score, and after that, I have included my opinion on some questions to this post\n
-At last I have included styles in which the answer is to be written\n`
+After that, I have included my opinion on some questions to this post\n
+At last I have included styles in which the answer is to be written, Please follow the style correctly and flexiblely.\n`
 
     case 'feedback':
       return `You will be provided with the details and comments from a Reddit thread. Your task is to read the details and comments and summarize the main feedback provided.

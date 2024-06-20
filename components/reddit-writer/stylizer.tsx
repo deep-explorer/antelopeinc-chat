@@ -44,21 +44,25 @@ export default function Stylizer({
   const [audience, setAudience] = useState<any>(audienceList[0].name)
   const handleSubmit = () => {
     let styler = `
-    ------------------------Style of the answer you have to prepare -----------------------------\n
-        Please write this outline into a compelling post with the below style.\n`
+    ------------------------Style guide of your reply you have to prepare -----------------------------\n
+Please write this outline into a compelling post with the below style.\n`
     const styles = [channel, length, writingStyle, audience]
     channelList.find(e => e.name === channel)
     styler += `Post is for ${channel} channel, Tone, style, something you have to focus and audience of this post is like belows:
-           ${channelList.find(e => e.name === channel)?.style} \n\n`
+           ${channelList.find(e => e.name === channel)?.style}
+    `
 
     styler += `Post length has to be ${length} , style and usage for this post is like belows:
-        ${lengthList.find(e => e.name === length)?.style}\n\n`
+        ${lengthList.find(e => e.name === length)?.style}
+    `
 
     styler += `Writing style is for ${writingStyle} , details of it are like belows:
-            ${writingStyleList.find((e: any) => e.name === writingStyle)?.style}\n\n`
+            ${writingStyleList.find((e: any) => e.name === writingStyle)?.style}
+    `
     styler += `Post is for ${audience} , details of it are like belows:
-            ${audienceList.find((e: any) => e.name === audience)?.style}\n\n`
-    styler += `---------------------------------------End of style guide-----------------------------------\n`
+            ${audienceList.find((e: any) => e.name === audience)?.style}`
+    styler += `
+    ---------------------------------------End of style guide-----------------------------------\n`
 
     onStyle(styler)
   }

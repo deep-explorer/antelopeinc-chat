@@ -78,7 +78,7 @@ export function Comparison() {
           }}
         />
         <div>
-          <h1 className="text-lg md:text-xl font-bold mb-4">
+          <h1 className="text-lg md:text-3xl font-bold mb-4">
             Renzo&apos;s, Your Report is Ready.
           </h1>
           <p className="text-sm md:text-base">
@@ -92,11 +92,19 @@ export function Comparison() {
         className={`p-3 md:p-5 rounded-md flex flex-col gap-6 bg-gradient-to-b relative ${isEmailVerified ? 'bg-[#1E333A]' : 'opacity-gradient h-[260px]'}`}
       >
         {strengthContent && (
-          <ContentTemplate flag="pros" {...strengthContent} />
+          <ContentTemplate
+            flag="pros"
+            isSubContainer={true}
+            {...strengthContent}
+          />
         )}
 
         {isEmailVerified && weaknessContent && (
-          <ContentTemplate flag="cons" {...weaknessContent} />
+          <ContentTemplate
+            flag="cons"
+            isSubContainer={true}
+            {...weaknessContent}
+          />
         )}
       </div>
       {isEmailVerified ? (

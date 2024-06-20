@@ -32,44 +32,65 @@ export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }
 import { useState } from 'react'
 import * as BasicTooltip from '@radix-ui/react-tooltip'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
+import { childrenToReact } from 'react-markdown/lib/ast-to-react'
 
 interface PrimaryTooltipProps {
   description: string
+  bgColor?: string
+  children?: React.ReactNode
 }
 
-export function PrimaryTooltip({ description }: PrimaryTooltipProps) {
+export const PrimaryTooltip: React.FC<PrimaryTooltipProps> = ({
+  description,
+  bgColor,
+  children
+}) => {
   const [isTooltipClicked, setIsTooltipClicked] = useState(false)
-  
-  return (
-    <BasicTooltip.Provider>
-      <BasicTooltip.Root delayDuration={200} open={isTooltipClicked} >
-        <BasicTooltip.Trigger asChild>
-          <InfoCircledIcon
-            className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer"
-            onClick={() => setIsTooltipClicked(true)}
-            onMouseEnter={() => setIsTooltipClicked(true)}
-            onMouseLeave={() => setIsTooltipClicked(false)} />
-        </BasicTooltip.Trigger>
-        <BasicTooltip.Portal>
-          <BasicTooltip.Content
-            side="bottom"
-            align="end"
-            className="max-w-[200px] data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade text-violet11 select-none rounded-[4px] bg-primary p-[10px] leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity] text-sm font-extralight"
-            sideOffset={4}
-            style={{
-              transform: 'translateX(8px)',
-              fontFamily: 'Satoshi-Variable'
-            }}
-            onPointerDownOutside={() => setIsTooltipClicked(false)}
-          >
-            {description}
-            <BasicTooltip.Arrow
-              className="fill-primary"
-              style={{ transform: 'translateX(8px)' }}
-            />
-          </BasicTooltip.Content>
-        </BasicTooltip.Portal>
-      </BasicTooltip.Root>
-    </BasicTooltip.Provider>
-  )
+
+  if (description && description.length > 0) {
+    return (
+      <BasicTooltip.Provider>
+        <BasicTooltip.Root delayDuration={200} open={isTooltipClicked}>
+          <BasicTooltip.Trigger asChild>
+            {!children ? (
+              <InfoCircledIcon
+                className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer"
+                onClick={() => setIsTooltipClicked(true)}
+                onMouseEnter={() => setIsTooltipClicked(true)}
+                onMouseLeave={() => setIsTooltipClicked(false)}
+              />
+            ) : (
+              <div
+                onClick={() => setIsTooltipClicked(true)}
+                onMouseEnter={() => setIsTooltipClicked(true)}
+                onMouseLeave={() => setIsTooltipClicked(false)}
+              >
+                {children}
+              </div>
+            )}
+          </BasicTooltip.Trigger>
+          <BasicTooltip.Portal>
+            <BasicTooltip.Content
+              side="bottom"
+              align="end"
+              className={`max-w-[200px] data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade text-violet11 select-none rounded-[4px] ${bgColor ? '' : 'bg-primary'} ${children ? 'p-[6px]' : 'p-[8px]'} leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity] text-sm font-extralight`}
+              sideOffset={4}
+              style={{
+                transform: 'translateX(8px)',
+                fontFamily: 'Satoshi-Variable',
+                backgroundColor: bgColor ? bgColor : ''
+              }}
+              onPointerDownOutside={() => setIsTooltipClicked(false)}
+            >
+              {description}
+              <BasicTooltip.Arrow
+                className={`${bgColor ? '' : 'fill-primary'}`}
+                style={{ transform: 'translateX(8px)', fill: bgColor }}
+              />
+            </BasicTooltip.Content>
+          </BasicTooltip.Portal>
+        </BasicTooltip.Root>
+      </BasicTooltip.Provider>
+    )
+  }
 }

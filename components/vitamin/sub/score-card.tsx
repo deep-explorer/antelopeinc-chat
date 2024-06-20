@@ -22,22 +22,25 @@ export function ScoreCard({
 
   return (
     <div className="p-2 md:p-5 relative flex gap-2 md:gap-4 bg-[#1E333B] rounded">
-      <div>
-        <img
-          src={icon}
-          height={windowWidth > 768 ? 80 : 24}
-          width={windowWidth > 768 ? 80 : 24}
-          alt={title}
-        />
+      <div className="w-10 md:w-20 h-10 md:h-20 rounded p-1 md:p-2 bg-[#35474F]">
+        <div>
+          <img
+            src={icon}
+            height={windowWidth > 768 ? 64 : 32}
+            width={windowWidth > 768 ? 64 : 32}
+            className="size-8 md:size-16"
+            alt={title}
+          />
+        </div>
       </div>
       <div>
-        <div className="text-base md:text-2xl font-bold  md:mb-4">
+        <div className="text-sm md:text-4xl font-bold  md:mb-4">
           <SlotCounter
-            value={`${prefix}${value}${suffix}`}
+            value={`${prefix}${value}${suffix?.toUpperCase()}`}
             animateOnVisible={{ triggerOnce: true }}
           />
         </div>
-        <p className="text-[10px] md:text-base font-medium text-[#788589]">
+        <p className="text-[8px] md:text-base font-medium text-[#788589]">
           {title}
         </p>
       </div>

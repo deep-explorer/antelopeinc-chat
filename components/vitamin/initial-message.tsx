@@ -29,7 +29,6 @@ export function InitialMessage() {
   const [logos, setLogos] = useState<string[]>([])
   const [metadata, setMetadata] = useState<ClientMetadata | null>(null)
   const { isBypassMode } = useFreeChatContext()
-
   //  TODO: combine with server component
   useEffect(() => {
     getMetaDataOnClient(brand).then(data => {
@@ -40,8 +39,8 @@ export function InitialMessage() {
     })
   }, [])
 
-  const loadingTime = 2000
   const onClick = async () => {
+    const loadingTime = 2000
     setMessages(currentMessages => [
       ...currentMessages,
       {

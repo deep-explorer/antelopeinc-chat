@@ -27,7 +27,6 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const profileUrl = searchParams.get('profileUrl')
-
   try {
     const response = await fetcher(
       `https://fresh-linkedin-profile-data.p.rapidapi.com/get-profile-posts?linkedin_url=${profileUrl}&type=posts`,
@@ -71,6 +70,5 @@ const parseResponseToString = (posts: any[]) => {
     const textSnippet = post.text?.replace(/\n|\|/g, ' ') // Replace newlines with spaces
     tableString += `| ${index + 1} | ${textSnippet} | ${post.post_url} | ${post.num_appreciations} | ${post.num_comments} | ${post.num_empathy} | ${post.num_interests} | ${post.num_likes} | ${post.num_praises} | ${post.num_reposts} | ${post.posted} | ${resharedText} |\n`
   })
-
   return tableString
 }

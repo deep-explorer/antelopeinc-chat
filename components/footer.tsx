@@ -17,12 +17,7 @@ export function Footer({ className, ...props }: React.ComponentProps<'p'>) {
       // {...props}
     >
       <div className="flex justify-between">
-        <Image
-          src="/bottom-logo.png"
-          alt="bottom-logo"
-          width={131}
-          height={55}
-        />
+        <img src="/bottom-logo.png" alt="bottom-logo" width={131} height={55} />
         <a
           target="_blank"
           href="https://linkedin.com/"

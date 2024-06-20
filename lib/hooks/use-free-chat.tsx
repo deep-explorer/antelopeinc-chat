@@ -22,6 +22,11 @@ interface FreeChatContext {
 
   isBypassMode: boolean
   setBypassMode: (flag: boolean) => void
+
+  redditSummary: string
+  setRedditSummary: (summary: string) => void
+  redditQuestions: string[]
+  setRedditQuestions: (questions: string[]) => void
 }
 
 const FreeChatContext = React.createContext<FreeChatContext>({
@@ -41,7 +46,12 @@ const FreeChatContext = React.createContext<FreeChatContext>({
   setLoadingMessage: (message: string) => {},
 
   isBypassMode: false,
-  setBypassMode: () => {}
+  setBypassMode: () => {},
+
+  redditSummary: '',
+  setRedditSummary: (summary: string) => {},
+  redditQuestions: [],
+  setRedditQuestions: (questions: string[]) => {}
 })
 
 export function useFreeChatContext() {
@@ -64,10 +74,13 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
   const [footerButtonIndex, setFooterButtonIndex] = React.useState(0)
   const [loadingMessage, setLoadingMessage] = React.useState('')
   const [isBypassMode, _setBypassMode] = React.useState(false)
+  const [redditSummary, setRedditSummary] = React.useState('')
+  const [redditQuestions, setRedditQuestions] = React.useState<string[]>([])
 
   const setBypassMode = (flag: boolean) => {
-    if (ENVIRONMENT === 'development') {
+    if (ENVIRONMENT ==='local' || ENVIRONMENT === 'development') {
       _setBypassMode(flag)
+      setEmailVerified(flag)
     } else {
       console.warn(
         'This is a production environment. Bypass mode is not allowed.'
@@ -91,7 +104,11 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
         loadingMessage,
         setLoadingMessage,
         isBypassMode,
-        setBypassMode
+        setBypassMode,
+        redditSummary,
+        setRedditSummary,
+        redditQuestions,
+        setRedditQuestions
       }}
     >
       {children}

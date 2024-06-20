@@ -31,7 +31,7 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
         </div>
         <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
           {pathname === '/renzos' ? (
-            <Image
+            <img
               src={'/vitamin/logos/renzos.png'}
               width={windowWidth >= 768 ? 48 : 24}
               height={windowWidth >= 768 ? 48 : 24}
@@ -50,7 +50,7 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
     <div className="group relative flex gap-2 md:gap-3 text-white max-w-[300px] sm:max-w-[600px] lg:max-w-[816px]">
       <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
         {pathname === '/renzos' ? (
-          <Image
+          <img
             src={'/vitamin/logos/renzos.png'}
             width={windowWidth >= 768 ? 48 : 24}
             height={windowWidth >= 768 ? 48 : 24}
@@ -90,7 +90,7 @@ export function BotCard({
     >
       <div className="relative flex gap-2 md:gap-3">
         <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-md ">
-          <Image
+          <img
             src="/header-logo.png"
             alt="bot-logo"
             width={windowWidth >= 768 ? 48 : 24}
@@ -200,7 +200,7 @@ export function BotMessage({
               key={index}
             >
               <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-md">
-                <Image
+                <img
                   src="/header-logo.png"
                   alt="bot-logo"
                   width={windowWidth >= 768 ? 48 : 24}
@@ -288,7 +288,7 @@ export function SpinnerMessage() {
   return (
     <div className="group relative flex">
       <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-md">
-        <Image
+        <img
           src="/header-logo.png"
           alt="bot-logo"
           width={windowWidth >= 768 ? 48 : 24}

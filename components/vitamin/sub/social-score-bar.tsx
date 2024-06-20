@@ -50,7 +50,7 @@ export function SocialScoreBar({
           >
             {inset}
           </div>
-          <Image
+          <img
             src="/image-icons/progress-bar-indicator.png"
             height={windowWidth > 768 ? 32 : 20}
             width={windowWidth > 768 ? 2 : 1.2}
@@ -62,7 +62,7 @@ export function SocialScoreBar({
               left: `${((20 + 0.8 * average) * 100) / (20 + 0.8 * value)}%`
             }}
           />
-          <Image
+          <img
             src="/vitamin/logos/renzos.png"
             height={windowWidth > 768 ? 60 : 32}
             width={windowWidth > 768 ? 60 : 32}

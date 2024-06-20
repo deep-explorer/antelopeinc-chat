@@ -1,3 +1,4 @@
+'use client'
 import { useUIState } from 'ai/rsc'
 import { Button } from '@radix-ui/themes'
 import { AI } from '@/lib/chat/actions'

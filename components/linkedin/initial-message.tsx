@@ -33,7 +33,7 @@ export function InitialMessage() {
     setLoading(true)
     try {
       const response = await fetcher(
-        `/api?profileUrl=https://www.linkedin.com/in/${link}`
+        `/api/tools/linkedin-analyzer?profileUrl=https://www.linkedin.com/in/${link}`
       )
       setLoading(false)
 

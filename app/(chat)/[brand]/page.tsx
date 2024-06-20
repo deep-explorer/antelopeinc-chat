@@ -6,6 +6,7 @@ import { getMissingKeys } from '@/app/actions'
 import { InitialMessage } from '@/components/vitamin/initial-message'
 import type { Metadata, ResolvingMetadata } from 'next'
 import { getMetadata } from '@/app/shared-metadata'
+import { redirect } from 'next/navigation'
 
 type Props = {
   params: { brand: string }
@@ -20,9 +21,7 @@ export async function generateMetadata(
   const { brand } = params
   const metadata = await getMetadata(brand)
   if (!metadata) {
-    return {
-      title: 'Not Found'
-    }
+    redirect('/')
   }
   return {
     title: metadata.preview.title,

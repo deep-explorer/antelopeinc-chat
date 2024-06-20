@@ -79,14 +79,15 @@ export function Chat({
   }, [missingKeys])
 
   //  TODO: whitelisting with BE
-  if (
-    path !== '/renzos' &&
-    path !== '/tools/linkedin-analyzer' &&
-    path !== '/tools/content-intelligence' &&
-    path !== '/tools/reddit-writer'
-  ) {
-    return <p>This brand is not available now.</p>
-  }
+  // if (
+  //   path !== '/renzos' &&
+  //   path !== '/tools/linkedin-analyzer' &&
+  //   path !== '/tools/content-intelligence' &&
+  //   path !== '/tools/reddit-writer'
+    
+  // ) {
+  //   return <p>This brand is not available now.</p>
+  // }
 
   return (
     <>

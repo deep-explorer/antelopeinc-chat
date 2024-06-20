@@ -41,7 +41,7 @@ export function ResearchRecommendations() {
       {recommendation && (
         <ContentTemplate
           {...recommendation}
-          footer={
+          footerComponent={
             <>
               <p>
                 As a next step, we recommend reviewing these reports in more

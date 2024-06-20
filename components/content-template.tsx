@@ -19,6 +19,7 @@ export interface IContainer {
   header: string
   caption?: string //  accordion
   texts?: string[]
+  footer?: string
   icon?: string
   tooltip?: string
   children: (
@@ -41,8 +42,9 @@ export interface IBasicElement {
 
 interface ContentTemplateProps extends IContainer {
   flag?: 'pros' | 'cons'
-  footer?: React.ReactNode
+  footerComponent?: React.ReactNode
   containerClassName?: string
+  isSubContainer?: boolean
 }
 
 export const ContentTemplate = ({
@@ -55,7 +57,8 @@ export const ContentTemplate = ({
   flag,
   children,
   footer,
-  containerClassName
+  containerClassName,
+  isSubContainer = false
 }: ContentTemplateProps) => {
   const { width: windowWidth } = useWindowSize()
   const [carouselProgress, setCarouselProgress] = useState(0)
@@ -72,7 +75,7 @@ export const ContentTemplate = ({
             />
           )}
           <h1
-            className={`text-lg md:text-xl font-extrabold self-center ${header === 'Critical' ? 'text-[#EA3F3F]' : header === 'Suggested' ? 'text-[#FFA34E]' : header === 'Consider' ? 'text-[#24AE8D]' : ''}`}
+            className={`${isSubContainer ? 'text-base md:text-2xl ' : 'text-lg md:text-3xl '} font-bold self-center ${header === 'Critical' ? 'text-[#EA3F3F]' : header === 'Suggested' ? 'text-[#FFA34E]' : header === 'Consider' ? 'text-[#24AE8D]' : ''}`}
           >
             {header}
           </h1>
@@ -95,7 +98,11 @@ export const ContentTemplate = ({
         {children.map((child, index) => (
           <Fragment key={index}>
             {child.display === 'container' && (
-              <ContentTemplate {...child} containerClassName="gap-1 md:gap-2" />
+              <ContentTemplate
+                {...child}
+                containerClassName="gap-1 md:gap-2"
+                isSubContainer={true}
+              />
             )}
             {child.type === 'scorecard' && <ScoreCard {...child} />}
             {child.type === 'scalar' && <Scalar flag={flag} {...child} />}
@@ -127,8 +134,6 @@ export const ContentTemplate = ({
             <img src="/image-icons/ruler.png" height={36} alt="ruler" />
           </div>
         ))}
-
-      {footer}
     </div>
   )
 }

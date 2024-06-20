@@ -36,7 +36,7 @@ export function GaugeCard({
     >
       <div className="flex justify-between">
         <div className="flex gap-3">
-          <div className="size-6 md:size-12 overflow-hidden">
+          <div className="size-6 md:size-12 overflow-hidden rounded p-1 md:p-2 bg-[#35474F]">
             <img
               src={icon}
               height={windowWidth > 768 ? 48 : 24}

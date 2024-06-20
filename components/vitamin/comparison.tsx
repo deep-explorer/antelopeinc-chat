@@ -109,13 +109,7 @@ export function Comparison() {
       </div>
       {isEmailVerified ? (
         <>
-          <p className="text-sm md:text-base">
-            Renzo&apos;s strengths and weaknesses highlight strong reviews yet
-            comparatively poor content performance, with brands like Flintstones
-            and MaryRuth&apos;s leading. Would you like to drill further into
-            the analysis, or learn more about Antelope&apos;s reporting
-            solutions?
-          </p>
+          <p className="text-sm md:text-base">{weaknessContent?.footer}</p>
           <FooterButtonGroup
             submitCaption="Feedback Analysis"
             helperText="To compare customer feedback, select below:"

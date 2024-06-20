@@ -36,7 +36,7 @@ export function DataOverview() {
       {content ? (
         <ContentTemplate
           {...content}
-          footer={
+          footerComponent={
             <FooterButtonGroup
               submitCaption="Start Comparison"
               helperText="To run the comparison, select below:"

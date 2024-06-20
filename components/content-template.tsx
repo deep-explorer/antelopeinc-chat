@@ -19,6 +19,7 @@ export interface IContainer {
   header: string
   caption?: string //  accordion
   texts?: string[]
+  footer?: string
   icon?: string
   tooltip?: string
   children: (
@@ -41,7 +42,7 @@ export interface IBasicElement {
 
 interface ContentTemplateProps extends IContainer {
   flag?: 'pros' | 'cons'
-  footer?: React.ReactNode
+  footerComponent?: React.ReactNode
   containerClassName?: string
   isSubContainer?: boolean
 }
@@ -133,8 +134,6 @@ export const ContentTemplate = ({
             <img src="/image-icons/ruler.png" height={36} alt="ruler" />
           </div>
         ))}
-
-      {footer}
     </div>
   )
 }

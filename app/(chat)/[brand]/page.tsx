@@ -21,7 +21,7 @@ export async function generateMetadata(
   const { brand } = params
   const metadata = await getMetadata(brand)
   if (!metadata) {
-    redirect('/')
+    redirect('http://antelopeinc.com/')
   }
   return {
     title: metadata.preview.title,

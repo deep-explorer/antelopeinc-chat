@@ -169,7 +169,7 @@ export function InitialMessage() {
       ------------------------------------------------------------------------------------------
       <Your answer here>
       `
-    console.log(prompt)
+    // console.log(prompt)
     const responseMessage = await submitUserMessage(prompt, 'reddit-writter')
 
     setMessages(currentMessages => [...currentMessages, responseMessage])

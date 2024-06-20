@@ -54,7 +54,7 @@ export const PrimaryTooltip: React.FC<PrimaryTooltipProps> = ({
           <BasicTooltip.Trigger asChild>
             {!children ? (
               <InfoCircledIcon
-                className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer"
+                className="size-3 md:size-[18px] opacity-20 hover:opacity-40 cursor-pointer"
                 onClick={() => setIsTooltipClicked(true)}
                 onMouseEnter={() => setIsTooltipClicked(true)}
                 onMouseLeave={() => setIsTooltipClicked(false)}

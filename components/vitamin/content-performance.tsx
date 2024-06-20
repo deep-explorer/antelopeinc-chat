@@ -49,7 +49,7 @@ export function ContentPerformance() {
       {contentPerformance && channelContentPerformance && (
         <ContentTemplate
           {...contentPerformance}
-          footer={
+          footerComponent={
             <>
               <ContentTemplate {...channelContentPerformance} />
               <p className="text-sm md:text-base">

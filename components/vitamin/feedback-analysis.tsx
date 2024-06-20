@@ -51,7 +51,7 @@ export function FeedbackAnalysis() {
       {feedbackContent && channelFeedbackContent && (
         <ContentTemplate
           {...feedbackContent}
-          footer={
+          footerComponent={
             <>
               {/* <ContentTemplate {...channelFeedbackContent} />
                */}
@@ -70,10 +70,10 @@ export function FeedbackAnalysis() {
                   title={child.header}
                   description={child.texts[0]}
                   totalRating={child.children[0].value.percent}
-                  totalRatingInset = {child.children[0].inset}
+                  totalRatingInset={child.children[0].inset}
                   industryAverageTotalRating={child.children[0].industry}
                   averageScore={child.children[1].value.percent}
-                  averageScoreInset = {child.children[1].inset}
+                  averageScoreInset={child.children[1].inset}
                   industryAverageScore={child.children[1].industry}
                   key={index}
                   isInView={

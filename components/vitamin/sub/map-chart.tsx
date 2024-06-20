@@ -40,8 +40,6 @@ const renderCustomShape = (props: {
   cy: number
   payload: any
 }): JSX.Element => {
-  // const { width: windowWidth } = useWindowSize()
-
   const { cx, cy } = props
 
   return (
@@ -109,11 +107,12 @@ export function MapChart({
     >
       <div className="flex justify-between">
         <div className="flex gap-2">
-          <Image
+          <img
             src={icon}
             width={windowWidth > 768 ? 48 : 24}
             height={windowWidth > 768 ? 48 : 24}
             alt={`/image-icons/${icon}.png`}
+            className="rounded-md"
           />
           <h2 className="text-lg md:text-xl font-bold self-center">{title}</h2>
         </div>
@@ -204,8 +203,8 @@ export function MapChart({
 
               return {
                 name: key,
-                x: (children[key].x * 90) / maxX, //  maxX equals to 90 out of 100
-                y: (children[key].y * 90) / maxY,
+                x: (Math.log(children[key].x + 1) / Math.log(maxX + 1)) * 90, //  maxX equals to 90 out of 100
+                y: (Math.log(children[key].y + 1) / Math.log(maxY + 1)) * 90,
                 logo: children[key].logo,
                 tooltip: children[key].tooltip,
                 size: children[key].size,

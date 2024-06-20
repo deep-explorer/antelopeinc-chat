@@ -34,6 +34,11 @@ module.exports = {
         source: '/linkedin-analyzer',
         destination: '/tools/linkedin-analyzer',
         permanent: true
+      },
+      {
+        source: '/reddit-writer',
+        destination: '/tools/reddit-writer',
+        permanent: true
       }
     ]
   }

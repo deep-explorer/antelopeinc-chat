@@ -18,7 +18,6 @@ export function InitialMessage() {
     e.preventDefault()
 
     const data = Object.fromEntries(new FormData(e.target as HTMLFormElement))
-
     try {
       const responseMessage = await submitUserMessage(data.description)
       setMessages(currentMessages => [...currentMessages, responseMessage])
@@ -65,7 +64,7 @@ export function InitialMessage() {
             match="valueMissing"
           >
             <div className="self-center">
-              <Image
+              <img
                 src="/image-icons/invalid.png"
                 height={14}
                 width={14}

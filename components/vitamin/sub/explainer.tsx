@@ -33,13 +33,12 @@ export function Explainer({
 }: IExplainer) {
   const { width: windowWidth } = useWindowSize()
   const [isVisible, setVisible] = useState(false)
-
+  
   useEffect(() => {
     if (isInView) {
       setVisible(true)
     }
   }, [isInView])
-
   return (
     <div
       className={`p-3 md:p-5 flex flex-col justify-between bg-[#293D45] rounded-xl w-[224px] md:w-[290px] h-[180px] md:h-[284px] border-2 border-[#3E5057] ${className}`}
@@ -47,22 +46,24 @@ export function Explainer({
       <div className="flex flex-col gap-2 md:gap-3">
         <div className="flex justify-between">
           <div className="flex gap-3">
-            <Image
-              src={`/image-icons/${icon}.png`}
-              height={windowWidth < 768 ? 44 : 64}
-              width={windowWidth < 768 ? 44 : 64}
-              alt={icon}
+            <img
+              src={icon}
+              style={{
+                height: `${windowWidth < 768 ? '44px' : '64px'}`,
+                width: `${windowWidth < 768 ? '44px' : '64px'}`
+              }}
+              alt={`/image-icons/${icon}.png`}
             />
             <h3 className="text-base md:text-2xl font-semibold">{title}</h3>
           </div>
-          <div>
-            <Image
-              src={`/image-icons/${urgency}.png`}
-              height={24}
-              width={24}
-              alt={urgency}
-            />
-          </div>
+          <img
+            src={`/image-icons/${urgency}.png`}
+            style={{
+              height: '18px',
+              width: '18px'
+            }}
+            alt="urgency"
+          />
         </div>
 
         <p className="text-xs md:text-sm h-[48px] md:h-[78px] overflow-hidden">

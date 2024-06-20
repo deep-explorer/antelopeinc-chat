@@ -163,13 +163,13 @@ export function InitialMessage() {
       response.comments +
       answerPrompt +
       styles +
-      `\n So far, I have included all the comments and answers to the questions, Please write the response as required\n
+      `\n So far, I have included all the comments and answers to the questions, Please write the response as required and please use pretty many emojis and decorate the text as possible\n
       You start writing with the below.
       "Thank you!, Here is your post:
       ------------------------------------------------------------------------------------------
       <Your answer here>
       `
-    // console.log(prompt)
+    console.log(prompt)
     const responseMessage = await submitUserMessage(prompt, 'reddit-writter')
 
     setMessages(currentMessages => [...currentMessages, responseMessage])

@@ -57,6 +57,7 @@ export const ContentTemplate = ({
   flag,
   children,
   footer,
+  footerComponent,
   containerClassName,
   isSubContainer = false
 }: ContentTemplateProps) => {
@@ -134,6 +135,8 @@ export const ContentTemplate = ({
             <img src="/image-icons/ruler.png" height={36} alt="ruler" />
           </div>
         ))}
+
+      {footerComponent}
     </div>
   )
 }

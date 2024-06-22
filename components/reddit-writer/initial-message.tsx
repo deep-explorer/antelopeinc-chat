@@ -96,7 +96,8 @@ export function InitialMessage() {
        If you'd like to skip a question, you can leave the box empty.`
       setSummary(title)
 
-      let q = (await getStaticAIAnswer(res.data.comments, 'reddit-writer')) || ''
+      let q =
+        (await getStaticAIAnswer(res.data.comments, 'reddit-writer')) || ''
       if (q.length == 0) {
         setError('Internal Error! Please try again later.')
         return
@@ -144,7 +145,7 @@ export function InitialMessage() {
         return `
         ${answerPrompt}
         - Question ${i + 1}: ${questions[i]}
-        - Answer: ${answers[i].length > 0 ? answers[i] : "I don\'t know"}
+        - Answer: ${answers[i].length > 0 ? answers[i] : "I don't know"}
         `
       })
     })
@@ -169,7 +170,6 @@ export function InitialMessage() {
       ------------------------------------------------------------------------------------------
       <Your answer here>
       `
-    // console.log(prompt)
     const responseMessage = await submitUserMessage(prompt, 'reddit-writter')
 
     setMessages(currentMessages => [...currentMessages, responseMessage])

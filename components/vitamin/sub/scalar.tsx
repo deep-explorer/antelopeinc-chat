@@ -63,25 +63,27 @@ export function Scalar({
         <PrimaryTooltip description={tooltip || 'No description'} />
       </div>
 
-      <div className="flex justify-between gap-1 md:gap-3 w-full md:w-auto">
+      <div className="flex justify-between gap-2 md:gap-3 w-full md:w-auto">
         {low && (
           <PrimaryTooltip description={low?.tooltip} bgColor="#ea3f3f">
-            <img
-              src={low.logo}
-              height={windowWidth > 768 ? 48 : 24}
-              width={windowWidth > 768 ? 48 : 24}
-              alt="renzos-trails"
-              className="rounded-full w-[48px] h-[48px] border-2 hover:border-[#ec6142]  cursor-pointer"
-              style={{
-                height: windowWidth > 768 ? 48 : 24,
-                width: windowWidth > 768 ? 48 : 24
-              }}
-            />
+            <div className="size-6 md:size-12">
+              <img
+                src={low.logo}
+                height={windowWidth > 768 ? 48 : 24}
+                width={windowWidth > 768 ? 48 : 24}
+                alt="renzos-trails"
+                className="rounded-full border-2 hover:border-[#ec6142]  cursor-pointer"
+                style={{
+                  height: windowWidth > 768 ? 48 : 24,
+                  width: windowWidth > 768 ? 48 : 24
+                }}
+              />
+            </div>
           </PrimaryTooltip>
         )}
 
         <Progress.Root
-          className="relative bg-blackA6 rounded-full min-w-[180px] w-[inherit] md:min-w-[365px] h-[10px] md:h-4 shadow-md bg-[#32474F] self-center"
+          className="relative bg-blackA6 rounded-full min-w-[160px] w-[inherit] md:min-w-[365px] h-[10px] md:h-4 shadow-md bg-[#32474F] self-center"
           style={{
             // Fix overflow clipping in Safari
             // https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0
@@ -134,17 +136,19 @@ export function Scalar({
 
         {high && (
           <PrimaryTooltip description={high?.tooltip} bgColor="#24ae8d">
-            <img
-              src={high.logo}
-              height={windowWidth > 768 ? 48 : 24}
-              width={windowWidth > 768 ? 48 : 24}
-              alt="renzos-leads"
-              className="rounded-full w-[48px] h-[48px] border-2 hover:border-[#ec6142]  cursor-pointer"
-              style={{
-                height: windowWidth > 768 ? 48 : 24,
-                width: windowWidth > 768 ? 48 : 24
-              }}
-            />
+            <div className="size-6 md:size-12">
+              <img
+                src={high.logo}
+                height={windowWidth > 768 ? 48 : 24}
+                width={windowWidth > 768 ? 48 : 24}
+                alt="renzos-leads"
+                className="rounded-full w-[48px] h-[48px] border-2 hover:border-[#ec6142]  cursor-pointer"
+                style={{
+                  height: windowWidth > 768 ? 48 : 24,
+                  width: windowWidth > 768 ? 48 : 24
+                }}
+              />
+            </div>
           </PrimaryTooltip>
         )}
       </div>

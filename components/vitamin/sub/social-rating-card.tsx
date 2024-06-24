@@ -43,7 +43,7 @@ export function SocialRatingCard({
             <img
               src={icon}
               alt={`/image-icons/${icon}.png`}
-              className="rounded-md"
+              className="rounded-md size-6 md:size-12"
             />
           </div>
           <h2 className="text-sm md:text-lg font-semibold self-center">

@@ -109,10 +109,8 @@ export function MapChart({
         <div className="flex gap-2">
           <img
             src={icon}
-            width={windowWidth > 768 ? 48 : 24}
-            height={windowWidth > 768 ? 48 : 24}
             alt={`/image-icons/${icon}.png`}
-            className="rounded-md"
+            className="rounded-md size-6 md:size-12"
           />
           <h2 className="text-lg md:text-xl font-bold self-center">{title}</h2>
         </div>

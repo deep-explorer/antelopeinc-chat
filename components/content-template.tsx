@@ -96,7 +96,7 @@ export const ContentTemplate = ({
         caption={caption}
         setCarouselProgress={setCarouselProgress}
       >
-        {children.map((child, index) => (
+        {[children[0]].map((child, index) => (
           <Fragment key={index}>
             {child.display === 'container' && (
               <ContentTemplate

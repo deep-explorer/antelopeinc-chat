@@ -59,8 +59,9 @@ export function InitialMessage() {
       top: document.body.scrollHeight,
       behavior: 'smooth'
     })
+    await sleep(loadingTime)
     setMessages(currentMessages => [
-      ...currentMessages.slice(0, -1),
+      ...currentMessages,
       {
         id: nanoid(),
         display: <DataOverview />,

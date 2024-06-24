@@ -43,7 +43,7 @@ export function ChatList({ messages, session, isShared }: ChatList) {
       ) : null} */}
 
       {messages.map((message, index) => (
-        <div key = {index}>
+        <div key={index}>
           {message.role === 'assistant' && (
             <BotCard
               isLastMessage={index === messages.length - 1}
@@ -53,7 +53,12 @@ export function ChatList({ messages, session, isShared }: ChatList) {
             </BotCard>
           )}
           {message.role === 'user' && (
-            <UserMessage key={message.id}>{message.display}</UserMessage>
+            <UserMessage
+              isLastMessage={index === messages.length - 1}
+              key={message.id}
+            >
+              {message.display}
+            </UserMessage>
           )}
           {message.role === 'response' && message.display}
         </div>

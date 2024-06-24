@@ -15,11 +15,6 @@ export const showPrompts = async (
       id: nanoid(),
       display: userPrompt,
       role: 'user'
-    },
-    {
-      id: nanoid(),
-      display: <CardSkeleton />,
-      role: 'assistant'
     }
   ])
   await sleep(100) //  NOTE: to wait for actual UI update
@@ -27,9 +22,8 @@ export const showPrompts = async (
     top: document.body.scrollHeight,
     behavior: 'smooth'
   })
-  await sleep(2000)
   setMessages(currentMessages => [
-    ...currentMessages.slice(0, -1),
+    ...currentMessages,
     {
       id: nanoid(),
       display: assistantPrompt,

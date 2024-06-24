@@ -10,6 +10,7 @@ import { ContentTemplate, IContainer } from '../content-template'
 import { fetcher } from '@/lib/utils'
 import { showPrompts } from '@/lib/chat/prompt'
 import { useParams } from 'next/navigation'
+import { CardSkeleton } from '../ui/card-skeleton'
 
 export function ResearchRecommendations() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -38,7 +39,7 @@ export function ResearchRecommendations() {
 
   return (
     <>
-      {recommendation && (
+      {recommendation ? (
         <ContentTemplate
           {...recommendation}
           footerComponent={
@@ -70,6 +71,8 @@ export function ResearchRecommendations() {
             </>
           }
         />
+      ) : (
+        <CardSkeleton />
       )}
     </>
   )

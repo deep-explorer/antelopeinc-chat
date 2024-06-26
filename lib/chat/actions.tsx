@@ -37,6 +37,7 @@ import { Chat } from '@/lib/types'
 import { auth } from '@/auth'
 import { FreePromptsMessage } from '@/components/stocks/index'
 import { getSystemPrompt } from '../constants/systemPrompt'
+import { InitialMessage } from '@/components/reddit-writer/initial-message'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || ''
@@ -173,6 +174,7 @@ async function submitUserMessage(content: string, chId?: ChatId) {
             {textNode}
             {/* <BotMessage content={textStream.value} /> */}
             {chatId === 'linkedin-analyzer' && <FreePromptsMessage />}
+            {chatId == 'reddit-writer' && <InitialMessage/>}
           </>
         )
 

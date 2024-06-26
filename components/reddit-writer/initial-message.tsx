@@ -137,7 +137,7 @@ export function InitialMessage() {
     setShowStylizer(true)
     await sleep(100) //  NOTE: to wait for actual UI update
     window.scrollTo({
-      top: 800,
+      top: document.body.scrollHeight,
       behavior: 'smooth'
     })
     new Array(5).fill(0).forEach((_, i) => {
@@ -170,7 +170,7 @@ export function InitialMessage() {
       ------------------------------------------------------------------------------------------
       <Your answer here>
       `
-    const responseMessage = await submitUserMessage(prompt, 'reddit-writter')
+    const responseMessage = await submitUserMessage(prompt, 'reddit-writer')
 
     setMessages(currentMessages => [...currentMessages, responseMessage])
     setUrlSubmitted(false)

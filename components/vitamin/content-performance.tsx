@@ -8,6 +8,7 @@ import { fetcher } from '@/lib/utils'
 import { FooterButtonGroup } from './footer-button-group'
 import { showPrompts } from '@/lib/chat/prompt'
 import { useParams } from 'next/navigation'
+import { CardSkeleton } from '../ui/card-skeleton'
 
 export function ContentPerformance() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -46,10 +47,10 @@ export function ContentPerformance() {
 
   return (
     <>
-      {contentPerformance && channelContentPerformance && (
+      {contentPerformance && channelContentPerformance ? (
         <ContentTemplate
           {...contentPerformance}
-          footer={
+          footerComponent={
             <>
               <ContentTemplate {...channelContentPerformance} />
               <p className="text-sm md:text-base">
@@ -65,6 +66,8 @@ export function ContentPerformance() {
             </>
           }
         />
+      ) : (
+        <CardSkeleton />
       )}
     </>
   )

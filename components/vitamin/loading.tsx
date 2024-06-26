@@ -14,7 +14,7 @@ export function Loading({ loadingTime }: LoadingProps) {
   const params = useParams()
   const [isLoading, setLoading] = useState(true)
   const [continuationText, setContinuationText] = useState<string | null>(null)
-  
+
   const { brand } = params
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export function Loading({ loadingTime }: LoadingProps) {
               }}
             />
           </div>
-          <h1 className="text-lg md:text-xl font-bold">
+          <h1 className="text-lg font-bold">
             {isLoading ? 'Starting Your Analysis' : 'Data is Ready'}
           </h1>
         </div>
@@ -65,7 +65,7 @@ export function Loading({ loadingTime }: LoadingProps) {
           }}
         />
         <div className="flex flex-col gap-4">
-          <h1 className="text-lg md:text-xl font-bold">
+          <h1 className="text-3xl font-bold">
             {isLoading ? 'Starting Your Analysis' : 'Data is Ready'}
           </h1>
           <p className="text-sm md:text-base">{continuationText}</p>

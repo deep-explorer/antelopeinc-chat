@@ -13,7 +13,6 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-
 export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
@@ -21,14 +20,15 @@ export async function generateMetadata(
   const { brand } = params
   const metadata = await getMetadata(brand)
   if (!metadata) {
-    redirect('http://antelopeinc.com/')
+    redirect('https://antelopeinc.com/')
   }
+
   return {
     title: metadata.preview.title,
     openGraph: {
       title: metadata.preview.title,
       description: metadata.preview.description,
-      siteName: "chat.antelopeinc.com",
+      siteName: 'chat.antelopeinc.com',
       images: [
         {
           url: metadata.preview.image,

@@ -19,12 +19,23 @@ import { usePathname } from 'next/navigation'
 
 // Different types of message bubbles.
 
-export function UserMessage({ children }: { children: React.ReactNode }) {
+export function UserMessage({
+  children,
+  isLastMessage
+}: {
+  children: React.ReactNode
+  isLastMessage?: boolean
+}) {
   const { width: windowWidth } = useWindowSize()
   const pathname = usePathname()
 
   return windowWidth >= 768 ? (
-    <div className="grid place-items-end">
+    <div
+      className="grid place-items-end"
+      style={{
+        minHeight: isLastMessage ? `calc(100vh - 260px)` : ''
+      }}
+    >
       <div className="group relative flex gap-2 md:gap-3 text-white max-w-[300px] sm:max-w-[600px] lg:max-w-[816px]">
         <div className="bg-[#18898D] px-3 md:px-6 py-2 md:py-4 rounded-tr-none md:rounded-tr-none rounded-sm md:rounded-lg overflow-x-auto text-sm">
           {children}
@@ -47,7 +58,12 @@ export function UserMessage({ children }: { children: React.ReactNode }) {
       </div>
     </div>
   ) : (
-    <div className="group relative flex gap-2 md:gap-3 text-white max-w-[300px] sm:max-w-[600px] lg:max-w-[816px]">
+    <div
+      className="group relative flex gap-2 md:gap-3 text-white max-w-[300px] sm:max-w-[600px] lg:max-w-[816px]"
+      style={{
+        minHeight: isLastMessage ? `calc(100vh - 230px)` : ''
+      }}
+    >
       <div className="flex size-[24px] md:size-[48px] shrink-0 select-none items-center justify-center rounded-full bg-primary shadow-sm">
         {pathname === '/renzos' ? (
           <img

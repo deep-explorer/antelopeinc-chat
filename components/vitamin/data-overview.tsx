@@ -10,6 +10,7 @@ import { ContentTemplate, IContainer } from '../content-template'
 import { FooterButtonGroup } from './footer-button-group'
 import { showPrompts } from '@/lib/chat/prompt'
 import { useParams } from 'next/navigation'
+import { CardSkeleton } from '../ui/card-skeleton'
 
 export function DataOverview() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -36,7 +37,7 @@ export function DataOverview() {
       {content ? (
         <ContentTemplate
           {...content}
-          footer={
+          footerComponent={
             <FooterButtonGroup
               submitCaption="Start Comparison"
               helperText="To run the comparison, select below:"
@@ -44,7 +45,9 @@ export function DataOverview() {
             />
           }
         />
-      ) : null}
+      ) : (
+        <CardSkeleton />
+      )}
     </>
   )
 }

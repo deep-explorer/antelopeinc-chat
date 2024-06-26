@@ -64,15 +64,6 @@ export function InitialMessage() {
       ...currentMessages,
       {
         id: nanoid(),
-        display: <CardSkeleton />,
-        role: 'assistant'
-      }
-    ])
-    await sleep(2000)
-    setMessages(currentMessages => [
-      ...currentMessages.slice(0, -1),
-      {
-        id: nanoid(),
         display: <DataOverview />,
         role: 'assistant'
       }
@@ -82,24 +73,28 @@ export function InitialMessage() {
   return (
     <>
       <BotCard>
-        <div className="flex flex-col gap-6 text-center">
-          <h2 className="text-xl md:text-[30px] font-bold mt-2">
-            Children&apos;s Vitamins Analysis
-          </h2>
-          <LogoCarousel logos={logos} />
-          <div className="flex flex-col gap-2">
-            {metadata?.footer.map((f, i) => (
-              <p className="text-sm md:text-lg px-2" key={i}>
-                {f}
-              </p>
-            ))}
+        {metadata && logos.length > 0 ? (
+          <div className="flex flex-col gap-6 text-center">
+            <h2 className="text-xl md:text-[30px] font-bold mt-2">
+              Children&apos;s Vitamins Analysis
+            </h2>
+            <LogoCarousel logos={logos} />
+            <div className="flex flex-col gap-2">
+              {metadata?.footer.map((f, i) => (
+                <p className="text-sm md:text-lg px-2" key={i}>
+                  {f}
+                </p>
+              ))}
+            </div>
+            <FooterButtonGroup
+              submitCaption="Start the Analysis"
+              helperText="To begin the analysis, select below:"
+              onSubmit={onClick}
+            />
           </div>
-          <FooterButtonGroup
-            submitCaption="Start the Analysis"
-            helperText="To begin the analysis, select below:"
-            onSubmit={onClick}
-          />
-        </div>
+        ) : (
+          <CardSkeleton />
+        )}
       </BotCard>
 
       {isBypassMode && (

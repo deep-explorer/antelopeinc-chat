@@ -32,7 +32,7 @@ export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }
 import { useState } from 'react'
 import * as BasicTooltip from '@radix-ui/react-tooltip'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
-import { childrenToReact } from 'react-markdown/lib/ast-to-react'
+import { useWindowSize } from 'usehooks-ts'
 
 interface PrimaryTooltipProps {
   description: string
@@ -46,6 +46,25 @@ export const PrimaryTooltip: React.FC<PrimaryTooltipProps> = ({
   children
 }) => {
   const [isTooltipClicked, setIsTooltipClicked] = useState(false)
+  const { width: windowWidth } = useWindowSize()
+
+  const handleMouseEnter = () => {
+    if (windowWidth > 768) {
+      setIsTooltipClicked(true)
+    }
+  }
+
+  const handleMouseLeave = () => {
+    if (windowWidth > 768) {
+      setIsTooltipClicked(false)
+    }
+  }
+
+  const handleClick = () => {
+    if (windowWidth <= 768) {
+      setIsTooltipClicked(true)
+    }
+  }
 
   if (description && description.length > 0) {
     return (
@@ -54,16 +73,16 @@ export const PrimaryTooltip: React.FC<PrimaryTooltipProps> = ({
           <BasicTooltip.Trigger asChild>
             {!children ? (
               <InfoCircledIcon
-                className="size-[18px] opacity-20 hover:opacity-40 cursor-pointer"
-                onClick={() => setIsTooltipClicked(true)}
-                onMouseEnter={() => setIsTooltipClicked(true)}
-                onMouseLeave={() => setIsTooltipClicked(false)}
+                className="size-3 md:size-[18px] opacity-20 hover:opacity-40 cursor-pointer"
+                onClick={handleClick}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
               />
             ) : (
               <div
-                onClick={() => setIsTooltipClicked(true)}
-                onMouseEnter={() => setIsTooltipClicked(true)}
-                onMouseLeave={() => setIsTooltipClicked(false)}
+                onClick={handleClick}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
               >
                 {children}
               </div>

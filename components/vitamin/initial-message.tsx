@@ -13,7 +13,7 @@ import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
 
-import { fetcher, sleep } from '@/lib/utils'
+import { fetcher, safeCall, sleep } from '@/lib/utils'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { LogoCarousel } from './sub/logo-carousel'
 import { useEffect, useState } from 'react'
@@ -31,12 +31,14 @@ export function InitialMessage() {
   const { isBypassMode } = useFreeChatContext()
   //  TODO: combine with server component
   useEffect(() => {
-    getMetaDataOnClient(brand).then(data => {
-      setMetadata(data)
-      setLogos(
-        data?.children[1].urls.map((url: string) => url.replaceAll('\\', ''))
-      )
-    })
+    safeCall(() =>
+      getMetaDataOnClient(brand).then(data => {
+        setMetadata(data)
+        setLogos(
+          data?.children[1].urls.map((url: string) => url.replaceAll('\\', ''))
+        )
+      })
+    )
   }, [])
 
   const onClick = async () => {

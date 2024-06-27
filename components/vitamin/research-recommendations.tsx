@@ -7,7 +7,7 @@ import { antelopeEndpoint, companyUrl } from '@/lib/constants/config'
 import { useWindowSize } from 'usehooks-ts'
 import { useEffect, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
-import { fetcher } from '@/lib/utils'
+import { fetcher, safeCall } from '@/lib/utils'
 import { showPrompts } from '@/lib/chat/prompt'
 import { useParams } from 'next/navigation'
 import { CardSkeleton } from '../ui/card-skeleton'
@@ -20,13 +20,13 @@ export function ResearchRecommendations() {
 
   //  TODO: combine with server component
   useEffect(() => {
-    fetcher(
-      `${antelopeEndpoint}/chatbots/recos?origin=leadgen&shortcode=${brand}`
-    )
-      .then(res => {
+    safeCall(() =>
+      fetcher(
+        `${antelopeEndpoint}/chatbots/recos?origin=leadgen&shortcode=${brand}`
+      ).then(res => {
         setRecommendation(res.data)
       })
-      .catch(e => console.log(e))
+    )
   }, [])
 
   const onClick = async (index: number) => {

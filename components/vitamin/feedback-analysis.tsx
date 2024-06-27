@@ -7,7 +7,7 @@ import { ContentPerformance } from './content-performance'
 import { Carousel } from '../ui/carousel'
 import { useEffect, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
-import { fetcher } from '@/lib/utils'
+import { fetcher, safeCall } from '@/lib/utils'
 import { SocialRatingCard } from './sub/social-rating-card'
 import { FooterButtonGroup } from './footer-button-group'
 import { showPrompts } from '@/lib/chat/prompt'
@@ -28,20 +28,20 @@ export function FeedbackAnalysis() {
 
   //  TODO: combine with server component
   useEffect(() => {
-    fetcher(
-      `${antelopeEndpoint}/chatbots/feedback?origin=leadgen&shortcode=${brand}`
-    )
-      .then(res => {
+    safeCall(() =>
+      fetcher(
+        `${antelopeEndpoint}/chatbots/feedback?origin=leadgen&shortcode=${brand}`
+      ).then(res => {
         setFeedbackContent(res.data)
       })
-      .catch(e => console.log(e))
-    fetcher(
-      `${antelopeEndpoint}/chatbots/channelFeedback?origin=leadgen&shortcode=${brand}`
     )
-      .then(res => {
+    safeCall(() =>
+      fetcher(
+        `${antelopeEndpoint}/chatbots/channelFeedback?origin=leadgen&shortcode=${brand}`
+      ).then(res => {
         setChannelFeedbackContent(res.data)
       })
-      .catch(e => console.log(e))
+    )
   }, [])
 
   const onClick = async () => {

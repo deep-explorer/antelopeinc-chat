@@ -11,7 +11,7 @@ import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { EmailCodeInputMessage } from './email-code-input-message'
 import { useEffect, useRef, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
-import { fetcher } from '@/lib/utils'
+import { fetcher, safeCall } from '@/lib/utils'
 import { FooterButtonGroup } from './footer-button-group'
 import { showPrompts } from '@/lib/chat/prompt'
 import { useParams } from 'next/navigation'
@@ -33,20 +33,20 @@ export function Comparison() {
 
   //  TODO: combine with server component
   useEffect(() => {
-    fetcher(
-      `${antelopeEndpoint}/chatbots/strengths?origin=leadgen&shortcode=${brand}`
-    )
-      .then(res => {
+    safeCall(() =>
+      fetcher(
+        `${antelopeEndpoint}/chatbots/strengths?origin=leadgen&shortcode=${brand}`
+      ).then(res => {
         setStrengthContent(res.data)
       })
-      .catch(e => console.log(e))
-    fetcher(
-      `${antelopeEndpoint}/chatbots/weaknesses?origin=leadgen&shortcode=${brand}`
     )
-      .then(res => {
+    safeCall(() =>
+      fetcher(
+        `${antelopeEndpoint}/chatbots/weaknesses?origin=leadgen&shortcode=${brand}`
+      ).then(res => {
         setWeaknessContent(res.data)
       })
-      .catch(e => console.log(e))
+    )
   }, [])
 
   useEffect(() => {

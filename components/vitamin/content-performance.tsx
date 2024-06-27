@@ -4,7 +4,7 @@ import { ResearchRecommendations } from './research-recommendations'
 import { antelopeEndpoint } from '@/lib/constants/config'
 import { useEffect, useState } from 'react'
 import { ContentTemplate, IContainer } from '../content-template'
-import { fetcher } from '@/lib/utils'
+import { fetcher, safeCall } from '@/lib/utils'
 import { FooterButtonGroup } from './footer-button-group'
 import { showPrompts } from '@/lib/chat/prompt'
 import { useParams } from 'next/navigation'
@@ -21,20 +21,20 @@ export function ContentPerformance() {
 
   //  TODO: combine with server component
   useEffect(() => {
-    fetcher(
-      `${antelopeEndpoint}/chatbots/content?origin=leadgen&shortcode=${brand}`
-    )
-      .then(res => {
+    safeCall(() =>
+      fetcher(
+        `${antelopeEndpoint}/chatbots/content?origin=leadgen&shortcode=${brand}`
+      ).then(res => {
         setContentPerformance(res.data)
       })
-      .catch(e => console.log(e))
-    fetcher(
-      `${antelopeEndpoint}/chatbots/channelContent?origin=leadgen&shortcode=${brand}`
     )
-      .then(res => {
+    safeCall(() =>
+      fetcher(
+        `${antelopeEndpoint}/chatbots/channelContent?origin=leadgen&shortcode=${brand}`
+      ).then(res => {
         setChannelContentPerformance(res.data)
       })
-      .catch(e => console.log(e))
+    )
   }, [])
 
   const onClick = async () => {

@@ -5,7 +5,7 @@ import { AI } from '@/lib/chat/actions'
 import { Comparison } from './comparison'
 import { antelopeEndpoint } from '@/lib/constants/config'
 import { useEffect, useState } from 'react'
-import { fetcher } from '@/lib/utils'
+import { fetcher, safeCall } from '@/lib/utils'
 import { ContentTemplate, IContainer } from '../content-template'
 import { FooterButtonGroup } from './footer-button-group'
 import { showPrompts } from '@/lib/chat/prompt'
@@ -19,13 +19,13 @@ export function DataOverview() {
 
   //  TODO: combine with server component
   useEffect(() => {
-    fetcher(
-      `${antelopeEndpoint}/chatbots/overview?origin=leadgen&shortcode=${brand}`
-    )
-      .then(res => {
+    safeCall(() =>
+      fetcher(
+        `${antelopeEndpoint}/chatbots/overview?origin=leadgen&shortcode=${brand}`
+      ).then(res => {
         setContent(res.data)
       })
-      .catch(e => console.log(e))
+    )
   }, [])
 
   const onClick = async () => {

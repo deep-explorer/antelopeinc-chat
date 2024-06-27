@@ -106,3 +106,19 @@ export const getMetaDataOnClient = async (brand: string | string[]) => {
     return null
   }
 }
+
+//  excute async api call and recall on error 3 times
+export const safeCall = async (
+  fn: (...args: any) => Promise<any>,
+  retryCount = 3
+) => {
+  let count = 0
+  while (count < retryCount) {
+    try {
+      return await fn()
+    } catch (err) {
+      count++
+    }
+  }
+  return null
+}

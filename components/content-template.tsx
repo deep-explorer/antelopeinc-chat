@@ -178,7 +178,7 @@ export const ElementsWrapper = ({
     case 'slider':
       return (
         // <Carousel onChange={progress => setCarouselProgress(progress)}>
-        <div>{children}</div>
+        <div>Slider{children}</div>
         // </Carousel>
       )
     case 'accordion':

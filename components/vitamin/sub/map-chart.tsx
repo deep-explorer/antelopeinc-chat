@@ -312,7 +312,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export const MapChart = (p: any) => {
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="200px">
       <BarChart
         width={500}
         height={300}

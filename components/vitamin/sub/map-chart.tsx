@@ -1,4 +1,4 @@
-// import { IBasicElement } from '@/components/content-template'
+import { IBasicElement } from '@/components/content-template'
 // import { PrimaryTooltip } from '@/components/ui/tooltip'
 // import { InfoCircledIcon } from '@radix-ui/react-icons'
 // import Image from 'next/image'
@@ -72,25 +72,25 @@
 //   return null
 // }
 
-// export interface IMapChartProps extends IBasicElement {
-//   type: 'map'
-//   axes: {
-//     x: string
-//     y: string
-//   }
-//   children: IMapElements
-//   className?: string
-// }
+export interface IMapChartProps extends IBasicElement {
+  type: 'map'
+  axes: {
+    x: string
+    y: string
+  }
+  children: IMapElements
+  className?: string
+}
 
-// interface IMapElements {
-//   [key: string]: {
-//     logo: string
-//     tooltip: string
-//     x: number
-//     y: number
-//     size: number //   ?
-//   }
-// }
+interface IMapElements {
+  [key: string]: {
+    logo: string
+    tooltip: string
+    x: number
+    y: number
+    size: number //   ?
+  }
+}
 // export function MapChart({
 //   title,
 //   tooltip,

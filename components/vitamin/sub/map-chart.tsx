@@ -186,8 +186,8 @@ export function MapChart({
             />
           </YAxis>
           <Tooltip
-          // cursor={{ strokeDasharray: '3 3' }}
-          // content={CustomTooltip}
+            cursor={{ strokeDasharray: '3 3' }}
+            content={CustomTooltip}
           />
           <Scatter
             name="A school"

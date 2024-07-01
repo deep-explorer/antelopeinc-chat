@@ -177,9 +177,9 @@ export const ElementsWrapper = ({
       return <div className="flex flex-col gap-3 w-full">{children}</div>
     case 'slider':
       return (
-        <Carousel onChange={progress => setCarouselProgress(progress)}>
-          {children}
-        </Carousel>
+        // <Carousel onChange={progress => setCarouselProgress(progress)}>
+        <div>{children}</div>
+        // </Carousel>
       )
     case 'accordion':
       let color = '#fff'

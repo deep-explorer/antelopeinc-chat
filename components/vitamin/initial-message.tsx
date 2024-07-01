@@ -22,7 +22,6 @@ import { useParams } from 'next/navigation'
 import { getMetaDataOnClient } from '@/lib/utils'
 import { ClientMetadata } from '@/lib/types'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
-import { MapChart } from './sub/map-chart'
 
 export function InitialMessage() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -89,7 +88,6 @@ export function InitialMessage() {
                 </p>
               ))}
             </div>
-            <MapChart />
             <FooterButtonGroup
               submitCaption="Start the Analysis"
               helperText="To begin the analysis, select below:"

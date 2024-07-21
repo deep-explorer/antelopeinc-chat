@@ -22,6 +22,7 @@ import { useParams } from 'next/navigation'
 import { getMetaDataOnClient } from '@/lib/utils'
 import { ClientMetadata } from '@/lib/types'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
+import { antelopeEndpoint } from '@/lib/constants/config'
 
 export function InitialMessage() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -31,14 +32,24 @@ export function InitialMessage() {
   const { isBypassMode } = useFreeChatContext()
   //  TODO: combine with server component
   useEffect(() => {
-    safeCall(() =>
-      getMetaDataOnClient(brand).then(data => {
-        setMetadata(data)
-        setLogos(
-          data?.children[1].urls.map((url: string) => url.replaceAll('\\', ''))
+    fetch(`${antelopeEndpoint}/cache/clear`)
+      .then(() =>
+        fetch(
+          `${antelopeEndpoint}/chatbots/overview?origin=leadgen&shortcode=${brand}`
+        )
+      )
+      .finally(() => {
+        safeCall(() =>
+          getMetaDataOnClient(brand).then(data => {
+            setMetadata(data)
+            setLogos(
+              data?.children[1].urls.map((url: string) =>
+                url.replaceAll('\\', '')
+              )
+            )
+          })
         )
       })
-    )
   }, [])
 
   const onClick = async () => {

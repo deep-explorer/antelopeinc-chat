@@ -155,20 +155,17 @@ export function PromptForm({
           <form
             ref={formRef}
             onSubmit={onSubmit}
-            className="flex bg-[#CDE2E7] dark:bg-[#071920] rounded-md md:rounded-lg border-[#35474F] border-2 relative max-h-20 overflow-auto  p-1 md:pl-8 pr-0 cursor-not-allowed"
+            className="flex bg-[#CDE2E7] dark:bg-[#071920] rounded-md md:rounded-lg border-[#35474F] border-2 relative max-h-20 overflow-auto  p-1 md:pl-8 pr-0"
           >
-            <div className="flex justify-center items-center">
-              <Button
-                variant="default"
-                {...getRootProps()}
-                type="button"
-                disabled={true}
-              >
-                <input disabled={true} {...getInputProps()} />
-                <IconPlus />
-                <p className="hidden md:block">File</p>
-              </Button>
-            </div>
+            {pathname === '/tools/linkedin-analyzer' && (
+              <div className="flex justify-center items-center">
+                <Button variant="default" {...getRootProps()} type="button">
+                  <input {...getInputProps()} />
+                  <IconPlus />
+                  <p className="hidden md:block">File</p>
+                </Button>
+              </div>
+            )}
             <Textarea
               ref={inputRef}
               tabIndex={0}
@@ -193,7 +190,7 @@ export function PromptForm({
                     variant={'outline'}
                     type="submit"
                     size="icon"
-                    disabled={input === '' && pathname !== '/renzos'}
+                    disabled={input === '' || pathname !== '/renzos'}
                   >
                     <span>
                       <div

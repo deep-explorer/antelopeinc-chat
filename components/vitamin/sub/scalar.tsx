@@ -72,7 +72,7 @@ export function Scalar({
                 height={windowWidth > 768 ? 48 : 24}
                 width={windowWidth > 768 ? 48 : 24}
                 alt="renzos-trails"
-                className="rounded-full border-2 hover:border-[#ec6142]  cursor-pointer"
+                className="rounded-full border-2 hover:border-[#ea3f3f]  cursor-pointer"
                 style={{
                   height: windowWidth > 768 ? 48 : 24,
                   width: windowWidth > 768 ? 48 : 24
@@ -142,7 +142,7 @@ export function Scalar({
                 height={windowWidth > 768 ? 48 : 24}
                 width={windowWidth > 768 ? 48 : 24}
                 alt="renzos-leads"
-                className="rounded-full w-[48px] h-[48px] border-2 hover:border-[#ec6142]  cursor-pointer"
+                className="rounded-full w-[48px] h-[48px] border-2 hover:border-[#24ae8d]  cursor-pointer"
                 style={{
                   height: windowWidth > 768 ? 48 : 24,
                   width: windowWidth > 768 ? 48 : 24

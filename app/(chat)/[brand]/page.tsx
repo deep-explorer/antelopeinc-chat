@@ -7,6 +7,7 @@ import { InitialMessage } from '@/components/vitamin/initial-message'
 import type { Metadata, ResolvingMetadata } from 'next'
 import { getMetadata } from '@/app/shared-metadata'
 import { redirect } from 'next/navigation'
+import { antelopeEndpoint } from '@/lib/constants/config'
 
 type Props = {
   params: { brand: string }
@@ -18,6 +19,8 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { brand } = params
+  await fetch(`${antelopeEndpoint}/cache/clear`)
+  console.log('cache cleared')
   const metadata = await getMetadata(brand)
   if (!metadata) {
     redirect('https://antelopeinc.com/')

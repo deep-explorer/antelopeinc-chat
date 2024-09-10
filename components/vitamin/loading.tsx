@@ -1,30 +1,21 @@
-import Image from 'next/image'
 import { RoundSpinner } from '../stocks/ChatSpinner'
 import { useWindowSize } from 'usehooks-ts'
 import { useEffect, useState } from 'react'
-import { useParams } from 'next/navigation'
-import { getMetaDataOnClient } from '@/lib/utils'
 
 interface LoadingProps {
+  logo: string
+  continuationText: string
   loadingTime: number
 }
 
-export function Loading({ loadingTime }: LoadingProps) {
+export function Loading({ logo, continuationText, loadingTime }: LoadingProps) {
   const { width: windowWidth } = useWindowSize()
-  const params = useParams()
   const [isLoading, setLoading] = useState(true)
-  const [continuationText, setContinuationText] = useState<string | null>(null)
-
-  const { brand } = params
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
     }, loadingTime)
-
-    getMetaDataOnClient(brand).then(data => {
-      setContinuationText(data?.continuationText)
-    })
   }, [])
 
   return (
@@ -33,16 +24,17 @@ export function Loading({ loadingTime }: LoadingProps) {
         <div className="flex gap-4 items-center">
           <div>
             <img
-              src="/vitamin/logos/renzos.png"
+              src={logo}
               height={windowWidth > 768 ? 92 : 56}
               width={windowWidth > 768 ? 92 : 56}
-              alt="renzos-loading"
+              alt="logo"
               style={{
                 marginTop: 4,
                 marginLeft: 4,
                 zIndex: 10,
                 position: 'relative'
               }}
+              className="rounded-full"
             />
           </div>
           <h1 className="text-lg font-bold">
@@ -53,8 +45,8 @@ export function Loading({ loadingTime }: LoadingProps) {
       </div>
       <div className="hidden md:flex gap-4">
         <img
-          src="/vitamin/logos/renzos.png"
-          alt="renzos-loading"
+          src={logo}
+          alt="logo"
           style={{
             marginTop: 4,
             marginLeft: 4,
@@ -63,6 +55,7 @@ export function Loading({ loadingTime }: LoadingProps) {
             height: windowWidth > 768 ? 92 : 56,
             width: windowWidth > 768 ? 92 : 56
           }}
+          className="rounded-full"
         />
         <div className="flex flex-col gap-4">
           <h1 className="text-3xl font-bold">

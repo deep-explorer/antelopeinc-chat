@@ -32,24 +32,17 @@ export function InitialMessage() {
   const { isBypassMode } = useFreeChatContext()
   //  TODO: combine with server component
   useEffect(() => {
-    fetch(`${antelopeEndpoint}/cache/clear`)
-      .then(() =>
-        fetch(
-          `${antelopeEndpoint}/chatbots/overview?origin=leadgen&shortcode=${brand}`
-        )
-      )
-      .finally(() => {
-        safeCall(() =>
-          getMetaDataOnClient(brand).then(data => {
-            setMetadata(data)
-            setLogos(
-              data?.children[1].urls.map((url: string) =>
-                url.replaceAll('\\', '')
-              )
-            )
-          })
-        )
+    safeCall(() =>
+      getMetaDataOnClient(brand).then(data => {
+        setMetadata(data)
+        setLogos([
+          data?.children[0].url.image.replaceAll('\\', ''),
+          ...data?.children[1].urls.map((url: string) =>
+            url.replaceAll('\\', '')
+          )
+        ])
       })
+    )
   }, [])
 
   const onClick = async () => {
@@ -63,7 +56,13 @@ export function InitialMessage() {
       },
       {
         id: nanoid(),
-        display: <Loading loadingTime={loadingTime} />,
+        display: (
+          <Loading
+            logo={logos.length > 0 ? logos[0] : ''}
+            continuationText={metadata?.continuationText || ''}
+            loadingTime={loadingTime}
+          />
+        ),
         role: 'assistant'
       }
     ])
@@ -89,7 +88,7 @@ export function InitialMessage() {
         {metadata && logos.length > 0 ? (
           <div className="flex flex-col gap-6 text-center">
             <h2 className="text-xl md:text-[30px] font-bold mt-2">
-              Children&apos;s Vitamins Analysis
+              {metadata.title}
             </h2>
             <LogoCarousel logos={logos} />
             <div className="flex flex-col gap-2">
@@ -113,7 +112,11 @@ export function InitialMessage() {
       {isBypassMode && (
         <>
           <BotCard>
-            <Loading loadingTime={2000} />
+            <Loading
+              logo={logos.length > 0 ? logos[0] : ''}
+              continuationText={metadata?.continuationText || ''}
+              loadingTime={2000}
+            />
           </BotCard>
           <BotCard>
             <DataOverview />

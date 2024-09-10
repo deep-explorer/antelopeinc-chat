@@ -1,31 +1,21 @@
-import Image from 'next/image'
 import { RoundSpinner } from '../stocks/ChatSpinner'
 import { useWindowSize } from 'usehooks-ts'
 import { useEffect, useState } from 'react'
-import { useParams } from 'next/navigation'
-import { getMetaDataOnClient } from '@/lib/utils'
 
 interface LoadingProps {
   logo: string
+  continuationText: string
   loadingTime: number
 }
 
-export function Loading({ logo, loadingTime }: LoadingProps) {
+export function Loading({ logo, continuationText, loadingTime }: LoadingProps) {
   const { width: windowWidth } = useWindowSize()
-  const params = useParams()
   const [isLoading, setLoading] = useState(true)
-  const [continuationText, setContinuationText] = useState<string | null>(null)
-
-  const { brand } = params
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
     }, loadingTime)
-
-    getMetaDataOnClient(brand).then(data => {
-      setContinuationText(data?.continuationText)
-    })
   }, [])
 
   return (

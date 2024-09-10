@@ -105,7 +105,6 @@ export const Header = () => {
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
-  const { brand } = params
   const { isBypassMode, setBypassMode } = useFreeChatContext()
 
   React.useEffect(() => {
@@ -121,9 +120,9 @@ export const Header = () => {
   }, [])
 
   React.useEffect(() => {
-    if (brand) {
+    if (params.brand) {
       setIsLoading(true)
-      getMetaDataOnClient(brand).then(data => {
+      getMetaDataOnClient(params.brand).then(data => {
         setMetadata(data)
         setIsLoading(false)
       })
@@ -133,6 +132,7 @@ export const Header = () => {
       setMetadata(foundTitle || null)
     }
   }, [params])
+
   return (
     <>
       <header
@@ -152,7 +152,7 @@ export const Header = () => {
               </Link>
             </div>
             <div className="hidden lg:flex gap-2 items-center">
-              {brand === 'renzos' && (
+              {params.brand === 'renzos' && (
                 <div>
                   <img
                     src={`/vitamin/logos/renzos.png`}
@@ -215,7 +215,7 @@ export const Header = () => {
             <Link href={`${companyUrl}/blog/`}>Blog</Link>
           </div>
           <div className="flex gap-4 items-center">
-            {(ENVIRONMENT ==='local' || ENVIRONMENT === 'development') && (
+            {(ENVIRONMENT === 'local' || ENVIRONMENT === 'development') && (
               <div className="flex gap-2">
                 <Switch
                   checked={isBypassMode}

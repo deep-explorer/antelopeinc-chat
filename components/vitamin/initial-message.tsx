@@ -32,24 +32,17 @@ export function InitialMessage() {
   const { isBypassMode } = useFreeChatContext()
   //  TODO: combine with server component
   useEffect(() => {
-    fetch(`${antelopeEndpoint}/cache/clear`)
-      .then(() =>
-        fetch(
-          `${antelopeEndpoint}/chatbots/overview?origin=leadgen&shortcode=${brand}`
-        )
-      )
-      .finally(() => {
-        safeCall(() =>
-          getMetaDataOnClient(brand).then(data => {
-            setMetadata(data)
-            setLogos(
-              data?.children[1].urls.map((url: string) =>
-                url.replaceAll('\\', '')
-              )
-            )
-          })
-        )
+    safeCall(() =>
+      getMetaDataOnClient(brand).then(data => {
+        setMetadata(data)
+        setLogos([
+          data?.children[0].url.image.replaceAll('\\', ''),
+          ...data?.children[1].urls.map((url: string) =>
+            url.replaceAll('\\', '')
+          )
+        ])
       })
+    )
   }, [])
 
   const onClick = async () => {
@@ -66,6 +59,7 @@ export function InitialMessage() {
         display: (
           <Loading
             logo={logos.length > 0 ? logos[0] : ''}
+            continuationText={metadata?.continuationText || ''}
             loadingTime={loadingTime}
           />
         ),
@@ -120,6 +114,7 @@ export function InitialMessage() {
           <BotCard>
             <Loading
               logo={logos.length > 0 ? logos[0] : ''}
+              continuationText={metadata?.continuationText || ''}
               loadingTime={2000}
             />
           </BotCard>

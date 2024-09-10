@@ -11,12 +11,18 @@ export default async function IndexPage() {
   // const id = nanoid()
   // const session = (await auth()) as Session
   // const missingKeys = await getMissingKeys()
-  
+
   return (
     <div className="flex flex-col gap-2">
       <p className="text-xl font-semibold">Select an analyzer</p>
       <Link href="/renzos" className="italic hover:underline text-primary">
         Renzos
+      </Link>
+      <Link href="/aircanada" className="italic hover:underline text-primary">
+        Canadian Airlines
+      </Link>
+      <Link href="/rbc" className="italic hover:underline text-primary">
+        Candian Banking
       </Link>
       <Link
         href="/tools/linkedin-analyzer"
@@ -32,11 +38,10 @@ export default async function IndexPage() {
       </Link>
       <Link
         href={`https://www.reddit.com/api/v1/authorize?client_id=${process.env.REDDIT_CLIENT_ID}&response_type=code&state=random_string&redirect_uri=${process.env.REDDIT_REDIRECT_URL}&duration=permanent&scope=read`}
-       className="italic hover:underline text-primary"
+        className="italic hover:underline text-primary"
       >
         Reddit Ideator
-      </Link> 
+      </Link>
     </div>
   )
 }
-//#2f393d00

@@ -26,6 +26,7 @@ import { getMetaDataOnClient } from '@/lib/utils'
 import { ClientMetadata } from '@/lib/types'
 import { Skeleton } from '@radix-ui/themes'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
+import { useLeadgenContext } from '@/lib/context/leadgen-context'
 
 /* 
 async function UserOrLogin() {
@@ -106,6 +107,7 @@ export const Header = () => {
   const [isLoading, setIsLoading] = React.useState(false)
 
   const { isBypassMode, setBypassMode } = useFreeChatContext()
+  const { setBrandLogoUrl } = useLeadgenContext()
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -124,6 +126,7 @@ export const Header = () => {
       setIsLoading(true)
       getMetaDataOnClient(params.brand).then(data => {
         setMetadata(data)
+        setBrandLogoUrl(data?.logo)
         setIsLoading(false)
       })
     } else {
@@ -244,7 +247,7 @@ export const Header = () => {
             className="text-xs md:text-base text-primary font-bold"
             style={{ letterSpacing: 2 }}
           >
-            ANTELOPE CHATBOT
+            Antelope Competitive Intelligence Chabot
           </h1>
 
           {isLoading ? (

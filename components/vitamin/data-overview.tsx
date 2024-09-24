@@ -11,11 +11,13 @@ import { FooterButtonGroup } from './footer-button-group'
 import { showPrompts } from '@/lib/chat/prompt'
 import { useParams } from 'next/navigation'
 import { CardSkeleton } from '../ui/card-skeleton'
+import { useLeadgenContext } from '@/lib/context/leadgen-context'
 
 export function DataOverview() {
   const [_, setMessages] = useUIState<typeof AI>()
   const { brand } = useParams()
   const [content, setContent] = useState<IContainer | null>(null)
+  const { setContinuationText } = useLeadgenContext()
 
   //  TODO: combine with server component
   useEffect(() => {
@@ -24,6 +26,8 @@ export function DataOverview() {
         `${antelopeEndpoint}/chatbots/overview?origin=leadgen&shortcode=${brand}`
       ).then(res => {
         setContent(res.data)
+        console.log('res.data is ', res.data)
+        setContinuationText(res.data.continuationText)
       })
     )
   }, [])

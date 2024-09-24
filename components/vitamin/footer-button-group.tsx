@@ -282,7 +282,7 @@ const availableButtons = [
     )
   },
   {
-    caption: 'Send a Message',
+    caption: 'Send us a Message',
     response: <SendUsMessage />
   },
   {

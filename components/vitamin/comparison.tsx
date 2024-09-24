@@ -16,13 +16,17 @@ import { FooterButtonGroup } from './footer-button-group'
 import { showPrompts } from '@/lib/chat/prompt'
 import { useParams } from 'next/navigation'
 import { CardSkeleton } from '../ui/card-skeleton'
+import { useLeadgenContext } from '@/lib/context/leadgen-context'
 
-export function Comparison() {
+interface ComparisonProps {}
+
+export const Comparison: React.FC<ComparisonProps> = ({}) => {
   const [_, setMessages] = useUIState<typeof AI>()
   const { width: windowWidth } = useWindowSize()
   const { brand } = useParams()
   const { userEmail, isEmailVerified } = useFreeChatContext()
   const elementRef = useRef<HTMLDivElement>(null)
+  const { brandLogoUrl, continuationText } = useLeadgenContext()
 
   const [strengthContent, setStrengthContent] = useState<IContainer | null>(
     null
@@ -64,31 +68,35 @@ export function Comparison() {
   const onClick = async () => {
     await showPrompts('Feedback Analysis', <FeedbackAnalysis />, setMessages)
   }
-
+  console.log({ continuationText })
   return (
     <>
       {strengthContent && weaknessContent ? (
         <div className="flex flex-col gap-4 md:gap-6" ref={elementRef}>
           <div className="flex flex-col md:flex-row gap-2 md:gap-4">
-            <img
-              src="/vitamin/logos/renzos.png"
-              height={80}
-              width={80}
-              alt="renzos-loading"
-              style={{
-                height: windowWidth > 768 ? 80 : 64,
-                width: windowWidth > 768 ? 80 : 64
-              }}
-            />
+            {brandLogoUrl && (
+              <img
+                src={brandLogoUrl}
+                height={80}
+                width={80}
+                alt="renzos-loading"
+                className="rounded-full"
+                style={{
+                  height: windowWidth > 768 ? 80 : 64,
+                  width: windowWidth > 768 ? 80 : 64
+                }}
+              />
+            )}
             <div>
               <h1 className="text-lg md:text-3xl font-bold mb-4">
-                Renzo&apos;s, Your Report is Ready.
+                {continuationText && continuationText.length >= 2
+                  ? continuationText[0]
+                  : 'Your Report is Ready.'}
               </h1>
               <p className="text-sm md:text-base">
-                Antelope&apos;s platform has evaluated over 2.3 million data
-                points accross ten channels and 12 of your closest competitors
-                in the children&apos;s vitamin space. Below is a summary of
-                findings:
+                {continuationText && continuationText.length >= 2
+                  ? continuationText[1]
+                  : "Antelope's platform has evaluated over 2.3 million data points accross ten channels and 12 of your closest competitors in the children's vitamin space. Below is a summary of findings:"}
               </p>
             </div>
           </div>

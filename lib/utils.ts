@@ -100,7 +100,8 @@ export const getMetaDataOnClient = async (brand: string | string[]) => {
       desc: data.texts,
       footer: data.footer,
       continuationText: data.continuationText,
-      children: data.children
+      children: data.children,
+      logo: data.children[0].url.image.replace("\\'", "'")
     }
   } catch (err) {
     return null

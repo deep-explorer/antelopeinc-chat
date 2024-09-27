@@ -130,7 +130,9 @@ export const Comparison: React.FC<ComparisonProps> = ({}) => {
             </>
           ) : (
             <div className="flex flex-col gap-6 mt-[-48px] z-10">
-              <EmailInputMessage />
+              <EmailInputMessage
+                continuationText={strengthContent.continuationText}
+              />
               {userEmail && <EmailCodeInputMessage />}
             </div>
           )}

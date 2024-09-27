@@ -68,7 +68,7 @@ export const Comparison: React.FC<ComparisonProps> = ({}) => {
   const onClick = async () => {
     await showPrompts('Feedback Analysis', <FeedbackAnalysis />, setMessages)
   }
-  console.log({ continuationText })
+
   return (
     <>
       {strengthContent && weaknessContent ? (

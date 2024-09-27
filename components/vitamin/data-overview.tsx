@@ -26,7 +26,6 @@ export function DataOverview() {
         `${antelopeEndpoint}/chatbots/overview?origin=leadgen&shortcode=${brand}`
       ).then(res => {
         setContent(res.data)
-        console.log('res.data is ', res.data)
         setContinuationText(res.data.continuationText)
       })
     )

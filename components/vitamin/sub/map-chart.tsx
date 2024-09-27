@@ -42,7 +42,6 @@ const renderCustomShape = (props: {
   payload: any
 }): JSX.Element => {
   const { cx, cy } = props
-  const { brandLogoUrl } = useLeadgenContext()
   const radius = window.innerWidth > 768 ? 24 : 12
 
   return (
@@ -52,7 +51,7 @@ const renderCustomShape = (props: {
           <circle cx={cx} cy={cy} r={radius} />
         </clipPath>
       </defs>
-      {brandLogoUrl === props.payload.logo && (
+      {props.payload.isMain && (
         <circle
           cx={cx}
           cy={cy}
@@ -67,9 +66,6 @@ const renderCustomShape = (props: {
         x={cx - radius}
         y={cy - radius}
         className="size-6 md:size-12"
-        style={{
-          zIndex: brandLogoUrl === props.payload.logo ? 10 : ''
-        }}
         clipPath={`url(#round${props.payload.key})`}
       />
     </>
@@ -129,6 +125,7 @@ export function MapChart({
       x: (Math.log(children[key].x + 1) / Math.log(maxX + 1)) * 90, // maxX equals to 90 out of 100
       y: (Math.log(children[key].y + 1) / Math.log(maxY + 1)) * 90,
       logo: children[key].logo,
+      isMain: children[key].logo === brandLogoUrl,
       tooltip: children[key].tooltip,
       size: children[key].size,
       key: title + index

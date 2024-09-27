@@ -247,7 +247,7 @@ export const Header = () => {
             className="text-xs md:text-base text-primary font-bold"
             style={{ letterSpacing: 2 }}
           >
-            Antelope Competitive Intelligence Chabot
+            Antelope Competitive Intelligence Chatbot
           </h1>
 
           {isLoading ? (

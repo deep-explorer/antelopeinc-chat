@@ -31,7 +31,7 @@ export function ResearchRecommendations() {
 
   const onClick = async (index: number) => {
     if (index === 1) {
-      await showPrompts('Send Us a Message', <SendUsMessage />, setMessages)
+      await showPrompts('Contact Antelope', <SendUsMessage />, setMessages)
     } else {
       window.open(companyUrl, '_blank')
     }
@@ -49,7 +49,7 @@ export function ResearchRecommendations() {
                 detail or scheduling a meeting with a member of the Antelope
                 team to learn more about our services and how we can help drive
                 growth and improvement for Renzo&apos;s. Alternatively, you can
-                also send us a message and our team will be in touch soon.
+                also contact Antelope and our team will be in touch soon.
               </p>
               <div className="flex flex-wrap">
                 {availableButtons.map((availableButton, index) => (
@@ -83,6 +83,6 @@ const availableButtons = [
     caption: 'Book a Demo'
   },
   {
-    caption: 'Send Us a Message'
+    caption: 'Contact Antelope'
   }
 ]

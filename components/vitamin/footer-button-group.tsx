@@ -282,7 +282,7 @@ const availableButtons = [
     )
   },
   {
-    caption: 'Send us a Message',
+    caption: 'Contact Antelope',
     response: <SendUsMessage />
   },
   {
@@ -304,7 +304,7 @@ const availableButtons = [
           rel="noreferrer"
           className="italic hover:underline text-primary"
         >
-          send us a message
+          contact Antelope
         </Link>{' '}
         or email us at contact@antelopeinc.com.
       </p>

@@ -96,3 +96,12 @@
 .bottom-button:hover {
   background-color: #188b84 !important;
 }
+
+.swiper-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+.swiper-slide {
+  height: auto !important;
+}

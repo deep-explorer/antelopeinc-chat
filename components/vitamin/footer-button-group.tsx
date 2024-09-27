@@ -261,6 +261,32 @@ const cycleButtons = [
   }
 ]
 
+const BookDemo = () => {
+  const { openScheduleDialog } = useFreeChatContext()
+
+  return (
+    <p>
+      To connect with a member of our team, please{' '}
+      <a
+        onClick={() => openScheduleDialog(true)}
+        className="italic hover:underline text-primary cursor-pointer"
+      >
+        click this link
+      </a>{' '}
+      to schedule a meeting at your convenience. You can also{' '}
+      <Link
+        href={`${companyUrl}/#get-in-touch`}
+        target="_blank"
+        rel="noreferrer"
+        className="italic hover:underline text-primary"
+      >
+        contact Antelope
+      </Link>{' '}
+      or email us at contact@antelopeinc.com.
+    </p>
+  )
+}
+
 const availableButtons = [
   {
     caption: 'View Case Studies',
@@ -287,27 +313,6 @@ const availableButtons = [
   },
   {
     caption: 'Book a Demo',
-    response: (
-      <p>
-        To connect with a member of our team, please{' '}
-        <Link
-          href={`https://go.oncehub.com/DanielRobinson`}
-          target="_blank"
-          className="italic hover:underline text-primary"
-        >
-          click this link
-        </Link>{' '}
-        to schedule a meeting at your convenience. You can also{' '}
-        <Link
-          href={`${companyUrl}/#get-in-touch`}
-          target="_blank"
-          rel="noreferrer"
-          className="italic hover:underline text-primary"
-        >
-          contact Antelope
-        </Link>{' '}
-        or email us at contact@antelopeinc.com.
-      </p>
-    )
+    response: <BookDemo />
   }
 ]

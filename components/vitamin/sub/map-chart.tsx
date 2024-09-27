@@ -1,5 +1,6 @@
 import { IBasicElement } from '@/components/content-template'
 import { PrimaryTooltip } from '@/components/ui/tooltip'
+import { useLeadgenContext } from '@/lib/context/leadgen-context'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
 import {
@@ -41,19 +42,34 @@ const renderCustomShape = (props: {
   payload: any
 }): JSX.Element => {
   const { cx, cy } = props
+  const { brandLogoUrl } = useLeadgenContext()
+  const radius = window.innerWidth > 768 ? 24 : 12
 
   return (
     <>
       <defs>
         <clipPath id={`round${props.payload.key}`}>
-          <circle cx={cx} cy={cy} r={window.innerWidth > 768 ? 24 : 12} />
+          <circle cx={cx} cy={cy} r={radius} />
         </clipPath>
       </defs>
+      {brandLogoUrl === props.payload.logo && (
+        <circle
+          cx={cx}
+          cy={cy}
+          r={radius}
+          stroke="#f07060"
+          strokeWidth="6"
+          fill="none"
+        />
+      )}
       <image
         href={`${props.payload.logo}`}
-        x={cx - (window.innerWidth > 768 ? 24 : 12)}
-        y={cy - (window.innerWidth > 768 ? 24 : 12)}
+        x={cx - radius}
+        y={cy - radius}
         className="size-6 md:size-12"
+        style={{
+          zIndex: brandLogoUrl === props.payload.logo ? 10 : ''
+        }}
         clipPath={`url(#round${props.payload.key})`}
       />
     </>
@@ -73,6 +89,7 @@ const CustomTooltip: React.FC<any> = ({ active, payload }) => {
 }
 
 export interface IMapChartProps extends IBasicElement {
+  texts: string[]
   type: 'map'
   axes: {
     x: string
@@ -93,6 +110,7 @@ interface IMapElements {
 }
 export function MapChart({
   title,
+  texts,
   tooltip,
   axes,
   icon,
@@ -103,7 +121,7 @@ export function MapChart({
 
   return (
     <div
-      className={`w-[260px] md:w-[605px] rounded-md bg-[#1E333B] flex flex-col gap-3 md:gap-6 p-4 md:p-8 ${className}`}
+      className={`w-[260px] md:w-[605px] h-full rounded-md bg-[#1E333B] flex flex-col gap-3 md:gap-6 p-4 md:p-8 ${className}`}
     >
       <div className="flex justify-between">
         <div className="flex gap-2">
@@ -116,12 +134,7 @@ export function MapChart({
         </div>
         <PrimaryTooltip description={tooltip} />
       </div>
-      <p className="text-xs md:text-lg">
-        {/* TODO: description from Props */}
-        {title} engagement metrics suggest a highly active and loyal community,
-        with users resonating strongly with visually-driven storytelling and
-        behind-the-scenes content.
-      </p>
+      <p className="text-xs md:text-lg">{texts[0]}</p>
       <ResponsiveContainer width="100%" height={windowWidth > 768 ? 400 : 200}>
         <ScatterChart>
           <CartesianGrid

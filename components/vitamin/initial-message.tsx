@@ -12,7 +12,7 @@ import { ThankYou } from './sub/thank-you'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
-
+import Script from 'next/script'
 import { fetcher, safeCall, sleep } from '@/lib/utils'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { LogoCarousel } from './sub/logo-carousel'
@@ -23,13 +23,15 @@ import { getMetaDataOnClient } from '@/lib/utils'
 import { ClientMetadata } from '@/lib/types'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { antelopeEndpoint } from '@/lib/constants/config'
+import { SimpleDialog } from '../ui/simple-dialog'
 
 export function InitialMessage() {
   const [_, setMessages] = useUIState<typeof AI>()
   const { brand } = useParams()
   const [logos, setLogos] = useState<string[]>([])
   const [metadata, setMetadata] = useState<ClientMetadata | null>(null)
-  const { isBypassMode } = useFreeChatContext()
+  const { isBypassMode, isScheduleDialogOpened, openScheduleDialog } =
+    useFreeChatContext()
   //  TODO: combine with server component
   useEffect(() => {
     safeCall(() =>
@@ -141,6 +143,21 @@ export function InitialMessage() {
           </BotCard>
         </>
       )}
+
+      <SimpleDialog
+        open={isScheduleDialogOpened}
+        onClose={() => openScheduleDialog(false)}
+      >
+        <Script src="https://cdn.oncehub.com/mergedjs/so.js" />
+        <div
+          id="SOIDIV_DanielRobinson"
+          data-so-page="DanielRobinson"
+          data-height="550"
+          data-style="border: 1px solid #d8d8d8; min-width: 290px; max-width: 900px;"
+          className="border-1 border-[#d8d8d8] min-w-[290px] max-w-[900px] md:w-[768px]"
+          data-psz="00"
+        ></div>
+      </SimpleDialog>
     </>
   )
 }

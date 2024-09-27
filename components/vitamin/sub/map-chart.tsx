@@ -118,6 +118,34 @@ export function MapChart({
   className
 }: IMapChartProps) {
   const { width: windowWidth } = useWindowSize()
+  const { brandLogoUrl } = useLeadgenContext()
+
+  const processedChildren = Object.keys(children).map((key, index) => {
+    const maxX = Math.max(...Object.values(children).map(child => child.x))
+    const maxY = Math.max(...Object.values(children).map(child => child.y))
+
+    return {
+      name: key,
+      x: (Math.log(children[key].x + 1) / Math.log(maxX + 1)) * 90, // maxX equals to 90 out of 100
+      y: (Math.log(children[key].y + 1) / Math.log(maxY + 1)) * 90,
+      logo: children[key].logo,
+      tooltip: children[key].tooltip,
+      size: children[key].size,
+      key: title + index
+    }
+  })
+
+  // Find the element with the matching logo
+  const matchingElementIndex = processedChildren.findIndex(
+    child => child.logo === brandLogoUrl
+  )
+
+  if (matchingElementIndex !== -1) {
+    // Remove the element from its original position
+    const [matchingElement] = processedChildren.splice(matchingElementIndex, 1)
+    // Push the element to the end of the array
+    processedChildren.push(matchingElement)
+  }
 
   return (
     <div
@@ -204,24 +232,7 @@ export function MapChart({
           />
           <Scatter
             name="A school"
-            data={Object.keys(children).map((key, index) => {
-              const maxX = Math.max(
-                ...Object.values(children).map(child => child.x)
-              )
-              const maxY = Math.max(
-                ...Object.values(children).map(child => child.y)
-              )
-
-              return {
-                name: key,
-                x: (Math.log(children[key].x + 1) / Math.log(maxX + 1)) * 90, //  maxX equals to 90 out of 100
-                y: (Math.log(children[key].y + 1) / Math.log(maxY + 1)) * 90,
-                logo: children[key].logo,
-                tooltip: children[key].tooltip,
-                size: children[key].size,
-                key: title + index
-              }
-            })}
+            data={processedChildren}
             shape={renderCustomShape as ScatterCustomizedShape}
           />
         </ScatterChart>

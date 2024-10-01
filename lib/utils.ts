@@ -16,7 +16,7 @@ export async function fetcher<JSON = any>(
   input: RequestInfo,
   init?: RequestInit
 ): Promise<JSON> {
-  const res = await fetch(input, init)
+  const res = await fetch(input, { credentials: 'include', ...init })
 
   if (!res.ok) {
     const json = await res.json()
@@ -94,7 +94,9 @@ export const getMetaDataOnClient = async (brand: string | string[]) => {
     const response = await fetch(
       `${antelopeEndpoint}/chatbots/intro?origin=leadgen&shortcode=${brand}`
     )
-    const { data } = await response.json()
+    const res = await response.json()
+    const { data } = res
+    console.log('getMetaDataOnClient', { res })
     return {
       title: data.header,
       desc: data.texts,

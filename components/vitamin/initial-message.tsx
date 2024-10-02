@@ -13,39 +13,19 @@ import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
 import Script from 'next/script'
-import { fetcher, safeCall, sleep } from '@/lib/utils'
+import { sleep } from '@/lib/utils'
 import { CardSkeleton } from '../ui/card-skeleton'
 import { LogoCarousel } from './sub/logo-carousel'
-import { useEffect, useState } from 'react'
 import { FooterButtonGroup } from './footer-button-group'
-import { useParams } from 'next/navigation'
-import { getMetaDataOnClient } from '@/lib/utils'
-import { ClientMetadata } from '@/lib/types'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
-import { antelopeEndpoint } from '@/lib/constants/config'
 import { SimpleDialog } from '../ui/simple-dialog'
+import { useLeadgenContext } from '@/lib/context/leadgen-context'
 
 export function InitialMessage() {
   const [_, setMessages] = useUIState<typeof AI>()
-  const { brand } = useParams()
-  const [logos, setLogos] = useState<string[]>([])
-  const [metadata, setMetadata] = useState<ClientMetadata | null>(null)
   const { isBypassMode, isScheduleDialogOpened, openScheduleDialog } =
     useFreeChatContext()
-  //  TODO: combine with server component
-  useEffect(() => {
-    safeCall(() =>
-      getMetaDataOnClient(brand).then(data => {
-        setMetadata(data)
-        setLogos([
-          data?.children[0].url.image.replaceAll('\\', ''),
-          ...data?.children[1].urls.map((url: string) =>
-            url.replaceAll('\\', '')
-          )
-        ])
-      })
-    )
-  }, [])
+  const { metadata, logos } = useLeadgenContext()
 
   const onClick = async () => {
     const loadingTime = 2000

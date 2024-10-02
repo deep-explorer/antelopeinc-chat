@@ -91,12 +91,11 @@ export const getMessageFromCode = (resultCode: string) => {
 
 export const getMetaDataOnClient = async (brand: string | string[]) => {
   try {
-    const response = await fetch(
+    const response = await fetcher(
       `${antelopeEndpoint}/chatbots/intro?origin=leadgen&shortcode=${brand}`
     )
-    const res = await response.json()
-    const { data } = res
-    console.log('getMetaDataOnClient', { res })
+    const { data } = response
+    console.log('getMetaDataOnClient', { response })
     return {
       title: data.header,
       desc: data.texts,

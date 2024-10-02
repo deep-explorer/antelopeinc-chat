@@ -100,14 +100,12 @@ export const Header = () => {
   const pathname = usePathname()
   const params = useParams()
 
-  const [metadata, setMetadata] = React.useState<
-    ClientMetadata | StaticTitles | null
-  >(null)
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
   const { isBypassMode, setBypassMode } = useFreeChatContext()
-  const { setBrandLogoUrl } = useLeadgenContext()
+  const { setBrandLogoUrl, setLogos, metadata, setMetadata } =
+    useLeadgenContext()
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -128,11 +126,17 @@ export const Header = () => {
         setMetadata(data)
         setBrandLogoUrl(data?.logo)
         setIsLoading(false)
+        setLogos([
+          data?.children[0].url.image.replaceAll('\\', ''),
+          ...data?.children[1].urls.map((url: string) =>
+            url.replaceAll('\\', '')
+          )
+        ])
       })
     } else {
       setIsLoading(false)
-      const foundTitle = staticTitles.find(t => t.pathname === pathname)?.data
-      setMetadata(foundTitle || null)
+      // const foundTitle = staticTitles.find(t => t.pathname === pathname)?.data
+      // setMetadata(foundTitle || null)
     }
   }, [params])
 

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from 'react'
+import { ClientMetadata } from '../types'
 
 interface LeadgenContextProps {
   // brandName: string
@@ -7,6 +8,12 @@ interface LeadgenContextProps {
   setBrandLogoUrl: (url: string) => void
   continuationText: string[]
   setContinuationText: (text: string[]) => void
+
+  //  for initial message component in order to avoid duplicated calls
+  logos: string[]
+  setLogos: (logos: string[]) => void
+  metadata: ClientMetadata | null
+  setMetadata: (meta: ClientMetadata | null) => void
 }
 
 const LeadgenContext = createContext<LeadgenContextProps | undefined>(undefined)
@@ -22,6 +29,9 @@ export const LeadgenContextProvider: React.FC<LeadgenContextProviderProps> = ({
   const [brandLogoUrl, setBrandLogoUrl] = useState<string>('')
   const [continuationText, setContinuationText] = useState<string[]>([])
 
+  const [logos, setLogos] = useState<string[]>([])
+  const [metadata, setMetadata] = useState<ClientMetadata | null>(null)
+
   return (
     <LeadgenContext.Provider
       value={{
@@ -30,7 +40,11 @@ export const LeadgenContextProvider: React.FC<LeadgenContextProviderProps> = ({
         brandLogoUrl,
         setBrandLogoUrl,
         continuationText,
-        setContinuationText
+        setContinuationText,
+        logos,
+        setLogos,
+        metadata,
+        setMetadata
       }}
     >
       {children}

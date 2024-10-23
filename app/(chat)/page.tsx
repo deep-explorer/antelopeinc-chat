@@ -42,6 +42,12 @@ export default async function IndexPage() {
       >
         Reddit Ideator
       </Link>
+      <Link
+        href="/tools/ice-breaker"
+        className="italic hover:underline text-primary"
+      >
+        Ice Breaker
+      </Link>
     </div>
   )
 }

@@ -174,7 +174,7 @@ async function submitUserMessage(content: string, chId?: ChatId) {
             {textNode}
             {/* <BotMessage content={textStream.value} /> */}
             {chatId === 'linkedin-analyzer' && <FreePromptsMessage />}
-            {chatId == 'reddit-writer' && <InitialMessage/>}
+            {chatId == 'reddit-writer' && <InitialMessage />}
           </>
         )
 
@@ -405,10 +405,10 @@ export type ChatId =
   | 'linkedin-analyzer'
   | 'content-intelligence'
   | 'reddit-writer'
+  | 'ice-breaker'
   | 'thread'
   | 'comment'
   | 'feedback'
-
 
 export type RedditSummarizer = 'thread' | 'comment' | 'feedback'
 

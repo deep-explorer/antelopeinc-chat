@@ -9,6 +9,7 @@ import { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
 import { BotCard, UserMessage } from '../stocks/message'
 import IceBreakerSlider from './ice-breaker-slider'
+import IceBreaker from './ice-breaker'
 
 export function InitialMessage() {
   const [senderLink, setSenderLink] = useState('')
@@ -52,7 +53,7 @@ export function InitialMessage() {
         // },
         {
           id: nanoid(),
-          display: <IceBreakerSlider iceBreakers={response.data} />,
+          display: <IceBreaker data={response.data} />,
           role: 'assistant'
         }
       ])
@@ -103,7 +104,7 @@ export function InitialMessage() {
             {isLoading ? (
               <>
                 {spinner}
-                <p>Fetching user profile...</p>
+                <p>Analyzing user profile...</p>
               </>
             ) : (
               <p className=" text-red-500 italic">{error}</p>

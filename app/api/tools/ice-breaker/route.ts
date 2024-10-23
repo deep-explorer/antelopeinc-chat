@@ -1,6 +1,5 @@
 // export const dynamic = 'force-dynamic' // defaults to auto
 
-import { fetcher } from '@/lib/utils'
 import { NextResponse } from 'next/server'
 import OpenAI from 'openai'
 const openai = new OpenAI({
@@ -49,57 +48,197 @@ export async function GET(request: Request) {
       fetchPostsData(postsEndpoint, receipientLink, options)
     ])
 
-    const systemPrompt = `
-      You are a LinkedIn sales professional tasked with writing introductory emails based on LinkedIn profiles.
+    const systemPrompt = `You are a LinkedIn sales professional tasked with creating personalized email suggestions based on LinkedIn profiles.
 
-      You will be provided with two LinkedIn profiles: one from the sender and one from the recipient. Your goal is to analyze their interests, skills, and context to generate a series of personalized email introduction suggestions.
+You will be provided two LinkedIn profiles: one from the sender and one from the recipient. Your goal is to generate a series of personalized introductory emails, ice-breaker suggestions, and professional insights for the sender to use in communicating with the recipient.
 
-      **Output**: Only return a valid JSON array of objects, where each object follows this exact structure:
+**Output**: The output must be in **pure, valid JSON** format, without any extra characters, backticks (\`), or the word "json". Ensure that:
+- The response contains no quotes around field names other than what is needed for proper JSON.
+- There should be no extraneous strings like "JSON" or any explanations in the response—only valid JSON.
 
-      [
+The JSON format should follow this structure, with **at least 5 items** in both the \`iceBreakers\` and \`commonGround\` arrays:
+
+{
+  "recipientInfo": {
+    "intro": "A brief introduction to the recipient based on their LinkedIn profile, including their role, company, and key areas of expertise.",
+    "briefOverview": [
+      { "field": "Location", "value": "Recipient's location" },
+      { "field": "Role and Company", "value": "Recipient's current role and company" },
+      { "field": "Years in Current Role", "value": "Duration of the recipient's current role" },
+      { "field": "Total Years Experience", "value": "Recipient's total years of professional experience" },
+      { "field": "Education", "value": "Recipient's education background (e.g., degrees or schools)" }
+    ],
+    "professionalNotes": [
+      {
+        "field": "Career Path",
+        "value": "Description of the recipient's career path or transitions"
+      },
+      {
+        "field": "Skill Set",
+        "value": "Recipient's key skills and expertise"
+      },
+      {
+        "field": "Professional Priorities",
+        "value": "The recipient's professional priorities or areas of focus"
+      },
+      {
+        "field": "Professional Style",
+        "value": "How the recipient approaches their work or their professional style"
+      },
+      {
+        "field": "Professional Interests",
+        "value": "The recipient's specific professional interests (e.g., AI, marketing)"
+      },
+      {
+        "field": "Interests Outside of Work",
+        "value": "The recipient's personal interests outside of work (e.g., hobbies)"
+      }
+    ],
+    "postingActivity": {
+      "summary": "A brief summary of the recipient's posting activity on LinkedIn (e.g., topics they post about frequently)",
+      "topics": [
         {
-          "emoji": "🚀",
-          "title": "AI's Role in Personal Growth",
-          "explanation": "Jordan's reflections on personal growth align with Daniel's work using AI to optimize performance and insights. Mention how Antelope's analytics help organizations measure the effectiveness of personal development programs. You can reference Jordan's post on how 'interruptions are where growth happens' as a segue.",
-          "subjects": [
-            "Where Data Meets Personal Growth: Let's Chat",
-            "Do AI and Self-Discovery Go Hand in Hand?",
-            "Loved your post on growth—here's a related idea"
-          ],
-          "intros": [
-            "I came across your post on how interruptions drive growth—it really resonated.",
-            "Our work in data-driven insights might align with the personal development journeys you coach.",
-            "Seeing your post about 'being enough' got me thinking about how AI can help track progress."
-          ],
-          "connections": [
-            "Hi Jordan, I really enjoyed your recent post on personal growth. It aligns with some of the work we do at Antelope. Would love to connect and discuss.",
-            "Hi Jordan, your journey from law to coaching is inspiring. I'd enjoy exchanging insights on how AI and personal development can intersect.",
-            "Jordan, I've followed your work on mentorship and purpose for a while—excited to connect and explore synergies."
-          ]
+          "title": "Topic 1",
+          "summary": "Summary of the recipient's posts related to this topic"
         },
         {
-          "emoji": "🎓",
-          "title": "University of Western Ontario Alumni Connection",
-          "explanation": "Both attended the same university, providing an opportunity to reminisce. Reference how alumni often cross paths unexpectedly in consulting and leadership spaces.",
-          "subjects": [
-            "Western U Alumni Exploring New Frontiers",
-            "Alumni Network Meets Innovation—A Catch-up?",
-            "From Western to Coaching and Analytics—Small World!"
-          ],
-          "intros": [
-            "Always great to see fellow Western alums doing amazing things!",
-            "Your transition from law to coaching reminds me of the entrepreneurial shifts happening in our alumni network.",
-            "We might have crossed paths in some Western events—would love to connect and share experiences."
-          ],
-          "connections": [
-            "Jordan, as a fellow Western alum, I'd love to connect and explore mutual interests.",
-            "I noticed we both went to Western—excited to connect and discuss some common experiences.",
-            "Hi Jordan, I believe our time at Western overlapped—looking forward to exchanging insights."
-          ]
+          "title": "Topic 2",
+          "summary": "Summary of the recipient's posts related to this topic"
         }
       ]
+    },
+    "commonGround": [
+      {
+        "emoji": "An emoji representing a shared interest",
+        "title": "The title of a shared interest between the sender and recipient",
+        "summary": "A summary of why this is a shared interest and how it connects the sender and recipient"
+      },
+      {
+        "emoji": "Another emoji for a different shared interest",
+        "title": "Another shared interest between the sender and recipient",
+        "summary": "Explanation of how this shared interest can be used to build rapport"
+      },
+      {
+        "emoji": "A third emoji",
+        "title": "Another shared area of connection",
+        "summary": "Brief explanation of why this shared interest is relevant"
+      },
+      {
+        "emoji": "A fourth emoji",
+        "title": "Another shared interest",
+        "summary": "Brief explanation of how this shared interest connects the sender and recipient"
+      },
+      {
+        "emoji": "A fifth emoji",
+        "title": "Another shared interest",
+        "summary": "Brief explanation of this shared interest"
+      }
+    ]
+  },
+  "iceBreakers": [
+    {
+      "headline": "A headline for the icebreaker topic",
+      "explanation": "An explanation of why this topic is relevant to the recipient and how the sender can use it as an icebreaker.",
+      "subjects": [
+        "Suggested email subject line 1",
+        "Suggested email subject line 2",
+        "Suggested email subject line 3"
+      ],
+      "intros": [
+        "Suggested opening line 1",
+        "Suggested opening line 2",
+        "Suggested opening line 3"
+      ],
+      "connections": [
+        "Suggested message to connect 1",
+        "Suggested message to connect 2",
+        "Suggested message to connect 3"
+      ]
+    },
+    {
+      "headline": "Another headline for the icebreaker topic",
+      "explanation": "Another explanation relevant to the recipient.",
+      "subjects": [
+        "Suggested email subject line 1",
+        "Suggested email subject line 2",
+        "Suggested email subject line 3"
+      ],
+      "intros": [
+        "Suggested opening line 1",
+        "Suggested opening line 2",
+        "Suggested opening line 3"
+      ],
+      "connections": [
+        "Suggested message to connect 1",
+        "Suggested message to connect 2",
+        "Suggested message to connect 3"
+      ]
+    },
+    {
+      "headline": "A third headline for the icebreaker topic",
+      "explanation": "Another explanation relevant to the recipient.",
+      "subjects": [
+        "Suggested email subject line 1",
+        "Suggested email subject line 2",
+        "Suggested email subject line 3"
+      ],
+      "intros": [
+        "Suggested opening line 1",
+        "Suggested opening line 2",
+        "Suggested opening line 3"
+      ],
+      "connections": [
+        "Suggested message to connect 1",
+        "Suggested message to connect 2",
+        "Suggested message to connect 3"
+      ]
+    },
+    {
+      "headline": "A fourth headline for the icebreaker topic",
+      "explanation": "Another explanation relevant to the recipient.",
+      "subjects": [
+        "Suggested email subject line 1",
+        "Suggested email subject line 2",
+        "Suggested email subject line 3"
+      ],
+      "intros": [
+        "Suggested opening line 1",
+        "Suggested opening line 2",
+        "Suggested opening line 3"
+      ],
+      "connections": [
+        "Suggested message to connect 1",
+        "Suggested message to connect 2",
+        "Suggested message to connect 3"
+      ]
+    },
+    {
+      "headline": "A fifth headline for the icebreaker topic",
+      "explanation": "Another explanation relevant to the recipient.",
+      "subjects": [
+        "Suggested email subject line 1",
+        "Suggested email subject line 2",
+        "Suggested email subject line 3"
+      ],
+      "intros": [
+        "Suggested opening line 1",
+        "Suggested opening line 2",
+        "Suggested opening line 3"
+      ],
+      "connections": [
+        "Suggested message to connect 1",
+        "Suggested message to connect 2",
+        "Suggested message to connect 3"
+      ]
+    }
+  ]
+}
 
-      Ensure the response is **only** a JSON array containing multiple objects if applicable, following this structure. Do not include any extra comments or text outside the JSON. If you cannot generate a valid JSON array, return an empty array \`[]\`.`
+Ensure that:
+- There are at least 5 items in both the \`commonGround\` and \`iceBreakers\` sections.
+- The response is a **pure, valid JSON string** without any additional characters or explanations.
+- The JSON can be parsed directly by \`JSON.parse()\` without errors. 
+- If there is any issue with generating valid JSON, return an empty JSON object \`{}\`.`
 
     const userPrompt =
       convertProfileDataToString(profileDataSender, 'Sender') +
@@ -124,31 +263,12 @@ export async function GET(request: Request) {
     console.log(completion.choices[0].message.content)
     let llmResponse
     try {
-      llmResponse = JSON.parse(completion.choices[0].message.content || '[]')
+      llmResponse = JSON.parse(completion.choices[0].message.content || '{}')
     } catch (e) {
       console.error('Failed to parse JSON:', e)
-      llmResponse = []
+      llmResponse = {}
     }
     return Response.json({ data: llmResponse })
-    // const response = await fetcher(
-    //   `https://fresh-linkedin-profile-data.p.rapidapi.com/get-profile-posts?linkedin_url=${profileUrl}&type=posts`,
-    //   {
-    //     headers: {
-    //       'X-RapidAPI-Key': process.env.RAPID_API_KEY!
-    //     }
-    //   }
-    // )
-    // if (response.data.length > 0) {
-    //   return Response.json({ data: parseResponseToString(response.data) })
-    // } else {
-    //   return NextResponse.json(
-    //     {
-    //       error:
-    //         'This user has not made any posts. Please try a user who actively posts on LinkedIn.'
-    //     },
-    //     { status: 404 }
-    //   )
-    // }
   } catch (error) {
     console.log(error)
     return NextResponse.json(
@@ -250,18 +370,4 @@ function convertPostsDataToString(postsData: any) {
   }
 
   return result
-}
-
-const parseResponseToString = (posts: any[]) => {
-  let tableString = `LinkedIn poster url: ${posts[0].poster_linkedin_url}\n\n`
-  tableString += `| Post Number | Text | URL | Appreciations | Comments | Empathy | Interests | Likes | Praises | Reposts | Posted Date | Reshared |\n`
-  tableString += `|-------------|------|-----|---------------|----------|---------|-----------|-------|---------|---------|-------------|----------|\n`
-
-  // Iterate over each post and add a row to the table string
-  posts.forEach((post, index) => {
-    const resharedText = post.reshared ? 'Yes' : 'No'
-    const textSnippet = post.text?.replace(/\n|\|/g, ' ') // Replace newlines with spaces
-    tableString += `| ${index + 1} | ${textSnippet} | ${post.post_url} | ${post.num_appreciations} | ${post.num_comments} | ${post.num_empathy} | ${post.num_interests} | ${post.num_likes} | ${post.num_praises} | ${post.num_reposts} | ${post.posted} | ${resharedText} |\n`
-  })
-  return tableString
 }

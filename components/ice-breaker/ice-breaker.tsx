@@ -227,13 +227,12 @@ export default function IceBreaker({ data }: { data: typeof example }) {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const nextSlide = () => {
-    setCurrentSlide(prev => (prev + 1) % (data.iceBreakers.length + 5))
+    setCurrentSlide(prev => (prev + 1) % data.iceBreakers.length)
   }
 
   const prevSlide = () => {
     setCurrentSlide(
-      prev =>
-        (prev - 1 + data.iceBreakers.length + 5) % (data.iceBreakers.length + 5)
+      prev => (prev - 1 + data.iceBreakers.length) % data.iceBreakers.length
     )
   }
 
@@ -250,39 +249,37 @@ export default function IceBreaker({ data }: { data: typeof example }) {
     </Table>
   )
 
-  const renderSlideContent = (index: number) => {
-    if (index === 0) {
-      return (
-        <div className="space-y-4">
-          <h3 className="text-2xl font-bold text-white text-center">Intro</h3>
+  return (
+    <div className="w-full max-w-4xl mx-auto  text-white">
+      <h2 className="text-3xl font-bold mb-8 text-center text-white">
+        Recipient Profile & Ice Breakers
+      </h2>
+
+      <div className="space-y-8 mb-12">
+        <section>
+          <h3 className="text-2xl font-bold mb-4 text-white">1. Intro</h3>
           <p className="text-white">{data.recipientInfo.intro}</p>
-        </div>
-      )
-    } else if (index === 1) {
-      return (
-        <div className="space-y-4">
-          <h3 className="text-2xl font-bold text-white text-center">
-            Brief Overview
+        </section>
+
+        <section>
+          <h3 className="text-2xl font-bold mb-4 text-white">
+            2. Brief Overview
           </h3>
           {renderTable(data.recipientInfo.briefOverview)}
-        </div>
-      )
-    } else if (index === 2) {
-      return (
-        <div className="space-y-4">
-          <h3 className="text-2xl font-bold text-white text-center">
-            Professional Notes
+        </section>
+
+        <section>
+          <h3 className="text-2xl font-bold mb-4 text-white">
+            3. Professional Notes
           </h3>
           {renderTable(data.recipientInfo.professionalNotes)}
-        </div>
-      )
-    } else if (index === 3) {
-      return (
-        <div className="space-y-4">
-          <h3 className="text-2xl font-bold text-white text-center">
-            Posting Activity
+        </section>
+
+        <section>
+          <h3 className="text-2xl font-bold mb-4 text-white">
+            4. Posting Activity
           </h3>
-          <p className="text-white">
+          <p className="text-white mb-4">
             {data.recipientInfo.postingActivity.summary}
           </p>
           <Table>
@@ -301,18 +298,16 @@ export default function IceBreaker({ data }: { data: typeof example }) {
               ))}
             </TableBody>
           </Table>
-        </div>
-      )
-    } else if (index === 4) {
-      return (
-        <div className="space-y-4">
-          <h3 className="text-2xl font-bold text-white text-center">
-            Common Ground
+        </section>
+
+        <section>
+          <h3 className="text-2xl font-bold mb-4 text-white">
+            5. Common Ground
           </h3>
-          <ul className="list-none space-y-2">
+          <ul className="list-none space-y-4">
             {data.recipientInfo.commonGround.map((item, i) => (
               <li key={i} className="flex items-start">
-                <span className="mr-2 text-2xl">{item.emoji}</span>
+                <span className="mr-4 text-2xl">{item.emoji}</span>
                 <div>
                   <h4 className="font-bold text-white">{item.title}</h4>
                   <p className="text-white">{item.summary}</p>
@@ -320,115 +315,109 @@ export default function IceBreaker({ data }: { data: typeof example }) {
               </li>
             ))}
           </ul>
-        </div>
-      )
-    } else {
-      const iceBreaker = data.iceBreakers[index - 5]
-      return (
-        <div className="space-y-4">
-          <h3 className="text-2xl font-bold text-white text-center">
-            {iceBreaker.headline}
-          </h3>
-          <div>
-            <h4 className="font-semibold mb-2 text-[#E85A4F]">Explanation:</h4>
-            <p className="text-white">{iceBreaker.explanation}</p>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-2 text-[#E85A4F]">
-              Email Subject Lines:
-            </h4>
-            <ul className="list-disc pl-5 text-white">
-              {iceBreaker.subjects.map((subject, i) => (
-                <li key={i}>{subject}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-2 text-[#E85A4F]">
-              Email Intro Sentences:
-            </h4>
-            <ul className="list-disc pl-5 text-white">
-              {iceBreaker.intros.map((intro, i) => (
-                <li key={i}>{intro}</li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-2 text-[#E85A4F]">
-              LinkedIn Connection Messages:
-            </h4>
-            <ul className="list-disc pl-5 text-white">
-              {iceBreaker.connections.map((connection, i) => (
-                <li key={i}>{connection}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      )
-    }
-  }
-
-  return (
-    <div className="w-full max-w-4xl mx-auto text-white">
-      <h2 className="text-2xl font-bold mb-4 text-center text-white">
-        Ice Breaker
-      </h2>
-      <div className="relative px-12">
-        <div className="overflow-hidden">
-          <div
-            className="flex transition-transform duration-300 ease-in-out"
-            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-          >
-            {[...Array(data.iceBreakers.length + 5)].map((_, index) => (
-              <Card
-                key={index}
-                className="w-full flex-shrink-0 bg-[#243B4A] border-[#4A7C7C]"
-              >
-                <CardContent className="p-6 overflow-y-auto max-h-[70vh]">
-                  {renderSlideContent(index)}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-        <Button
-          variant="outline"
-          size="icon"
-          className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-[#4A7C7C] text-white border-2 border-white hover:bg-[#3A6B6B] hover:text-white"
-          onClick={prevSlide}
-        >
-          <ChevronLeft className="h-4 w-4" />
-          <span className="sr-only">Previous slide</span>
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-[#4A7C7C] text-white border-2 border-white hover:bg-[#3A6B6B] hover:text-white"
-          onClick={nextSlide}
-        >
-          <ChevronRight className="h-4 w-4" />
-          <span className="sr-only">Next slide</span>
-        </Button>
+        </section>
       </div>
-      <div className="flex justify-center mt-4 flex-wrap">
-        {[...Array(data.iceBreakers.length + 5)].map((_, index) => (
+
+      <section>
+        <h3 className="text-2xl font-bold mb-4 text-white text-center">
+          6. Ice Breakers
+        </h3>
+        <div className="relative px-12">
+          <div className="overflow-hidden">
+            <div
+              className="flex transition-transform duration-300 ease-in-out"
+              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+            >
+              {data.iceBreakers.map((breaker, index) => (
+                <Card
+                  key={index}
+                  className="w-full flex-shrink-0 bg-[#243B4A] border-[#4A7C7C]"
+                >
+                  <CardContent className="p-6 overflow-y-auto max-h-[70vh]">
+                    <h4 className="text-xl font-bold text-white text-center mb-4">
+                      {breaker.headline}
+                    </h4>
+                    <div className="space-y-4">
+                      <div>
+                        <h5 className="font-semibold mb-2 text-[#E85A4F]">
+                          Explanation:
+                        </h5>
+                        <p className="text-white">{breaker.explanation}</p>
+                      </div>
+                      <div>
+                        <h5 className="font-semibold mb-2 text-[#E85A4F]">
+                          Email Subject Lines:
+                        </h5>
+                        <ul className="list-disc pl-5 text-white">
+                          {breaker.subjects.map((subject, i) => (
+                            <li key={i}>{subject}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h5 className="font-semibold mb-2 text-[#E85A4F]">
+                          Email Intro Sentences:
+                        </h5>
+                        <ul className="list-disc pl-5 text-white">
+                          {breaker.intros.map((intro, i) => (
+                            <li key={i}>{intro}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h5 className="font-semibold mb-2 text-[#E85A4F]">
+                          LinkedIn Connection Messages:
+                        </h5>
+                        <ul className="list-disc pl-5 text-white">
+                          {breaker.connections.map((connection, i) => (
+                            <li key={i}>{connection}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
           <Button
-            key={index}
-            variant={currentSlide === index ? 'default' : 'outline'}
-            size="sm"
-            className={`mx-1 mb-2 ${
-              currentSlide === index
-                ? 'bg-[#E85A4F] text-white hover:bg-[#D74940] hover:text-white'
-                : 'bg-[#4A7C7C] text-white border-[#4A7C7C] hover:bg-[#3A6B6B] hover:text-white'
-            }`}
-            onClick={() => setCurrentSlide(index)}
+            variant="outline"
+            size="icon"
+            className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-[#4A7C7C] text-white border-2 border-white hover:bg-[#3A6B6B] hover:text-white"
+            onClick={prevSlide}
           >
-            {index + 1}
-            <span className="sr-only">Go to slide {index + 1}</span>
+            <ChevronLeft className="h-4 w-4" />
+            <span className="sr-only">Previous ice breaker</span>
           </Button>
-        ))}
-      </div>
+          <Button
+            variant="outline"
+            size="icon"
+            className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-[#4A7C7C] text-white border-2 border-white hover:bg-[#3A6B6B] hover:text-white"
+            onClick={nextSlide}
+          >
+            <ChevronRight className="h-4 w-4" />
+            <span className="sr-only">Next ice breaker</span>
+          </Button>
+        </div>
+        <div className="flex justify-center mt-4">
+          {data.iceBreakers.map((_, index) => (
+            <Button
+              key={index}
+              variant={currentSlide === index ? 'default' : 'outline'}
+              size="sm"
+              className={`mx-1 ${
+                currentSlide === index
+                  ? 'bg-[#E85A4F] text-white hover:bg-[#D74940] hover:text-white'
+                  : 'bg-[#4A7C7C] text-white border-[#4A7C7C] hover:bg-[#3A6B6B] hover:text-white'
+              }`}
+              onClick={() => setCurrentSlide(index)}
+            >
+              {index + 1}
+              <span className="sr-only">Go to ice breaker {index + 1}</span>
+            </Button>
+          ))}
+        </div>
+      </section>
     </div>
   )
 }

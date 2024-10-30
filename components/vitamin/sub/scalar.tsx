@@ -120,13 +120,15 @@ export function Scalar({
               {isEmailVerified && (
                 <img
                   src={value.logo}
-                  height={windowWidth > 768 ? 36 : 20}
-                  width={windowWidth > 768 ? 36 : 20}
                   alt="renzos-indicator"
                   className="absolute top-0 right-0 rounded-full border-2 transition-all duration-1000 ease-in-out"
                   style={{
                     transform: `translate(9px, ${windowWidth > 768 ? -8 : -4}px)`,
-                    borderColor: internalFlag === 'pros' ? '#24AE8D' : '#EA3F3F'
+                    borderColor:
+                      internalFlag === 'pros' ? '#24AE8D' : '#EA3F3F',
+                    height: windowWidth > 768 ? 36 : 20,
+                    width: windowWidth > 768 ? 36 : 20,
+                    maxWidth: 'none'
                   }}
                 />
               )}

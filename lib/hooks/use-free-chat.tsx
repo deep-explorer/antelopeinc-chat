@@ -27,6 +27,9 @@ interface FreeChatContext {
   setRedditSummary: (summary: string) => void
   redditQuestions: string[]
   setRedditQuestions: (questions: string[]) => void
+
+  iceBreakerLinkedins: string[] //  sender and recipient
+  setIceBreakerLinkedins: (links: string[]) => void
 }
 
 const FreeChatContext = React.createContext<FreeChatContext>({
@@ -51,7 +54,10 @@ const FreeChatContext = React.createContext<FreeChatContext>({
   redditSummary: '',
   setRedditSummary: (summary: string) => {},
   redditQuestions: [],
-  setRedditQuestions: (questions: string[]) => {}
+  setRedditQuestions: (questions: string[]) => {},
+
+  iceBreakerLinkedins: ['', ''],
+  setIceBreakerLinkedins: () => {}
 })
 
 export function useFreeChatContext() {
@@ -76,9 +82,12 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
   const [isBypassMode, _setBypassMode] = React.useState(false)
   const [redditSummary, setRedditSummary] = React.useState('')
   const [redditQuestions, setRedditQuestions] = React.useState<string[]>([])
+  const [iceBreakerLinkedins, setIceBreakerLinkedins] = React.useState<
+    string[]
+  >([])
 
   const setBypassMode = (flag: boolean) => {
-    if (ENVIRONMENT ==='local' || ENVIRONMENT === 'development') {
+    if (ENVIRONMENT === 'local' || ENVIRONMENT === 'development') {
       _setBypassMode(flag)
       setEmailVerified(flag)
     } else {
@@ -108,7 +117,9 @@ export function FreeChatProvider({ children }: FreeChatProviderProps) {
         redditSummary,
         setRedditSummary,
         redditQuestions,
-        setRedditQuestions
+        setRedditQuestions,
+        iceBreakerLinkedins,
+        setIceBreakerLinkedins
       }}
     >
       {children}

@@ -8,7 +8,13 @@ import { antelopeEndpoint } from '@/lib/constants/config'
 import { useWindowSize } from 'usehooks-ts'
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons'
 
-export function EmailInputMessage() {
+interface EmailInputMessageProps {
+  continuationText?: string[]
+}
+
+export const EmailInputMessage: React.FC<EmailInputMessageProps> = ({
+  continuationText
+}) => {
   const { width: windowWidth } = useWindowSize()
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
@@ -63,12 +69,15 @@ export function EmailInputMessage() {
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4 text-sm">
       <h1 className="text-lg md:text-xl font-bold text-center">
-        To continue, we&apos;ll need to validate your email address.
+        {continuationText && continuationText.length >= 2
+          ? continuationText[0]
+          : "To continue, we'll need to validate your email address."}
       </h1>
 
       <p className="text-sm md:text-base">
-        Please enter your email below, and we&apos;ll send you a validation code
-        to continue your analysis.
+        {continuationText && continuationText.length >= 2
+          ? continuationText[1]
+          : "Please enter your email below, and we'll send you a validation code to continue your analysis."}
       </p>
       <div>
         <TextField.Root

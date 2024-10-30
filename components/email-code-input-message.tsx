@@ -7,12 +7,15 @@ import { useActions, useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { antelopeEndpoint } from '@/lib/constants/config'
+import { usePathname } from 'next/navigation'
+import { showPrompts } from '@/lib/chat/prompt'
+import IceBreaker from './ice-breaker/ice-breaker'
 
 export function EmailCodeInputMessage() {
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
   const [isValidatingEmail, setValidatingEmail] = useState(false)
-
+  const path = usePathname()
   const [_, setMessages] = useUIState<typeof AI>()
   const { submitUserMessage } = useActions()
   const { userEmail, linkedinPosts, isBypassMode } = useFreeChatContext()
@@ -38,9 +41,16 @@ export function EmailCodeInputMessage() {
       }
 
       //  TODO: verify signature using public key
-      // Submit and get response message
-      const responseMessage = await submitUserMessage(linkedinPosts)
-      setMessages(currentMessages => [...currentMessages, responseMessage])
+
+      switch (path) {
+        case '/tools/linkedin-analyzer':
+          const responseMessage = await submitUserMessage(linkedinPosts)
+          setMessages(currentMessages => [...currentMessages, responseMessage])
+          break
+        case '/tools/ice-breaker':
+          showPrompts('Analyze', <IceBreaker />, setMessages)
+          break
+      }
     } catch (e: any) {
       setValidatingEmail(false)
       setError(
@@ -52,7 +62,7 @@ export function EmailCodeInputMessage() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4 text-sm">
-      <h1 className="text-xl font-semibold">Enter your code</h1>
+      <h1 className="text-xl font-semibold text-teal-500">Enter your code</h1>
       <p>Check your email for a confirmation code to continue the chat.</p>
       <div>
         <Input

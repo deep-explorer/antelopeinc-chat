@@ -96,3 +96,38 @@
 .bottom-button:hover {
   background-color: #188b84 !important;
 }
+
+.swiper-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+.swiper-slide {
+  height: auto !important;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1b2a35; /* Dark background for the table */
+  color: #e0e0e0; /* Light text color */
+}
+
+/* Header row */
+.table thead th {
+  background-color: #243b4a;
+  color: #82d8d8;
+  padding: 12px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 1px solid #4a7c7c;
+}
+
+/* Data rows */
+.table tbody tr {
+  border-bottom: 1px solid #4a7c7c;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #243b4a; /* Alternate row background */
+}

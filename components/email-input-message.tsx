@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Input } from './ui/input'
 import { spinner } from './stocks'
 import { fetcher } from '@/lib/utils'
@@ -10,6 +10,7 @@ import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { diposableEmailBlocklist } from '@/lib/constants/diposable-email-blocklist'
 import { EmailCodeInputMessage } from './email-code-input-message'
 import { antelopeEndpoint } from '@/lib/constants/config'
+import { usePathname } from 'next/navigation'
 
 export function EmailInputMessage() {
   const [email, setEmail] = useState('')
@@ -18,6 +19,21 @@ export function EmailInputMessage() {
 
   const [_, setMessages] = useUIState<typeof AI>()
   const { setUserEmail, isBypassMode } = useFreeChatContext()
+  const pathname = usePathname()
+  const description = useMemo(() => {
+    let desc = 'To receive the analysis, please enter your email below.'
+    switch (pathname) {
+      case '/tools/linkedin-analyzer':
+        desc =
+          "To receive the analysis, which includes a detailed breakdown of the selected profile's strengths, weaknesses, key tactics, and best practices, please enter your email below."
+        break
+      case '/tools/ice-breaker':
+        desc =
+          'To receive the personalized ice breaker report-featuring key conversation starters, shared interests, and actionable insights between participants—please enter your email below.'
+        break
+    }
+    return desc
+  }, [pathname])
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -73,13 +89,9 @@ export function EmailInputMessage() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4 text-sm">
-      <h1 className="text-xl font-semibold">Report Ready</h1>
+      <h1 className="text-xl font-semibold text-teal-500">Report Ready</h1>
       <p>Thank you for providing your profile details.</p>
-      <p>
-        To receive the analysis, which includes a detailed breakdown of the
-        selected profile&apos;s strengths, weaknesses, key tactics, and best
-        practices, please enter your email below.
-      </p>
+      <p>{description}</p>
       <div>
         <Input
           placeholder="yourname@email.com"

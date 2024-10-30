@@ -1,6 +1,7 @@
 import { RoundSpinner } from '../stocks/ChatSpinner'
 import { useWindowSize } from 'usehooks-ts'
 import { useEffect, useState } from 'react'
+import { useLeadgenContext } from '@/lib/context/leadgen-context'
 
 interface LoadingProps {
   logo: string
@@ -11,7 +12,7 @@ interface LoadingProps {
 export function Loading({ logo, continuationText, loadingTime }: LoadingProps) {
   const { width: windowWidth } = useWindowSize()
   const [isLoading, setLoading] = useState(true)
-
+  const { brandLogoUrl } = useLeadgenContext()
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
@@ -22,21 +23,23 @@ export function Loading({ logo, continuationText, loadingTime }: LoadingProps) {
     <div className="relative">
       <div className="md:hidden flex flex-col gap-4">
         <div className="flex gap-4 items-center">
-          <div>
-            <img
-              src={logo}
-              height={windowWidth > 768 ? 92 : 56}
-              width={windowWidth > 768 ? 92 : 56}
-              alt="logo"
-              style={{
-                marginTop: 4,
-                marginLeft: 4,
-                zIndex: 10,
-                position: 'relative'
-              }}
-              className="rounded-full"
-            />
-          </div>
+          {brandLogoUrl && (
+            <div>
+              <img
+                src={brandLogoUrl}
+                height={windowWidth > 768 ? 92 : 56}
+                width={windowWidth > 768 ? 92 : 56}
+                alt="logo"
+                style={{
+                  marginTop: 4,
+                  marginLeft: 4,
+                  zIndex: 10,
+                  position: 'relative'
+                }}
+                className="rounded-full"
+              />
+            </div>
+          )}
           <h1 className="text-lg font-bold">
             {isLoading ? 'Starting Your Analysis' : 'Data is Ready'}
           </h1>
@@ -44,19 +47,21 @@ export function Loading({ logo, continuationText, loadingTime }: LoadingProps) {
         <p className="text-sm md:text-base">{continuationText}</p>
       </div>
       <div className="hidden md:flex gap-4">
-        <img
-          src={logo}
-          alt="logo"
-          style={{
-            marginTop: 4,
-            marginLeft: 4,
-            zIndex: 10,
-            position: 'relative',
-            height: windowWidth > 768 ? 92 : 56,
-            width: windowWidth > 768 ? 92 : 56
-          }}
-          className="rounded-full"
-        />
+        {brandLogoUrl && (
+          <img
+            src={brandLogoUrl}
+            alt="logo"
+            style={{
+              marginTop: 4,
+              marginLeft: 4,
+              zIndex: 10,
+              position: 'relative',
+              height: windowWidth > 768 ? 92 : 56,
+              width: windowWidth > 768 ? 92 : 56
+            }}
+            className="rounded-full"
+          />
+        )}
         <div className="flex flex-col gap-4">
           <h1 className="text-3xl font-bold">
             {isLoading ? 'Starting Your Analysis' : 'Data is Ready'}

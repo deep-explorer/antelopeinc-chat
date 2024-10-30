@@ -26,6 +26,7 @@ import { getMetaDataOnClient } from '@/lib/utils'
 import { ClientMetadata } from '@/lib/types'
 import { Skeleton } from '@radix-ui/themes'
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
+import { useLeadgenContext } from '@/lib/context/leadgen-context'
 
 /* 
 async function UserOrLogin() {
@@ -90,6 +91,15 @@ const staticTitles = [
       title: 'Reddit Ideator',
       desc: ['Turn on active Reddit thread into a compelling piece of content']
     }
+  },
+  {
+    pathname: '/tools/ice-breaker',
+    data: {
+      title: 'LinkedIn Ice Breaker',
+      desc: [
+        "Provide the sender's and recipient's LinkedIn profiles to discover the best approach for making a connection."
+      ]
+    }
   }
 ]
 
@@ -99,13 +109,12 @@ export const Header = () => {
   const pathname = usePathname()
   const params = useParams()
 
-  const [metadata, setMetadata] = React.useState<
-    ClientMetadata | StaticTitles | null
-  >(null)
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
   const { isBypassMode, setBypassMode } = useFreeChatContext()
+  const { setBrandLogoUrl, setLogos, metadata, setMetadata } =
+    useLeadgenContext()
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -124,12 +133,19 @@ export const Header = () => {
       setIsLoading(true)
       getMetaDataOnClient(params.brand).then(data => {
         setMetadata(data)
+        setBrandLogoUrl(data?.logo)
         setIsLoading(false)
+        setLogos([
+          data?.children[0].url.image.replaceAll('\\', ''),
+          ...data?.children[1].urls.map((url: string) =>
+            url.replaceAll('\\', '')
+          )
+        ])
       })
     } else {
       setIsLoading(false)
       const foundTitle = staticTitles.find(t => t.pathname === pathname)?.data
-      setMetadata(foundTitle || null)
+      setMetadata((foundTitle as ClientMetadata) || null)
     }
   }, [params])
 
@@ -244,7 +260,7 @@ export const Header = () => {
             className="text-xs md:text-base text-primary font-bold"
             style={{ letterSpacing: 2 }}
           >
-            ANTELOPE CHATBOT
+            Antelope Competitive Intelligence Chatbot
           </h1>
 
           {isLoading ? (

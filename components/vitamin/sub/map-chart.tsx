@@ -1,5 +1,6 @@
 import { IBasicElement } from '@/components/content-template'
 import { PrimaryTooltip } from '@/components/ui/tooltip'
+import { useLeadgenContext } from '@/lib/context/leadgen-context'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
 import {
@@ -41,18 +42,29 @@ const renderCustomShape = (props: {
   payload: any
 }): JSX.Element => {
   const { cx, cy } = props
+  const radius = window.innerWidth > 768 ? 24 : 12
 
   return (
     <>
       <defs>
         <clipPath id={`round${props.payload.key}`}>
-          <circle cx={cx} cy={cy} r={window.innerWidth > 768 ? 24 : 12} />
+          <circle cx={cx} cy={cy} r={radius} />
         </clipPath>
       </defs>
+      {props.payload.isMain && (
+        <circle
+          cx={cx}
+          cy={cy}
+          r={radius}
+          stroke="#f07060"
+          strokeWidth="6"
+          fill="none"
+        />
+      )}
       <image
         href={`${props.payload.logo}`}
-        x={cx - (window.innerWidth > 768 ? 24 : 12)}
-        y={cy - (window.innerWidth > 768 ? 24 : 12)}
+        x={cx - radius}
+        y={cy - radius}
         className="size-6 md:size-12"
         clipPath={`url(#round${props.payload.key})`}
       />
@@ -73,6 +85,7 @@ const CustomTooltip: React.FC<any> = ({ active, payload }) => {
 }
 
 export interface IMapChartProps extends IBasicElement {
+  texts: string[]
   type: 'map'
   axes: {
     x: string
@@ -93,6 +106,7 @@ interface IMapElements {
 }
 export function MapChart({
   title,
+  texts,
   tooltip,
   axes,
   icon,
@@ -100,10 +114,39 @@ export function MapChart({
   className
 }: IMapChartProps) {
   const { width: windowWidth } = useWindowSize()
+  const { brandLogoUrl } = useLeadgenContext()
+
+  const processedChildren = Object.keys(children).map((key, index) => {
+    const maxX = Math.max(...Object.values(children).map(child => child.x))
+    const maxY = Math.max(...Object.values(children).map(child => child.y))
+
+    return {
+      name: key,
+      x: (Math.log(children[key].x + 1) / Math.log(maxX + 1)) * 90, // maxX equals to 90 out of 100
+      y: (Math.log(children[key].y + 1) / Math.log(maxY + 1)) * 90,
+      logo: children[key].logo,
+      isMain: children[key].logo === brandLogoUrl,
+      tooltip: children[key].tooltip,
+      size: children[key].size,
+      key: title + index
+    }
+  })
+
+  // Find the element with the matching logo
+  const matchingElementIndex = processedChildren.findIndex(
+    child => child.logo === brandLogoUrl
+  )
+
+  if (matchingElementIndex !== -1) {
+    // Remove the element from its original position
+    const [matchingElement] = processedChildren.splice(matchingElementIndex, 1)
+    // Push the element to the end of the array
+    processedChildren.push(matchingElement)
+  }
 
   return (
     <div
-      className={`w-[260px] md:w-[605px] rounded-md bg-[#1E333B] flex flex-col gap-3 md:gap-6 p-4 md:p-8 ${className}`}
+      className={`w-[260px] md:w-[605px] h-full rounded-md bg-[#1E333B] flex flex-col gap-3 md:gap-6 p-4 md:p-8 ${className}`}
     >
       <div className="flex justify-between">
         <div className="flex gap-2">
@@ -116,12 +159,7 @@ export function MapChart({
         </div>
         <PrimaryTooltip description={tooltip} />
       </div>
-      <p className="text-xs md:text-lg">
-        {/* TODO: description from Props */}
-        {title} engagement metrics suggest a highly active and loyal community,
-        with users resonating strongly with visually-driven storytelling and
-        behind-the-scenes content.
-      </p>
+      <p className="text-xs md:text-lg">{texts[0]}</p>
       <ResponsiveContainer width="100%" height={windowWidth > 768 ? 400 : 200}>
         <ScatterChart>
           <CartesianGrid
@@ -191,24 +229,7 @@ export function MapChart({
           />
           <Scatter
             name="A school"
-            data={Object.keys(children).map((key, index) => {
-              const maxX = Math.max(
-                ...Object.values(children).map(child => child.x)
-              )
-              const maxY = Math.max(
-                ...Object.values(children).map(child => child.y)
-              )
-
-              return {
-                name: key,
-                x: (Math.log(children[key].x + 1) / Math.log(maxX + 1)) * 90, //  maxX equals to 90 out of 100
-                y: (Math.log(children[key].y + 1) / Math.log(maxY + 1)) * 90,
-                logo: children[key].logo,
-                tooltip: children[key].tooltip,
-                size: children[key].size,
-                key: title + index
-              }
-            })}
+            data={processedChildren}
             shape={renderCustomShape as ScatterCustomizedShape}
           />
         </ScatterChart>

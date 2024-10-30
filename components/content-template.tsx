@@ -20,6 +20,7 @@ export interface IContainer {
   caption?: string //  accordion
   texts?: string[]
   footer?: string
+  continuationText?: string[]
   icon?: string
   tooltip?: string
   children: (

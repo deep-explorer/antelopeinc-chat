@@ -5,7 +5,7 @@ export function ThankYou() {
       <p className="text-sm md:text-base">
         Thank you for reaching out! Feel free to review your report in more
         depth above or visit our website to learn more about Antelope and how we
-        can help drive growth and improvement for Renzo&apos;s.
+        can help drive growth and improvement for you.
       </p>
     </div>
   )

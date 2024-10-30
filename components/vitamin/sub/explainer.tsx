@@ -33,7 +33,7 @@ export function Explainer({
 }: IExplainer) {
   const { width: windowWidth } = useWindowSize()
   const [isVisible, setVisible] = useState(false)
-  
+
   useEffect(() => {
     if (isInView) {
       setVisible(true)
@@ -41,11 +41,11 @@ export function Explainer({
   }, [isInView])
   return (
     <div
-      className={`p-3 md:p-5 flex flex-col justify-between bg-[#293D45] rounded-xl w-[224px] md:w-[290px] h-[180px] md:h-[284px] border-2 border-[#3E5057] ${className}`}
+      className={`p-3 md:p-5 flex flex-col justify-between bg-[#293D45] rounded-xl w-[224px] md:w-[310px] h-full border-2 border-[#3E5057] ${className}`}
     >
       <div className="flex flex-col gap-2 md:gap-3">
         <div className="flex justify-between">
-          <div className="flex gap-3">
+          <div className="flex gap-3 items-center">
             <img
               src={icon}
               style={{
@@ -54,7 +54,7 @@ export function Explainer({
               }}
               alt={`/image-icons/${icon}.png`}
             />
-            <h3 className="text-base md:text-2xl font-semibold">{title}</h3>
+            <h3 className="text-base md:text-xl font-semibold">{title}</h3>
           </div>
           <img
             src={`/image-icons/${urgency}.png`}

@@ -13,6 +13,9 @@ export interface IExplainer extends IBasicElement {
   type: 'explainer'
   urgency: Urgency
   texts: string[]
+  detail: {
+    texts: string[]
+  }
   link: {
     caption: string
     target: string
@@ -26,6 +29,7 @@ export function Explainer({
   title,
   urgency,
   texts,
+  detail,
   link,
   tooltip,
   className,
@@ -47,12 +51,12 @@ export function Explainer({
         <div className="flex justify-between">
           <div className="flex gap-3 items-center">
             <img
-              src={icon}
+              src={`/image-icons/${icon}.png`}
               style={{
                 height: `${windowWidth < 768 ? '44px' : '64px'}`,
                 width: `${windowWidth < 768 ? '44px' : '64px'}`
               }}
-              alt={`/image-icons/${icon}.png`}
+              alt={icon}
             />
             <h3 className="text-base md:text-xl font-semibold">{title}</h3>
           </div>
@@ -66,9 +70,19 @@ export function Explainer({
           />
         </div>
 
-        <p className="text-xs md:text-sm h-[48px] md:h-[78px] overflow-hidden">
-          {texts[0]}
-        </p>
+        <div
+          className="text-sm md:text-base"
+          dangerouslySetInnerHTML={{ __html: texts[0] }}
+        ></div>
+        <div>
+          <div
+            className="text-sm md:text-base"
+            dangerouslySetInnerHTML={{ __html: texts[1] }}
+          ></div>
+          <div className="text-sm md:text-base my-2 px-2 md:px-4 py-4 md:py-8 rounded-md bg-[#3D5057] text-center">
+            {detail.texts[0]}
+          </div>
+        </div>
       </div>
 
       <Button

@@ -131,3 +131,43 @@
 .table tbody tr:nth-child(even) {
   background-color: #243b4a; /* Alternate row background */
 }
+
+.focus {
+  padding: 2px;
+  border-radius: 2px;
+}
+.focus.critical {
+  background-color: #ea3f3f;
+}
+.focus.suggested {
+  background-color: #ffa34e;
+}
+.focus.consider {
+  background-color: #24ae8d;
+}
+
+.underline.critical {
+  text-decoration-color: #ea3f3f;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+.underline.suggested {
+  text-decoration-color: #ffa34e;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+.underline.consider {
+  text-decoration-color: #24ae8d;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.underline.critical:hover {
+  color: #ea3f3f;
+}
+.underline.suggested:hover {
+  color: #ffa34e;
+}
+.underline.consider:hover {
+  color: #24ae8d;
+}
